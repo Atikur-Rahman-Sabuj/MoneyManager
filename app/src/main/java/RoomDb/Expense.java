@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity(tableName = "Expenses")
 @TypeConverters(Converters.class)
 public class Expense {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long Id;
     private String Name;
     private  double Amount;
