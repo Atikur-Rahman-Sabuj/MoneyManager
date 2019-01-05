@@ -55,6 +55,8 @@ public class AddExpense extends AppCompatActivity {
                     expense.setDate(new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(tvDatePicker.getText().toString()));
                     MainActivity.myAppRoomDatabase.expenseDao().AddExpense(expense);
                     Toast.makeText(getApplicationContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
+                    etName.setText("");
+                    etAmount.setText("");
                 }catch (Exception e)
                 {
                     Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_LONG).show();
