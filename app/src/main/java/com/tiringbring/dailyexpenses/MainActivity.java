@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import RoomDb.Expense;
 import RoomDb.ExpenseDatabase;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Button button = (Button)findViewById(R.id.btnButton);
         final Button btnShowExpenses = (Button) findViewById(R.id.btnShowExpenseList);
+        final Button btnSetting = (Button) findViewById(R.id.btnSetting);
         final TextView txtView = (TextView) findViewById(R.id.txtView);
         myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(),ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
         button.setOnClickListener(new View.OnClickListener() {
@@ -30,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ExpenseList.class);
+                startActivity(intent);
+            }
+        });
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
                 startActivity(intent);
             }
         });

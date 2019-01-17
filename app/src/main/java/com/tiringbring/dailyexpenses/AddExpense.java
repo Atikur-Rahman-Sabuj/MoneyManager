@@ -3,6 +3,7 @@ package com.tiringbring.dailyexpenses;
 import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.arch.persistence.room.Room;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import RoomDb.Expense;
@@ -43,31 +45,50 @@ public class AddExpense extends AppCompatActivity {
         etAmount = (EditText) findViewById(R.id.etAmount);
         btnSave = (Button) findViewById(R.id.btnSave);
 
+        Intent intent = getIntent();
+        Long expenseId = intent.getLongExtra("expenseId", 0);
+        Calendar calendar = Calendar.getInstance();
+        if(expenseId != 0)
+        {
+            Expense expense = MainActivity.myAppRoomDatabase.expenseDao().GetExpenseById(expenseId);
+            calendar.setTime(expense.getDate());
+            etName.setText(expense.getName());
+            etAmount.setText(String.valueOf(expense.getAmount()));
+            btnSave.setText("Update");
+        }
+
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try
                 {
-                    Expense expense = new Expense();
-                    expense.setName(etName.getText().toString());
-                    expense.setAmount(Double.parseDouble(etAmount.getText().toString()));
-                    expense.setDate(new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(tvDatePicker.getText().toString()));
-                    MainActivity.myAppRoomDatabase.expenseDao().AddExpense(expense);
-                    Toast.makeText(getApplicationContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
+                    Expense newExpense = new Expense();
+                    newExpense.setName(etName.getText().toString());
+                    newExpense.setAmount(Double.parseDouble(etAmount.getText().toString()));
+                    newExpense.setDate(new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(tvDatePicker.getText().toString()));
+                    if(expenseId == 0){
+                        MainActivity.myAppRoomDatabase.expenseDao().AddExpense(newExpense);
+                        Toast.makeText(getApplicationContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        newExpense.setId(expenseId);
+                        MainActivity.myAppRoomDatabase.expenseDao().UpdateExpense(newExpense);
+                        Toast.makeText(getApplicationContext(),"Updated Successfully",Toast.LENGTH_LONG).show();
+                    }
+
                     etName.setText("");
                     etAmount.setText("");
+                    btnSave.setText("Save");
+                    RelaceFragment();
                 }catch (Exception e)
                 {
                     Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_LONG).show();
                 }
-
-
             }
         });
 
 
-        Calendar calendar = Calendar.getInstance();
         Year = calendar.get(Calendar.YEAR);
         Month = calendar.get(Calendar.MONTH)+1;
         Day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -79,7 +100,7 @@ public class AddExpense extends AppCompatActivity {
                         AddExpense.this,
                          android.R.style.Theme_Holo_Light,
                         tvDateSetListner,
-                        Year,Month,Day);
+                        Year,Month-1,Day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.getWindow().setGravity(Gravity.BOTTOM);
                 dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -90,8 +111,35 @@ public class AddExpense extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month++;
+                Year = year;
+                Month = month;
+                Day = dayOfMonth;
                 tvDatePicker.setText(dayOfMonth+"/"+month+"/"+year);
+                RelaceFragment();
             }
         };
+        if(findViewById(R.id.dayExpensesFragmentLayout)!=null)
+        {
+            ExpenseFragment expenseFragment = new ExpenseFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("Day", Day);
+            bundle.putInt("Month", Month);
+            bundle.putInt("Year", Year);
+            expenseFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().add(R.id.dayExpensesFragmentLayout,expenseFragment).commit();
+        }
+
+    }
+    private  void RelaceFragment(){
+        if(findViewById(R.id.dayExpensesFragmentLayout)!=null)
+        {
+            ExpenseFragment expenseFragment = new ExpenseFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("Day", Day);
+            bundle.putInt("Month", Month);
+            bundle.putInt("Year", Year);
+            expenseFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.dayExpensesFragmentLayout,expenseFragment).commit();
+        }
     }
 }

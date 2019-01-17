@@ -10,9 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tiringbring.dailyexpenses.dummy.DummyContent;
+import com.tiringbring.dailyexpenses.ListAdaptor.ExpensesRecyclerViewAdapter;
 import com.tiringbring.dailyexpenses.dummy.DummyContent.DummyItem;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import RoomDb.Expense;
@@ -23,25 +26,28 @@ import RoomDb.Expense;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class expenseFragment extends Fragment {
+public class ExpenseFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-
+    private int Day;
+    private int Month;
+    private int Year;
+    private Date date;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public expenseFragment() {
+    public ExpenseFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static expenseFragment newInstance(int columnCount) {
-        expenseFragment fragment = new expenseFragment();
+    public static ExpenseFragment newInstance(int columnCount) {
+        ExpenseFragment fragment = new ExpenseFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -53,7 +59,10 @@ public class expenseFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            Day = getArguments().getInt("Day");
+            Month = getArguments().getInt("Month");
+            Year = getArguments().getInt("Year");
+            date = new GregorianCalendar(Year, Month-1, Day).getTime();
         }
     }
 
@@ -71,8 +80,8 @@ public class expenseFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            List<Expense> expenses = MainActivity.myAppRoomDatabase.expenseDao().GetExpenses();
-            recyclerView.setAdapter(new ExpensesRecyclerViewAdapter(expenses, mListener));
+            List<Expense> expenses = MainActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
+            recyclerView.setAdapter(new ExpensesRecyclerViewAdapter(getContext(), expenses, mListener));
         }
         return view;
     }
