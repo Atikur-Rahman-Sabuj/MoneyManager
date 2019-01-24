@@ -35,6 +35,12 @@
             android:layout_height="wrap_content"
             android:text="Setting" />
 
+        <Button
+            android:id="@+id/btnShowChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show Chart" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

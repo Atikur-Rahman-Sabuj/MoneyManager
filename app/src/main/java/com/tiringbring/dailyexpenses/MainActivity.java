@@ -20,8 +20,20 @@ public class MainActivity extends AppCompatActivity {
         final Button button = (Button)findViewById(R.id.btnButton);
         final Button btnShowExpenses = (Button) findViewById(R.id.btnShowExpenseList);
         final Button btnSetting = (Button) findViewById(R.id.btnSetting);
+        final Button btnShowChart = (Button) findViewById(R.id.btnShowChart);
         final TextView txtView = (TextView) findViewById(R.id.txtView);
         myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(),ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
+
+
+        btnShowChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),StartActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

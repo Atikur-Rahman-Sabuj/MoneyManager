@@ -20,7 +20,7 @@ public class ExpenseDataController {
 
 
     public  void MakeList(List<Expense> expenses){
-        expenses.sort(Comparator.comparing(Expense::getDate));
+        expenses.sort(Comparator.comparing(Expense::getDate).reversed());
         Expense fex = expenses.get(0);
         Date prevDate = fex.getDate();
         Date newDate;

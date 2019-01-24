@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".ExpandableExpenseFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <ExpandableListView
         android:id="@+id/expandableExpenseList"
