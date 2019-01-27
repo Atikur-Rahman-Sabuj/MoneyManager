@@ -9,7 +9,9 @@
     <ExpandableListView
         android:id="@+id/expandableExpenseList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:divider="@android:color/holo_blue_bright"
+        android:dividerHeight="0.5dp">
 
     </ExpandableListView>
 

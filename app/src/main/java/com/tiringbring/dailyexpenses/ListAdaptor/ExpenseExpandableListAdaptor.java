@@ -85,10 +85,10 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
         if(convertView == null)
         {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.fragment_espense, null);
+            convertView = layoutInflater.inflate(R.layout.fragment_details_expense, null);
         }
-        TextView mIdView = (TextView) convertView.findViewById(R.id.item_number);
-        TextView mContentView = (TextView) convertView.findViewById(R.id.content);
+        TextView mIdView = (TextView) convertView.findViewById(R.id.tvName);
+        TextView mContentView = (TextView) convertView.findViewById(R.id.tvAmount);
         mIdView.setText(DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getName());
         mContentView.setText(String.format("%.2f", DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getAmount()));
         convertView.setOnLongClickListener(new View.OnLongClickListener() {

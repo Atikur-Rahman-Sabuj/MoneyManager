@@ -28,7 +28,7 @@ public class DayExpenses {
         this.total = total;
     }
 
-    private  double AddTotal(List<Expense> expenses){
+    public double AddTotal(List<Expense> expenses){
         double sum = 0;
         for(Expense ex:expenses){
             sum += ex.getAmount();

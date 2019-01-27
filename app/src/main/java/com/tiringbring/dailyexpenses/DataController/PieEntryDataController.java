@@ -16,6 +16,9 @@ public class PieEntryDataController {
          expenses.forEach(expense ->{
              pieEntries.add(new PieEntry(((int) expense.getAmount()),expense.getName()));
          });
+         if(pieEntries.size()==0){
+             pieEntries.add(new PieEntry(1 , "No entry"));
+         }
          return pieEntries;
     }
 }

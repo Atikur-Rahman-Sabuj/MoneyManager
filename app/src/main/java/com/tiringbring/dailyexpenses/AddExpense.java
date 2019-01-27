@@ -19,9 +19,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tiringbring.dailyexpenses.Entity.DayExpenses;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 import RoomDb.Expense;
@@ -32,10 +36,12 @@ public class AddExpense extends AppCompatActivity {
     private EditText etName;
     private EditText etAmount;
     private Button btnSave;
+    private TextView tvTotal;
     private DatePickerDialog.OnDateSetListener tvDateSetListner;
     private int  Year;
     private int Month;
     private int Day;
+    private long expenseId = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +50,10 @@ public class AddExpense extends AppCompatActivity {
         etName = (EditText) findViewById(R.id.etName);
         etAmount = (EditText) findViewById(R.id.etAmount);
         btnSave = (Button) findViewById(R.id.btnSave);
+        tvTotal = (TextView) findViewById(R.id.tvAddTotal);
 
         Intent intent = getIntent();
-        Long expenseId = intent.getLongExtra("expenseId", 0);
+        expenseId = intent.getLongExtra("expenseId", 0);
         Calendar calendar = Calendar.getInstance();
         if(expenseId != 0)
         {
@@ -74,6 +81,7 @@ public class AddExpense extends AppCompatActivity {
                     else {
                         newExpense.setId(expenseId);
                         MainActivity.myAppRoomDatabase.expenseDao().UpdateExpense(newExpense);
+                        expenseId = 0;
                         Toast.makeText(getApplicationContext(),"Updated Successfully",Toast.LENGTH_LONG).show();
                     }
 
@@ -81,6 +89,7 @@ public class AddExpense extends AppCompatActivity {
                     etAmount.setText("");
                     btnSave.setText("Save");
                     RelaceFragment();
+                    ChangeTotal();
                 }catch (Exception e)
                 {
                     Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_LONG).show();
@@ -116,6 +125,7 @@ public class AddExpense extends AppCompatActivity {
                 Day = dayOfMonth;
                 tvDatePicker.setText(dayOfMonth+"/"+month+"/"+year);
                 RelaceFragment();
+                ChangeTotal();
             }
         };
         if(findViewById(R.id.dayExpensesFragmentLayout)!=null)
@@ -127,6 +137,7 @@ public class AddExpense extends AppCompatActivity {
             bundle.putInt("Year", Year);
             expenseFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().add(R.id.dayExpensesFragmentLayout,expenseFragment).commit();
+            ChangeTotal();
         }
 
     }
@@ -141,5 +152,13 @@ public class AddExpense extends AppCompatActivity {
             expenseFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.dayExpensesFragmentLayout,expenseFragment).commit();
         }
+    }
+    private void ChangeTotal(){
+        Date date = new GregorianCalendar(Year, Month-1, Day).getTime();
+        List<Expense> expenses = MainActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
+        Double totoal = new DayExpenses().AddTotal(expenses);
+        tvTotal.setText(String.format("%.2f", totoal));
+        //mContentView.setText(String.format("%.2f",mValues.get(position).getAmount()));
+
     }
 }

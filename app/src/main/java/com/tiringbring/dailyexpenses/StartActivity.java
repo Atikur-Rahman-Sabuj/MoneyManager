@@ -90,8 +90,8 @@ public class StartActivity extends AppCompatActivity {
         mChart.setDrawBorders(false);
         mChart.setDrawMarkers(false);
         mChart.getLegend().setEnabled(false);
-        mChart.setVisibleXRangeMaximum(4); // allow 20 values to be displayed at once on the x-axis, not more
-        mChart.moveViewToX(4);
+        mChart.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
+        mChart.moveViewToX(0);
         XAxis xAxis = mChart.getXAxis();
         YAxis left = mChart.getAxisLeft();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(getXAxisValues()));
@@ -163,8 +163,9 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void BindDataToPieChart() {
-        pieChart.setUsePercentValues(true);
-        pieChart.getDescription().setText("Day expense");
+        pieChart.setUsePercentValues(false);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        pieChart.getDescription().setText(dateFormat.format(pieDate));
         pieChart.setExtraOffsets(5,10,5,5);
         pieChart.setDragDecelerationFrictionCoef(0.95f);
         pieChart.setDrawHoleEnabled(true);
@@ -172,15 +173,14 @@ public class StartActivity extends AppCompatActivity {
         pieChart.setTransparentCircleRadius(61f);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
         ArrayList<PieEntry> yValues = new PieEntryDataController().GetList(pieDate);
-
-        PieDataSet dataSet = new PieDataSet(yValues, "Alphabets");
+        PieDataSet dataSet = new PieDataSet(yValues, "");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
 
         PieData data = new PieData(dataSet);
         data.setValueTextSize(10f);
-        data.setValueTextColor(Color.YELLOW);
+        data.setValueTextColor(Color.WHITE);
 
         pieChart.setData(data);
 
