@@ -1,10 +1,9 @@
 package RoomDb;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.TypeConverter;
-import android.arch.persistence.room.TypeConverters;
-import android.support.constraint.ConstraintLayout;
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 
 @Database(entities = {Expense.class}, version = 1)
 @TypeConverters(Converters.class)

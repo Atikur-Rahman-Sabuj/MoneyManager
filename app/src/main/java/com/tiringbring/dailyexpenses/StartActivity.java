@@ -2,10 +2,8 @@ package com.tiringbring.dailyexpenses;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.format.DateUtils;
-import android.text.method.DateTimeKeyListener;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -19,36 +17,32 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tiringbring.dailyexpenses.DataController.BarEntryDataController;
 import com.tiringbring.dailyexpenses.DataController.PieEntryDataController;
 import com.tiringbring.dailyexpenses.Utility.OnSwipeTouchListener;
 
-import java.lang.reflect.Array;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-
-import RoomDb.Expense;
 
 public class StartActivity extends AppCompatActivity {
     private BarChart mChart;
     private PieChart pieChart;
     private Date pieDate;
+    private FloatingActionButton fabAddNew;
+    private FloatingActionButton fabShowList;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
-
+        fabAddNew = (FloatingActionButton) findViewById(R.id.fabAdd);
+        fabShowList = (FloatingActionButton) findViewById(R.id.fabShowAll);
         mChart= (BarChart) findViewById(R.id.barChart);
         pieChart = (PieChart) findViewById(R.id.pieChart);
 
@@ -59,8 +53,8 @@ public class StartActivity extends AppCompatActivity {
 
 
         mChart.getDescription().setEnabled(false);
-
-        List<BarEntry> data = new BarEntryDataController().GetBarEntries();
+        BarEntryDataController beDataController = new BarEntryDataController();
+        List<BarEntry> data = beDataController.GetBarEntries();
 //        data.add(new BarEntry(1, 455 ));
 //        data.add(new BarEntry(2, 500));
 //        data.add(new BarEntry(3, 235));
@@ -76,35 +70,47 @@ public class StartActivity extends AppCompatActivity {
                 colors.add(Color.RED);
             }
             else {
-                colors.add(Color.BLUE);
+                colors.add(Color.GREEN);
             }
         }
         BarDataSet set = new BarDataSet(data, "");
         //set.setColors(ColorTemplate.MATERIAL_COLORS);
         set.setColors(colors);
-        set.setDrawValues(true);
+        set.setDrawValues(false);
         BarData barData = new BarData(set);
+        //barData.setBarWidth(.8f);
         mChart.setData(barData);
+        mChart.setExtraOffsets(0, 0, 0, 0);
+
+
+        mChart.getContentRect().set(0, 0, mChart.getWidth(), mChart.getHeight());
         mChart.invalidate();
         mChart.animateY(500);
+        mChart.setScaleEnabled(false);
+        mChart.setDrawValueAboveBar(true);
         mChart.setDrawBorders(false);
         mChart.setDrawMarkers(false);
+        //mChart.setExtraOffsets(0,0,0,0);
         mChart.getLegend().setEnabled(false);
         mChart.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
         mChart.moveViewToX(0);
         XAxis xAxis = mChart.getXAxis();
         YAxis left = mChart.getAxisLeft();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(getXAxisValues()));
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
         left.setDrawLabels(false); // no axis labels
         left.setDrawAxisLine(false); // no axis line
         left.setDrawGridLines(false); // no grid lines
-        left.setDrawZeroLine(true); // draw a zero line
+        left.setDrawZeroLine(false); // draw a zero line
         mChart.getAxisRight().setEnabled(false); // no right axis
         xAxis.setDrawGridLines(false);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        //xAxis.setDrawLabels(false);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
+        xAxis.setDrawLabels(true);
+        xAxis.setAvoidFirstLastClipping(false);
+        xAxis.setDrawAxisLine(true);
+        xAxis.setAxisLineColor(Color.BLACK);
+        //xAxis.setCenterAxisLabels(true);
         mChart.setDrawGridBackground(false);
-        mChart.setFitBars(true);
+        mChart.setFitBars(false);
 
         pieChart.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()){
             public void onSwipeTop() {
@@ -169,6 +175,7 @@ public class StartActivity extends AppCompatActivity {
         pieChart.setExtraOffsets(5,10,5,5);
         pieChart.setDragDecelerationFrictionCoef(0.95f);
         pieChart.setDrawHoleEnabled(true);
+        pieChart.getLegend().setEnabled(false);
         pieChart.setHoleColor(Color.WHITE);
         pieChart.setTransparentCircleRadius(61f);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
@@ -184,23 +191,5 @@ public class StartActivity extends AppCompatActivity {
 
         pieChart.setData(data);
 
-
-
-
-
-    }
-
-    private ArrayList<String> getXAxisValues()
-    {
-        ArrayList<String> labels = new ArrayList<String> ();
-
-        labels.add( "SAT");
-        labels.add( "SUN");
-        labels.add( "MON");
-        labels.add( "TUE");
-        labels.add( "WED");
-        labels.add( "THU");
-        labels.add( "FRI");
-        return labels;
     }
 }

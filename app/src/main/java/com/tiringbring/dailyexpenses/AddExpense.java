@@ -1,17 +1,14 @@
 package com.tiringbring.dailyexpenses;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -29,7 +26,6 @@ import java.util.List;
 import java.util.Locale;
 
 import RoomDb.Expense;
-import RoomDb.ExpenseDatabase;
 
 public class AddExpense extends AppCompatActivity {
     private TextView tvDatePicker;

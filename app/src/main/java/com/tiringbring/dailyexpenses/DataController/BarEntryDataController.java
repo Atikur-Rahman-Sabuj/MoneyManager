@@ -13,6 +13,7 @@ import java.util.List;
 import RoomDb.Expense;
 
 public class BarEntryDataController {
+    public ArrayList<String> labels = new ArrayList<String> ();
     public List<BarEntry> GetBarEntries(){
         List<Expense> expenses = MainActivity.myAppRoomDatabase.expenseDao().GetExpenses();
         List<DayExpenses> dayExpensesList = new ExpenseDataController(expenses).getDailyExpenses();
@@ -45,10 +46,15 @@ public class BarEntryDataController {
         }
         for (DayExpenses expense:
              dayExpenses) {
+            labels.add(new DateDataController().DatetoString(expense.date));
             barEntries.add(new BarEntry(j++, expense.getTotal().intValue()));
         }
 
         return  barEntries;
 
+    }
+    public ArrayList<String> getXAxisValues()
+    {
+        return labels;
     }
 }

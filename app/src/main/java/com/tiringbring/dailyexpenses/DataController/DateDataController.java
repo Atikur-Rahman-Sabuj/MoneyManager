@@ -5,8 +5,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateDataController {
+    private  SimpleDateFormat formatter;
+
+    public DateDataController() {
+        this.formatter = new SimpleDateFormat("dd/MM/yyyy");
+    }
+
     public Date CropTimeFromDate(Calendar calendar){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date;
         try {
             date = formatter.parse(formatter.format(calendar.getTime()));
@@ -15,5 +20,9 @@ public class DateDataController {
         }
         return  date;
 
+    }
+    public  String DatetoString(Date date){
+        SimpleDateFormat newFormatter = new SimpleDateFormat("dd/MM");
+        return newFormatter.format(date);
     }
 }
