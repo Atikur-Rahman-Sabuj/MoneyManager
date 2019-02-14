@@ -2,6 +2,7 @@ package com.tiringbring.dailyexpenses.DataController;
 
 import com.github.mikephil.charting.data.PieEntry;
 import com.tiringbring.dailyexpenses.MainActivity;
+import com.tiringbring.dailyexpenses.StartActivity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +13,7 @@ import RoomDb.Expense;
 public class PieEntryDataController {
     public ArrayList<PieEntry> GetList(Date date){
          ArrayList<PieEntry> pieEntries = new ArrayList<>();
-         List<Expense> expenses = MainActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
+         List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
          expenses.forEach(expense ->{
              pieEntries.add(new PieEntry(((int) expense.getAmount()),expense.getName()));
          });

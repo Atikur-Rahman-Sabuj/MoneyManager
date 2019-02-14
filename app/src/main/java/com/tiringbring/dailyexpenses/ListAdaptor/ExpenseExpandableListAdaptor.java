@@ -5,14 +5,18 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tiringbring.dailyexpenses.AddExpense;
+import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
 import com.tiringbring.dailyexpenses.MainActivity;
 import com.tiringbring.dailyexpenses.R;
@@ -20,14 +24,20 @@ import com.tiringbring.dailyexpenses.R;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import androidx.core.content.ContextCompat;
+
 public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
     Context context;
+    Long dailyLimit;
+    float scale;
     List<DayExpenses> DayExpenseList;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
     public  ExpenseExpandableListAdaptor(Context context, List<DayExpenses> DayExpenseList){
         this.context = context;
         this.DayExpenseList = DayExpenseList;
+        dailyLimit = new MySharedPreferences(context).getDayilyLimit();
+        scale = context.getResources().getDisplayMetrics().density;
     }
 
 
@@ -75,6 +85,17 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
         }
         TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
         TextView tvTotal = (TextView) convertView.findViewById(R.id.tvTotal);
+        LinearLayout loIndicatorBar = (LinearLayout) convertView.findViewById(R.id.loIndicatorBar);
+        if(DayExpenseList.get(groupPosition).getTotal()>dailyLimit){
+            loIndicatorBar.setBackgroundColor(ContextCompat.getColor(context, R.color.light_red));
+            loIndicatorBar.getLayoutParams().height = (int) (60 * scale + 0.5f);
+        }
+        else {
+            int height = (int) (((DayExpenseList.get(groupPosition).getTotal()/dailyLimit))*60);
+            loIndicatorBar.getLayoutParams().height = (int) (height * scale + 0.5f);
+            loIndicatorBar.setBackgroundColor(ContextCompat.getColor(context, R.color.light_green));
+
+        }
         tvDate.setText(dateFormat.format(DayExpenseList.get(groupPosition).getDate()));
         tvTotal.setText(String.format("%.2f", DayExpenseList.get(groupPosition).getTotal()));
         return  convertView;
@@ -97,7 +118,7 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
                 final CharSequence[] items = { "Edit", "Delete" };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle(DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getName()+" "+String.valueOf(String.format("%.2f", DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getAmount())));
+                builder.setTitle(DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getName()+"    "+String.valueOf(String.format("%.2f", DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getAmount())));
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

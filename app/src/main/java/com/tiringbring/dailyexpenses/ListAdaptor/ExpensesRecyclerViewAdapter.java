@@ -57,7 +57,7 @@ public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRe
                 final CharSequence[] items = { "Edit", "Delete" };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle(mValues.get(position).getName()+" "+String.valueOf(mValues.get(position).getAmount()));
+                builder.setTitle(mValues.get(position).getName()+"    "+String.valueOf(mValues.get(position).getAmount()));
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

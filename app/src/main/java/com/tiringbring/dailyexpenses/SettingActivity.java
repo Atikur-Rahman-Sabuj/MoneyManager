@@ -2,12 +2,18 @@ package com.tiringbring.dailyexpenses;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -19,18 +25,24 @@ public class SettingActivity extends AppCompatActivity {
         TextView tvDayLimitValue = (TextView)findViewById(R.id.tvDayLimitValue);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
 
-        long dailyLimit = pref.getLong("limit_daily_expense", 20000);
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        long dailyLimit = new MySharedPreferences(getApplicationContext()).getDayilyLimit();
         tvDayLimitValue.setText(String.valueOf(dailyLimit));
-        View dialogView = getLayoutInflater().inflate(R.layout.setting_limit_dialouge, null);
+
 
 
         tvDayLimitValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                View dialogView = getLayoutInflater().inflate(R.layout.setting_limit_dialouge, null);
                 AlertDialog alertDialog = new AlertDialog.Builder(SettingActivity.this).create();
                 alertDialog.setTitle("Set Limit");
                 //alertDialog.setIcon("Icon id here");
-                alertDialog.setCancelable(false);
+                alertDialog.setCancelable(true);
+                //alertDialog.getWindow().setGravity(Gravity.BOTTOM);
                 //Constant.alertDialog.setMessage("Your Message Here");
 
 
@@ -41,9 +53,7 @@ public class SettingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         long value = Long.parseLong(etLimit.getText().toString());
-                        SharedPreferences.Editor editor = pref.edit();
-                        editor.putLong("limit_daily_expense", value);
-                        editor.commit();
+                        new MySharedPreferences(getApplicationContext()).setDayilyLimit(value);
                         tvDayLimitValue.setText(String.valueOf(value));
                     }
                 });
@@ -51,6 +61,7 @@ public class SettingActivity extends AppCompatActivity {
                 alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         alertDialog.dismiss();
                     }
                 });
@@ -65,4 +76,6 @@ public class SettingActivity extends AppCompatActivity {
 
 
     }
+
+
 }

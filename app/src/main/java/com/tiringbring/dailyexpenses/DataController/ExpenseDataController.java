@@ -15,7 +15,10 @@ public class ExpenseDataController {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
     public ExpenseDataController(List<Expense> Expenses) {
-        MakeList(Expenses);
+        if(Expenses.size()>0){
+            MakeList(Expenses);
+        }
+
     }
 
 

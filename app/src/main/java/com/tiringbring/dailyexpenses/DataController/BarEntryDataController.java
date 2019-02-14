@@ -3,6 +3,7 @@ package com.tiringbring.dailyexpenses.DataController;
 import com.github.mikephil.charting.data.BarEntry;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
 import com.tiringbring.dailyexpenses.MainActivity;
+import com.tiringbring.dailyexpenses.StartActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,21 +16,27 @@ import RoomDb.Expense;
 public class BarEntryDataController {
     public ArrayList<String> labels = new ArrayList<String> ();
     public List<BarEntry> GetBarEntries(){
-        List<Expense> expenses = MainActivity.myAppRoomDatabase.expenseDao().GetExpenses();
-        List<DayExpenses> dayExpensesList = new ExpenseDataController(expenses).getDailyExpenses();
+        List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpenses();
+        List<DayExpenses> dayExpensesList = new ArrayList<>();
+        if(expenses.size()>0){
+            dayExpensesList = new ExpenseDataController(expenses).getDailyExpenses();
+        }
 
         List<DayExpenses> dayExpenses = new ArrayList<>();
+
         Calendar calendar = Calendar.getInstance();
-        Calendar calendar1 = Calendar.getInstance();
+        //Calendar calendar1 = Calendar.getInstance();
         Date startDate = new DateDataController().CropTimeFromDate(calendar);
-        calendar1.add(Calendar.DATE, -30);
-        Date endDate = new DateDataController().CropTimeFromDate(calendar1);
-        if(endDate.before(dayExpensesList.get(dayExpensesList.size()-1).getDate())){
+        //calendar1.add(Calendar.DATE, -30);
+        Date endDate = startDate;// = new DateDataController().CropTimeFromDate(calendar1);
+        DayExpenses itDayExpense = new DayExpenses();
+        if(expenses.size()>0){
             endDate = dayExpensesList.get(dayExpensesList.size()-1).getDate();
+            itDayExpense = dayExpensesList.get(0);
         }
         int i = 0,j = 0;
-        DayExpenses itDayExpense = dayExpensesList.get(i);
-        List<BarEntry> barEntries = new ArrayList<>();
+
+
         for (Date date = startDate; date.after(endDate); calendar.add(Calendar.DATE, -1),date = new DateDataController().CropTimeFromDate(calendar)) {
             // Do your job here with `date`.
             DayExpenses tempdayExpenses = new DayExpenses();
@@ -42,8 +49,26 @@ public class BarEntryDataController {
                 tempdayExpenses.setTotal(0.0);
             }
             dayExpenses.add(tempdayExpenses);
+        }
+        if(expenses.size()>0){
+            DayExpenses tempdayExpenses = new DayExpenses();
+            tempdayExpenses.setDate(endDate);
+            tempdayExpenses.setTotal(dayExpensesList.get(dayExpensesList.size()-1).getTotal());
+            dayExpenses.add(tempdayExpenses);
+        }else {
+            calendar.add(Calendar.DATE, 1);
+        }
+        Date dt;
+        for(int d = 0 ; d < 7 ; d++){
+            calendar.add(Calendar.DATE, -1);
+            dt = new DateDataController().CropTimeFromDate(calendar);
+            DayExpenses tempodayExpenses = new DayExpenses();
+            tempodayExpenses.setDate(dt);
+            tempodayExpenses.setTotal(0.0);
+            dayExpenses.add(tempodayExpenses);
 
         }
+        List<BarEntry> barEntries = new ArrayList<>();
         for (DayExpenses expense:
              dayExpenses) {
             labels.add(new DateDataController().DatetoString(expense.date));

@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
+    <color name="myColorPrimary">#127E9E</color>
     <color name="colorPrimaryDark">#00574B</color>
+    <color name="myColorPrimaryDark">#0B4F63</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="myColorAccent">#004781</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="common_border_color">#DAF7A6</color>
     <color name="card_background_verylight">#F4F6F7</color>
     <color name="button_default">#21618C</color>
+    <color name="light_green">#00ED06</color>
+    <color name="light_red">#F01B1B</color>
+    <color name="navigationBarColor">#D6F3FF</color>
 </resources>

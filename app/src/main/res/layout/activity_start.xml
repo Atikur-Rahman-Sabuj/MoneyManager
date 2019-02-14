@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical">
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+    <Button
+        android:id="@+id/btnAddNew"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add_new"
-        app:backgroundTint="@color/button_default" />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabShowAll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_marginRight="90dp"
+        android:background="@drawable/add_button_background"
+        android:elevation="10dp"
+        android:translationZ="10dp" />
+
+    <Button
+        android:id="@+id/btnShowList"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="92dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add_new"
-        app:backgroundTint="@color/button_default" />
+        android:background="@drawable/list_button_background"
+        android:elevation="10dp"
+        android:translationZ="10dp" />
 
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="90dp"
         android:orientation="horizontal"
         tools:context=".StartActivity">
         <RelativeLayout
@@ -43,13 +45,19 @@
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"></com.github.mikephil.charting.charts.PieChart>
+                android:layout_height="300dp">
+
+            </com.github.mikephil.charting.charts.PieChart>
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"
-                android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
-                android:layout_height="313dp"></com.github.mikephil.charting.charts.BarChart>
+                android:layout_height="200dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp">
+
+            </com.github.mikephil.charting.charts.BarChart>
+
         </RelativeLayout>
 
     </RelativeLayout>

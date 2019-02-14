@@ -79,7 +79,7 @@ public class ExpenseFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            List<Expense> expenses = MainActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
+            List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
             recyclerView.setAdapter(new ExpensesRecyclerViewAdapter(getContext(), expenses, mListener));
         }
         return view;

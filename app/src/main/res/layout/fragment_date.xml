@@ -3,54 +3,74 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:orientation="horizontal">
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:elevation="5dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:background="#FFFFFF"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-                android:background="@drawable/rounded_corner"
-                android:paddingLeft="14dp"
-                android:paddingTop="8dp"
-                android:paddingRight="14dp"
-                android:paddingBottom="8dp"
-                android:text="sample"
-                android:textAlignment="textStart"
-                android:textColor="#ffffff"
-                android:textSize="17dp" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="#FFFFFF"
+                android:orientation="horizontal"
+                android:padding="8dp">
 
-            <TextView
-                android:id="@+id/tvTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+                    android:background="@drawable/rounded_corner"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="14dp"
+                    android:paddingBottom="8dp"
+                    android:text="sample"
+                    android:textAlignment="textStart"
+                    android:textColor="#ffffff"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:id="@+id/tvTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/rounded_corner"
+                    android:maxWidth="180dp"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="14dp"
+                    android:paddingBottom="8dp"
+                    android:text="sample"
+                    android:textAlignment="textEnd"
+                    android:textColor="#ffffff"
+                    android:textSize="17dp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/loIndicatorBar"
+                android:layout_width="5dp"
+                android:layout_height="60dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/rounded_corner"
-                android:maxWidth="180dp"
-                android:paddingLeft="14dp"
-                android:paddingTop="8dp"
-                android:paddingRight="14dp"
-                android:paddingBottom="8dp"
-                android:text="sample"
-                android:textAlignment="textEnd"
-                android:textColor="#ffffff"
-                android:textSize="17dp" />
+                android:layout_alignParentBottom="true"
+                android:background="@color/light_green"
+                android:orientation="horizontal"></LinearLayout>
 
         </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
+
 </LinearLayout>

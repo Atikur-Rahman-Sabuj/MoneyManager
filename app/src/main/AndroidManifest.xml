@@ -9,17 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".StartActivity"
+            android:label="Expenses">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddExpense" />
+        <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".AddExpense"
+            android:label="Add Expense"
+            android:parentActivityName=".StartActivity"/>
         <activity android:name=".ExpenseList" />
-        <activity android:name=".SettingActivity" />
+        <activity android:name=".SettingActivity"
+            android:label="Settings"
+            android:parentActivityName=".StartActivity"/>
     </application>
 
 </manifest>

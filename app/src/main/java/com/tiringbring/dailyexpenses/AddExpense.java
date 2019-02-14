@@ -8,6 +8,8 @@ import android.graphics.drawable.ColorDrawable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -32,6 +34,8 @@ public class AddExpense extends AppCompatActivity {
     private EditText etName;
     private EditText etAmount;
     private Button btnSave;
+    private Button btnLeft;
+    private Button btnRight;
     private TextView tvTotal;
     private DatePickerDialog.OnDateSetListener tvDateSetListner;
     private int  Year;
@@ -42,10 +46,14 @@ public class AddExpense extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tvDatePicker = (TextView) findViewById(R.id.tvDatePicker);
         etName = (EditText) findViewById(R.id.etName);
         etAmount = (EditText) findViewById(R.id.etAmount);
         btnSave = (Button) findViewById(R.id.btnSave);
+        btnLeft = (Button) findViewById(R.id.btnDPleft);
+        btnRight = (Button) findViewById(R.id.btnDPRight);
         tvTotal = (TextView) findViewById(R.id.tvAddTotal);
 
         Intent intent = getIntent();
@@ -53,13 +61,45 @@ public class AddExpense extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         if(expenseId != 0)
         {
-            Expense expense = MainActivity.myAppRoomDatabase.expenseDao().GetExpenseById(expenseId);
+            Expense expense = StartActivity.myAppRoomDatabase.expenseDao().GetExpenseById(expenseId);
             calendar.setTime(expense.getDate());
             etName.setText(expense.getName());
             etAmount.setText(String.valueOf(expense.getAmount()));
             btnSave.setText("Update");
         }
 
+        btnLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.set(Calendar.DAY_OF_MONTH, Day);
+                calendar1.set(Calendar.MONTH, Month-1);
+                calendar1.set(Calendar.YEAR, Year);
+                calendar1.add(Calendar.DAY_OF_MONTH, 1);
+                Year = calendar1.get(Calendar.YEAR);
+                Month = calendar1.get(Calendar.MONTH)+1;
+                Day = calendar1.get(Calendar.DAY_OF_MONTH);
+                tvDatePicker.setText(Day+"/"+Month+"/"+Year);
+                RelaceFragment();
+                ChangeTotal();
+            }
+        });
+        btnRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.set(Calendar.DAY_OF_MONTH, Day);
+                calendar1.set(Calendar.MONTH, Month-1);
+                calendar1.set(Calendar.YEAR, Year);
+                calendar1.add(Calendar.DAY_OF_MONTH, -1);
+                Year = calendar1.get(Calendar.YEAR);
+                Month = calendar1.get(Calendar.MONTH)+1;
+                Day = calendar1.get(Calendar.DAY_OF_MONTH);
+                tvDatePicker.setText(Day+"/"+Month+"/"+Year);
+                RelaceFragment();
+                ChangeTotal();
+            }
+        });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,28 +107,37 @@ public class AddExpense extends AppCompatActivity {
                 try
                 {
                     Expense newExpense = new Expense();
-                    newExpense.setName(etName.getText().toString());
+                    if(etName.getText().toString().equals("")){
+                        newExpense.setName("Untitled");
+                    }else {
+                        newExpense.setName(etName.getText().toString());
+                    }
+
                     newExpense.setAmount(Double.parseDouble(etAmount.getText().toString()));
                     newExpense.setDate(new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(tvDatePicker.getText().toString()));
                     if(expenseId == 0){
-                        MainActivity.myAppRoomDatabase.expenseDao().AddExpense(newExpense);
-                        Toast.makeText(getApplicationContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
+                        StartActivity.myAppRoomDatabase.expenseDao().AddExpense(newExpense);
+                        //Toast.makeText(getApplicationContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
                     }
                     else {
                         newExpense.setId(expenseId);
-                        MainActivity.myAppRoomDatabase.expenseDao().UpdateExpense(newExpense);
+                        StartActivity.myAppRoomDatabase.expenseDao().UpdateExpense(newExpense);
                         expenseId = 0;
-                        Toast.makeText(getApplicationContext(),"Updated Successfully",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(),"Updated Successfully",Toast.LENGTH_LONG).show();
                     }
 
                     etName.setText("");
                     etAmount.setText("");
                     btnSave.setText("Save");
+                    if(etName.requestFocus()) {
+                        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                        etAmount.clearFocus();
+                    }
                     RelaceFragment();
                     ChangeTotal();
                 }catch (Exception e)
                 {
-                    Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -151,10 +200,29 @@ public class AddExpense extends AppCompatActivity {
     }
     private void ChangeTotal(){
         Date date = new GregorianCalendar(Year, Month-1, Day).getTime();
-        List<Expense> expenses = MainActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
+        List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
         Double totoal = new DayExpenses().AddTotal(expenses);
         tvTotal.setText(String.format("%.2f", totoal));
         //mContentView.setText(String.format("%.2f",mValues.get(position).getAmount()));
 
+    }
+
+    // create an action bar button
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // handle button activities
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.settingMenuButton) {
+            Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -11,19 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="#ffffff"
+        android:elevation="5dp"
         android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/dayExpensesFragmentLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="#FFFFFF"
-            android:elevation="10dp">
+            android:background="#FFFFFF">
 
         </FrameLayout>
-
 
 
     </LinearLayout>
@@ -84,40 +86,68 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tvDatePicker"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/background_date"
-            android:elevation="5dp"
-            android:paddingTop="8dp"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvDatePicker"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/background_date"
+                android:elevation="2dp"
+                android:paddingTop="12dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btnDPleft"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/left_button_background"
+                android:translationZ="1dp" />
+
+            <Button
+                android:id="@+id/btnDPRight"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/right_button_background"
+                android:translationZ="1dp" />
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/textbox_background"
-            android:ems="10"
+            android:layout_height="50dp"
             android:layout_marginBottom="5dp"
-            android:elevation="5dp"
-            android:hint="Name"
+            android:background="@drawable/textbox_background"
+            android:elevation="2dp"
+            android:ems="18"
+            android:hint="write what you spend on"
             android:inputType="textPersonName"
             android:textAlignment="center" />
 
         <EditText
             android:id="@+id/etAmount"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/textbox_background"
-            android:ems="10"
+            android:layout_height="50dp"
             android:layout_marginBottom="5dp"
-            android:elevation="5dp"
-            android:hint="123.45"
+            android:background="@drawable/textbox_background"
+            android:elevation="2dp"
+
+            android:ems="18"
+            android:hint="write the amount"
             android:inputType="numberDecimal"
             android:textAlignment="center" />
 
@@ -127,7 +157,8 @@
             android:layout_height="40dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/save_button_background"
-            android:elevation="5dp"
+            android:elevation="2dp"
+            android:translationZ="3dp"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-black"
             android:text="Save"
