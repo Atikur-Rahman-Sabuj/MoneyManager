@@ -42,7 +42,7 @@ public class ExpandableExpenseFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_expandable_expense, container, false);
-        Toast.makeText(getContext(),"here", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(),"here", Toast.LENGTH_LONG).show();
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableExpenseList);
         List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpenses();
         dayExpensesList = new ExpenseDataController(expenses).getDailyExpenses();

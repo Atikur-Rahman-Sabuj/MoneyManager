@@ -42,6 +42,14 @@ public class AddExpense extends AppCompatActivity {
     private int Month;
     private int Day;
     private long expenseId = 0;
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,7 +206,7 @@ public class AddExpense extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.dayExpensesFragmentLayout,expenseFragment).commit();
         }
     }
-    private void ChangeTotal(){
+    public void ChangeTotal(){
         Date date = new GregorianCalendar(Year, Month-1, Day).getTime();
         List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
         Double totoal = new DayExpenses().AddTotal(expenses);

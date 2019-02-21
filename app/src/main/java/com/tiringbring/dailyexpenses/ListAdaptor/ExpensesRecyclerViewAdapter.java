@@ -16,6 +16,7 @@ import com.tiringbring.dailyexpenses.AddExpense;
 import com.tiringbring.dailyexpenses.MainActivity;
 import com.tiringbring.dailyexpenses.R;
 import com.tiringbring.dailyexpenses.ExpenseFragment.OnListFragmentInteractionListener;
+import com.tiringbring.dailyexpenses.StartActivity;
 import com.tiringbring.dailyexpenses.dummy.DummyContent.DummyItem;
 
 import java.util.List;
@@ -32,11 +33,12 @@ public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRe
     private final List<Expense> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Context context;
-
-    public ExpensesRecyclerViewAdapter(Context context, List<Expense> items, OnListFragmentInteractionListener listener) {
+    AddExpense addExpense;
+    public ExpensesRecyclerViewAdapter(Context context, List<Expense> items, OnListFragmentInteractionListener listener, AddExpense addExpense) {
         mValues = items;
         mListener = listener;
         this.context = context;
+        this.addExpense = addExpense;
     }
 
     @Override
@@ -48,6 +50,7 @@ public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRe
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        final int pos = position;
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getName());
         holder.mContentView.setText(String.format("%.2f",mValues.get(position).getAmount()));
@@ -57,14 +60,14 @@ public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRe
                 final CharSequence[] items = { "Edit", "Delete" };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle(mValues.get(position).getName()+"    "+String.valueOf(mValues.get(position).getAmount()));
+                builder.setTitle(mValues.get(pos).getName()+"    "+String.valueOf(mValues.get(pos).getAmount()));
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case 0:{
                                 Intent intent = new Intent(context, AddExpense.class);
-                                intent.putExtra("expenseId", mValues.get(position).getId());
+                                intent.putExtra("expenseId", mValues.get(pos).getId());
                                 ((Activity)context).startActivity(intent);
                                 break;
                             }
@@ -75,10 +78,11 @@ public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRe
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                                MainActivity.myAppRoomDatabase.expenseDao().DeleteExpense(mValues.get(position));
-                                                mValues.remove(position);
+                                                StartActivity.myAppRoomDatabase.expenseDao().DeleteExpense(mValues.get(pos));
+                                                mValues.remove(pos);
                                                 notifyDataSetChanged();
-                                                Toast.makeText(context, "Yes", Toast.LENGTH_SHORT).show();
+                                                addExpense.ChangeTotal();
+                                                //Toast.makeText(context, "Yes", Toast.LENGTH_SHORT).show();
                                             }})
                                         .setNegativeButton(android.R.string.no, null).show();
                                 break;

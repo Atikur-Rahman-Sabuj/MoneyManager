@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity(tableName = "Expenses")
 @TypeConverters(Converters.class)
-public class Expense {
+public class Expense implements Comparable<Expense>{
     @PrimaryKey(autoGenerate = true)
     private long Id;
     private String Name;
@@ -45,5 +45,10 @@ public class Expense {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public int compareTo(Expense o) {
+        return  getDate().compareTo(o.getDate());
     }
 }

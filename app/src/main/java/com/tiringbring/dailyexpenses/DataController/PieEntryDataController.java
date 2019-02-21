@@ -11,16 +11,32 @@ import java.util.List;
 import RoomDb.Expense;
 
 public class PieEntryDataController {
+    private  double Total=0;
     public ArrayList<PieEntry> GetList(Date date){
          ArrayList<PieEntry> pieEntries = new ArrayList<>();
          List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
-         expenses.forEach(expense ->{
-             pieEntries.add(new PieEntry(((int) expense.getAmount()),expense.getName()));
-         });
+        for (Expense expense:expenses
+             ) {
+            Total += expense.getAmount();
+            pieEntries.add(new PieEntry(((int) expense.getAmount()),expense.getName()));
+        }
+//         expenses.forEach(expense ->{
+//             Total+=expense.getAmount();
+//             pieEntries.add(new PieEntry(((int) expense.getAmount()),expense.getName()));
+//         });
+
          if(pieEntries.size()==0){
              pieEntries.add(new PieEntry(1 , "No entry"));
          }
          return pieEntries;
+    }
+
+    public void setTotal(double total) {
+        Total = total;
+    }
+
+    public double getTotal() {
+        return Total;
     }
 }
 

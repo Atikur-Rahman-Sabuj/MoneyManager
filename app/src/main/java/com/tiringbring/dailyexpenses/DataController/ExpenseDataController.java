@@ -4,6 +4,7 @@ import com.tiringbring.dailyexpenses.Entity.DayExpenses;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +24,9 @@ public class ExpenseDataController {
 
 
     public  void MakeList(List<Expense> expenses){
-        expenses.sort(Comparator.comparing(Expense::getDate).reversed());
+        Collections.sort(expenses);
+        Collections.reverse(expenses);
+        //expenses.sort(Comparator.comparing(Expense::getDate).reversed());
         Expense fex = expenses.get(0);
         Date prevDate = fex.getDate();
         Date newDate;
@@ -57,4 +60,7 @@ public class ExpenseDataController {
     public void setDailyExpenses(List<DayExpenses> dailyExpenses) {
         DailyExpenses = dailyExpenses;
     }
+//    public List<Expense> SortExpensesByDate(List<Expense> expenses){
+//
+//    }
 }

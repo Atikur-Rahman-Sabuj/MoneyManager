@@ -1,5 +1,6 @@
 package com.tiringbring.dailyexpenses;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -79,8 +80,9 @@ public class ExpenseFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            AddExpense addExpense = (AddExpense)getActivity();
             List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
-            recyclerView.setAdapter(new ExpensesRecyclerViewAdapter(getContext(), expenses, mListener));
+            recyclerView.setAdapter(new ExpensesRecyclerViewAdapter(getContext(), expenses, mListener,addExpense));
         }
         return view;
     }

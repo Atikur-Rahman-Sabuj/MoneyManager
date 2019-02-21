@@ -2,10 +2,12 @@ package com.tiringbring.dailyexpenses;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 
 import RoomDb.ExpenseDatabase;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.room.Room;
 
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -23,10 +26,13 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tiringbring.dailyexpenses.DataController.BarEntryDataController;
@@ -44,6 +50,7 @@ public class StartActivity extends AppCompatActivity {
     public static ExpenseDatabase myAppRoomDatabase;
     private BarChart mChart;
     private PieChart pieChart;
+    private TextView textView;
     Long dailyLimit;
     private Date pieDate;
     private Button btnAddNew;
@@ -58,6 +65,7 @@ public class StartActivity extends AppCompatActivity {
         btnShowList = (Button) findViewById(R.id.btnShowList);
         mChart= (BarChart) findViewById(R.id.barChart);
         pieChart = (PieChart) findViewById(R.id.pieChart);
+        textView = (TextView) findViewById(R.id.textView);
         dailyLimit = new MySharedPreferences(getApplicationContext()).getDayilyLimit();
 
         btnAddNew.setOnClickListener(new View.OnClickListener() {
@@ -78,17 +86,17 @@ public class StartActivity extends AppCompatActivity {
         BindDataToPieChart();
 
         mChart.getDescription().setEnabled(false);
-        BarEntryDataController beDataController = new BarEntryDataController();
+        final BarEntryDataController beDataController = new BarEntryDataController();
         List<BarEntry> data = beDataController.GetBarEntries();
         //generating colors
         List<Integer> colors = new ArrayList<>();
         for (BarEntry be:
                 data) {
             if(be.getY()>dailyLimit){
-                colors.add(Color.RED);
+                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
             }
             else {
-                colors.add(Color.GREEN);
+                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
             }
         }
         BarDataSet set = new BarDataSet(data, "");
@@ -127,6 +135,18 @@ public class StartActivity extends AppCompatActivity {
         mChart.setDrawGridBackground(false);
         mChart.setFitBars(false);
         mChart.invalidate();
+        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                pieDate = beDataController.dates.get(((int) e.getX()));
+                BindDataToPieChart();
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
 
         pieChart.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()){
             public void onSwipeTop() {
@@ -203,6 +223,19 @@ public class StartActivity extends AppCompatActivity {
             pieDate = expectedDay;
         }
     }
+    boolean closable = false;
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if(closable){
+            //super.onBackPressed();
+            this.moveTaskToBack(true);
+
+        }else {
+            Toast.makeText(getApplicationContext(),"press again to exit", Toast.LENGTH_SHORT).show();
+            closable = !closable;
+        }
+    }
 
     private void BindDataToPieChart() {
         pieChart.setUsePercentValues(false);
@@ -219,7 +252,10 @@ public class StartActivity extends AppCompatActivity {
         pieChart.setHoleRadius(35f);
         pieChart.setTransparentCircleRadius(50f);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
-        ArrayList<PieEntry> yValues = new PieEntryDataController().GetList(pieDate);
+        PieEntryDataController pedc = new PieEntryDataController();
+        ArrayList<PieEntry> yValues = pedc.GetList(pieDate);
+        Double Total = pedc.getTotal();
+        textView.setText("Total : "+Total.toString()+"   Slide chart to see more!");
         PieDataSet dataSet = new PieDataSet(yValues, "");
         dataSet.setSliceSpace(1f);
         dataSet.setSelectionShift(5f);

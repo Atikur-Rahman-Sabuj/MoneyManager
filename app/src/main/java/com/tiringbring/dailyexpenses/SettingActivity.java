@@ -17,19 +17,27 @@ import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 
 public class SettingActivity extends AppCompatActivity {
 
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         TextView tvDayLimitPanel = (TextView)findViewById(R.id.tvDayLimitPanel);
-        TextView tvDayLimitValue = (TextView)findViewById(R.id.tvDayLimitValue);
+        final TextView tvDayLimitValue = (TextView)findViewById(R.id.tvDayLimitValue);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
 
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        long dailyLimit = new MySharedPreferences(getApplicationContext()).getDayilyLimit();
+        final long dailyLimit = new MySharedPreferences(getApplicationContext()).getDayilyLimit();
         tvDayLimitValue.setText(String.valueOf(dailyLimit));
 
 
@@ -38,7 +46,7 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 View dialogView = getLayoutInflater().inflate(R.layout.setting_limit_dialouge, null);
-                AlertDialog alertDialog = new AlertDialog.Builder(SettingActivity.this).create();
+                final AlertDialog alertDialog = new AlertDialog.Builder(SettingActivity.this).create();
                 alertDialog.setTitle("Set Limit");
                 //alertDialog.setIcon("Icon id here");
                 alertDialog.setCancelable(true);

@@ -15,18 +15,24 @@ import RoomDb.Expense;
 
 public class BarEntryDataController {
     public ArrayList<String> labels = new ArrayList<String> ();
+    public ArrayList<Date> dates = new ArrayList<>();
     public List<BarEntry> GetBarEntries(){
         List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpenses();
         List<DayExpenses> dayExpensesList = new ArrayList<>();
-        if(expenses.size()>0){
-            dayExpensesList = new ExpenseDataController(expenses).getDailyExpenses();
-        }
-
-        List<DayExpenses> dayExpenses = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
         //Calendar calendar1 = Calendar.getInstance();
         Date startDate = new DateDataController().CropTimeFromDate(calendar);
+
+        if(expenses.size()>0){
+            dayExpensesList = new ExpenseDataController(expenses).getDailyExpenses();
+            if(dayExpensesList.get(0).getDate().after(startDate)){
+                startDate = dayExpensesList.get(0).getDate();
+                calendar.setTime(startDate);
+            }
+        }
+
+        List<DayExpenses> dayExpenses = new ArrayList<>();
         //calendar1.add(Calendar.DATE, -30);
         Date endDate = startDate;// = new DateDataController().CropTimeFromDate(calendar1);
         DayExpenses itDayExpense = new DayExpenses();
@@ -72,6 +78,7 @@ public class BarEntryDataController {
         for (DayExpenses expense:
              dayExpenses) {
             labels.add(new DateDataController().DatetoString(expense.date));
+            dates.add(expense.date);
             barEntries.add(new BarEntry(j++, expense.getTotal().intValue()));
         }
 

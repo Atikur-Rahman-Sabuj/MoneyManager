@@ -4,13 +4,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logoround"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".StartActivity"
-            android:label="Expenses">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +23,8 @@
         <activity android:name=".AddExpense"
             android:label="Add Expense"
             android:parentActivityName=".StartActivity"/>
-        <activity android:name=".ExpenseList" />
+        <activity android:name=".ExpenseList"
+            android:label="Expenses"/>
         <activity android:name=".SettingActivity"
             android:label="Settings"
             android:parentActivityName=".StartActivity"/>
