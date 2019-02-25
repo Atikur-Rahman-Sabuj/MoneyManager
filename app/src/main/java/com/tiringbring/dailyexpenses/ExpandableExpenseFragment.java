@@ -12,7 +12,11 @@ import android.widget.Toast;
 
 import com.tiringbring.dailyexpenses.DataController.ExpenseDataController;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
+import com.tiringbring.dailyexpenses.Entity.MonthExpenses;
+import com.tiringbring.dailyexpenses.Entity.YearlyExpenses;
 import com.tiringbring.dailyexpenses.ListAdaptor.ExpenseExpandableListAdaptor;
+import com.tiringbring.dailyexpenses.ListAdaptor.MonthlyExpenseExpandableListAdaptor;
+import com.tiringbring.dailyexpenses.ListAdaptor.YearlyExpenseExpandableListAdaptor;
 
 import java.util.List;
 
@@ -46,8 +50,30 @@ public class ExpandableExpenseFragment extends Fragment {
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableExpenseList);
         List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpenses();
         dayExpensesList = new ExpenseDataController(expenses).getDailyExpenses();
-        expandableListAdapter = new ExpenseExpandableListAdaptor(getContext(), dayExpensesList);
-        expandableListView.setAdapter(expandableListAdapter);
+        String ddItem = getArguments().getString("DDITEMS");
+        switch (ddItem){
+            case "daily":{
+                expandableListAdapter = new ExpenseExpandableListAdaptor(getContext(), dayExpensesList);
+                expandableListView.setAdapter(expandableListAdapter);
+                break;
+            }
+            case "monthly":{
+                List<MonthExpenses> monthlyExpenseList = new ExpenseDataController(expenses).GetMonthlyExpenses(dayExpensesList);
+                MonthlyExpenseExpandableListAdaptor monthlyExpenseExpandableListAdaptor = new MonthlyExpenseExpandableListAdaptor(getContext(), monthlyExpenseList);
+                expandableListView.setAdapter(monthlyExpenseExpandableListAdaptor);
+                break;
+            }
+            case "yearly":{
+                List<MonthExpenses> monthlyExpenseList = new ExpenseDataController(expenses).GetMonthlyExpenses(dayExpensesList);
+                List<YearlyExpenses> yearlyExpensesList = new ExpenseDataController(expenses).GetYearlyExpenses(monthlyExpenseList);
+                YearlyExpenseExpandableListAdaptor yearlyExpenseExpandableListAdaptor = new YearlyExpenseExpandableListAdaptor(getContext(), yearlyExpensesList);
+                expandableListView.setAdapter(yearlyExpenseExpandableListAdaptor);
+                break;
+            }
+        }
+
+
+
         return  view;
     }
 

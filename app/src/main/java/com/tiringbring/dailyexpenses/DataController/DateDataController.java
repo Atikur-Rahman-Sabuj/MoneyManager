@@ -25,4 +25,20 @@ public class DateDataController {
         SimpleDateFormat newFormatter = new SimpleDateFormat("dd/MM");
         return newFormatter.format(date);
     }
+    public String DateToMonthYear(Date date){
+        SimpleDateFormat newFormatter = new SimpleDateFormat("MMM yy");
+        return newFormatter.format(date);
+    }
+    public String DateToYear(Date date){
+        SimpleDateFormat newFormatter = new SimpleDateFormat("yyyy");
+        return newFormatter.format(date);
+    }
+    public String DateToMonth(Date date){
+        SimpleDateFormat newFormatter = new SimpleDateFormat("MMM");
+        return newFormatter.format(date);
+    }
+    public String DateToDate(Date date){
+        SimpleDateFormat newFormatter = new SimpleDateFormat("dd EEE");
+        return newFormatter.format(date);
+    }
 }
