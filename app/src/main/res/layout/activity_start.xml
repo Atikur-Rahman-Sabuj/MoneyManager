@@ -16,7 +16,8 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/add_button_background"
         android:elevation="10dp"
-        android:translationZ="10dp" />
+        android:translationZ="10dp"
+        android:transitionName="addNew"/>
 
     <Button
         android:id="@+id/btnShowList"
@@ -27,7 +28,8 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/list_button_background"
         android:elevation="10dp"
-        android:translationZ="10dp" />
+        android:translationZ="10dp"
+        android:transitionName="showList"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

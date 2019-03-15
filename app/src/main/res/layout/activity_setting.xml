@@ -21,34 +21,146 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:clipToPadding="false"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvDayLimitPanel"
-                android:layout_width="87dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingLeft="10dp"
+                android:gravity="left"
+                android:padding="10dp"
+                android:layout_alignParentLeft="true"
                 android:text="Daily expense limit"
-                android:textAlignment="textStart"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/tvDayLimitValue"
-                android:layout_width="87dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_weight="1"
-                android:paddingRight="10dp"
+                android:background="@color/white"
+                android:elevation="5dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
                 android:text="TextView"
-                android:textAlignment="textEnd"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18dp" />
 
-        </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvMonthlyLimitPanel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:padding="10dp"
+                android:layout_alignParentLeft="true"
+                android:text="Monthly expense limit"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/tvMonthlyLimitValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:elevation="5dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                android:text="TextView"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvYearlyLimitPanel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:padding="10dp"
+                android:layout_alignParentLeft="true"
+                android:text="Yearly expense limit"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/tvYearlyLimitValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:elevation="5dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                android:text="TextView"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvNotificationSetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:padding="10dp"
+                android:layout_alignParentLeft="true"
+                android:text="Show notification"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18dp" />
+
+            <Switch
+                android:id="@+id/switchNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:text="" />
+
+
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

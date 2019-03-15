@@ -21,7 +21,6 @@ public class ExpenseDataController {
         if(Expenses.size()>0){
             MakeList(Expenses);
         }
-
     }
     public List<MonthExpenses> GetMonthlyExpenses(List<DayExpenses> dailyExpenses){
         List<MonthExpenses> monthlyExpenses = new ArrayList<>();
@@ -68,7 +67,22 @@ public class ExpenseDataController {
         }
         return yearlyExpenseList;
     }
-
+    public  List<DayExpenses> MakeCustomList(Date StartDate, Date EndDate){
+        List<DayExpenses> CustomDailyExpenses = new ArrayList<>();
+        int i = 0;
+        while (i<DailyExpenses.size()){
+            boolean first = (DailyExpenses.get(i).date).after(StartDate);
+            boolean second = (DailyExpenses.get(i).date).before(EndDate);
+            if(!first&&!second){
+                CustomDailyExpenses.add(DailyExpenses.get(i));
+            }
+            if(EndDate.after(DailyExpenses.get(i).date)){
+                break;
+            }
+            i++;
+        }
+        return CustomDailyExpenses;
+    }
     public  void MakeList(List<Expense> expenses){
         Collections.sort(expenses);
         Collections.reverse(expenses);

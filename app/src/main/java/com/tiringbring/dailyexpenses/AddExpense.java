@@ -1,5 +1,6 @@
 package com.tiringbring.dailyexpenses;
 
+import android.app.ActivityOptions;
 import android.app.DatePickerDialog;
 import androidx.room.Room;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +40,7 @@ public class AddExpense extends AppCompatActivity {
     private Button btnLeft;
     private Button btnRight;
     private TextView tvTotal;
+    private LinearLayout myLinearLayout;
     private DatePickerDialog.OnDateSetListener tvDateSetListner;
     private int  Year;
     private int Month;
@@ -47,7 +51,11 @@ public class AddExpense extends AppCompatActivity {
     public void onBackPressed() {
         //super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+        myLinearLayout=(LinearLayout)findViewById(R.id.linearLayout);
+
         startActivity(intent);
+
+
     }
 
     @Override

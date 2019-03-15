@@ -1,6 +1,10 @@
 package com.tiringbring.dailyexpenses;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -11,6 +15,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.room.Room;
 
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,12 +43,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tiringbring.dailyexpenses.DataController.BarEntryDataController;
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 import com.tiringbring.dailyexpenses.DataController.PieEntryDataController;
+import com.tiringbring.dailyexpenses.Notification.Notification;
 import com.tiringbring.dailyexpenses.Utility.OnSwipeTouchListener;
+import com.tiringbring.dailyexpenses.Utility.PlayAnimation;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class StartActivity extends AppCompatActivity {
@@ -56,30 +64,48 @@ public class StartActivity extends AppCompatActivity {
     private Button btnAddNew;
     private Button btnShowList;
     @SuppressLint("ClickableViewAccessibility")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(),ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
+        onFirstRun();
         btnAddNew = (Button) findViewById(R.id.btnAddNew);
         btnShowList = (Button) findViewById(R.id.btnShowList);
         mChart= (BarChart) findViewById(R.id.barChart);
         pieChart = (PieChart) findViewById(R.id.pieChart);
         textView = (TextView) findViewById(R.id.textView);
         dailyLimit = new MySharedPreferences(getApplicationContext()).getDayilyLimit();
+        //new PlayAnimation().PlayFadeIn(getApplicationContext(), btnAddNew);
+        //Notification set
+//        Calendar nCalendar = Calendar.getInstance();
+//        nCalendar.set(Calendar.HOUR, 21);
+//        nCalendar.set(Calendar.MINUTE, 45);
+//        nCalendar.set(Calendar.SECOND, 0);
+//        setAlart(nCalendar.getTimeInMillis());
+
+
+
 
         btnAddNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddExpense.class);
+
+
                 startActivity(intent);
+
+
             }
         });
         btnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ExpenseList.class);
+
                 startActivity(intent);
+
             }
         });
         SetPieChartDate();
@@ -125,6 +151,7 @@ public class StartActivity extends AppCompatActivity {
         left.setDrawAxisLine(false); // no axis line
         left.setDrawGridLines(false); // no grid lines
         left.setDrawZeroLine(false); // draw a zero line
+
         mChart.getAxisRight().setEnabled(false); // no right axis
         xAxis.setDrawGridLines(false);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
@@ -170,6 +197,33 @@ public class StartActivity extends AppCompatActivity {
         });
 
     }
+
+    private void onFirstRun() {
+        //MySharedPreferences msp = new MySharedPreferences(getApplicationContext());
+            setNotification();
+            //msp.setIsFirstRun(false);
+
+    }
+
+    private void setNotification() {
+        //Long alertTime = new GregorianCalendar().getTimeInMillis()+10*1000;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        Intent alertIntent = new Intent(this, Notification.class);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+    }
+
+//    private void setAlart(long timeInMillis) {
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        Intent intent = new Intent(this, Notification.class);
+//        intent.setAction("MY_NOTIFICATION_MESSAGE");
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+//        Toast.makeText(this, "Alarm is set", Toast.LENGTH_SHORT).show();
+//    }
 
     // create an action bar button
     @Override
@@ -254,6 +308,10 @@ public class StartActivity extends AppCompatActivity {
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
         PieEntryDataController pedc = new PieEntryDataController();
         ArrayList<PieEntry> yValues = pedc.GetList(pieDate);
+        if(yValues.size()<1){
+            pieChart.setHoleRadius(50f);
+            pieChart.setCenterText(dateFormat.format(pieDate)+" No expense on this date");
+        }
         Double Total = pedc.getTotal();
         textView.setText("Total : "+Total.toString()+"   Slide chart to see more!");
         PieDataSet dataSet = new PieDataSet(yValues, "");
@@ -266,6 +324,6 @@ public class StartActivity extends AppCompatActivity {
         data.setValueTextColor(Color.WHITE);
 
         pieChart.setData(data);
-
     }
+
 }

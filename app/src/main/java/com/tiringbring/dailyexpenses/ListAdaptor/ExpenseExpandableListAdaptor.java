@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tiringbring.dailyexpenses.AddExpense;
+import com.tiringbring.dailyexpenses.DataController.DateDataController;
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
 import com.tiringbring.dailyexpenses.MainActivity;
@@ -86,19 +87,11 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
         }
         TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
         TextView tvTotal = (TextView) convertView.findViewById(R.id.tvTotal);
-        LinearLayout loIndicatorBar = (LinearLayout) convertView.findViewById(R.id.loIndicatorBar);
-        if(DayExpenseList.get(groupPosition).getTotal()>dailyLimit){
-            loIndicatorBar.setBackgroundColor(ContextCompat.getColor(context, R.color.light_red));
-            loIndicatorBar.getLayoutParams().height = (int) (60 * scale + 0.5f);
-        }
-        else {
-            int height = (int) (((DayExpenseList.get(groupPosition).getTotal()/dailyLimit))*60);
-            loIndicatorBar.getLayoutParams().height = (int) (height * scale + 0.5f);
-            loIndicatorBar.setBackgroundColor(ContextCompat.getColor(context, R.color.light_green));
-
-        }
-        tvDate.setText(dateFormat.format(DayExpenseList.get(groupPosition).getDate()));
-        tvTotal.setText(String.format("%.2f", DayExpenseList.get(groupPosition).getTotal()));
+        TextView tvLimit = (TextView) convertView.findViewById(R.id.tvLimit);
+        double percentage = (((DayExpenseList.get(groupPosition).getTotal()/dailyLimit))*100);
+        tvDate.setText(new DateDataController().DatetoBigDateMonthYear(DayExpenseList.get(groupPosition).getDate()));
+        tvTotal.setText("Total "+String.format("%.2f", DayExpenseList.get(groupPosition).getTotal()));
+        tvLimit.setText(String.format("%.2f", percentage)+"% than limit!");
         return  convertView;
     }
 
@@ -114,7 +107,7 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
         TextView mIdView = (TextView) convertView.findViewById(R.id.tvName);
         TextView mContentView = (TextView) convertView.findViewById(R.id.tvAmount);
         mIdView.setText(DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getName());
-        mContentView.setText(String.format("%.2f", DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getAmount()));
+        mContentView.setText("Total "+String.format("%.2f", DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getAmount()));
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

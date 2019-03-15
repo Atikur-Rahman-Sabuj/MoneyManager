@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/myColorAccent</item>
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowActivityTransitions">true</item>
     </style>
 
 </resources>

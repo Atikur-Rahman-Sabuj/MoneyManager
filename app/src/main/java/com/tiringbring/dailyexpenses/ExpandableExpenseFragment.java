@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.tiringbring.dailyexpenses.DataController.DateDataController;
 import com.tiringbring.dailyexpenses.DataController.ExpenseDataController;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
 import com.tiringbring.dailyexpenses.Entity.MonthExpenses;
@@ -18,6 +19,7 @@ import com.tiringbring.dailyexpenses.ListAdaptor.ExpenseExpandableListAdaptor;
 import com.tiringbring.dailyexpenses.ListAdaptor.MonthlyExpenseExpandableListAdaptor;
 import com.tiringbring.dailyexpenses.ListAdaptor.YearlyExpenseExpandableListAdaptor;
 
+import java.util.Date;
 import java.util.List;
 
 import RoomDb.Expense;
@@ -70,11 +72,30 @@ public class ExpandableExpenseFragment extends Fragment {
                 expandableListView.setAdapter(yearlyExpenseExpandableListAdaptor);
                 break;
             }
+            case "custom":{
+                Date startDate = new DateDataController().StringToDate( getArguments().getString("START_DATE"));
+                Date endDate = new DateDataController().StringToDate(getArguments().getString("END_DATE"));
+                List<DayExpenses> customDayExpenseList = new ExpenseDataController(expenses).MakeCustomList(startDate, endDate);
+                ExpenseList expenseList = (ExpenseList)getActivity();
+                expenseList.setTotalTextView(getTotal(customDayExpenseList));
+                expandableListAdapter = new ExpenseExpandableListAdaptor(getContext(), customDayExpenseList);
+                expandableListView.setAdapter(expandableListAdapter);
+                break;
+            }
+
         }
 
 
 
         return  view;
+    }
+    private double getTotal(List<DayExpenses> dayExpensesList){
+        double sum = 0;
+        for (DayExpenses dex: dayExpensesList
+             ) {
+            sum += dex.total;
+        }
+        return sum;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

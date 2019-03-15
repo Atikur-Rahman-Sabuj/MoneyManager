@@ -23,6 +23,7 @@
         <item>Daily</item>
         <item>Monthly</item>
         <item>Yearly</item>
+        <item>Custom</item>
     </string-array>
     <string-array name="pref_example_list_titles">
         <item>Always</item>

@@ -27,7 +27,7 @@ import androidx.core.content.ContextCompat;
 
 public class MonthlyExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
     Context context;
-    Long dailyLimit;
+    Long monthlyLimit;
     float scale;
     List<MonthExpenses> MonthlyExpenseList;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
@@ -35,7 +35,7 @@ public class MonthlyExpenseExpandableListAdaptor extends BaseExpandableListAdapt
     public  MonthlyExpenseExpandableListAdaptor(Context context, List<MonthExpenses> MonthlyExpenseList){
         this.context = context;
         this.MonthlyExpenseList = MonthlyExpenseList;
-        dailyLimit = new MySharedPreferences(context).getDayilyLimit();
+        monthlyLimit = new MySharedPreferences(context).getMonthlyLimit();
         scale = context.getResources().getDisplayMetrics().density;
     }
 
@@ -84,20 +84,12 @@ public class MonthlyExpenseExpandableListAdaptor extends BaseExpandableListAdapt
         }
         TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
         TextView tvTotal = (TextView) convertView.findViewById(R.id.tvTotal);
-        LinearLayout loIndicatorBar = (LinearLayout) convertView.findViewById(R.id.loIndicatorBar);
-        loIndicatorBar.setActivated(false);
-//        if(DayExpenseList.get(groupPosition).getTotal()>dailyLimit){
-//            loIndicatorBar.setBackgroundColor(ContextCompat.getColor(context, R.color.light_red));
-//            loIndicatorBar.getLayoutParams().height = (int) (60 * scale + 0.5f);
-//        }
-//        else {
-//            int height = (int) (((DayExpenseList.get(groupPosition).getTotal()/dailyLimit))*60);
-//            loIndicatorBar.getLayoutParams().height = (int) (height * scale + 0.5f);
-//            loIndicatorBar.setBackgroundColor(ContextCompat.getColor(context, R.color.light_green));
-//
-//        }
+        TextView tvLimit = (TextView) convertView.findViewById(R.id.tvLimit);
+
+        double percentage = (((MonthlyExpenseList.get(groupPosition).total/monthlyLimit))*100);
         tvDate.setText(MonthlyExpenseList.get(groupPosition).month);
-        tvTotal.setText(String.format("%.2f", MonthlyExpenseList.get(groupPosition).total));
+        tvTotal.setText("Total "+String.format("%.2f", MonthlyExpenseList.get(groupPosition).total));
+        tvLimit.setText(String.format("%.2f", percentage)+"% than limit!");
         return  convertView;
     }
 
@@ -113,7 +105,7 @@ public class MonthlyExpenseExpandableListAdaptor extends BaseExpandableListAdapt
         TextView mIdView = (TextView) convertView.findViewById(R.id.tvName);
         TextView mContentView = (TextView) convertView.findViewById(R.id.tvAmount);
         mIdView.setText(new DateDataController().DateToDate(MonthlyExpenseList.get(groupPosition).dayExpenses.get(childPosition).date));
-        mContentView.setText(String.format("%.2f", MonthlyExpenseList.get(groupPosition).dayExpenses.get(childPosition).total));
+        mContentView.setText("Total "+String.format("%.2f", MonthlyExpenseList.get(groupPosition).dayExpenses.get(childPosition).total));
         return  convertView;
     }
 

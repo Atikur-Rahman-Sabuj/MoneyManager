@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +54,12 @@ public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRe
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final int pos = position;
         holder.mItem = mValues.get(position);
+//        Animation animation = AnimationUtils.loadAnimation(context, R.anim.fadein);
+//        if(position == mValues.size()-1){
+//            holder.mIdView.startAnimation(animation);
+//            holder.mContentView.startAnimation(animation);
+//        }
+
         holder.mIdView.setText(mValues.get(position).getName());
         holder.mContentView.setText(String.format("%.2f",mValues.get(position).getAmount()));
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
