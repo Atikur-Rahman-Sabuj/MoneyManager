@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExpenseList">
+    tools:context=".Activitie.ExpenseList">
 
     <Button
         android:id="@+id/btnAddNewExpense"
@@ -17,12 +17,6 @@
         android:elevation="10dp"
         android:translationZ="10dp"
         android:transitionName="addNew"/>
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/test_string" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,7 +59,7 @@
                         android:paddingTop="10dp"
                         android:paddingRight="0dp"
                         android:paddingBottom="10dp"
-                        android:text="To date: " />
+                        android:text="@string/to_date" />
 
                     <TextView
                         android:id="@+id/tvStartDate"
@@ -100,7 +94,7 @@
                         android:paddingTop="10dp"
                         android:paddingRight="0dp"
                         android:paddingBottom="10dp"
-                        android:text="From date: " />
+                        android:text="@string/from_date" />
 
                     <TextView
                         android:id="@+id/tvEndDate"

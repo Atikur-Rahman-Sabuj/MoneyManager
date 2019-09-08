@@ -2,10 +2,8 @@ package com.tiringbring.dailyexpenses.DataController;
 
 import com.github.mikephil.charting.data.BarEntry;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
-import com.tiringbring.dailyexpenses.MainActivity;
-import com.tiringbring.dailyexpenses.StartActivity;
+import com.tiringbring.dailyexpenses.Activitie.StartActivity;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

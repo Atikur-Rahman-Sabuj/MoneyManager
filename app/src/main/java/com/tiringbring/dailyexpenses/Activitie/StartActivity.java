@@ -1,12 +1,10 @@
-package com.tiringbring.dailyexpenses;
+package com.tiringbring.dailyexpenses.Activitie;
 
 import android.annotation.SuppressLint;
-import android.app.ActivityOptions;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 
 import RoomDb.ExpenseDatabase;
@@ -15,7 +13,6 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.room.Room;
 
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,20 +36,18 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tiringbring.dailyexpenses.DataController.BarEntryDataController;
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 import com.tiringbring.dailyexpenses.DataController.PieEntryDataController;
 import com.tiringbring.dailyexpenses.Notification.Notification;
+import com.tiringbring.dailyexpenses.R;
 import com.tiringbring.dailyexpenses.Utility.OnSwipeTouchListener;
-import com.tiringbring.dailyexpenses.Utility.PlayAnimation;
 import com.tiringbring.dailyexpenses.Utility.ResourceManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class StartActivity extends AppCompatActivity {
@@ -321,7 +316,7 @@ public class StartActivity extends AppCompatActivity {
             pieChart.setCenterText(dateFormat.format(pieDate)+" No expense on this date");
         }
         Double Total = pedc.getTotal();
-        textView.setText("Total : "+Total.toString()+"   Slide chart to see more!");
+        textView.setText(getResources().getString(R.string.total)+" : "+Total.toString()+"   "+getResources().getString(R.string.chart_slide));
         PieDataSet dataSet = new PieDataSet(yValues, "");
         dataSet.setSliceSpace(1f);
         dataSet.setSelectionShift(5f);

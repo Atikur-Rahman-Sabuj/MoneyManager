@@ -1,6 +1,5 @@
-package com.tiringbring.dailyexpenses;
+package com.tiringbring.dailyexpenses.Fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -11,7 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tiringbring.dailyexpenses.Activitie.AddExpense;
+import com.tiringbring.dailyexpenses.Activitie.StartActivity;
 import com.tiringbring.dailyexpenses.ListAdaptor.ExpensesRecyclerViewAdapter;
+import com.tiringbring.dailyexpenses.R;
 import com.tiringbring.dailyexpenses.dummy.DummyContent.DummyItem;
 
 import java.util.Date;

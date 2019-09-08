@@ -11,4 +11,13 @@
         <item>বার্ষিক</item>
         <item>কাস্টমাইজ</item>
     </string-array>
+    <string name="from_date">তারিখ পর্যন্ত:</string>
+    <string name="to_date">" তারিখ হইতে:"</string>
+    <string name="total">" মোট"</string>
+    <string name="chart_slide">আরও দেখতে চার্ট স্লাইড করুন!</string>
+    <string name="daily_expense_limit">"দৈনিক ব্যয় সীমা "</string>
+    <string name="monthly_expense_limit">"মাসিক ব্যয় সীমা "</string>
+    <string name="yearly_expense_limit">"বার্ষিক ব্যয় সীমা "</string>
+    <string name="show_notification">নোটিফিকেশন দেখুন</string>
+    <string name="language">ভাষা</string>
 </resources>

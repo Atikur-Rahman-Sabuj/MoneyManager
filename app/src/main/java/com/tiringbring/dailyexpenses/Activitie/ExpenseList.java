@@ -1,35 +1,29 @@
-package com.tiringbring.dailyexpenses;
+package com.tiringbring.dailyexpenses.Activitie;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 
-import android.app.ActionBar;
-import android.app.ActivityOptions;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Pair;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ActionMenuView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tiringbring.dailyexpenses.DataController.DateDataController;
-import com.tiringbring.dailyexpenses.Utility.PlayAnimation;
+import com.tiringbring.dailyexpenses.Fragment.ExpandableExpenseFragment;
+import com.tiringbring.dailyexpenses.R;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -246,6 +240,6 @@ public class ExpenseList extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void setTotalTextView(double Total){
-        tvTotal.setText("Total "+String.format("%.2f", Total));
+        tvTotal.setText(getResources().getString(R.string.total)+" "+String.format("%.2f", Total));
     }
 }

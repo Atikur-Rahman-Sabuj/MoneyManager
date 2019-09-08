@@ -1,29 +1,19 @@
 package com.tiringbring.dailyexpenses.ListAdaptor;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.tiringbring.dailyexpenses.AddExpense;
 import com.tiringbring.dailyexpenses.DataController.DateDataController;
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
-import com.tiringbring.dailyexpenses.Entity.DayExpenses;
 import com.tiringbring.dailyexpenses.Entity.MonthExpenses;
 import com.tiringbring.dailyexpenses.R;
-import com.tiringbring.dailyexpenses.StartActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
-
-import androidx.core.content.ContextCompat;
 
 public class MonthlyExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
     Context context;

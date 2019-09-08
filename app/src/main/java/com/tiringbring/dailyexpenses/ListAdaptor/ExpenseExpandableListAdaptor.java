@@ -5,28 +5,21 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.tiringbring.dailyexpenses.AddExpense;
+import com.tiringbring.dailyexpenses.Activitie.AddExpense;
 import com.tiringbring.dailyexpenses.DataController.DateDataController;
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
-import com.tiringbring.dailyexpenses.MainActivity;
 import com.tiringbring.dailyexpenses.R;
-import com.tiringbring.dailyexpenses.StartActivity;
+import com.tiringbring.dailyexpenses.Activitie.StartActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
-
-import androidx.core.content.ContextCompat;
 
 public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
     Context context;

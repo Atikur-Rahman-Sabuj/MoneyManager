@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingActivity">
+    tools:context=".Activitie.SettingActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,11 +33,11 @@
                 android:id="@+id/tvDayLimitPanel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_weight="1"
                 android:gravity="left"
                 android:padding="10dp"
-                android:layout_alignParentLeft="true"
-                android:text="Daily expense limit"
+                android:text="@string/daily_expense_limit"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18dp" />
 
@@ -70,11 +70,11 @@
                 android:id="@+id/tvMonthlyLimitPanel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_weight="1"
                 android:gravity="left"
                 android:padding="10dp"
-                android:layout_alignParentLeft="true"
-                android:text="Monthly expense limit"
+                android:text="@string/monthly_expense_limit"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18dp" />
 
@@ -107,11 +107,11 @@
                 android:id="@+id/tvYearlyLimitPanel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_weight="1"
                 android:gravity="left"
                 android:padding="10dp"
-                android:layout_alignParentLeft="true"
-                android:text="Yearly expense limit"
+                android:text="@string/yearly_expense_limit"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18dp" />
 
@@ -144,11 +144,11 @@
                 android:id="@+id/tvNotificationSetting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_weight="1"
                 android:gravity="left"
                 android:padding="10dp"
-                android:layout_alignParentLeft="true"
-                android:text="Show notification"
+                android:text="@string/show_notification"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18dp" />
 
@@ -174,11 +174,11 @@
                 android:id="@+id/tvLanguage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_weight="1"
                 android:gravity="left"
                 android:padding="10dp"
-                android:layout_alignParentLeft="true"
-                android:text="Show notification"
+                android:text="@string/language"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18dp" />
 
@@ -191,11 +191,6 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/test_string" />
     </LinearLayout>
 
 

@@ -1,8 +1,7 @@
 package com.tiringbring.dailyexpenses.DataController;
 
 import com.github.mikephil.charting.data.PieEntry;
-import com.tiringbring.dailyexpenses.MainActivity;
-import com.tiringbring.dailyexpenses.StartActivity;
+import com.tiringbring.dailyexpenses.Activitie.StartActivity;
 
 import java.util.ArrayList;
 import java.util.Date;

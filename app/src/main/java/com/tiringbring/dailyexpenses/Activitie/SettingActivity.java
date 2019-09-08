@@ -1,9 +1,9 @@
-package com.tiringbring.dailyexpenses;
+package com.tiringbring.dailyexpenses.Activitie;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.Configuration;
@@ -12,9 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,10 +20,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
-import com.tiringbring.dailyexpenses.DataController.PreferenceTypes;
+import com.tiringbring.dailyexpenses.R;
 import com.tiringbring.dailyexpenses.Utility.ResourceManager;
 
 import java.util.Locale;

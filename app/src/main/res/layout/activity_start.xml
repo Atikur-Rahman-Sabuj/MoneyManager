@@ -36,7 +36,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="90dp"
         android:orientation="horizontal"
-        tools:context=".StartActivity">
+        tools:context=".Activitie.StartActivity">
         <RelativeLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -61,12 +61,6 @@
                 android:paddingLeft="10dp"
                 android:textAlignment="textStart"
                 android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/test_string" />
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"

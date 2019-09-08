@@ -10,7 +10,7 @@
         android:roundIcon="@drawable/logoround"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity"
+        <activity android:name=".Activitie.StartActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,20 +18,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activitie.MainActivity">
 
         </activity>
-        <activity android:name=".AddExpense"
+        <activity android:name=".Activitie.AddExpense"
             android:exported="true"
             android:label="Add Expense"
-            android:parentActivityName=".StartActivity"/>
-        <activity android:name=".ExpenseList"
+            android:parentActivityName=".Activitie.StartActivity"/>
+        <activity android:name=".Activitie.ExpenseList"
             android:exported="true"
             android:label="Expenses"
-            android:parentActivityName=".StartActivity"/>
-        <activity android:name=".SettingActivity"
+            android:parentActivityName=".Activitie.StartActivity"/>
+        <activity android:name=".Activitie.SettingActivity"
             android:label="Settings"
-            android:parentActivityName=".StartActivity"/>
+            android:parentActivityName=".Activitie.StartActivity"/>
         <receiver android:name=".Notification.Notification"
             android:process=":remote" />
         <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />

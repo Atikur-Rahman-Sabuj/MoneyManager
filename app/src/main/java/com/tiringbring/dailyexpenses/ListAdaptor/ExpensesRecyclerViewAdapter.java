@@ -9,16 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.tiringbring.dailyexpenses.AddExpense;
-import com.tiringbring.dailyexpenses.MainActivity;
+import com.tiringbring.dailyexpenses.Activitie.AddExpense;
 import com.tiringbring.dailyexpenses.R;
-import com.tiringbring.dailyexpenses.ExpenseFragment.OnListFragmentInteractionListener;
-import com.tiringbring.dailyexpenses.StartActivity;
+import com.tiringbring.dailyexpenses.Fragment.ExpenseFragment.OnListFragmentInteractionListener;
+import com.tiringbring.dailyexpenses.Activitie.StartActivity;
 import com.tiringbring.dailyexpenses.dummy.DummyContent.DummyItem;
 
 import java.util.List;
