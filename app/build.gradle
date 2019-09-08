@@ -3,11 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.tiringbring.dailyexpenses"
+        applicationId 'com.tiringbringforme.dailyexpenses'
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 7
-        versionName '1.5'
+        versionCode 1
+        versionName '1.1'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -40,4 +40,5 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
     implementation 'androidx.cardview:cardview:1.0.0-beta01'
     implementation 'com.google.android.material:material:1.0.0'
+
 }

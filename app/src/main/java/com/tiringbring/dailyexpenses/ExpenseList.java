@@ -150,7 +150,7 @@ public class ExpenseList extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.spinner);
         Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
 
-        ArrayAdapter<CharSequence> mSpinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(),R.array.dropdown_string_array,R.layout.spinner_item);
+        ArrayAdapter<CharSequence> mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.dropdown_string_array, R.layout.spinner_item);
         mSpinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_item);
         //spinner.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
 

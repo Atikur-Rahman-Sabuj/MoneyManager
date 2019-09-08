@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">খরচ</string>
+
+    <string name="test_string">পরীক্ষা</string>
+
+    <string-array name="dropdown_string_array">
+        <item>দৈনিক</item>
+        <item>মাসিক</item>
+        <item>বার্ষিক</item>
+        <item>কাস্টমাইজ</item>
+    </string-array>
+</resources>

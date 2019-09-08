@@ -62,6 +62,12 @@
                 android:textAlignment="textStart"
                 android:textSize="14sp" />
 
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/test_string" />
+
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"
                 android:layout_width="match_parent"

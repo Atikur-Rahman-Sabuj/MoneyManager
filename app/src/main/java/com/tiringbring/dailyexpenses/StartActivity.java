@@ -46,6 +46,7 @@ import com.tiringbring.dailyexpenses.DataController.PieEntryDataController;
 import com.tiringbring.dailyexpenses.Notification.Notification;
 import com.tiringbring.dailyexpenses.Utility.OnSwipeTouchListener;
 import com.tiringbring.dailyexpenses.Utility.PlayAnimation;
+import com.tiringbring.dailyexpenses.Utility.ResourceManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,6 +69,13 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set language
+        if(new MySharedPreferences(this).getLanguage().equals("bn")){
+            ResourceManager.changeLanguage(this,"bn");
+        }else{
+            ResourceManager.changeLanguage(this, "en");
+        }
+
         setContentView(R.layout.activity_start);
         myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(),ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
         onFirstRun();
@@ -213,7 +221,7 @@ public class StartActivity extends AppCompatActivity {
         calendar.set(Calendar.SECOND, 0);
         Intent alertIntent = new Intent(this, Notification.class);
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT));
     }
 
 //    private void setAlart(long timeInMillis) {

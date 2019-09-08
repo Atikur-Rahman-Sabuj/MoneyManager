@@ -61,4 +61,14 @@ public class MySharedPreferences {
         editor.putLong("limit_yearly_expense", value);
         editor.commit();
     }
+    public String getLanguage(){
+        android.content.SharedPreferences pref = context.getSharedPreferences("MyPref", 0);
+        return pref.getString(PreferenceTypes.LANGUAGE, "en");
+    }
+    public  void setLanguage(String language){
+        android.content.SharedPreferences pref = context.getSharedPreferences("MyPref", 0);
+        android.content.SharedPreferences.Editor editor = pref.edit();
+        editor.putString(PreferenceTypes.LANGUAGE, language);
+        editor.commit();
+    }
 }
