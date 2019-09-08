@@ -1,5 +1,7 @@
 package com.tiringbring.dailyexpenses.DataController;
 
+import android.content.Context;
+
 import com.github.mikephil.charting.data.BarEntry;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
 import com.tiringbring.dailyexpenses.Activitie.StartActivity;
@@ -14,8 +16,9 @@ import RoomDb.Expense;
 public class BarEntryDataController {
     public ArrayList<String> labels = new ArrayList<String> ();
     public ArrayList<Date> dates = new ArrayList<>();
-    public List<BarEntry> GetBarEntries(){
-        List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpenses();
+    public List<BarEntry> GetBarEntries(Context context){
+        List<Expense> expenses = StartActivity.getDBInstance(context).expenseDao().GetExpenses();
+        StartActivity.destroyDBInstance();
         List<DayExpenses> dayExpensesList = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();

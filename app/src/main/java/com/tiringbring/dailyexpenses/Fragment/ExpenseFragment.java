@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tiringbring.dailyexpenses.Activitie.AddExpense;
+import com.tiringbring.dailyexpenses.Activitie.AddExpenseActivity;
 import com.tiringbring.dailyexpenses.Activitie.StartActivity;
 import com.tiringbring.dailyexpenses.ListAdaptor.ExpensesRecyclerViewAdapter;
 import com.tiringbring.dailyexpenses.R;
@@ -82,8 +82,11 @@ public class ExpenseFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            AddExpense addExpense = (AddExpense)getActivity();
-            List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
+            AddExpenseActivity addExpense = (AddExpenseActivity)getActivity();
+            List<Expense> expenses = StartActivity.getDBInstance(getContext()).expenseDao().GetExpensesOfaDate(date);
+            StartActivity.destroyDBInstance();
+            //if(StartActivity.myAppRoomDatabase.isOpen())
+                //StartActivity.myAppRoomDatabase.close();
             recyclerView.setAdapter(new ExpensesRecyclerViewAdapter(getContext(), expenses, mListener,addExpense));
         }
         return view;

@@ -1,5 +1,7 @@
 package com.tiringbring.dailyexpenses.DataController;
 
+import android.content.Context;
+
 import com.github.mikephil.charting.data.PieEntry;
 import com.tiringbring.dailyexpenses.Activitie.StartActivity;
 
@@ -11,9 +13,10 @@ import RoomDb.Expense;
 
 public class PieEntryDataController {
     private  double Total=0;
-    public ArrayList<PieEntry> GetList(Date date){
+    public ArrayList<PieEntry> GetList(Context context, Date date){
          ArrayList<PieEntry> pieEntries = new ArrayList<>();
-         List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date);
+         List<Expense> expenses = StartActivity.getDBInstance(context).expenseDao().GetExpensesOfaDate(date);
+         StartActivity.destroyDBInstance();
         for (Expense expense:expenses
              ) {
             Total += expense.getAmount();

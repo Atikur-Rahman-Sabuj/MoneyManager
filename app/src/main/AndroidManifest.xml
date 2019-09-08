@@ -1,40 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tiringbring.dailyexpenses">
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+
     <application
-        android:configChanges="locale"
         android:allowBackup="true"
+        android:configChanges="locale"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logoround"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activitie.StartActivity"
-            >
+        <activity android:name=".Activitie.FileExplorerActivity"></activity>
+        <activity android:name=".Activitie.ImportExportActivity" />
+        <activity android:name=".Activitie.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activitie.MainActivity">
-
-        </activity>
-        <activity android:name=".Activitie.AddExpense"
+        <activity
+            android:name=".Activitie.AddExpenseActivity"
             android:exported="true"
             android:label="Add Expense"
-            android:parentActivityName=".Activitie.StartActivity"/>
-        <activity android:name=".Activitie.ExpenseList"
+            android:parentActivityName=".Activitie.StartActivity" />
+        <activity
+            android:name=".Activitie.ExpenseListActivity"
             android:exported="true"
             android:label="Expenses"
-            android:parentActivityName=".Activitie.StartActivity"/>
-        <activity android:name=".Activitie.SettingActivity"
+            android:parentActivityName=".Activitie.StartActivity" />
+        <activity
+            android:name=".Activitie.SettingActivity"
             android:label="Settings"
-            android:parentActivityName=".Activitie.StartActivity"/>
-        <receiver android:name=".Notification.Notification"
+            android:parentActivityName=".Activitie.StartActivity" />
+
+        <meta-data
+            android:name="com.onesignal.NotificationOpened.DEFAULT"
+            android:value="DISABLE" />
+
+        <receiver
+            android:name=".Notification.Notification"
             android:process=":remote" />
-        <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
 </manifest>

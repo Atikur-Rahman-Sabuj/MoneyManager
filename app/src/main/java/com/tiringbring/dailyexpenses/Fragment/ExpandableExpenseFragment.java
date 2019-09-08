@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
-import com.tiringbring.dailyexpenses.Activitie.ExpenseList;
+import com.tiringbring.dailyexpenses.Activitie.ExpenseListActivity;
 import com.tiringbring.dailyexpenses.Activitie.StartActivity;
 import com.tiringbring.dailyexpenses.DataController.DateDataController;
 import com.tiringbring.dailyexpenses.DataController.ExpenseDataController;
@@ -52,7 +52,10 @@ public class ExpandableExpenseFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_expandable_expense, container, false);
         //Toast.makeText(getContext(),"here", Toast.LENGTH_LONG).show();
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableExpenseList);
-        List<Expense> expenses = StartActivity.myAppRoomDatabase.expenseDao().GetExpenses();
+        List<Expense> expenses = StartActivity.getDBInstance(getContext()).expenseDao().GetExpenses();
+        StartActivity.destroyDBInstance();
+        //if(StartActivity.myAppRoomDatabase.isOpen())
+            //StartActivity.myAppRoomDatabase.close();
         dayExpensesList = new ExpenseDataController(expenses).getDailyExpenses();
         String ddItem = getArguments().getString("DDITEMS");
         switch (ddItem){
@@ -78,7 +81,7 @@ public class ExpandableExpenseFragment extends Fragment {
                 Date startDate = new DateDataController().StringToDate( getArguments().getString("START_DATE"));
                 Date endDate = new DateDataController().StringToDate(getArguments().getString("END_DATE"));
                 List<DayExpenses> customDayExpenseList = new ExpenseDataController(expenses).MakeCustomList(startDate, endDate);
-                ExpenseList expenseList = (ExpenseList)getActivity();
+                ExpenseListActivity expenseList = (ExpenseListActivity)getActivity();
                 expenseList.setTotalTextView(getTotal(customDayExpenseList));
                 expandableListAdapter = new ExpenseExpandableListAdaptor(getContext(), customDayExpenseList);
                 expandableListView.setAdapter(expandableListAdapter);

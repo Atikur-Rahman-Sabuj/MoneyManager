@@ -8,13 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import com.tiringbring.dailyexpenses.Activitie.AddExpense;
+import com.tiringbring.dailyexpenses.Activitie.AddExpenseActivity;
 import com.tiringbring.dailyexpenses.DataController.DateDataController;
 import com.tiringbring.dailyexpenses.DataController.ExpenseDataController;
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
 import com.tiringbring.dailyexpenses.Entity.MonthExpenses;
-import com.tiringbring.dailyexpenses.Activitie.ExpenseList;
+import com.tiringbring.dailyexpenses.Activitie.ExpenseListActivity;
 import com.tiringbring.dailyexpenses.R;
 
 import java.util.Calendar;
@@ -48,7 +48,7 @@ public class Notification extends BroadcastReceiver {
     }
 
     private void CreateMonthlyNotification(Context context) {
-        PendingIntent notificationIntent = PendingIntent.getActivity(context, 0, new Intent(context, ExpenseList.class),0);
+        PendingIntent notificationIntent = PendingIntent.getActivity(context, 0, new Intent(context, ExpenseListActivity.class),0);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -91,7 +91,7 @@ public class Notification extends BroadcastReceiver {
     }
 
     private void CreateDailyNotification(Context context, String header, String message, String alert) {
-        PendingIntent notificationIntent = PendingIntent.getActivity(context, 0, new Intent(context, AddExpense.class),0);
+        PendingIntent notificationIntent = PendingIntent.getActivity(context, 0, new Intent(context, AddExpenseActivity.class),0);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

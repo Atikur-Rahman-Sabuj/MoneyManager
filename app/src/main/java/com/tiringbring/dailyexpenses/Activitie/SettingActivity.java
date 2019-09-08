@@ -1,11 +1,15 @@
 package com.tiringbring.dailyexpenses.Activitie;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
@@ -15,12 +19,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.tiringbring.dailyexpenses.DataController.ImportExport;
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 import com.tiringbring.dailyexpenses.R;
 import com.tiringbring.dailyexpenses.Utility.ResourceManager;
@@ -33,6 +39,7 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
     private boolean isNotificationEnabled;
     private Spinner spLanguage;
     boolean isSpinnerInitialized = false;
+    private Button btnImportExport;
 
     @Override
     public void onBackPressed() {
@@ -51,6 +58,32 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         final TextView tvDayLimitValue = (TextView)findViewById(R.id.tvDayLimitValue);
         final TextView tvMonthlyLimitValue = (TextView) findViewById(R.id.tvMonthlyLimitValue);
         final TextView tvYearlyLimitValue = (TextView)findViewById(R.id.tvYearlyLimitValue);
+        btnImportExport = (Button) findViewById(R.id.btnImportExport);
+        btnImportExport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted
+                    startActivity(new Intent(getApplicationContext(), ImportExportActivity.class));
+                }else {
+                    // Permission is not granted
+                    // Should we show an explanation?
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(SettingActivity.this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        // Show an explanation to the user *asynchronously* -- don't block
+                        // this thread waiting for the user's response! After the user
+                        // sees the explanation, try again to request the permission.
+                    } else {
+                        // No explanation needed; request the permission
+                        ActivityCompat.requestPermissions(SettingActivity.this,
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                10);
+
+                    }
+                }
+            }
+        });
         switchNotification = (Switch) findViewById(R.id.switchNotification);
 
         spLanguage = (Spinner) findViewById(R.id.spiLanguage);
@@ -205,6 +238,7 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
 
     }
 
+
     private void changeLanguage(String languageCode){
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
@@ -215,6 +249,27 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
             conf.locale = new Locale(languageCode.toLowerCase());
         }
         res.updateConfiguration(conf, dm);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 10: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay!
+                    startActivity(new Intent(getApplicationContext(), ImportExportActivity.class));
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
     }
 
     @Override

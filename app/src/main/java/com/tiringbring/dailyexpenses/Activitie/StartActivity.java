@@ -51,7 +51,7 @@ import java.util.Date;
 import java.util.List;
 
 public class StartActivity extends AppCompatActivity {
-    public static ExpenseDatabase myAppRoomDatabase;
+    private static ExpenseDatabase INSTANCE;
     private BarChart mChart;
     private PieChart pieChart;
     private TextView textView;
@@ -72,7 +72,7 @@ public class StartActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_start);
-        myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(),ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
+        //myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(),ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
         onFirstRun();
         btnAddNew = (Button) findViewById(R.id.btnAddNew);
         btnShowList = (Button) findViewById(R.id.btnShowList);
@@ -94,7 +94,7 @@ public class StartActivity extends AppCompatActivity {
         btnAddNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddExpense.class);
+                Intent intent = new Intent(getApplicationContext(), AddExpenseActivity.class);
 
 
                 startActivity(intent);
@@ -105,7 +105,7 @@ public class StartActivity extends AppCompatActivity {
         btnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ExpenseList.class);
+                Intent intent = new Intent(getApplicationContext(), ExpenseListActivity.class);
 
                 startActivity(intent);
 
@@ -116,7 +116,7 @@ public class StartActivity extends AppCompatActivity {
 
         mChart.getDescription().setEnabled(false);
         final BarEntryDataController beDataController = new BarEntryDataController();
-        List<BarEntry> data = beDataController.GetBarEntries();
+        List<BarEntry> data = beDataController.GetBarEntries(getApplicationContext());
         //generating colors
         List<Integer> colors = new ArrayList<>();
         for (BarEntry be:
@@ -310,7 +310,7 @@ public class StartActivity extends AppCompatActivity {
         pieChart.setTransparentCircleRadius(50f);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
         PieEntryDataController pedc = new PieEntryDataController();
-        ArrayList<PieEntry> yValues = pedc.GetList(pieDate);
+        ArrayList<PieEntry> yValues = pedc.GetList(getApplicationContext(), pieDate);
         if(yValues.size()<1){
             pieChart.setHoleRadius(50f);
             pieChart.setCenterText(dateFormat.format(pieDate)+" No expense on this date");
@@ -327,6 +327,19 @@ public class StartActivity extends AppCompatActivity {
         data.setValueTextColor(Color.WHITE);
 
         pieChart.setData(data);
+    }
+    public static ExpenseDatabase getDBInstance(final Context context) {
+            if (INSTANCE == null) {
+                INSTANCE = Room.databaseBuilder(context,ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
+            }
+            return INSTANCE;
+
+    }
+
+    // close database
+    public static void destroyDBInstance(){
+        if (INSTANCE.isOpen()) INSTANCE.close();
+        INSTANCE = null;
     }
 
 }

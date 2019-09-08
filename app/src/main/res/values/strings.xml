@@ -1,11 +1,19 @@
-<resources tools:ignore="MissingTranslation" xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="app_name">Expenses</string>
 
     <string name="test_string">Test</string>
 
 
-
+    <string name="to_date">To date:</string>
+    <string name="from_date">From date:</string>
+    <string name="total">Total</string>
+    <string name="chart_slide">Slide chart to see more!</string>
+    <string name="daily_expense_limit">Daily expense limit</string>
+    <string name="monthly_expense_limit">Monthly expense limit</string>
+    <string name="yearly_expense_limit">Yearly expense limit</string>
+    <string name="show_notification">Show notification</string>
+    <string name="language">Language</string>
     <string-array name="dropdown_string_array">
         <item>Daily</item>
         <item>Monthly</item>
@@ -16,14 +24,5 @@
         <item>English</item>
         <item>বাংলা</item>
     </string-array>
-    <string name="to_date">To date:</string>
-    <string name="from_date">From date:</string>
-    <string name="total">Total</string>
-    <string name="chart_slide">Slide chart to see more!</string>
-    <string name="daily_expense_limit">Daily expense limit</string>
-    <string name="monthly_expense_limit">Monthly expense limit</string>
-    <string name="yearly_expense_limit">Yearly expense limit</string>
-    <string name="show_notification">Show notification</string>
-    <string name="language">Language</string>
 
 </resources>

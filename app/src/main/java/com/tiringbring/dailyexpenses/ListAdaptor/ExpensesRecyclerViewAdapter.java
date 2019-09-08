@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.tiringbring.dailyexpenses.Activitie.AddExpense;
+import com.tiringbring.dailyexpenses.Activitie.AddExpenseActivity;
 import com.tiringbring.dailyexpenses.R;
 import com.tiringbring.dailyexpenses.Fragment.ExpenseFragment.OnListFragmentInteractionListener;
 import com.tiringbring.dailyexpenses.Activitie.StartActivity;
@@ -31,8 +31,8 @@ public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRe
     private final List<Expense> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Context context;
-    AddExpense addExpense;
-    public ExpensesRecyclerViewAdapter(Context context, List<Expense> items, OnListFragmentInteractionListener listener, AddExpense addExpense) {
+    AddExpenseActivity addExpense;
+    public ExpensesRecyclerViewAdapter(Context context, List<Expense> items, OnListFragmentInteractionListener listener, AddExpenseActivity addExpense) {
         mValues = items;
         mListener = listener;
         this.context = context;
@@ -70,7 +70,7 @@ public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRe
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case 0:{
-                                Intent intent = new Intent(context, AddExpense.class);
+                                Intent intent = new Intent(context, AddExpenseActivity.class);
                                 intent.putExtra("expenseId", mValues.get(pos).getId());
                                 ((Activity)context).startActivity(intent);
                                 break;
@@ -82,7 +82,8 @@ public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRe
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                                StartActivity.myAppRoomDatabase.expenseDao().DeleteExpense(mValues.get(pos));
+                                                StartActivity.getDBInstance(context).expenseDao().DeleteExpense(mValues.get(pos));
+                                                StartActivity.destroyDBInstance();
                                                 mValues.remove(pos);
                                                 notifyDataSetChanged();
                                                 addExpense.ChangeTotal();

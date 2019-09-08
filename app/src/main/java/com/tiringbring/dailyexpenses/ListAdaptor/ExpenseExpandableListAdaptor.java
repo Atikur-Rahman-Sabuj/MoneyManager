@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.tiringbring.dailyexpenses.Activitie.AddExpense;
+import com.tiringbring.dailyexpenses.Activitie.AddExpenseActivity;
 import com.tiringbring.dailyexpenses.DataController.DateDataController;
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
@@ -113,7 +113,7 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case 0:{
-                                Intent intent = new Intent(context, AddExpense.class);
+                                Intent intent = new Intent(context, AddExpenseActivity.class);
                                 intent.putExtra("expenseId", DayExpenseList.get(gp).getDayExpenseList().get(cp).getId());
                                 ((Activity)context).startActivity(intent);
                                 break;
@@ -125,7 +125,8 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                                StartActivity.myAppRoomDatabase.expenseDao().DeleteExpense(DayExpenseList.get(gp).getDayExpenseList().get(cp));
+                                                StartActivity.getDBInstance(context).expenseDao().DeleteExpense(DayExpenseList.get(gp).getDayExpenseList().get(cp));
+                                                StartActivity.destroyDBInstance();
                                                 //DayExpenseList.get(groupPosition).getDayExpenseList().remove(childPosition);
                                                 if(DayExpenseList.get(gp).getDayExpenseList().size()==1){
                                                     DayExpenseList.remove(gp);
