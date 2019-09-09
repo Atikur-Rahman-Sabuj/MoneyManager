@@ -66,15 +66,15 @@ public class FileExplorerActivity extends AppCompatActivity {
         File[] files = f.listFiles();
 
 
-        if (!dirPath.equals(root)) {
+        if (!dirPath.equals(Environment.getExternalStorageDirectory().toString()+root)) {
 
 
-            item.add(root);
+            //item.add(root);
 
-            path.add(root);
+            //path.add(root);
 
 
-            item.add("../");
+            item.add("specialId8143y01");
 
             path.add(f.getParent());
 
@@ -141,9 +141,15 @@ public class FileExplorerActivity extends AppCompatActivity {
 //                            }).show();
 
 
-            ImportExport.importDB(path.get(position).substring(Environment.getExternalStorageDirectory().toString().length()), getApplicationContext());
+            if(ImportExport.importDB(path.get(position).substring(Environment.getExternalStorageDirectory().toString().length()), getApplicationContext())){
+                startActivity(new Intent(getApplicationContext(), ImportExportActivity.class).putExtra("isImport","success"));
+
+            }else {
+                startActivity(new Intent(getApplicationContext(), ImportExportActivity.class).putExtra("isImport","failed"));
+            }
             //StartActivity.myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(), ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
-            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+
+
         }
 
     }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tiringbring.dailyexpenses.Activitie.FileExplorerActivity;
@@ -35,20 +36,29 @@ public class FileExplorerRecyclerViewAdapter extends RecyclerView.Adapter<FileEx
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final String name = list.get(position);
-        holder.tvFolder.setText(name);
-        if(name.charAt(name.length()-1) == '/'){
+
+        if(name.equals("specialId8143y01")){
+            holder.ivFileIcon.setVisibility(View.GONE);
+            holder.ivFolderIcon.setVisibility(View.GONE);
+            holder.ivBackIcon.setVisibility(View.VISIBLE);
+            holder.tvFolder.setText("Go back");
+        }
+        else if(name.charAt(name.length()-1) == '/'){
             holder.ivFileIcon.setVisibility(View.GONE);
             holder.ivFolderIcon.setVisibility(View.VISIBLE);
+            holder.ivBackIcon.setVisibility(View.GONE);
+            holder.tvFolder.setText(name.substring(0, name.length()-1));
         }
         else{
-            holder.ivFolderIcon.setVisibility(View.GONE);
             holder.ivFileIcon.setVisibility(View.VISIBLE);
+            holder.ivFolderIcon.setVisibility(View.GONE);
+            holder.ivBackIcon.setVisibility(View.GONE);
+            holder.tvFolder.setText(name);
         }
-        holder.tvFolder.setOnClickListener(new View.OnClickListener() {
+        holder.cvRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (context instanceof FileExplorerActivity) {
-                    Toast.makeText(context, "Here", Toast.LENGTH_LONG).show();
                     ((FileExplorerActivity)context).onListItemClick(position);
                 }
             }
@@ -64,12 +74,16 @@ public class FileExplorerRecyclerViewAdapter extends RecyclerView.Adapter<FileEx
         public TextView tvFolder;
         public ImageView ivFolderIcon;
         public ImageView ivFileIcon;
+        public ImageView ivBackIcon;
+        public CardView cvRow;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            cvRow = (CardView) itemView.findViewById(R.id.cvRow);
             tvFolder = (TextView) itemView.findViewById(R.id.tvFileText);
             ivFolderIcon = (ImageView) itemView.findViewById(R.id.ivFolderIcon);
             ivFileIcon = (ImageView) itemView.findViewById(R.id.ivFileIcon);
+            ivBackIcon = (ImageView) itemView.findViewById(R.id.ivBackIcon);
 
 
         }

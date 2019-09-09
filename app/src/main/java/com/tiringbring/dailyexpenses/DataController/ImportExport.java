@@ -5,13 +5,17 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.tiringbring.dailyexpenses.Activitie.ImportExportActivity;
+import com.tiringbring.dailyexpenses.R;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
 public class ImportExport {
-    public static void importDB(String backupPath, Context context) {
+    public static boolean importDB(String backupPath, Context context) {
         // TODO Auto-generated method stub
 
         try {
@@ -30,20 +34,21 @@ public class ImportExport {
                 dst.transferFrom(src, 0, src.size());
                 src.close();
                 dst.close();
-                Toast.makeText( context, backupDB.toString(),
-                        Toast.LENGTH_LONG).show();
-
+                //Toast.makeText( context, backupDB.toString(),
+                //        Toast.LENGTH_LONG).show();
+                return  true;
 
             }
+            return  false;
         } catch (Exception e) {
 
-            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG)
-                    .show();
-
+          //  Toast.makeText(context, e.toString(), Toast.LENGTH_LONG)
+           //         .show();
+            return  false;
         }
     }
     //exporting database
-    public static void exportDB(Context context) {
+    public static boolean exportDB(Context context) {
         // TODO Auto-generated method stub
 
         try {
@@ -76,15 +81,16 @@ public class ImportExport {
                 dst.transferFrom(src, 0, src.size());
                 src.close();
                 dst.close();
-                Toast.makeText(context, backupDB.toString(),
-                        Toast.LENGTH_LONG).show();
-
+                Snackbar.make(((ImportExportActivity)context).findViewById(R.id.clRootExportImport), "Exported to folder: Expense", Snackbar.LENGTH_LONG).show();
+                //Toast.makeText(context, backupDB.toString(),
+             //           Toast.LENGTH_LONG).show();
+                return  true;
             }
+            return  false;
         } catch (Exception e) {
 
-            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG)
-                    .show();
-
+            Snackbar.make(((ImportExportActivity)context).findViewById(R.id.clRootExportImport), "Sorry! Could not export", Snackbar.LENGTH_LONG).show();
+            return false;
         }
     }
 

@@ -65,7 +65,7 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
                 if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         == PackageManager.PERMISSION_GRANTED) {
                     // Permission granted
-                    startActivity(new Intent(getApplicationContext(), ImportExportActivity.class));
+                    startActivity(new Intent(getApplicationContext(), ImportExportActivity.class).putExtra("isImport", "none"));
                 }else {
                     // Permission is not granted
                     // Should we show an explanation?
