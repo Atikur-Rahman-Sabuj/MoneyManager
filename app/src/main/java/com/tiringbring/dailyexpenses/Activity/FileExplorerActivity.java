@@ -1,9 +1,8 @@
-package com.tiringbring.dailyexpenses.Activitie;
+package com.tiringbring.dailyexpenses.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,8 +18,6 @@ import com.tiringbring.dailyexpenses.R;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import RoomDb.ExpenseDatabase;
 
 public class FileExplorerActivity extends AppCompatActivity {
 

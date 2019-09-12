@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tiringbring.dailyexpenses.Activitie.AddExpenseActivity;
-import com.tiringbring.dailyexpenses.Activitie.StartActivity;
+import com.tiringbring.dailyexpenses.Activity.AddExpenseActivity;
+import com.tiringbring.dailyexpenses.Activity.StartActivity;
 import com.tiringbring.dailyexpenses.ListAdaptor.ExpensesRecyclerViewAdapter;
 import com.tiringbring.dailyexpenses.R;
 import com.tiringbring.dailyexpenses.dummy.DummyContent.DummyItem;

@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.github.mikephil.charting.data.BarEntry;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
-import com.tiringbring.dailyexpenses.Activitie.StartActivity;
+import com.tiringbring.dailyexpenses.Activity.StartActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;

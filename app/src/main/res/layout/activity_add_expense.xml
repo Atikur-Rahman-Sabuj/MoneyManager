@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".Activitie.AddExpenseActivity">
+    tools:context=".Activity.AddExpenseActivity">
 
 
     <LinearLayout
@@ -43,7 +43,7 @@
         android:orientation="vertical"
         android:transitionName="addNew">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -64,7 +64,7 @@
                 android:paddingTop="8dp"
                 android:paddingRight="14dp"
                 android:paddingBottom="8dp"
-                android:text="Total"
+                android:text="@string/total"
                 android:textAlignment="textStart"
                 android:textColor="#ffffff"
                 android:textSize="17dp" />
@@ -136,7 +136,7 @@
             android:background="@drawable/textbox_background"
             android:elevation="2dp"
             android:ems="18"
-            android:hint="write what you spend on"
+            android:hint="@string/hint_spend_reason"
             android:inputType="textPersonName"
             android:textAlignment="center" />
 
@@ -149,7 +149,7 @@
             android:elevation="2dp"
 
             android:ems="18"
-            android:hint="write the amount"
+            android:hint="@string/hint_amount"
             android:inputType="numberDecimal"
             android:textAlignment="center" />
 
@@ -157,17 +157,17 @@
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/save_button_background"
             android:elevation="2dp"
-            android:translationZ="3dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-black"
-            android:text="Save"
+            android:text="@string/save"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:translationZ="3dp"
             android:typeface="normal" />
     </LinearLayout>
 

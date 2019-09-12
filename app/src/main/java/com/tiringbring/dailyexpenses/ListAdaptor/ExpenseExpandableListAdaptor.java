@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.tiringbring.dailyexpenses.Activitie.AddExpenseActivity;
+import com.tiringbring.dailyexpenses.Activity.AddExpenseActivity;
 import com.tiringbring.dailyexpenses.DataController.DateDataController;
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
 import com.tiringbring.dailyexpenses.R;
-import com.tiringbring.dailyexpenses.Activitie.StartActivity;
+import com.tiringbring.dailyexpenses.Activity.StartActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.List;

@@ -8,13 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import com.tiringbring.dailyexpenses.Activitie.AddExpenseActivity;
+import com.tiringbring.dailyexpenses.Activity.AddExpenseActivity;
 import com.tiringbring.dailyexpenses.DataController.DateDataController;
 import com.tiringbring.dailyexpenses.DataController.ExpenseDataController;
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;
 import com.tiringbring.dailyexpenses.Entity.MonthExpenses;
-import com.tiringbring.dailyexpenses.Activitie.ExpenseListActivity;
+import com.tiringbring.dailyexpenses.Activity.ExpenseListActivity;
 import com.tiringbring.dailyexpenses.R;
 
 import java.util.Calendar;

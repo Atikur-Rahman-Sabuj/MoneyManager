@@ -20,4 +20,7 @@
     <string name="yearly_expense_limit">"বার্ষিক ব্যয় সীমা "</string>
     <string name="show_notification">নোটিফিকেশন দেখুন</string>
     <string name="language">ভাষা</string>
+    <string name="save">সেভ</string>
+    <string name="hint_amount">ব্যয় এর পরিমাণ লিখুন</string>
+    <string name="hint_spend_reason">কি ব্যয় লিখুন</string>
 </resources>

@@ -3,7 +3,7 @@ package com.tiringbring.dailyexpenses.DataController;
 import android.content.Context;
 
 import com.github.mikephil.charting.data.PieEntry;
-import com.tiringbring.dailyexpenses.Activitie.StartActivity;
+import com.tiringbring.dailyexpenses.Activity.StartActivity;
 
 import java.util.ArrayList;
 import java.util.Date;

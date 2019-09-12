@@ -10,9 +10,9 @@
         android:roundIcon="@drawable/logoround"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activitie.FileExplorerActivity"></activity>
-        <activity android:name=".Activitie.ImportExportActivity" />
-        <activity android:name=".Activitie.StartActivity">
+        <activity android:name=".Activity.FileExplorerActivity"></activity>
+        <activity android:name=".Activity.ImportExportActivity" />
+        <activity android:name=".Activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,19 +20,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activitie.AddExpenseActivity"
+            android:name=".Activity.AddExpenseActivity"
             android:exported="true"
             android:label="Add Expense"
-            android:parentActivityName=".Activitie.StartActivity" />
+            android:parentActivityName=".Activity.StartActivity" />
         <activity
-            android:name=".Activitie.ExpenseListActivity"
+            android:name=".Activity.ExpenseListActivity"
             android:exported="true"
             android:label="Expenses"
-            android:parentActivityName=".Activitie.StartActivity" />
+            android:parentActivityName=".Activity.StartActivity" />
         <activity
-            android:name=".Activitie.SettingActivity"
+            android:name=".Activity.SettingActivity"
             android:label="Settings"
-            android:parentActivityName=".Activitie.StartActivity" />
+            android:parentActivityName=".Activity.StartActivity" />
 
         <meta-data
             android:name="com.onesignal.NotificationOpened.DEFAULT"

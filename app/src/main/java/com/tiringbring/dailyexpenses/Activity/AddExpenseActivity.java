@@ -1,4 +1,4 @@
-package com.tiringbring.dailyexpenses.Activitie;
+package com.tiringbring.dailyexpenses.Activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;

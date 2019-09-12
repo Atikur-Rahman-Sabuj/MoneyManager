@@ -1,4 +1,4 @@
-package com.tiringbring.dailyexpenses.Activitie;
+package com.tiringbring.dailyexpenses.Activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;

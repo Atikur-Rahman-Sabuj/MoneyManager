@@ -1,4 +1,4 @@
-package com.tiringbring.dailyexpenses.Activitie;
+package com.tiringbring.dailyexpenses.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;

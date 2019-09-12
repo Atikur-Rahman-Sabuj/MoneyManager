@@ -1,4 +1,4 @@
-package com.tiringbring.dailyexpenses.Activitie;
+package com.tiringbring.dailyexpenses.Activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -26,7 +26,6 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.tiringbring.dailyexpenses.DataController.ImportExport;
 import com.tiringbring.dailyexpenses.DataController.MySharedPreferences;
 import com.tiringbring.dailyexpenses.R;
 import com.tiringbring.dailyexpenses.Utility.ResourceManager;

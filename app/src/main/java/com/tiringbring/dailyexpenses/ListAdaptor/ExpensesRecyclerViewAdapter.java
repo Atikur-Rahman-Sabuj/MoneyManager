@@ -11,10 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.tiringbring.dailyexpenses.Activitie.AddExpenseActivity;
+import com.tiringbring.dailyexpenses.Activity.AddExpenseActivity;
 import com.tiringbring.dailyexpenses.R;
 import com.tiringbring.dailyexpenses.Fragment.ExpenseFragment.OnListFragmentInteractionListener;
-import com.tiringbring.dailyexpenses.Activitie.StartActivity;
+import com.tiringbring.dailyexpenses.Activity.StartActivity;
 import com.tiringbring.dailyexpenses.dummy.DummyContent.DummyItem;
 
 import java.util.List;

@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
-import com.tiringbring.dailyexpenses.Activitie.ExpenseListActivity;
-import com.tiringbring.dailyexpenses.Activitie.StartActivity;
+import com.tiringbring.dailyexpenses.Activity.ExpenseListActivity;
+import com.tiringbring.dailyexpenses.Activity.StartActivity;
 import com.tiringbring.dailyexpenses.DataController.DateDataController;
 import com.tiringbring.dailyexpenses.DataController.ExpenseDataController;
 import com.tiringbring.dailyexpenses.Entity.DayExpenses;

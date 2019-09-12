@@ -24,5 +24,8 @@
         <item>English</item>
         <item>বাংলা</item>
     </string-array>
+    <string name="save">Save</string>
+    <string name="hint_spend_reason">write what you spent on</string>
+    <string name="hint_amount">write the amount</string>
 
 </resources>
