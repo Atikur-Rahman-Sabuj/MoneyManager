@@ -6,20 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.tiringbring.dailyexpenses.DataController.ImportExport;
 import com.tiringbring.dailyexpenses.R;
 
 public class ImportExportActivity extends AppCompatActivity {
-    private Button btnImport, btnExport;
+    private LinearLayout btnImport, btnExport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_export);
-        btnImport = (Button) findViewById(R.id.btnImport);
-        btnExport = (Button) findViewById(R.id.btnExport);
+        btnImport = (LinearLayout) findViewById(R.id.btnImport);
+        btnExport = (LinearLayout) findViewById(R.id.btnExport);
         Intent intent = getIntent();
         if(intent.getExtras().getString("isImport").equals("success")){
             Snackbar.make(findViewById(R.id.clRootExportImport),"Imported successfully",Snackbar.LENGTH_LONG).show();
@@ -36,10 +37,14 @@ public class ImportExportActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ImportExport.exportDB(ImportExportActivity.this);
-                //Snackbar.make(findViewById(R.id.clRootExportImport), "Welcome to AndroidHive", Snackbar.LENGTH_LONG).show();
-               // StartActivity.myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(), ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        startActivity(new Intent(this, SettingActivity.class));
     }
 }

@@ -80,7 +80,7 @@ public class AddExpenseActivity extends AppCompatActivity {
             calendar.setTime(expense.getDate());
             etName.setText(expense.getName());
             etAmount.setText(String.valueOf(expense.getAmount()));
-            btnSave.setText("Update");
+            btnSave.setText(getResources().getString(R.string.update));
         }
 
         btnLeft.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +145,7 @@ public class AddExpenseActivity extends AppCompatActivity {
 
                     etName.setText("");
                     etAmount.setText("");
-                    btnSave.setText("Save");
+                    btnSave.setText(getResources().getString(R.string.save));
                     if(etName.requestFocus()) {
                         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
                         etAmount.clearFocus();

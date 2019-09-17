@@ -23,4 +23,5 @@
     <string name="save">সেভ</string>
     <string name="hint_amount">ব্যয় এর পরিমাণ লিখুন</string>
     <string name="hint_spend_reason">কি ব্যয় লিখুন</string>
+    <string name="update">আপডেট</string>
 </resources>

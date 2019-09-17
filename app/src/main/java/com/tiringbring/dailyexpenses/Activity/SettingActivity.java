@@ -258,7 +258,7 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay!
-                    startActivity(new Intent(getApplicationContext(), ImportExportActivity.class));
+                    startActivity(new Intent(getApplicationContext(), ImportExportActivity.class).putExtra("isImport", "none"));
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
