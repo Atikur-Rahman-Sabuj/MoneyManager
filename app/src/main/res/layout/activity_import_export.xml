@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="2"
-        tools:context="com.tiringbring.dailyexpenses.Activity.ImportExportActivity">
+        tools:context="com.tiringbring.moneymanager.Activity.ImportExportActivity">
 
         <LinearLayout
             android:id="@+id/btnImport"
