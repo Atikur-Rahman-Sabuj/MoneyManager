@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tiringbring.moneymanager">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
     <application
         android:allowBackup="true"
         android:configChanges="locale"
@@ -10,12 +13,14 @@
         android:roundIcon="@drawable/logoround"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.FileExplorerActivity"></activity>
+        <activity android:name=".Activity.AddTransactionActivity"></activity>
+        <activity android:name=".Activity.FileExplorerActivity" />
         <activity android:name=".Activity.ImportExportActivity" />
         <activity android:name=".Activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,7 +32,7 @@
         <activity
             android:name=".Activity.ExpenseListActivity"
             android:exported="true"
-            android:label="Expenses"
+            android:label="expens"
             android:parentActivityName=".Activity.StartActivity" />
         <activity
             android:name=".Activity.SettingActivity"
@@ -42,8 +47,5 @@
             android:name=".Notification.Notification"
             android:process=":remote" />
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
 </manifest>

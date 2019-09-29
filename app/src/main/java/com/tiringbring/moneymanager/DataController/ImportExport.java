@@ -57,12 +57,12 @@ public class ImportExport {
             if (sd.canWrite()) {
                 String  currentDBPath= "//data//" + "com.tiringbring.dailyexpenses"
                         + "//databases//" + "Expensedb";
-                String backupDBPath  = "/Expense/Expensedb";
+                String backupDBPath  = "/Transaction/Expensedb";
                 File currentDB = new File(data, currentDBPath);
                 File backupDB = new File(sd, backupDBPath);
 
                 FileChannel src = new FileInputStream(currentDB).getChannel();
-                File yourAppDir = new File(Environment.getExternalStorageDirectory()+File.separator+"Expense");
+                File yourAppDir = new File(Environment.getExternalStorageDirectory()+File.separator+"Transaction");
 
                 if(!yourAppDir.exists() && !yourAppDir.isDirectory())
                 {
@@ -80,7 +80,7 @@ public class ImportExport {
                 dst.transferFrom(src, 0, src.size());
                 src.close();
                 dst.close();
-                Snackbar.make(((ImportExportActivity)context).findViewById(R.id.clRootExportImport), "Exported to folder: Expense", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(((ImportExportActivity)context).findViewById(R.id.clRootExportImport), "Exported to folder: Transaction", Snackbar.LENGTH_LONG).show();
                 //Toast.makeText(context, backupDB.toString(),
              //           Toast.LENGTH_LONG).show();
                 return  true;

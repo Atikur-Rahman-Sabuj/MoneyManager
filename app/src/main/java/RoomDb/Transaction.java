@@ -1,19 +1,42 @@
 package RoomDb;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import java.util.Date;
 
-@Entity(tableName = "Expenses")
+@Entity(tableName = "Transactions", foreignKeys = @ForeignKey(entity = Category.class,
+        parentColumns = "Id",
+        childColumns = "CategoryId",
+        onDelete = ForeignKey.NO_ACTION))
 @TypeConverters(Converters.class)
-public class Expense implements Comparable<Expense>{
+public class Transaction implements Comparable<Transaction>{
     @PrimaryKey(autoGenerate = true)
     private long Id;
     private String Name;
     private  double Amount;
     private Date date;
+    private Boolean IsIncome;
+
+    public int getCategoryId() {
+        return CategoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        CategoryId = categoryId;
+    }
+
+    private int CategoryId;
+
+    public Boolean getIsIncome() {
+        return IsIncome;
+    }
+
+    public void setIsIncome(Boolean income) {
+        IsIncome = income;
+    }
 
     public long getId() {
         return Id;
@@ -48,7 +71,7 @@ public class Expense implements Comparable<Expense>{
     }
 
     @Override
-    public int compareTo(Expense o) {
+    public int compareTo(Transaction o) {
         return  getDate().compareTo(o.getDate());
     }
 }

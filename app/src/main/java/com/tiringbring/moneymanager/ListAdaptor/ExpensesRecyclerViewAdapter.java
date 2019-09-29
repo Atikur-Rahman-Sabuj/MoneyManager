@@ -19,7 +19,7 @@ import com.tiringbring.moneymanager.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
-import RoomDb.Expense;
+import RoomDb.Transaction;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
@@ -28,11 +28,11 @@ import RoomDb.Expense;
  */
 public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Expense> mValues;
+    private final List<Transaction> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Context context;
     AddExpenseActivity addExpense;
-    public ExpensesRecyclerViewAdapter(Context context, List<Expense> items, OnListFragmentInteractionListener listener, AddExpenseActivity addExpense) {
+    public ExpensesRecyclerViewAdapter(Context context, List<Transaction> items, OnListFragmentInteractionListener listener, AddExpenseActivity addExpense) {
         mValues = items;
         mListener = listener;
         this.context = context;
@@ -82,7 +82,7 @@ public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRe
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                                StartActivity.getDBInstance(context).expenseDao().DeleteExpense(mValues.get(pos));
+                                                StartActivity.getDBInstance(context).mmDao().DeleteTransaction(mValues.get(pos));
                                                 StartActivity.destroyDBInstance();
                                                 mValues.remove(pos);
                                                 notifyDataSetChanged();
@@ -118,7 +118,7 @@ public class ExpensesRecyclerViewAdapter extends RecyclerView.Adapter<ExpensesRe
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public Expense mItem;
+        public Transaction mItem;
 
         public ViewHolder(View view) {
             super(view);

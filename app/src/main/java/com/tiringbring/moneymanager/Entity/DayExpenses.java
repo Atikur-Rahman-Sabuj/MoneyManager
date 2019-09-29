@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import RoomDb.Expense;
+import RoomDb.Transaction;
 
 public class DayExpenses {
     public Date date;
     public Double total;
-    public List<Expense> dayExpenseList = new ArrayList<>();
+    public List<Transaction> dayTransactionList = new ArrayList<>();
     public DayExpenses(){
 
     }
 
-    public DayExpenses(List<Expense> dayExpenseList) {
-        this.dayExpenseList.addAll(dayExpenseList);
-        this.date = dayExpenseList.get(0).getDate();
-        this.total = AddTotal(dayExpenseList);
+    public DayExpenses(List<Transaction> dayTransactionList) {
+        this.dayTransactionList.addAll(dayTransactionList);
+        this.date = dayTransactionList.get(0).getDate();
+        this.total = AddTotal(dayTransactionList);
     }
 
     public Double getTotal() {
@@ -28,9 +28,9 @@ public class DayExpenses {
         this.total = total;
     }
 
-    public double AddTotal(List<Expense> expenses){
+    public double AddTotal(List<Transaction> expens){
         double sum = 0;
-        for(Expense ex:expenses){
+        for(Transaction ex: expens){
             sum += ex.getAmount();
         }
         return  sum;
@@ -44,11 +44,11 @@ public class DayExpenses {
         this.date = date;
     }
 
-    public List<Expense> getDayExpenseList() {
-        return dayExpenseList;
+    public List<Transaction> getDayTransactionList() {
+        return dayTransactionList;
     }
 
-    public void setDayExpenseList(List<Expense> dayExpenseList) {
-        this.dayExpenseList = dayExpenseList;
+    public void setDayTransactionList(List<Transaction> dayTransactionList) {
+        this.dayTransactionList = dayTransactionList;
     }
 }

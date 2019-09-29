@@ -10,15 +10,15 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import RoomDb.Expense;
+import RoomDb.Transaction;
 
 public class ExpenseDataController {
     public List<DayExpenses> DailyExpenses = new ArrayList<>();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
-    public ExpenseDataController(List<Expense> Expenses) {
-        if(Expenses.size()>0){
-            MakeList(Expenses);
+    public ExpenseDataController(List<Transaction> expens) {
+        if(expens.size()>0){
+            MakeList(expens);
         }
     }
     public List<MonthExpenses> GetMonthlyExpenses(List<DayExpenses> dailyExpenses){
@@ -82,30 +82,30 @@ public class ExpenseDataController {
         }
         return CustomDailyExpenses;
     }
-    public  void MakeList(List<Expense> expenses){
-        Collections.sort(expenses);
-        Collections.reverse(expenses);
-        //expenses.sort(Comparator.comparing(Expense::getDate).reversed());
-        Expense fex = expenses.get(0);
+    public  void MakeList(List<Transaction> expens){
+        Collections.sort(expens);
+        Collections.reverse(expens);
+        //expens.sort(Comparator.comparing(Transaction::getDate).reversed());
+        Transaction fex = expens.get(0);
         Date prevDate = fex.getDate();
         Date newDate;
-        List<Expense> tempExpenses = new ArrayList<>();
+        List<Transaction> tempExpens = new ArrayList<>();
         DayExpenses tempDayExpenses = new DayExpenses();
-        for(Expense ex:expenses)
+        for(Transaction ex: expens)
         {
             newDate = ex.getDate();
             if(prevDate.equals(newDate)){
-                tempExpenses.add(ex);
+                tempExpens.add(ex);
             }
             else {
-                tempDayExpenses = new DayExpenses(tempExpenses);
+                tempDayExpenses = new DayExpenses(tempExpens);
                 DailyExpenses.add(tempDayExpenses);
-                tempExpenses.clear();
-                tempExpenses.add(ex);
+                tempExpens.clear();
+                tempExpens.add(ex);
                 prevDate = ex.getDate();
             }
         }
-        tempDayExpenses = new DayExpenses(tempExpenses);
+        tempDayExpenses = new DayExpenses(tempExpens);
         DailyExpenses.add(tempDayExpenses);
 
     }

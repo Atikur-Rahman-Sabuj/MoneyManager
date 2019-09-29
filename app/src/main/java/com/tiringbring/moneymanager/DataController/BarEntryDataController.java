@@ -11,13 +11,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import RoomDb.Expense;
+import RoomDb.Transaction;
 
 public class BarEntryDataController {
     public ArrayList<String> labels = new ArrayList<String> ();
     public ArrayList<Date> dates = new ArrayList<>();
     public List<BarEntry> GetBarEntries(Context context){
-        List<Expense> expenses = StartActivity.getDBInstance(context).expenseDao().GetExpenses();
+        List<Transaction> expens = StartActivity.getDBInstance(context).mmDao().GetTransaction();
         StartActivity.destroyDBInstance();
         List<DayExpenses> dayExpensesList = new ArrayList<>();
 
@@ -25,8 +25,8 @@ public class BarEntryDataController {
         //Calendar calendar1 = Calendar.getInstance();
         Date startDate = new DateDataController().CropTimeFromDate(calendar);
 
-        if(expenses.size()>0){
-            dayExpensesList = new ExpenseDataController(expenses).getDailyExpenses();
+        if(expens.size()>0){
+            dayExpensesList = new ExpenseDataController(expens).getDailyExpenses();
             if(dayExpensesList.get(0).getDate().after(startDate)){
                 startDate = dayExpensesList.get(0).getDate();
                 calendar.setTime(startDate);
@@ -37,7 +37,7 @@ public class BarEntryDataController {
         //calendar1.add(Calendar.DATE, -30);
         Date endDate = startDate;// = new DateDataController().CropTimeFromDate(calendar1);
         DayExpenses itDayExpense = new DayExpenses();
-        if(expenses.size()>0){
+        if(expens.size()>0){
             endDate = dayExpensesList.get(dayExpensesList.size()-1).getDate();
             itDayExpense = dayExpensesList.get(0);
         }
@@ -57,7 +57,7 @@ public class BarEntryDataController {
             }
             dayExpenses.add(tempdayExpenses);
         }
-        if(expenses.size()>0){
+        if(expens.size()>0){
             DayExpenses tempdayExpenses = new DayExpenses();
             tempdayExpenses.setDate(endDate);
             tempdayExpenses.setTotal(dayExpensesList.get(dayExpensesList.size()-1).getTotal());

@@ -7,7 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 
-import RoomDb.ExpenseDatabase;
+import RoomDb.MMDatabase;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.room.Room;
@@ -51,7 +52,7 @@ import java.util.Date;
 import java.util.List;
 
 public class StartActivity extends AppCompatActivity {
-    private static ExpenseDatabase INSTANCE;
+    private static MMDatabase INSTANCE;
     private BarChart mChart;
     private PieChart pieChart;
     private TextView textView;
@@ -72,7 +73,7 @@ public class StartActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_start);
-        //myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(),ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
+        //myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(),MMDatabase.class, "Expensedb").allowMainThreadQueries().build();
         onFirstRun();
         btnAddNew = (Button) findViewById(R.id.btnAddNew);
         btnShowList = (Button) findViewById(R.id.btnShowList);
@@ -94,7 +95,7 @@ public class StartActivity extends AppCompatActivity {
         btnAddNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddExpenseActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
 
 
                 startActivity(intent);
@@ -328,9 +329,9 @@ public class StartActivity extends AppCompatActivity {
 
         pieChart.setData(data);
     }
-    public static ExpenseDatabase getDBInstance(final Context context) {
+    public static MMDatabase getDBInstance(final Context context) {
             if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(context,ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
+                INSTANCE = Room.databaseBuilder(context, MMDatabase.class, "MMdb").allowMainThreadQueries().build();
             }
             return INSTANCE;
 

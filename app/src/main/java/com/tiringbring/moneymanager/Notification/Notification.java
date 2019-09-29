@@ -21,21 +21,21 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import RoomDb.Expense;
-import RoomDb.ExpenseDatabase;
+import RoomDb.Transaction;
+import RoomDb.MMDatabase;
 import androidx.core.app.NotificationCompat;
 import androidx.room.Room;
 
 public class Notification extends BroadcastReceiver {
-    ExpenseDatabase myAppRoomDatabase = null;
+    MMDatabase myAppRoomDatabase = null;
     @Override
     public void onReceive(Context context, Intent intent) {
         if(new MySharedPreferences(context).getIsNotificationEnabled()){
             Calendar calendar = Calendar.getInstance();
             Date date = new DateDataController().CropTimeFromDate(calendar);
 
-            myAppRoomDatabase = Room.databaseBuilder(context,ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
-            boolean isExpenseExist = (myAppRoomDatabase.expenseDao().GetExpensesOfaDate(date)).size()>0;
+            myAppRoomDatabase = Room.databaseBuilder(context, MMDatabase.class, "Expensedb").allowMainThreadQueries().build();
+            boolean isExpenseExist = (myAppRoomDatabase.mmDao().GetTransactionsOfaDate(date)).size()>0;
             if(!isExpenseExist){
                 CreateDailyNotification(context, "Alert!!!", "You might have forgot to add todays expense!", "Reminder from Expenses");
             }
@@ -59,9 +59,9 @@ public class Notification extends BroadcastReceiver {
         } else {
             builder = new NotificationCompat.Builder(context);
         }
-        List<Expense> expenses = myAppRoomDatabase.expenseDao().GetExpenses();
-        List<DayExpenses> dayExpensesList = new ExpenseDataController(expenses).getDailyExpenses();
-        List<MonthExpenses> monthlyExpenseList = new ExpenseDataController(expenses).GetMonthlyExpenses(dayExpensesList);
+        List<Transaction> expens = myAppRoomDatabase.mmDao().GetTransaction();
+        List<DayExpenses> dayExpensesList = new ExpenseDataController(expens).getDailyExpenses();
+        List<MonthExpenses> monthlyExpenseList = new ExpenseDataController(expens).GetMonthlyExpenses(dayExpensesList);
         Calendar calendar = Calendar.getInstance();
         Double total = 0.0;
         String monthName = "";
@@ -76,7 +76,7 @@ public class Notification extends BroadcastReceiver {
 
         builder = builder
                 .setContentTitle(monthName + " Expenses")
-                .setContentText("Total Expense "+total+", "+percentage+"% than limit.")
+                .setContentText("Total Transaction "+total+", "+percentage+"% than limit.")
                 .setTicker("Monthly expense report");
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder.setSmallIcon(R.drawable.smalliconlowapi);

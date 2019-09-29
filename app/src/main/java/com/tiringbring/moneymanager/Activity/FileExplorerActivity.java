@@ -144,7 +144,7 @@ public class FileExplorerActivity extends AppCompatActivity {
             }else {
                 startActivity(new Intent(getApplicationContext(), ImportExportActivity.class).putExtra("isImport","failed"));
             }
-            //StartActivity.myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(), ExpenseDatabase.class, "Expensedb").allowMainThreadQueries().build();
+            //StartActivity.myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(), MMDatabase.class, "Expensedb").allowMainThreadQueries().build();
 
 
         }

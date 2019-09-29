@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import RoomDb.Expense;
+import RoomDb.Transaction;
 
 /**
  * A fragment representing a list of Items.
@@ -83,11 +83,11 @@ public class ExpenseFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             AddExpenseActivity addExpense = (AddExpenseActivity)getActivity();
-            List<Expense> expenses = StartActivity.getDBInstance(getContext()).expenseDao().GetExpensesOfaDate(date);
+            List<Transaction> expens = StartActivity.getDBInstance(getContext()).mmDao().GetTransactionsOfaDate(date);
             StartActivity.destroyDBInstance();
             //if(StartActivity.myAppRoomDatabase.isOpen())
                 //StartActivity.myAppRoomDatabase.close();
-            recyclerView.setAdapter(new ExpensesRecyclerViewAdapter(getContext(), expenses, mListener,addExpense));
+            recyclerView.setAdapter(new ExpensesRecyclerViewAdapter(getContext(), expens, mListener,addExpense));
         }
         return view;
     }

@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tiringbring.moneymanager.Entity.DayExpenses;
 import com.tiringbring.moneymanager.Fragment.ExpenseFragment;
@@ -28,7 +29,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
-import RoomDb.Expense;
+import RoomDb.Transaction;
 
 public class AddExpenseActivity extends AppCompatActivity {
     private TextView tvDatePicker;
@@ -75,11 +76,11 @@ public class AddExpenseActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         if(expenseId != 0)
         {
-            Expense expense = StartActivity.getDBInstance(getApplicationContext()).expenseDao().GetExpenseById(expenseId);
+            Transaction transaction = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTransactionById(expenseId);
             StartActivity.destroyDBInstance();
-            calendar.setTime(expense.getDate());
-            etName.setText(expense.getName());
-            etAmount.setText(String.valueOf(expense.getAmount()));
+            calendar.setTime(transaction.getDate());
+            etName.setText(transaction.getName());
+            etAmount.setText(String.valueOf(transaction.getAmount()));
             btnSave.setText(getResources().getString(R.string.update));
         }
 
@@ -121,23 +122,23 @@ public class AddExpenseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try
                 {
-                    Expense newExpense = new Expense();
+                    Transaction newTransaction = new Transaction();
                     if(etName.getText().toString().equals("")){
-                        newExpense.setName("Untitled");
+                        newTransaction.setName("Untitled");
                     }else {
-                        newExpense.setName(etName.getText().toString());
+                        newTransaction.setName(etName.getText().toString());
                     }
 
-                    newExpense.setAmount(Double.parseDouble(etAmount.getText().toString()));
-                    newExpense.setDate(new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(tvDatePicker.getText().toString()));
+                    newTransaction.setAmount(Double.parseDouble(etAmount.getText().toString()));
+                    newTransaction.setDate(new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(tvDatePicker.getText().toString()));
                     if(expenseId == 0){
-                        StartActivity.getDBInstance(getApplicationContext()).expenseDao().AddExpense(newExpense);
+                        StartActivity.getDBInstance(getApplicationContext()).mmDao().AddTransaction(newTransaction);
                         StartActivity.destroyDBInstance();
-                        //Toast.makeText(getApplicationContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
                     }
                     else {
-                        newExpense.setId(expenseId);
-                        StartActivity.getDBInstance(getApplicationContext()).expenseDao().UpdateExpense(newExpense);
+                        newTransaction.setId(expenseId);
+                        StartActivity.getDBInstance(getApplicationContext()).mmDao().UpdateTransaction(newTransaction);
                         StartActivity.destroyDBInstance();
                         expenseId = 0;
                         //Toast.makeText(getApplicationContext(),"Updated Successfully",Toast.LENGTH_LONG).show();
@@ -154,7 +155,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                     ChangeTotal();
                 }catch (Exception e)
                 {
-                    //Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -217,9 +218,9 @@ public class AddExpenseActivity extends AppCompatActivity {
     }
     public void ChangeTotal(){
         Date date = new GregorianCalendar(Year, Month-1, Day).getTime();
-        List<Expense> expenses = StartActivity.getDBInstance(getApplicationContext()).expenseDao().GetExpensesOfaDate(date);
+        List<Transaction> expens = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTransactionsOfaDate(date);
         StartActivity.destroyDBInstance();
-        Double totoal = new DayExpenses().AddTotal(expenses);
+        Double totoal = new DayExpenses().AddTotal(expens);
         tvTotal.setText(String.format("%.2f", totoal));
         //mContentView.setText(String.format("%.2f",mValues.get(position).getAmount()));
 

@@ -43,7 +43,7 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return DayExpenseList.get(groupPosition).getDayExpenseList().size();
+        return DayExpenseList.get(groupPosition).getDayTransactionList().size();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition);
+        return DayExpenseList.get(groupPosition).getDayTransactionList().get(childPosition);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getId();
+        return DayExpenseList.get(groupPosition).getDayTransactionList().get(childPosition).getId();
     }
 
     @Override
@@ -99,22 +99,22 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
         }
         TextView mIdView = (TextView) convertView.findViewById(R.id.tvName);
         TextView mContentView = (TextView) convertView.findViewById(R.id.tvAmount);
-        mIdView.setText(DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getName());
-        mContentView.setText("Total "+String.format("%.2f", DayExpenseList.get(groupPosition).getDayExpenseList().get(childPosition).getAmount()));
+        mIdView.setText(DayExpenseList.get(groupPosition).getDayTransactionList().get(childPosition).getName());
+        mContentView.setText("Total "+String.format("%.2f", DayExpenseList.get(groupPosition).getDayTransactionList().get(childPosition).getAmount()));
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 final CharSequence[] items = { "Edit", "Delete" };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle(DayExpenseList.get(gp).getDayExpenseList().get(cp).getName()+"    "+String.valueOf(String.format("%.2f", DayExpenseList.get(gp).getDayExpenseList().get(cp).getAmount())));
+                builder.setTitle(DayExpenseList.get(gp).getDayTransactionList().get(cp).getName()+"    "+String.valueOf(String.format("%.2f", DayExpenseList.get(gp).getDayTransactionList().get(cp).getAmount())));
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case 0:{
                                 Intent intent = new Intent(context, AddExpenseActivity.class);
-                                intent.putExtra("expenseId", DayExpenseList.get(gp).getDayExpenseList().get(cp).getId());
+                                intent.putExtra("expenseId", DayExpenseList.get(gp).getDayTransactionList().get(cp).getId());
                                 ((Activity)context).startActivity(intent);
                                 break;
                             }
@@ -125,14 +125,14 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                                StartActivity.getDBInstance(context).expenseDao().DeleteExpense(DayExpenseList.get(gp).getDayExpenseList().get(cp));
+                                                StartActivity.getDBInstance(context).mmDao().DeleteTransaction(DayExpenseList.get(gp).getDayTransactionList().get(cp));
                                                 StartActivity.destroyDBInstance();
-                                                //DayExpenseList.get(groupPosition).getDayExpenseList().remove(childPosition);
-                                                if(DayExpenseList.get(gp).getDayExpenseList().size()==1){
+                                                //DayExpenseList.get(groupPosition).getDayTransactionList().remove(childPosition);
+                                                if(DayExpenseList.get(gp).getDayTransactionList().size()==1){
                                                     DayExpenseList.remove(gp);
                                                 }else {
-                                                    DayExpenseList.get(gp).setTotal(DayExpenseList.get(gp).getTotal()-DayExpenseList.get(gp).getDayExpenseList().get(cp).getAmount());
-                                                    DayExpenseList.get(gp).getDayExpenseList().remove(cp);
+                                                    DayExpenseList.get(gp).setTotal(DayExpenseList.get(gp).getTotal()-DayExpenseList.get(gp).getDayTransactionList().get(cp).getAmount());
+                                                    DayExpenseList.get(gp).getDayTransactionList().remove(cp);
                                                 }
                                                 notifyDataSetChanged();
                                                 //Toast.makeText(context, "Yes", Toast.LENGTH_SHORT).show();

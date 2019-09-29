@@ -9,18 +9,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import RoomDb.Expense;
+import RoomDb.Transaction;
 
 public class PieEntryDataController {
     private  double Total=0;
     public ArrayList<PieEntry> GetList(Context context, Date date){
          ArrayList<PieEntry> pieEntries = new ArrayList<>();
-         List<Expense> expenses = StartActivity.getDBInstance(context).expenseDao().GetExpensesOfaDate(date);
+         List<Transaction> expens = StartActivity.getDBInstance(context).mmDao().GetTransactionsOfaDate(date);
          StartActivity.destroyDBInstance();
-        for (Expense expense:expenses
+        for (Transaction transaction : expens
              ) {
-            Total += expense.getAmount();
-            pieEntries.add(new PieEntry(((int) expense.getAmount()),expense.getName()));
+            Total += transaction.getAmount();
+            pieEntries.add(new PieEntry(((int) transaction.getAmount()), transaction.getName()));
         }
 
 //         if(pieEntries.size()==0){
