@@ -7,4 +7,5 @@
         yourapp:showAsAction="ifRoom"
         android:title="menu"
         yourapp:actionViewClass="android.widget.Spinner" />
+
 </menu>

@@ -11,6 +11,10 @@
         <item>বার্ষিক</item>
         <item>কাস্টমাইজ</item>
     </string-array>
+   <string-array name="dropdown_income_expense">
+        <item>Income</item>
+        <item>Expense</item>
+    </string-array>
     <string name="from_date">তারিখ পর্যন্ত:</string>
     <string name="to_date">" তারিখ হইতে:"</string>
     <string name="total">" মোট"</string>
@@ -21,7 +25,7 @@
     <string name="show_notification">নোটিফিকেশন দেখুন</string>
     <string name="language">ভাষা</string>
     <string name="save">সেভ</string>
-    <string name="hint_amount">ব্যয় এর পরিমাণ লিখুন</string>
+    <string name="hint_amount">পরিমাণ</string>
     <string name="hint_spend_reason">কি ব্যয় লিখুন</string>
     <string name="update">আপডেট</string>
 </resources>

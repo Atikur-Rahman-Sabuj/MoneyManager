@@ -20,13 +20,17 @@
         <item>Yearly</item>
         <item>Custom</item>
     </string-array>
+    <string-array name="dropdown_income_expense">
+        <item>Income</item>
+        <item>Expense</item>
+    </string-array>
     <string-array name="language_array">
         <item>English</item>
         <item>বাংলা</item>
     </string-array>
     <string name="save">Save</string>
     <string name="hint_spend_reason">write what you spent on</string>
-    <string name="hint_amount">write the amount</string>
+    <string name="hint_amount">amount</string>
     <string name="update">Update</string>
 
 </resources>

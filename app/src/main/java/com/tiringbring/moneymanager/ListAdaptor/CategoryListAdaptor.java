@@ -27,13 +27,15 @@ public class CategoryListAdaptor extends RecyclerView.Adapter<CategoryListAdapto
     private final List<List<Category>> categoryList;
     private Context context;
     private long selectedId;
+    private boolean isIncome;
     private View.OnClickListener tvClickListner;
     private View.OnLongClickListener tvLongClickListner;
 
-    public CategoryListAdaptor(final List<List<Category>> categoryList, final Context context, long selectedId) {
+    public CategoryListAdaptor(final List<List<Category>> categoryList, final Context context, long selectedId, final boolean isIncome) {
         this.categoryList = categoryList;
         this.context = context;
         this.selectedId = selectedId;
+        this.isIncome = isIncome;
         //region on click listener
         tvClickListner = new View.OnClickListener() {
             @Override
@@ -51,7 +53,7 @@ public class CategoryListAdaptor extends RecyclerView.Adapter<CategoryListAdapto
                                     if(editText.getText().toString().length()>0){
                                         Category category = new Category();
                                         category.setName(editText.getText().toString());
-                                        category.setIsIncome(true);
+                                        category.setIsIncome(isIncome);
                                         StartActivity.getDBInstance(context).mmDao().AddCategory(category);
                                         StartActivity.destroyDBInstance();
                                         ((AddTransactionActivity)context).LoadCategory(0);

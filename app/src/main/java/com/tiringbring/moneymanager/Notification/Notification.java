@@ -30,20 +30,20 @@ public class Notification extends BroadcastReceiver {
     MMDatabase myAppRoomDatabase = null;
     @Override
     public void onReceive(Context context, Intent intent) {
-        if(new MySharedPreferences(context).getIsNotificationEnabled()){
-            Calendar calendar = Calendar.getInstance();
-            Date date = new DateDataController().CropTimeFromDate(calendar);
-
-            myAppRoomDatabase = Room.databaseBuilder(context, MMDatabase.class, "Expensedb").allowMainThreadQueries().build();
-            boolean isExpenseExist = (myAppRoomDatabase.mmDao().GetTransactionsOfaDate(date)).size()>0;
-            if(!isExpenseExist){
-                CreateDailyNotification(context, "Alert!!!", "You might have forgot to add todays expense!", "Reminder from Expenses");
-            }
-            if(calendar.get(Calendar.DAY_OF_MONTH ) == 1){
-                CreateMonthlyNotification(context);
-            }
-
-        }
+//        if(new MySharedPreferences(context).getIsNotificationEnabled()){
+//            Calendar calendar = Calendar.getInstance();
+//            Date date = new DateDataController().CropTimeFromDate(calendar);
+//
+//            myAppRoomDatabase = Room.databaseBuilder(context, MMDatabase.class, "mmdb").allowMainThreadQueries().build();
+//            boolean isExpenseExist = (myAppRoomDatabase.mmDao().GetTransactionsOfaDate(date)).size()>0;
+//            if(!isExpenseExist){
+//                CreateDailyNotification(context, "Alert!!!", "You might have forgot to add todays expense!", "Reminder from Expenses");
+//            }
+//            if(calendar.get(Calendar.DAY_OF_MONTH ) == 1){
+//                CreateMonthlyNotification(context);
+//            }
+//
+//        }
 
     }
 
