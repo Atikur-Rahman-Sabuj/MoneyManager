@@ -29,11 +29,14 @@ import android.widget.Toast;
 import com.tiringbring.moneymanager.ListAdaptor.CategoryListAdaptor;
 import com.tiringbring.moneymanager.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import RoomDb.Category;
+import RoomDb.Transaction;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
@@ -44,6 +47,8 @@ public class AddTransactionActivity extends AppCompatActivity {
     private EditText etMemo, etAmount;
     private Button btnSave,btnLeft, btnRight;
     private TextView tvDatePicker;
+    private long transactionId = 0;
+    private long selectedId;
     private int  Year;
     private int Month;
     private int Day;
@@ -59,6 +64,8 @@ public class AddTransactionActivity extends AppCompatActivity {
         btnLeft = (Button) findViewById(R.id.btnDPleft);
         btnRight = (Button) findViewById(R.id.btnDPRight);
         rvCategoryList.setLayoutManager(new LinearLayoutManager(this));
+        //user this for horizontal list
+        //rvCategoryList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         tvDatePicker = (TextView) findViewById(R.id.tvDatePicker);
         LoadCategory(0);
         Calendar calendar = Calendar.getInstance();
@@ -132,13 +139,27 @@ public class AddTransactionActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    Transaction newTransaction = new Transaction();
+                    newTransaction.setName(etMemo.getText().toString());
+                    newTransaction.setIsIncome(isIncome);
+                    newTransaction.setCategoryId(selectedId);
+                    newTransaction.setAmount(Double.parseDouble(etAmount.getText().toString()));
+                    newTransaction.setDate(new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(tvDatePicker.getText().toString()));
+                    if(transactionId == 0){
+                        StartActivity.getDBInstance(getApplicationContext()).mmDao().AddTransaction(newTransaction);
+                        StartActivity.destroyDBInstance();
+                        Toast.makeText(getApplicationContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
+                    }
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_LONG).show();
+                }
 
             }
         });
 
-
-
     }
+
     public void LoadCategory(long selectedId){
         List<Category> categories = StartActivity.getDBInstance(this).mmDao().GetCategoriesofType(isIncome);
         StartActivity.destroyDBInstance();
@@ -165,8 +186,10 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         if(selectedId==0){
             layoutAddTransaction.setVisibility(View.GONE);
+            this.selectedId = selectedId;
         }else {
             layoutAddTransaction.setVisibility(View.VISIBLE);
+            this.selectedId = selectedId;
         }
 
     }

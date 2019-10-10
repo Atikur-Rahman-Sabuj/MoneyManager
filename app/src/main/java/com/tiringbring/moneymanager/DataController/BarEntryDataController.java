@@ -17,7 +17,7 @@ public class BarEntryDataController {
     public ArrayList<String> labels = new ArrayList<String> ();
     public ArrayList<Date> dates = new ArrayList<>();
     public List<BarEntry> GetBarEntries(Context context){
-        List<Transaction> expens = StartActivity.getDBInstance(context).mmDao().GetTransaction();
+        List<Transaction> transactions = StartActivity.getDBInstance(context).mmDao().GetTransaction();
         StartActivity.destroyDBInstance();
         List<DayExpenses> dayExpensesList = new ArrayList<>();
 
@@ -25,8 +25,8 @@ public class BarEntryDataController {
         //Calendar calendar1 = Calendar.getInstance();
         Date startDate = new DateDataController().CropTimeFromDate(calendar);
 
-        if(expens.size()>0){
-            dayExpensesList = new ExpenseDataController(expens).getDailyExpenses();
+        if(transactions.size()>0){
+            dayExpensesList = new ExpenseDataController(transactions).getDailyExpenses();
             if(dayExpensesList.get(0).getDate().after(startDate)){
                 startDate = dayExpensesList.get(0).getDate();
                 calendar.setTime(startDate);
@@ -37,7 +37,7 @@ public class BarEntryDataController {
         //calendar1.add(Calendar.DATE, -30);
         Date endDate = startDate;// = new DateDataController().CropTimeFromDate(calendar1);
         DayExpenses itDayExpense = new DayExpenses();
-        if(expens.size()>0){
+        if(transactions.size()>0){
             endDate = dayExpensesList.get(dayExpensesList.size()-1).getDate();
             itDayExpense = dayExpensesList.get(0);
         }
@@ -57,7 +57,7 @@ public class BarEntryDataController {
             }
             dayExpenses.add(tempdayExpenses);
         }
-        if(expens.size()>0){
+        if(transactions.size()>0){
             DayExpenses tempdayExpenses = new DayExpenses();
             tempdayExpenses.setDate(endDate);
             tempdayExpenses.setTotal(dayExpensesList.get(dayExpensesList.size()-1).getTotal());

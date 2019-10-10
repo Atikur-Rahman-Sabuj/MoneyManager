@@ -2,33 +2,43 @@ package RoomDb;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import java.lang.annotation.Native;
 import java.util.Date;
 
-@Entity(tableName = "Transactions", foreignKeys = @ForeignKey(entity = Category.class,
-        parentColumns = "Id",
-        childColumns = "CategoryId",
-        onDelete = ForeignKey.NO_ACTION))
+@Entity(tableName = "Transactions")
 @TypeConverters(Converters.class)
 public class Transaction implements Comparable<Transaction>{
     @PrimaryKey(autoGenerate = true)
     private long Id;
     private String Name;
-    private  double Amount;
+    private double Amount;
     private Date date;
     private Boolean IsIncome;
+    private long CategoryId;
+    @Ignore
+    private Category category;
 
-    public int getCategoryId() {
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public long getCategoryId() {
         return CategoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(long categoryId) {
         CategoryId = categoryId;
     }
 
-    private int CategoryId;
+
 
     public Boolean getIsIncome() {
         return IsIncome;

@@ -52,11 +52,11 @@ public class ExpandableExpenseFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_expandable_expense, container, false);
         //Toast.makeText(getContext(),"here", Toast.LENGTH_LONG).show();
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableExpenseList);
-        List<Transaction> expens = StartActivity.getDBInstance(getContext()).mmDao().GetTransaction();
+        List<Transaction> transactions = StartActivity.getDBInstance(getContext()).mmDao().GetTransaction();
         StartActivity.destroyDBInstance();
         //if(StartActivity.myAppRoomDatabase.isOpen())
             //StartActivity.myAppRoomDatabase.close();
-        dayExpensesList = new ExpenseDataController(expens).getDailyExpenses();
+        dayExpensesList = new ExpenseDataController(transactions).getDailyExpenses();
         String ddItem = getArguments().getString("DDITEMS");
         switch (ddItem){
             case "daily":{
@@ -65,14 +65,14 @@ public class ExpandableExpenseFragment extends Fragment {
                 break;
             }
             case "monthly":{
-                List<MonthExpenses> monthlyExpenseList = new ExpenseDataController(expens).GetMonthlyExpenses(dayExpensesList);
+                List<MonthExpenses> monthlyExpenseList = new ExpenseDataController(transactions).GetMonthlyExpenses(dayExpensesList);
                 MonthlyExpenseExpandableListAdaptor monthlyExpenseExpandableListAdaptor = new MonthlyExpenseExpandableListAdaptor(getContext(), monthlyExpenseList);
                 expandableListView.setAdapter(monthlyExpenseExpandableListAdaptor);
                 break;
             }
             case "yearly":{
-                List<MonthExpenses> monthlyExpenseList = new ExpenseDataController(expens).GetMonthlyExpenses(dayExpensesList);
-                List<YearlyExpenses> yearlyExpensesList = new ExpenseDataController(expens).GetYearlyExpenses(monthlyExpenseList);
+                List<MonthExpenses> monthlyExpenseList = new ExpenseDataController(transactions).GetMonthlyExpenses(dayExpensesList);
+                List<YearlyExpenses> yearlyExpensesList = new ExpenseDataController(transactions).GetYearlyExpenses(monthlyExpenseList);
                 YearlyExpenseExpandableListAdaptor yearlyExpenseExpandableListAdaptor = new YearlyExpenseExpandableListAdaptor(getContext(), yearlyExpensesList);
                 expandableListView.setAdapter(yearlyExpenseExpandableListAdaptor);
                 break;
@@ -80,7 +80,7 @@ public class ExpandableExpenseFragment extends Fragment {
             case "custom":{
                 Date startDate = new DateDataController().StringToDate( getArguments().getString("START_DATE"));
                 Date endDate = new DateDataController().StringToDate(getArguments().getString("END_DATE"));
-                List<DayExpenses> customDayExpenseList = new ExpenseDataController(expens).MakeCustomList(startDate, endDate);
+                List<DayExpenses> customDayExpenseList = new ExpenseDataController(transactions).MakeCustomList(startDate, endDate);
                 ExpenseListActivity expenseList = (ExpenseListActivity)getActivity();
                 expenseList.setTotalTextView(getTotal(customDayExpenseList));
                 expandableListAdapter = new ExpenseExpandableListAdaptor(getContext(), customDayExpenseList);

@@ -15,12 +15,14 @@
         android:layout_weight="1"
         android:foregroundGravity="center|clip_vertical|center_horizontal"
         android:gravity="center"
+        android:paddingStart="10dp"
         android:paddingTop="10dp"
+        android:paddingEnd="10dp"
         android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/tvFirst"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_corner_rectangle"
@@ -41,12 +43,14 @@
         android:layout_weight="1"
         android:foregroundGravity="center|clip_vertical|center_horizontal"
         android:gravity="center"
+        android:paddingStart="10dp"
         android:paddingTop="10dp"
+        android:paddingEnd="10dp"
         android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/tvSecond"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_corner_rectangle"
@@ -65,12 +69,14 @@
         android:layout_weight="1"
         android:foregroundGravity="center|clip_vertical|center_horizontal"
         android:gravity="center"
+        android:paddingStart="10dp"
         android:paddingTop="10dp"
+        android:paddingEnd="10dp"
         android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/tvThird"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_corner_rectangle"
@@ -89,12 +95,14 @@
         android:layout_weight="1"
         android:foregroundGravity="center|clip_vertical|center_horizontal"
         android:gravity="center"
+        android:paddingStart="10dp"
         android:paddingTop="10dp"
+        android:paddingEnd="10dp"
         android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/tvFourth"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_corner_rectangle"
@@ -103,8 +111,8 @@
             android:paddingStart="10dp"
             android:paddingTop="7dp"
             android:paddingEnd="10dp"
-            android:textAlignment="center"
-            android:paddingBottom="7dp" />
+            android:paddingBottom="7dp"
+            android:textAlignment="center" />
     </RelativeLayout>
 
 </LinearLayout>
