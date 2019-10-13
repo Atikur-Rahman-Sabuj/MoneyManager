@@ -37,7 +37,7 @@ public class YearlyExpenseExpandableListAdaptor extends BaseExpandableListAdapte
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return YearlyExpenseList.get(groupPosition).monthlyExpenses.size();
+        return 0;
     }
 
     @Override
@@ -73,12 +73,15 @@ public class YearlyExpenseExpandableListAdaptor extends BaseExpandableListAdapte
             convertView = layoutInflater.inflate(R.layout.fragment_date, null);
         }
         TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
-        TextView tvTotal = (TextView) convertView.findViewById(R.id.tvTotal);
-        TextView tvLimit = (TextView) convertView.findViewById(R.id.tvLimit);
-        double percentage = (((YearlyExpenseList.get(groupPosition).total/yearlyLimit))*100);
+        TextView tvIncomeTotal = (TextView) convertView.findViewById(R.id.tvIncomeTotal);
+        TextView tvExpenseTotal = (TextView) convertView.findViewById(R.id.tvExpenseTotal);
+        TextView tvBalanceTotal = (TextView) convertView.findViewById(R.id.tvBalanceTotal);
         tvDate.setText(YearlyExpenseList.get(groupPosition).year);
-        tvTotal.setText("Total "+String.format("%.2f", YearlyExpenseList.get(groupPosition).total));
-        tvLimit.setText(String.format("%.2f", percentage)+"% than limit!");
+        tvIncomeTotal.setText(String.format("%.2f", YearlyExpenseList.get(groupPosition).incomeTotal));
+        tvExpenseTotal.setText(String.format("%.2f", YearlyExpenseList.get(groupPosition).expenseTotal));
+        tvBalanceTotal.setText(String.format("%.2f", YearlyExpenseList.get(groupPosition).incomeTotal-YearlyExpenseList.get(groupPosition).expenseTotal));
+        //tvTotal.setText("Total "+String.format("%.2f", YearlyExpenseList.get(groupPosition).total));
+        //tvLimit.setText(String.format("%.2f", percentage)+"% than limit!");
         return  convertView;
     }
 
@@ -94,7 +97,7 @@ public class YearlyExpenseExpandableListAdaptor extends BaseExpandableListAdapte
         TextView mIdView = (TextView) convertView.findViewById(R.id.tvName);
         TextView mContentView = (TextView) convertView.findViewById(R.id.tvAmount);
         mIdView.setText(new DateDataController().DateToMonth(YearlyExpenseList.get(groupPosition).monthlyExpenses.get(childPosition).date));
-        mContentView.setText("Total "+String.format("%.2f", YearlyExpenseList.get(groupPosition).monthlyExpenses.get(childPosition).total));
+        mContentView.setText("Total "+String.format("%.2f", YearlyExpenseList.get(groupPosition).monthlyExpenses.get(childPosition).expenseTotal));
         return  convertView;
     }
 

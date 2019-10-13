@@ -9,21 +9,25 @@ import java.util.List;
 public class MonthExpenses {
     public Date date;
     public String month;
-    public Double total;
+    public Double incomeTotal;
+    public Double expenseTotal;
     public List<DayExpenses> dayExpenses = new ArrayList<>();
 
     public MonthExpenses(List<DayExpenses> dayExpenses) {
         this.date = dayExpenses.get(0).date;
         this.month = new DateDataController().DateToMonthYear(dayExpenses.get(0).date);
-        this.total = AddTotal(dayExpenses);
+        SetTotals(dayExpenses);
         this.dayExpenses.addAll(dayExpenses);
     }
-    private double AddTotal(List<DayExpenses> dayExpenses){
-        double sum = 0;
+    private void SetTotals(List<DayExpenses> dayExpenses){
+        double incomeSum = 0;
+        double expenseSum = 0;
         for (DayExpenses dayexp: dayExpenses) {
-            sum+=dayexp.total;
+            incomeSum += dayexp.incomeTotal;
+            expenseSum += dayexp.expenseTotal;
         }
-        return  sum;
+        this.incomeTotal = incomeSum;
+        this.expenseTotal = expenseSum;
     }
 
 }

@@ -7,19 +7,23 @@ import java.util.List;
 
 public class YearlyExpenses {
     public String year;
-    public Double total;
+    public Double incomeTotal;
+    public Double expenseTotal;
     public List<MonthExpenses> monthlyExpenses = new ArrayList<>();
 
     public YearlyExpenses(List<MonthExpenses> monthlyExpenses) {
         this.year = new DateDataController().DateToYear(monthlyExpenses.get(0).date);
-        this.total = AddTotal(monthlyExpenses);
+        SetTotal(monthlyExpenses);
         this.monthlyExpenses.addAll(monthlyExpenses);
     }
-    private double AddTotal(List<MonthExpenses> monthlyExpenses){
-        double sum = 0;
+    private void SetTotal(List<MonthExpenses> monthlyExpenses){
+        double incomeSum = 0;
+        double expenseSum = 0;
         for (MonthExpenses monex: monthlyExpenses) {
-            sum+=monex.total;
+            incomeSum += monex.incomeTotal;
+            expenseSum += monex.expenseTotal;
         }
-        return  sum;
+        this.incomeTotal = incomeSum;
+        this.expenseTotal = expenseSum;
     }
 }

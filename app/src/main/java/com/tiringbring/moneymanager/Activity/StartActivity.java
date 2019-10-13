@@ -115,69 +115,69 @@ public class StartActivity extends AppCompatActivity {
         SetPieChartDate();
         BindDataToPieChart();
 
-        mChart.getDescription().setEnabled(false);
-        final BarEntryDataController beDataController = new BarEntryDataController();
-        List<BarEntry> data = beDataController.GetBarEntries(getApplicationContext());
-        //generating colors
-        List<Integer> colors = new ArrayList<>();
-        for (BarEntry be:
-                data) {
-            if(be.getY()>dailyLimit){
-                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
-            }
-            else {
-                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
-            }
-        }
-        BarDataSet set = new BarDataSet(data, "");
-        //set.setColors(ColorTemplate.MATERIAL_COLORS);
-        set.setColors(colors);
-        set.setDrawValues(true);
-        BarData barData = new BarData(set);
-        barData.setBarWidth(.8f);
-        mChart.setData(barData);
-        mChart.setExtraOffsets(0, 0, 0, 0);
-
-
-        mChart.getContentRect().set(0, 0, mChart.getWidth(), mChart.getHeight());
-        mChart.animateY(500);
-        mChart.setScaleEnabled(false);
-        mChart.setDrawValueAboveBar(true);
-        mChart.setDrawBorders(false);
-        //mChart.setExtraOffsets(0,0,0,0);
-        mChart.getLegend().setEnabled(false);
-        mChart.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
-        mChart.moveViewToX(-1);
-        XAxis xAxis = mChart.getXAxis();
-        YAxis left = mChart.getAxisLeft();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
-        left.setDrawLabels(false); // no axis labels
-        left.setDrawAxisLine(false); // no axis line
-        left.setDrawGridLines(false); // no grid lines
-        left.setDrawZeroLine(false); // draw a zero line
-
-        mChart.getAxisRight().setEnabled(false); // no right axis
-        xAxis.setDrawGridLines(false);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
-        xAxis.setDrawLabels(true);
-        xAxis.setDrawAxisLine(true);
-        xAxis.setAxisLineColor(Color.BLACK);
-        //xAxis.setCenterAxisLabels(true);
-        mChart.setDrawGridBackground(false);
-        mChart.setFitBars(false);
-        mChart.invalidate();
-        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h) {
-                pieDate = beDataController.dates.get(((int) e.getX()));
-                BindDataToPieChart();
-            }
-
-            @Override
-            public void onNothingSelected() {
-
-            }
-        });
+//        mChart.getDescription().setEnabled(false);
+//        final BarEntryDataController beDataController = new BarEntryDataController();
+//        List<BarEntry> data = beDataController.GetBarEntries(getApplicationContext());
+//        //generating colors
+//        List<Integer> colors = new ArrayList<>();
+//        for (BarEntry be:
+//                data) {
+//            if(be.getY()>dailyLimit){
+//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
+//            }
+//            else {
+//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
+//            }
+//        }
+//        BarDataSet set = new BarDataSet(data, "");
+//        //set.setColors(ColorTemplate.MATERIAL_COLORS);
+//        set.setColors(colors);
+//        set.setDrawValues(true);
+//        BarData barData = new BarData(set);
+//        barData.setBarWidth(.8f);
+//        mChart.setData(barData);
+//        mChart.setExtraOffsets(0, 0, 0, 0);
+//
+//
+//        mChart.getContentRect().set(0, 0, mChart.getWidth(), mChart.getHeight());
+//        mChart.animateY(500);
+//        mChart.setScaleEnabled(false);
+//        mChart.setDrawValueAboveBar(true);
+//        mChart.setDrawBorders(false);
+//        //mChart.setExtraOffsets(0,0,0,0);
+//        mChart.getLegend().setEnabled(false);
+//        mChart.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
+//        mChart.moveViewToX(-1);
+//        XAxis xAxis = mChart.getXAxis();
+//        YAxis left = mChart.getAxisLeft();
+//        xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
+//        left.setDrawLabels(false); // no axis labels
+//        left.setDrawAxisLine(false); // no axis line
+//        left.setDrawGridLines(false); // no grid lines
+//        left.setDrawZeroLine(false); // draw a zero line
+//
+//        mChart.getAxisRight().setEnabled(false); // no right axis
+//        xAxis.setDrawGridLines(false);
+//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
+//        xAxis.setDrawLabels(true);
+//        xAxis.setDrawAxisLine(true);
+//        xAxis.setAxisLineColor(Color.BLACK);
+//        //xAxis.setCenterAxisLabels(true);
+//        mChart.setDrawGridBackground(false);
+//        mChart.setFitBars(false);
+//        mChart.invalidate();
+//        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+//            @Override
+//            public void onValueSelected(Entry e, Highlight h) {
+//                pieDate = beDataController.dates.get(((int) e.getX()));
+//                BindDataToPieChart();
+//            }
+//
+//            @Override
+//            public void onNothingSelected() {
+//
+//            }
+//        });
 
         pieChart.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()){
             public void onSwipeTop() {

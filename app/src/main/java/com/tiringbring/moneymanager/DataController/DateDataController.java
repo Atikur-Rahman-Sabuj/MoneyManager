@@ -55,7 +55,7 @@ public class DateDataController {
         return newFormatter.format(date);
     }
     public  String DatetoBigDateMonthYear(Date date){
-        SimpleDateFormat newFormatter = new SimpleDateFormat("dd MMMM, yyyy");
+        SimpleDateFormat newFormatter = new SimpleDateFormat("dd MMM, yyyy");
         return newFormatter.format(date);
     }
     public  String DatetoString(Date date){
@@ -63,7 +63,7 @@ public class DateDataController {
         return newFormatter.format(date);
     }
     public String DateToMonthYear(Date date){
-        SimpleDateFormat newFormatter = new SimpleDateFormat("MMM yy");
+        SimpleDateFormat newFormatter = new SimpleDateFormat("MMMM yyyy");
         return newFormatter.format(date);
     }
     public String DateToYear(Date date){

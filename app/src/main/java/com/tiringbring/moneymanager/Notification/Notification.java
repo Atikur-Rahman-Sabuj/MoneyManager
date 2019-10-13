@@ -68,7 +68,7 @@ public class Notification extends BroadcastReceiver {
         DateDataController ddc= new DateDataController();
         for (MonthExpenses mex:monthlyExpenseList) {
             if(String.valueOf(calendar.get(Calendar.YEAR)).equals( ddc.DateToYear(mex.date))&&(calendar.get(Calendar.MONTH)-1)==ddc.DateToMonthNo(mex.date))  {
-                total = mex.total;
+                total = mex.expenseTotal;
                 monthName = mex.month;
             }
         }

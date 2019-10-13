@@ -4,9 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tiringbring.moneymanager.R;
@@ -36,8 +38,18 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvCategoryName.setText(transactions.get(position).getCategory().getName());
-        holder.tvName.setText(transactions.get(position).getName());
+        if(transactions.get(position).getName().equals("") || transactions.get(position).getName().equals(null)){
+            holder.tvName.setText(transactions.get(position).getCategory().getName());
+        }else {
+            holder.tvName.setText(transactions.get(position).getName());
+        }
         holder.tvValue.setText(String.valueOf(String.format("%.2f", transactions.get(position).getAmount())));
+        if(transactions.get(position).getIsIncome()){
+            holder.llBorderColer.setBackground(ContextCompat.getDrawable(context, R.drawable.card_back_with_border_green));
+
+        }else{
+            holder.llBorderColer.setBackground(ContextCompat.getDrawable(context, R.drawable.card_back_with_border_red));
+        }
     }
 
     @Override
@@ -50,6 +62,7 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
         public final TextView tvCategoryName;
         public final TextView tvName;
         public final TextView tvValue;
+        public final LinearLayout llBorderColer;
 
 
         public ViewHolder(View view) {
@@ -58,6 +71,7 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
             tvCategoryName = (TextView) view.findViewById(R.id.tvCategoyName);
             tvName = (TextView) view.findViewById(R.id.tvName);
             tvValue = (TextView) view.findViewById(R.id.tvValue);
+            llBorderColer = (LinearLayout) view.findViewById(R.id.llBorderColor);
 
         }
 

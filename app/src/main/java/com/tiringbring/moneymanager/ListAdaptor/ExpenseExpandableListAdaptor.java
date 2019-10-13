@@ -85,12 +85,16 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.fragment_date, null);
         }
         TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
-        TextView tvTotal = (TextView) convertView.findViewById(R.id.tvTotal);
-        TextView tvLimit = (TextView) convertView.findViewById(R.id.tvLimit);
-        double percentage = (((DayExpenseList.get(groupPosition).getTotal()/dailyLimit))*100);
+        TextView tvIncomeTotal = (TextView) convertView.findViewById(R.id.tvIncomeTotal);
+        TextView tvExpenseTotal = (TextView) convertView.findViewById(R.id.tvExpenseTotal);
+        TextView tvBalanceTotal = (TextView) convertView.findViewById(R.id.tvBalanceTotal);
+        //TextView tvLimit = (TextView) convertView.findViewById(R.id.tvLimit);
+        //double percentage = (((DayExpenseList.get(groupPosition).getExpenseTotal()/dailyLimit))*100);
         tvDate.setText(new DateDataController().DatetoBigDateMonthYear(DayExpenseList.get(groupPosition).getDate()));
-        tvTotal.setText("Total "+String.format("%.2f", DayExpenseList.get(groupPosition).getTotal()));
-        tvLimit.setText(String.format("%.2f", percentage)+"% than limit!");
+        tvIncomeTotal.setText(String.format("%.2f", DayExpenseList.get(groupPosition).getIncomeTotal()));
+        tvExpenseTotal.setText(String.format("%.2f", DayExpenseList.get(groupPosition).getExpenseTotal()));
+        tvBalanceTotal.setText(String.format("%.2f", DayExpenseList.get(groupPosition).getIncomeTotal()-DayExpenseList.get(groupPosition).getExpenseTotal()));
+        //tvLimit.setText(String.format("%.2f", percentage)+"% than limit!");
         return  convertView;
     }
 

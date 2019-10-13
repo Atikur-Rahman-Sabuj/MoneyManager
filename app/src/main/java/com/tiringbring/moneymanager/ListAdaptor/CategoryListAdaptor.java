@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tiringbring.moneymanager.Activity.AddTransactionActivity;
 import com.tiringbring.moneymanager.Activity.StartActivity;
+import com.tiringbring.moneymanager.Dialog.CategoryDialog;
 import com.tiringbring.moneymanager.R;
 
 import java.util.List;
@@ -42,24 +44,31 @@ public class CategoryListAdaptor extends RecyclerView.Adapter<CategoryListAdapto
             public void onClick(View view) {
                 TextView textView = (TextView) view;
                 final EditText editText = new EditText(context);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                lp.setMargins(200, 0, 200, 0);
+                editText.setLayoutParams(lp);
+
+                //editText.setPadding(200, 0,200,0);
                 if(textView.getText().equals("Add")){
-                    new AlertDialog.Builder(context)
-                            .setTitle("Add category")
-                            .setView(editText)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    //Toast.makeText(context,editText.getText(),Toast.LENGTH_LONG).show();
-                                    if(editText.getText().toString().length()>0){
-                                        Category category = new Category();
-                                        category.setName(editText.getText().toString());
-                                        category.setIsIncome(isIncome);
-                                        StartActivity.getDBInstance(context).mmDao().AddCategory(category);
-                                        StartActivity.destroyDBInstance();
-                                        ((AddTransactionActivity)context).LoadCategory(0);
-                                    }
-                                }
-                            }).setNegativeButton("Cancel", null).show();
+//                    new AlertDialog.Builder(context)
+//                            .setTitle("Add category")
+//                            .setView(editText)
+//                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                    //Toast.makeText(context,editText.getText(),Toast.LENGTH_LONG).show();
+//                                    if(editText.getText().toString().length()>0){
+//                                        Category category = new Category();
+//                                        category.setName(editText.getText().toString());
+//                                        category.setIsIncome(isIncome);
+//                                        StartActivity.getDBInstance(context).mmDao().AddCategory(category);
+//                                        StartActivity.destroyDBInstance();
+//                                        ((AddTransactionActivity)context).LoadCategory(0);
+//                                    }
+//                                }
+//                            }).setNegativeButton("Cancel", null).show();
+                    CategoryDialog categoryDialog = new CategoryDialog();
+                    categoryDialog.showDialog(context, "Add Category", isIncome, categoryList, "");
                 }else{
                     for(int j=0; j<categoryList.size(); j++){
                         for(int k=0; k<categoryList.get(j).size(); k++){
@@ -78,38 +87,40 @@ public class CategoryListAdaptor extends RecyclerView.Adapter<CategoryListAdapto
             @Override
             public boolean onLongClick(View view) {
                 TextView textView = (TextView) view;
-                final EditText editText = new EditText(context);
+//                final EditText editText = new EditText(context);
                 final String catName = textView.getText().toString();
-                editText.setText(textView.getText());
-                if(!textView.getText().equals("Add")){
-                    new AlertDialog.Builder(context)
-                            .setTitle("Update category")
-                            .setView(editText)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    //Toast.makeText(context,editText.getText(),Toast.LENGTH_LONG).show();
-                                    if(editText.getText().toString().length()>0){
-
-                                        for(int j=0; j<categoryList.size(); j++){
-                                            for(int k=0; k<categoryList.get(j).size(); k++){
-                                                if(catName.equals(categoryList.get(j).get(k).getName())){
-                                                    Category category = categoryList.get(j).get(k);
-                                                    category.setName(editText.getText().toString());
-                                                    StartActivity.getDBInstance(context).mmDao().UpdateCategory(category);
-                                                    StartActivity.destroyDBInstance();
-                                                    ((AddTransactionActivity)context).LoadCategory(0);
-
-                                                }
-                                            }
-                                        }
-
-
-                                    }
-                                }
-                            }).setNegativeButton("Cancel", null).show();
-                }
-
+//                editText.setText(textView.getText());
+//                if(!textView.getText().equals("Add")){
+//                    new AlertDialog.Builder(context)
+//                            .setTitle("Update category")
+//                            .setView(editText)
+//                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                    //Toast.makeText(context,editText.getText(),Toast.LENGTH_LONG).show();
+//                                    if(editText.getText().toString().length()>0){
+//
+//                                        for(int j=0; j<categoryList.size(); j++){
+//                                            for(int k=0; k<categoryList.get(j).size(); k++){
+//                                                if(catName.equals(categoryList.get(j).get(k).getName())){
+//                                                    Category category = categoryList.get(j).get(k);
+//                                                    category.setName(editText.getText().toString());
+//                                                    StartActivity.getDBInstance(context).mmDao().UpdateCategory(category);
+//                                                    StartActivity.destroyDBInstance();
+//                                                    ((AddTransactionActivity)context).LoadCategory(0);
+//
+//                                                }
+//                                            }
+//                                        }
+//
+//
+//                                    }
+//                                }
+//                            }).setNegativeButton("Cancel", null).show();
+//                }
+//
+                CategoryDialog categoryDialog = new CategoryDialog();
+                categoryDialog.showDialog(context, "Update Category", isIncome, categoryList, catName);
                 return false;
             }
         };
