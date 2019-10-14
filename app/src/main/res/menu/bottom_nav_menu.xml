@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_daily"
+        android:icon="@android:color/transparent"
+        android:title="Daily" />
+
+    <item
+        android:id="@+id/navigation_monthly"
+        android:icon="@android:color/transparent"
+        android:title="Monthly" />
+
+    <item
+        android:id="@+id/navigation_yearly"
+        android:icon="@android:color/transparent"
+        android:title="Yearly" />
+    <item
+        android:id="@+id/navigation_custom"
+        android:icon="@android:color/transparent"
+        android:title="Custom" />
+
+</menu>

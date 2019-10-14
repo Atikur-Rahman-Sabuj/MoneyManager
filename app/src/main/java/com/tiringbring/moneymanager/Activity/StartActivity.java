@@ -59,7 +59,7 @@ public class StartActivity extends AppCompatActivity {
     Long dailyLimit;
     private Date pieDate;
     private Button btnAddNew;
-    private Button btnShowList;
+    private Button btnShowList, btnBottomNavigation;
     @SuppressLint("ClickableViewAccessibility")
 
     @Override
@@ -88,7 +88,13 @@ public class StartActivity extends AppCompatActivity {
 //        nCalendar.set(Calendar.MINUTE, 45);
 //        nCalendar.set(Calendar.SECOND, 0);
 //        setAlart(nCalendar.getTimeInMillis());
-
+        btnBottomNavigation = (Button) findViewById(R.id.btnGoToBtmNavigation);
+        btnBottomNavigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
+            }
+        });
 
 
 

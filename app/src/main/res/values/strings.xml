@@ -32,5 +32,9 @@
     <string name="hint_spend_reason">write what you spent on</string>
     <string name="hint_amount">amount</string>
     <string name="update">Update</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>
