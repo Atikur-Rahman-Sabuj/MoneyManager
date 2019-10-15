@@ -7,26 +7,26 @@
 
     <fragment
         android:id="@+id/navigation_monthly"
-        android:name="com.tiringbring.moneymanager.Activity.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="com.tiringbring.moneymanager.Activity.TabbedTransactionViews.MonthlyTransactions.MonthlyFragment"
+        android:label="Monthly"
+        tools:layout="@layout/fragment_monthly" />
 
     <fragment
         android:id="@+id/navigation_yearly"
-        android:name="com.tiringbring.moneymanager.Activity.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.tiringbring.moneymanager.Activity.TabbedTransactionViews.YearlyTransactions.YearlyFragment"
+        android:label="Yearly"
+        tools:layout="@layout/fragment_yearly" />
     <fragment
         android:id="@+id/navigation_custom"
-        android:name="com.tiringbring.moneymanager.Activity.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.tiringbring.moneymanager.Activity.TabbedTransactionViews.CustomTransactions.CustomFragment"
+        android:label="Custom"
+        tools:layout="@layout/fragment_custom" />
 
     <fragment
         android:id="@+id/navigation_daily"
-        android:name="com.tiringbring.moneymanager.Activity.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.tiringbring.moneymanager.Activity.TabbedTransactionViews.DailyTransactions.DailyFragment"
+        android:label="Daily"
+        tools:layout="@layout/fragment_daily" />
 
 
 
