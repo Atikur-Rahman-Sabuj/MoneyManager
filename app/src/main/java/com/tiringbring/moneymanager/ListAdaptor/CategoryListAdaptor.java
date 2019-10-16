@@ -3,6 +3,7 @@ package com.tiringbring.moneymanager.ListAdaptor;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,11 +140,13 @@ public class CategoryListAdaptor extends RecyclerView.Adapter<CategoryListAdapto
         holder.first.setText(categoryList.get(position).get(0).getName());
         if(categoryList.get(position).get(0).getId() == selectedId){
             holder.first.setBackground(context.getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
+            holder.first.setTextColor(context.getResources().getColor(R.color.white));
         }
         if(categoryList.get(position).size()>1){
             holder.second.setText(categoryList.get(position).get(1).getName());
             if(categoryList.get(position).get(1).getId() == selectedId){
                 holder.second.setBackground(context.getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
+                holder.second.setTextColor(context.getResources().getColor(R.color.white));
             }
         }else {
             holder.second.setVisibility(View.GONE);
@@ -153,6 +156,7 @@ public class CategoryListAdaptor extends RecyclerView.Adapter<CategoryListAdapto
             holder.third.setText(categoryList.get(position).get(2).getName());
             if(categoryList.get(position).get(2).getId() == selectedId){
                 holder.third.setBackground(context.getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
+                holder.third.setTextColor(context.getResources().getColor(R.color.white));
             }
         }else{
             holder.third.setVisibility(View.GONE);
@@ -162,6 +166,7 @@ public class CategoryListAdaptor extends RecyclerView.Adapter<CategoryListAdapto
             holder.fourth.setText(categoryList.get(position).get(3).getName());
             if(categoryList.get(position).get(3).getId() == selectedId){
                 holder.fourth.setBackground(context.getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
+                holder.fourth.setTextColor(context.getResources().getColor(R.color.white));
             }
         }else {
             holder.fourth.setVisibility(View.GONE);

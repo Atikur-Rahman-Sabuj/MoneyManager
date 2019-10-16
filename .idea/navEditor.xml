@@ -10,14 +10,7 @@
                 <map>
                   <entry key="navigation_custom">
                     <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-34" />
-                            <option name="y" value="-20" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
+                      <LayoutPositions />
                     </value>
                   </entry>
                   <entry key="navigation_daily">

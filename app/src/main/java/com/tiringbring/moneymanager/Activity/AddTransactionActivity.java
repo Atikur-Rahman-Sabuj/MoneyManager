@@ -43,10 +43,10 @@ public class AddTransactionActivity extends AppCompatActivity {
     private RecyclerView rvCategoryList;
     private LinearLayout layoutAddTransaction;
     private DatePickerDialog.OnDateSetListener tvDateSetListner;
-    private Boolean isIncome = true;
+    private Boolean isIncome = false;
     private EditText etMemo, etAmount;
     private Button btnSave,btnLeft, btnRight;
-    private TextView tvDatePicker;
+    private TextView tvDatePicker, tvIncomeSelect, tvExpenseSelect;
     private long transactionId = 0;
     private long selectedId;
     private int  Year;
@@ -63,6 +63,41 @@ public class AddTransactionActivity extends AppCompatActivity {
         btnSave = (Button) findViewById(R.id.btnSave);
         btnLeft = (Button) findViewById(R.id.btnDPleft);
         btnRight = (Button) findViewById(R.id.btnDPRight);
+        tvIncomeSelect = (TextView) findViewById(R.id.tvSelectIncome);
+        tvExpenseSelect = (TextView) findViewById(R.id.tvSelectExpense);
+        tvExpenseSelect.setBackground(getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
+        tvExpenseSelect.setTextColor(getResources().getColor(R.color.white));
+        //region income expense type select listners
+        tvIncomeSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isIncome = true;
+                tvIncomeSelect.setBackground(getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
+                tvIncomeSelect.setTextColor(getResources().getColor(R.color.white));
+
+                tvExpenseSelect.setBackground(null);
+                tvExpenseSelect.setTextColor(getResources().getColor(R.color.black));
+
+                layoutAddTransaction.setVisibility(View.GONE);
+                LoadCategory(0);
+            }
+        });
+        tvExpenseSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isIncome = false;
+                tvExpenseSelect.setBackground(getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
+                tvExpenseSelect.setTextColor(getResources().getColor(R.color.white));
+
+                tvIncomeSelect.setBackground(null);
+                tvIncomeSelect.setTextColor(getResources().getColor(R.color.black));
+
+                layoutAddTransaction.setVisibility(View.GONE);
+                LoadCategory(0);
+            }
+        });
+        //endregion
+
         rvCategoryList.setLayoutManager(new LinearLayoutManager(this));
         //user this for horizontal list
         //rvCategoryList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -194,50 +229,50 @@ public class AddTransactionActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.options, menu);
-        MenuItem item = menu.findItem(R.id.spinner);
-        Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
-
-        ArrayAdapter<CharSequence> mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.dropdown_income_expense, R.layout.spinner_item);
-        mSpinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_item);
-        //spinner.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
-
-        spinner.setAdapter(mSpinnerAdapter); // set the adapter to provide layout of rows and content
-        //spinner.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
-        spinner.requestLayout();
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0: {
-                        if(!isIncome){
-                            isIncome = true;
-                            layoutAddTransaction.setVisibility(View.GONE);
-                            LoadCategory(0);
-
-                        }
-
-                        break;
-                    }
-                    case 1: {
-                       if(isIncome){
-                           isIncome = false;
-                           layoutAddTransaction.setVisibility(View.GONE);
-                           LoadCategory(0);
-                       }
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Toast.makeText(getApplicationContext(),"nothing selected", Toast.LENGTH_SHORT).show();
-
-            }
-        }); // set the listener, to perform actions based on item selection
-        return super.onCreateOptionsMenu(menu);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.options, menu);
+//        MenuItem item = menu.findItem(R.id.spinner);
+//        Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
+//
+//        ArrayAdapter<CharSequence> mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.dropdown_income_expense, R.layout.spinner_item);
+//        mSpinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_item);
+//        //spinner.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
+//
+//        spinner.setAdapter(mSpinnerAdapter); // set the adapter to provide layout of rows and content
+//        //spinner.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
+//        spinner.requestLayout();
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                switch (position) {
+//                    case 0: {
+//                        if(!isIncome){
+//                            isIncome = true;
+//                            layoutAddTransaction.setVisibility(View.GONE);
+//                            LoadCategory(0);
+//
+//                        }
+//
+//                        break;
+//                    }
+//                    case 1: {
+//                       if(isIncome){
+//                           isIncome = false;
+//                           layoutAddTransaction.setVisibility(View.GONE);
+//                           LoadCategory(0);
+//                       }
+//                        break;
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                // Toast.makeText(getApplicationContext(),"nothing selected", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        }); // set the listener, to perform actions based on item selection
+//        return super.onCreateOptionsMenu(menu);
+//    }
 }
