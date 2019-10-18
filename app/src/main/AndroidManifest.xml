@@ -16,7 +16,10 @@
         <activity
             android:name=".Activity.BottomNavigationActivity"
             android:label="@string/title_activity_bottom_navigation"></activity>
-        <activity android:name=".Activity.AddTransactionActivity" />
+        <activity android:name=".Activity.AddTransactionActivity"
+            android:exported="true"
+            android:label="Add transaction"
+            android:parentActivityName=".Activity.StartActivity"/>
         <activity android:name=".Activity.FileExplorerActivity" />
         <activity android:name=".Activity.ImportExportActivity" />
         <activity android:name=".Activity.StartActivity">

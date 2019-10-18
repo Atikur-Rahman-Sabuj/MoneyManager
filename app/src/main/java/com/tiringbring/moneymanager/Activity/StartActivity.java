@@ -88,13 +88,6 @@ public class StartActivity extends AppCompatActivity {
 //        nCalendar.set(Calendar.MINUTE, 45);
 //        nCalendar.set(Calendar.SECOND, 0);
 //        setAlart(nCalendar.getTimeInMillis());
-        btnBottomNavigation = (Button) findViewById(R.id.btnGoToBtmNavigation);
-        btnBottomNavigation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
-            }
-        });
 
 
 
@@ -112,7 +105,7 @@ public class StartActivity extends AppCompatActivity {
         btnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ExpenseListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
 
                 startActivity(intent);
 

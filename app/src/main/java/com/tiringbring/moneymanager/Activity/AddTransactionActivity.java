@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import com.tiringbring.moneymanager.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -71,6 +73,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         tvIncomeSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(isIncome) return;
                 isIncome = true;
                 tvIncomeSelect.setBackground(getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
                 tvIncomeSelect.setTextColor(getResources().getColor(R.color.white));
@@ -85,6 +88,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         tvExpenseSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!isIncome) return;
                 isIncome = false;
                 tvExpenseSelect.setBackground(getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
                 tvExpenseSelect.setTextColor(getResources().getColor(R.color.white));
@@ -186,14 +190,64 @@ public class AddTransactionActivity extends AppCompatActivity {
                         StartActivity.destroyDBInstance();
                         Toast.makeText(getApplicationContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
                     }
+                    if(transactionId != 0){
+                        newTransaction.setId(transactionId);
+                        StartActivity.getDBInstance(getApplicationContext()).mmDao().UpdateTransaction(newTransaction);
+                        StartActivity.destroyDBInstance();
+                        Toast.makeText(getApplicationContext(),"Updated Successfully",Toast.LENGTH_LONG).show();
+                        setTitle("Add transaction");
+                    }
+                    etMemo.setText("");
+                    etAmount.setText("");
                 }catch (Exception e){
                     Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_LONG).show();
                 }
 
             }
         });
+        //region for update
+        Intent intent = getIntent();
+        transactionId = intent.getLongExtra("transactionId", 0);
+        if(transactionId != 0){
+            setTitle("Update transaction");
+            Transaction transaction =StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTransactionById(transactionId);
+            StartActivity.destroyDBInstance();
+            Date date = transaction.getDate();
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.setTime(date);
+            Year = calendar1.get(Calendar.YEAR);
+            Month = calendar1.get(Calendar.MONTH)+1;
+            Day = calendar1.get(Calendar.DAY_OF_MONTH);
+            tvDatePicker.setText(Day+"/"+Month+"/"+Year);
+            etMemo.setText(transaction.getName());
+            etAmount.setText(String.valueOf(transaction.getAmount()));
+            SetType(transaction.getIsIncome());
+            LoadCategory(transaction.getCategoryId());
+
+        }
+
+        //endregion
+
 
     }
+
+    public void SetType(Boolean _isIncome){
+        isIncome = _isIncome;
+        if(_isIncome){
+            tvIncomeSelect.setBackground(getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
+            tvIncomeSelect.setTextColor(getResources().getColor(R.color.white));
+
+            tvExpenseSelect.setBackground(null);
+            tvExpenseSelect.setTextColor(getResources().getColor(R.color.black));
+        }else{
+            tvExpenseSelect.setBackground(getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
+            tvExpenseSelect.setTextColor(getResources().getColor(R.color.white));
+
+            tvIncomeSelect.setBackground(null);
+            tvIncomeSelect.setTextColor(getResources().getColor(R.color.black));
+        }
+    }
+
 
     public void LoadCategory(long selectedId){
         List<Category> categories = StartActivity.getDBInstance(this).mmDao().GetCategoriesofType(isIncome);

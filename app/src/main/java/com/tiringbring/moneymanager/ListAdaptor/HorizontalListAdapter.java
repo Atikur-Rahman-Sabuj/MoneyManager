@@ -1,6 +1,7 @@
 package com.tiringbring.moneymanager.ListAdaptor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tiringbring.moneymanager.Activity.AddTransactionActivity;
 import com.tiringbring.moneymanager.R;
 
 import java.util.List;
@@ -36,7 +38,7 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.tvCategoryName.setText(transactions.get(position).getCategory().getName());
         if(transactions.get(position).getName().equals("") || transactions.get(position).getName().equals(null)){
             holder.tvName.setText(transactions.get(position).getCategory().getName());
@@ -50,6 +52,15 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
         }else{
             holder.llBorderColer.setBackground(ContextCompat.getDrawable(context, R.drawable.card_back_with_border_red));
         }
+        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(context, AddTransactionActivity.class);
+                intent.putExtra("transactionId", transactions.get(position).getId());
+                context.startActivity(intent);
+                return false;
+            }
+        });
     }
 
     @Override

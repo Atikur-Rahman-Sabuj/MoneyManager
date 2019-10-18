@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,13 +10,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@color/myColorPrimaryDark"
             android:orientation="vertical"
@@ -71,7 +72,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/myColorPrimaryDark"
             android:orientation="vertical"
@@ -94,7 +95,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCategoryList"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@color/white" />
             </LinearLayout>
         </LinearLayout>
@@ -104,13 +105,13 @@
     <LinearLayout
         android:id="@+id/layoutAddTrsaction"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="50dp">
 
             <TextView
                 android:id="@+id/tvDatePicker"
@@ -122,7 +123,7 @@
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btnDPleft"
@@ -149,7 +150,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@drawable/add_transaction_layout_background"
             android:orientation="horizontal"
             android:weightSum="3">
@@ -157,7 +158,7 @@
             <EditText
                 android:id="@+id/etMemo"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@drawable/add_memo_edittext_background"
                 android:ems="10"
@@ -168,7 +169,7 @@
             <EditText
                 android:id="@+id/etAmount"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@drawable/add_memo_edittext_background"
                 android:ems="10"
@@ -188,4 +189,4 @@
         </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -17,6 +17,7 @@ import com.tiringbring.moneymanager.R;
 import java.util.List;
 
 import RoomDb.Category;
+import RoomDb.Transaction;
 
 public class CategoryDialog {
     public void showDialog(final Context context, final String msg, final Boolean isIncome, final List<List<Category>> categoryList, final String catName) {
@@ -29,7 +30,9 @@ public class CategoryDialog {
         int height = (int)(context.getResources().getDisplayMetrics().heightPixels*0.90);
         dialog.getWindow().setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT);
         TextView title = (TextView) dialog.findViewById(R.id.tvDialogTitle);
+        final TextView tvErrorMessage = (TextView) dialog.findViewById(R.id.tvErrorMessage);
         title.setText(msg);
+        tvErrorMessage.setText("");
 
         final EditText etCategoryName = (EditText) dialog.findViewById(R.id.etCategoryName);
         if(catName.length()>0){
@@ -45,6 +48,16 @@ public class CategoryDialog {
 
             @Override
             public void onClick(View v) {
+
+                List<Category> categories =  StartActivity.getDBInstance(context).mmDao().GetCategoriesofType(isIncome);
+                StartActivity.destroyDBInstance();
+                for(int i = 0 ; i<categories.size(); i++){
+                    if(categories.get(i).getName().equals(etCategoryName.getText().toString())){
+                        tvErrorMessage.setText("Category already exists!");
+                        return;
+                    }
+                }
+
                 if(msg.equals("Add Category")){
                     if(etCategoryName.getText().toString().length()>0){
                         Category category = new Category();
