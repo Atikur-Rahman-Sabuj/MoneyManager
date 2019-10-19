@@ -7,24 +7,24 @@
 
     <fragment
         android:id="@+id/navigation_monthly"
-        android:name="com.tiringbring.moneymanager.Activity.TabbedTransactionViews.MonthlyTransactions.MonthlyFragment"
+        android:name="com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.MonthlyTransactions.MonthlyFragment"
         android:label="Monthly"
         tools:layout="@layout/fragment_monthly" />
 
     <fragment
         android:id="@+id/navigation_yearly"
-        android:name="com.tiringbring.moneymanager.Activity.TabbedTransactionViews.YearlyTransactions.YearlyFragment"
+        android:name="com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.YearlyTransactions.YearlyFragment"
         android:label="Yearly"
         tools:layout="@layout/fragment_yearly" />
     <fragment
         android:id="@+id/navigation_custom"
-        android:name="com.tiringbring.moneymanager.Activity.TabbedTransactionViews.CustomTransactions.CustomFragment"
+        android:name="com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.CustomTransactions.CustomFragment"
         android:label="Custom"
         tools:layout="@layout/fragment_custom" />
 
     <fragment
         android:id="@+id/navigation_daily"
-        android:name="com.tiringbring.moneymanager.Activity.TabbedTransactionViews.DailyTransactions.DailyFragment"
+        android:name="com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.DailyTransactions.DailyFragment"
         android:label="Daily"
         tools:layout="@layout/fragment_daily" />
 

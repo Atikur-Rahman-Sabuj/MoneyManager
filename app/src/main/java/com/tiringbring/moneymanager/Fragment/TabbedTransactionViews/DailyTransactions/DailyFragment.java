@@ -1,4 +1,4 @@
-package com.tiringbring.moneymanager.Activity.TabbedTransactionViews.DailyTransactions;
+package com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.DailyTransactions;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.tiringbring.moneymanager.Activity.StartActivity;
-import com.tiringbring.moneymanager.Activity.TabbedTransactionViews.ITabbedFragments;
+import com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.ITabbedFragments;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
 import com.tiringbring.moneymanager.Dialog.SelectCategoryListDialog;
 import com.tiringbring.moneymanager.Entity.DayExpenses;
@@ -26,6 +26,7 @@ import com.tiringbring.moneymanager.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import RoomDb.Category;
 import RoomDb.Transaction;
 
 
@@ -37,16 +38,21 @@ public class DailyFragment extends Fragment implements ITabbedFragments {
     ExpenseExpandableListAdaptor expandableListAdapter;
     List<DayExpenses> dayExpensesList;
     Button btnSelectFilterCategory;
+    List<Category> allCategories;
+    List<Category> selectedCategories;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_daily, container, false);
 
+        allCategories = StartActivity.getDBInstance(getContext()).mmDao().GetCategories();
+        StartActivity.destroyDBInstance();
+        selectedCategories = new ArrayList<>();
         btnSelectFilterCategory = (Button) view.findViewById(R.id.btnSelectFilterCategory);
         btnSelectFilterCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SelectCategoryListDialog().showDialog(getContext());
+                new SelectCategoryListDialog().showDialog(getContext(), allCategories, selectedCategories);
             }
         });
         expandableListView = (ExpandableListView) view.findViewById(R.id.expandableExpenseList);
@@ -74,6 +80,7 @@ public class DailyFragment extends Fragment implements ITabbedFragments {
 
         return view;
     }
+
 
     @Override
     public void Test() {

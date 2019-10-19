@@ -1,4 +1,4 @@
-package com.tiringbring.moneymanager.Activity.TabbedTransactionViews.MonthlyTransactions;
+package com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.MonthlyTransactions;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

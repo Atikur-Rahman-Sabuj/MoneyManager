@@ -1,4 +1,4 @@
-package com.tiringbring.moneymanager.Activity.TabbedTransactionViews.CustomTransactions;
+package com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.CustomTransactions;
 
 
 import android.app.DatePickerDialog;
@@ -17,7 +17,6 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tiringbring.moneymanager.Activity.ExpenseListActivity;
 import com.tiringbring.moneymanager.Activity.StartActivity;
 import com.tiringbring.moneymanager.DataController.DateDataController;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
