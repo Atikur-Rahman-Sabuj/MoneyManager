@@ -116,6 +116,7 @@ public class ExpenseDataController {
         return DailyExpenses;
     }
 
+
     public void setDailyExpenses(List<DayExpenses> dailyExpenses) {
         DailyExpenses = dailyExpenses;
     }

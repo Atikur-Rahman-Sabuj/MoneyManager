@@ -13,41 +13,57 @@ import com.tiringbring.moneymanager.R;
 
 import java.util.List;
 
-import RoomDb.Transaction;
+import RoomDb.Category;
 
 public class SelectedCategoryListAdaptor extends RecyclerView.Adapter<SelectedCategoryListAdaptor.ViewHolder> {
 
     private Context context;
-    private final List<String> strings;
+    private final List<Category> categories;
 
-    public SelectedCategoryListAdaptor(Context context, List<String> strings) {
+    public SelectedCategoryListAdaptor(Context context, List<Category> categories) {
         this.context = context;
-        this.strings = strings;
+        this.categories = categories;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.selected_category_list_item, parent, false);
+                .inflate(R.layout.category_selected_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvCategoryName.setText(strings.get(position));
+        if(categories.size()==0){
+            holder.tvCategoryName.setText("All Categories");
+            holder.tvCategoryType.setVisibility(View.GONE);
+            return;
+        }
+        holder.tvCategoryType.setVisibility(View.VISIBLE);
+        holder.tvCategoryName.setText(categories.get(position).getName());
+        if(categories.get(position).getIsIncome()){
+            holder.tvCategoryType.setText("Income");
+        }else{
+            holder.tvCategoryType.setText("Expense");
+        }
     }
 
     @Override
     public int getItemCount() {
-        return strings.size();
+        if(categories.size()==0){
+            return 1;
+        }
+        return categories.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvCategoryName;
+        public TextView tvCategoryType;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
+            tvCategoryType = itemView.findViewById(R.id.tvCategoryType);
         }
     }
 }

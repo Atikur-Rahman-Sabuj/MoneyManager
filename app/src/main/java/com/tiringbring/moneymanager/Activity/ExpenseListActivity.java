@@ -189,41 +189,41 @@ public class ExpenseListActivity extends AppCompatActivity {
     }
 
     private void GenerateDailyList(){
-        if(findViewById(R.id.expensefragmentLayout)!=null){
+        if(findViewById(R.id.flListFrrame)!=null){
             Bundle bundle = new Bundle();
             bundle.putString("DDITEMS", "daily");
             ExpandableExpenseFragment fragment = new ExpandableExpenseFragment();
             fragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.expensefragmentLayout, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flListFrrame, fragment).commit();
         }
     }
     private void GenerateMonthlyList(){
-        if(findViewById(R.id.expensefragmentLayout)!=null){
+        if(findViewById(R.id.flListFrrame)!=null){
             Bundle bundle = new Bundle();
             bundle.putString("DDITEMS", "monthly");
             ExpandableExpenseFragment fragment = new ExpandableExpenseFragment();
             fragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.expensefragmentLayout, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flListFrrame, fragment).commit();
         }
     }
     private void GenerateYearlyList(){
-        if(findViewById(R.id.expensefragmentLayout)!=null){
+        if(findViewById(R.id.flListFrrame)!=null){
             Bundle bundle = new Bundle();
             bundle.putString("DDITEMS", "yearly");
             ExpandableExpenseFragment fragment = new ExpandableExpenseFragment();
             fragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.expensefragmentLayout, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flListFrrame, fragment).commit();
         }
     }
     private void GenerateCustomList(){
-        if(findViewById(R.id.expensefragmentLayout)!=null){
+        if(findViewById(R.id.flListFrrame)!=null){
             Bundle bundle = new Bundle();
             bundle.putString("DDITEMS", "custom");
             bundle.putString("START_DATE", new DateDataController().DatetoDateMonthBigYear(startDate));
             bundle.putString("END_DATE", new DateDataController().DatetoDateMonthBigYear(endDate));
             ExpandableExpenseFragment fragment = new ExpandableExpenseFragment();
             fragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.expensefragmentLayout, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flListFrrame, fragment).commit();
         }
     }
 

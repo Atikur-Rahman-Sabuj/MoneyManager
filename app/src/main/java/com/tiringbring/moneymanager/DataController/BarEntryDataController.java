@@ -86,8 +86,24 @@ public class BarEntryDataController {
         return  barEntries;
 
     }
-    public ArrayList<String> getXAxisValues()
+    public List<String> getXAxisValues()
     {
-        return labels;
+        List<String> mlabels = new ArrayList<>();
+        mlabels.add("first");
+        mlabels.add("second");
+        mlabels.add("third");
+        mlabels.add("fourth");
+        mlabels.add("fifth");
+        mlabels.add("sixth");
+        mlabels.add("seventh");
+        mlabels.add("first");
+        mlabels.add("second");
+        mlabels.add("third");
+        mlabels.add("fourth");
+        mlabels.add("fifth");
+        mlabels.add("sixth");
+        mlabels.add("seventh");
+        return mlabels;
+        //return labels;
     }
 }

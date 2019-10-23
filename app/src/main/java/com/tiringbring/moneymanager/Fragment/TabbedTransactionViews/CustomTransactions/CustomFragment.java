@@ -7,37 +7,50 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tiringbring.moneymanager.Activity.StartActivity;
+import com.tiringbring.moneymanager.DataController.CategoryDataController;
 import com.tiringbring.moneymanager.DataController.DateDataController;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
+import com.tiringbring.moneymanager.DataController.TransactionDataController;
+import com.tiringbring.moneymanager.Dialog.SelectCategoryListDialog;
 import com.tiringbring.moneymanager.Entity.DayExpenses;
+import com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.ITabbedFragments;
 import com.tiringbring.moneymanager.ListAdaptor.ExpenseExpandableListAdaptor;
+import com.tiringbring.moneymanager.ListAdaptor.SelectedCategoryListAdaptor;
 import com.tiringbring.moneymanager.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import RoomDb.Category;
 import RoomDb.Transaction;
 
 
-public class CustomFragment extends Fragment {
+public class CustomFragment extends Fragment implements ITabbedFragments {
 
 
     ExpandableListView expandableListView;
     ExpenseExpandableListAdaptor expandableListAdapter;
     List<DayExpenses> dayExpensesList;
-
+    List<Transaction> transactions;
+    List<Transaction> filteredTransactions;
+    List<DayExpenses> customDayExpenseList;
 
     private Date startDate = new Date();
     private Date endDate = new Date();
@@ -48,6 +61,13 @@ public class CustomFragment extends Fragment {
     private DatePickerDialog.OnDateSetListener tvStartDateSetListner;
     private DatePickerDialog.OnDateSetListener tvEndDateSetListner;
     private Double incomeTotal, expenseTotal;
+    List<Category> allCategories;
+    List<Category> selectedCategories;
+    private Button btnSelectFilterCategory;
+    RecyclerView rvCategoryFilterList;
+    SelectedCategoryListAdaptor selectedCategoryListAdaptor;
+    private TextView tvMessage;
+    private FrameLayout flListFragment;
 
 
     @Override
@@ -56,6 +76,29 @@ public class CustomFragment extends Fragment {
 
 
         View view  =  inflater.inflate(R.layout.fragment_custom, container, false);
+        tvMessage = (TextView) view.findViewById(R.id.tvMessage);
+        flListFragment = (FrameLayout) view.findViewById(R.id.flListFrrame);
+
+        allCategories = StartActivity.getDBInstance(getContext()).mmDao().GetCategories();
+        StartActivity.destroyDBInstance();
+        allCategories = CategoryDataController.SortcategoryByType(true, allCategories);
+        selectedCategories = new ArrayList<>();
+        btnSelectFilterCategory = (Button) view.findViewById(R.id.btnSelectFilterCategory);
+        btnSelectFilterCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new SelectCategoryListDialog().showDialog(getContext(), allCategories, selectedCategories);
+            }
+        });
+        rvCategoryFilterList = (RecyclerView) view.findViewById(R.id.rvCategoryFilterList);
+        rvCategoryFilterList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        selectedCategoryListAdaptor = new SelectedCategoryListAdaptor(getContext(), selectedCategories);
+        rvCategoryFilterList.setAdapter(selectedCategoryListAdaptor);
+
+        transactions = StartActivity.getDBInstance(getContext()).mmDao().GetTransaction();
+        StartActivity.destroyDBInstance();
+        filteredTransactions = transactions;
+
         tvExpenseTotal = (TextView) view.findViewById(R.id.tvExpenseTotal);
         tvIncomeTotal = (TextView) view.findViewById(R.id.tvIncomeTotal);
         tvBalanceTotal = (TextView) view.findViewById(R.id.tvBalanceTotal);
@@ -127,15 +170,14 @@ public class CustomFragment extends Fragment {
             }
         };
         GenerateCustomList();
+        showHideMessage();
         return  view;
     }
 
     private void GenerateCustomList() {
 
-        List<Transaction> transactions = StartActivity.getDBInstance(getContext()).mmDao().GetTransaction();
-        StartActivity.destroyDBInstance();
-        dayExpensesList = new ExpenseDataController(transactions).getDailyExpenses();
-        List<DayExpenses> customDayExpenseList = new ExpenseDataController(transactions).MakeCustomList(startDate, endDate);
+        //dayExpensesList = new ExpenseDataController(transactions).getDailyExpenses();
+        customDayExpenseList = new ExpenseDataController(filteredTransactions).MakeCustomList(startDate, endDate);
         calculateTotals(customDayExpenseList);
         tvIncomeTotal.setText(String.format("%.2f",incomeTotal));
         tvExpenseTotal.setText(String.format("%.2f",expenseTotal));
@@ -155,6 +197,30 @@ public class CustomFragment extends Fragment {
         }
         incomeTotal = incomeSum;
         expenseTotal = expenseSum;
+    }
+
+    @Override
+    public void NotifySelectedCategoryChange() {
+        selectedCategoryListAdaptor.notifyDataSetChanged();
+        filteredTransactions = TransactionDataController.FilterTransactionsByCatgory(transactions, selectedCategories);
+        //dayExpensesList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
+        customDayExpenseList = new ExpenseDataController(filteredTransactions).MakeCustomList(startDate, endDate);
+        calculateTotals(customDayExpenseList);
+        tvIncomeTotal.setText(String.format("%.2f",incomeTotal));
+        tvExpenseTotal.setText(String.format("%.2f",expenseTotal));
+        tvBalanceTotal.setText(String.format("%.2f",incomeTotal - expenseTotal));
+        expandableListAdapter = new ExpenseExpandableListAdaptor(getContext(), customDayExpenseList);
+        expandableListView.setAdapter(expandableListAdapter);
+        showHideMessage();
+    }
+    void showHideMessage(){
+        if(customDayExpenseList.size()>0){
+            tvMessage.setVisibility(View.GONE);
+            flListFragment.setVisibility(View.VISIBLE);
+        }else{
+            flListFragment.setVisibility(View.GONE);
+            tvMessage.setVisibility(View.VISIBLE);
+        }
     }
 
 

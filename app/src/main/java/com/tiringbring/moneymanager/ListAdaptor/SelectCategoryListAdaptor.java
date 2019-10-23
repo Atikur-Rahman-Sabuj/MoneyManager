@@ -41,7 +41,7 @@ public class SelectCategoryListAdaptor extends RecyclerView.Adapter<SelectCatego
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.tvCategoryName.setText(allCategories.get(position).getName());
         if (allCategories.get(position).getIsIncome()) {
             holder.tvCategoryType.setText("Income");
@@ -49,7 +49,10 @@ public class SelectCategoryListAdaptor extends RecyclerView.Adapter<SelectCatego
             holder.tvCategoryType.setText("Expense");
         }
         if(selectedCategories.contains(allCategories.get(position))){
-            holder.tvCategoryName.setTextColor(Color.YELLOW);
+            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.medium_gray));
+            //holder.tvCategoryName.setTextColor(Color.YELLOW);
+        }else{
+            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.transparent));
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

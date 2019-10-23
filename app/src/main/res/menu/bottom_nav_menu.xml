@@ -3,21 +3,21 @@
 
     <item
         android:id="@+id/navigation_daily"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_bottom_tabbed_daily_icon"
         android:title="Daily" />
 
     <item
         android:id="@+id/navigation_monthly"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_bottom_tabbed_monthly_icon"
         android:title="Monthly" />
 
     <item
         android:id="@+id/navigation_yearly"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_bottom_tabbed_yearly_icon"
         android:title="Yearly" />
     <item
         android:id="@+id/navigation_custom"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_bottom_tabbed_custom_icon"
         android:title="Custom" />
 
 </menu>

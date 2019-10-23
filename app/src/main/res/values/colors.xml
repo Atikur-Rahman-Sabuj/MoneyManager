@@ -18,5 +18,6 @@
     <color name="medium_gray">#868686</color>
     <color name="light_gray">#F5F2F2</color>
     <color name="transparent">#00F5F2F2</color>
+    <color name="dark_gray">#3D3D3D</color>
 
 </resources>

@@ -10,7 +10,8 @@ import android.graphics.Color;
 import RoomDb.MMDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.os.Bundle;
@@ -29,20 +30,17 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.tiringbring.moneymanager.DataController.BarEntryDataController;
 import com.tiringbring.moneymanager.DataController.MySharedPreferences;
 import com.tiringbring.moneymanager.DataController.PieEntryDataController;
+import com.tiringbring.moneymanager.ListAdaptor.TestChartAdaptor;
 import com.tiringbring.moneymanager.Notification.Notification;
 import com.tiringbring.moneymanager.R;
-import com.tiringbring.moneymanager.Utility.OnSwipeTouchListener;
 import com.tiringbring.moneymanager.Utility.ResourceManager;
 
 import java.text.SimpleDateFormat;
@@ -53,13 +51,14 @@ import java.util.List;
 
 public class StartActivity extends AppCompatActivity {
     private static MMDatabase INSTANCE;
-    private BarChart mChart;
+    private BarChart barChartMonthlyIncome, barChartMonthlyExpense;
     private PieChart pieChart;
     private TextView textView;
     Long dailyLimit;
     private Date pieDate;
     private Button btnAddNew;
     private Button btnShowList, btnBottomNavigation;
+    private RecyclerView rvTestList;
     @SuppressLint("ClickableViewAccessibility")
 
     @Override
@@ -77,10 +76,19 @@ public class StartActivity extends AppCompatActivity {
         onFirstRun();
         btnAddNew = (Button) findViewById(R.id.btnAddNew);
         btnShowList = (Button) findViewById(R.id.btnShowList);
-        mChart= (BarChart) findViewById(R.id.barChart);
-        pieChart = (PieChart) findViewById(R.id.pieChart);
-        textView = (TextView) findViewById(R.id.textView);
+        barChartMonthlyIncome = (BarChart) findViewById(R.id.monthlyIncomeBarChart);
+        barChartMonthlyExpense = (BarChart) findViewById(R.id.monthlyExpenseBarChart);
+        rvTestList = (RecyclerView) findViewById(R.id.rvTestList);
+        rvTestList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        TestChartAdaptor testChartAdaptor = new TestChartAdaptor();
+        rvTestList.setAdapter(testChartAdaptor);
+
+
+
+
+
         dailyLimit = new MySharedPreferences(getApplicationContext()).getDayilyLimit();
+
         //new PlayAnimation().PlayFadeIn(getApplicationContext(), btnAddNew);
         //Notification set
 //        Calendar nCalendar = Calendar.getInstance();
@@ -111,10 +119,13 @@ public class StartActivity extends AppCompatActivity {
 
             }
         });
-        SetPieChartDate();
-        BindDataToPieChart();
+        //SetPieChartDate();
+        //BindDataToPieChart();
+        //BindDataToMonthlyIncomeBarChart();
+        //BindDataToMonthlyExpenseBarChart();
 
-//        mChart.getDescription().setEnabled(false);
+
+//        barChartMonthlyIncome.getDescription().setEnabled(false);
 //        final BarEntryDataController beDataController = new BarEntryDataController();
 //        List<BarEntry> data = beDataController.GetBarEntries(getApplicationContext());
 //        //generating colors
@@ -134,38 +145,38 @@ public class StartActivity extends AppCompatActivity {
 //        set.setDrawValues(true);
 //        BarData barData = new BarData(set);
 //        barData.setBarWidth(.8f);
-//        mChart.setData(barData);
-//        mChart.setExtraOffsets(0, 0, 0, 0);
+//        barChartMonthlyIncome.setData(barData);
+//        barChartMonthlyIncome.setExtraOffsets(0, 0, 0, 0);
 //
 //
-//        mChart.getContentRect().set(0, 0, mChart.getWidth(), mChart.getHeight());
-//        mChart.animateY(500);
-//        mChart.setScaleEnabled(false);
-//        mChart.setDrawValueAboveBar(true);
-//        mChart.setDrawBorders(false);
-//        //mChart.setExtraOffsets(0,0,0,0);
-//        mChart.getLegend().setEnabled(false);
-//        mChart.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
-//        mChart.moveViewToX(-1);
-//        XAxis xAxis = mChart.getXAxis();
-//        YAxis left = mChart.getAxisLeft();
+//        barChartMonthlyIncome.getContentRect().set(0, 0, barChartMonthlyIncome.getWidth(), barChartMonthlyIncome.getHeight());
+//        barChartMonthlyIncome.animateY(500);
+//        barChartMonthlyIncome.setScaleEnabled(false);
+//        barChartMonthlyIncome.setDrawValueAboveBar(true);
+//        barChartMonthlyIncome.setDrawBorders(false);
+//        //barChartMonthlyIncome.setExtraOffsets(0,0,0,0);
+//        barChartMonthlyIncome.getLegend().setEnabled(false);
+//        barChartMonthlyIncome.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
+//        barChartMonthlyIncome.moveViewToX(-1);
+//        XAxis xAxis = barChartMonthlyIncome.getXAxis();
+//        YAxis left = barChartMonthlyIncome.getAxisLeft();
 //        xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
 //        left.setDrawLabels(false); // no axis labels
 //        left.setDrawAxisLine(false); // no axis line
 //        left.setDrawGridLines(false); // no grid lines
 //        left.setDrawZeroLine(false); // draw a zero line
 //
-//        mChart.getAxisRight().setEnabled(false); // no right axis
+//        barChartMonthlyIncome.getAxisRight().setEnabled(false); // no right axis
 //        xAxis.setDrawGridLines(false);
 //        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
 //        xAxis.setDrawLabels(true);
 //        xAxis.setDrawAxisLine(true);
 //        xAxis.setAxisLineColor(Color.BLACK);
 //        //xAxis.setCenterAxisLabels(true);
-//        mChart.setDrawGridBackground(false);
-//        mChart.setFitBars(false);
-//        mChart.invalidate();
-//        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+//        barChartMonthlyIncome.setDrawGridBackground(false);
+//        barChartMonthlyIncome.setFitBars(false);
+//        barChartMonthlyIncome.invalidate();
+//        barChartMonthlyIncome.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 //            @Override
 //            public void onValueSelected(Entry e, Highlight h) {
 //                pieDate = beDataController.dates.get(((int) e.getX()));
@@ -178,27 +189,174 @@ public class StartActivity extends AppCompatActivity {
 //            }
 //        });
 
-        pieChart.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()){
-            public void onSwipeTop() {
-                //Toast.makeText(StartActivity.this, "top", Toast.LENGTH_SHORT).show();
-            }
-            public void onSwipeRight() {
-                //Toast.makeText(StartActivity.this, "right", Toast.LENGTH_SHORT).show();
-                ChangePieDate(1);
-                pieChart.clear();
-                BindDataToPieChart();
-            }
-            public void onSwipeLeft() {
-                //Toast.makeText(StartActivity.this, "left", Toast.LENGTH_SHORT).show();
-                ChangePieDate(-1);
-                pieChart.clear();
-                BindDataToPieChart();
-            }
-            public void onSwipeBottom() {
-                //Toast.makeText(StartActivity.this, "bottom", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        pieChart.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()){
+//            public void onSwipeTop() {
+//                //Toast.makeText(StartActivity.this, "top", Toast.LENGTH_SHORT).show();
+//            }
+//            public void onSwipeRight() {
+//                //Toast.makeText(StartActivity.this, "right", Toast.LENGTH_SHORT).show();
+//                ChangePieDate(1);
+//                pieChart.clear();
+//                BindDataToPieChart();
+//            }
+//            public void onSwipeLeft() {
+//                //Toast.makeText(StartActivity.this, "left", Toast.LENGTH_SHORT).show();
+//                ChangePieDate(-1);
+//                pieChart.clear();
+//                BindDataToPieChart();
+//            }
+//            public void onSwipeBottom() {
+//                //Toast.makeText(StartActivity.this, "bottom", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
+    }
+
+    private void BindDataToMonthlyIncomeBarChart() {
+        barChartMonthlyIncome.getDescription().setEnabled(false);
+        final BarEntryDataController beDataController = new BarEntryDataController();
+//        List<BarEntry> data = beDataController.GetBarEntries(getApplicationContext());
+//        //generating colors
+//        List<Integer> colors = new ArrayList<>();
+//        for (BarEntry be:
+//                data) {
+//            if(be.getY()>dailyLimit){
+//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
+//            }
+//            else {
+//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
+//            }
+//        }
+        List<BarEntry> barEntries = new ArrayList<>();
+        barEntries.add(new BarEntry(0, 20));
+        barEntries.add(new BarEntry(1, 30));
+        barEntries.add(new BarEntry(2, 40));
+        barEntries.add(new BarEntry(3, 38));
+        barEntries.add(new BarEntry(4, 25));
+        barEntries.add(new BarEntry(5, 35));
+        barEntries.add(new BarEntry(6, 20));
+        barEntries.add(new BarEntry(7, 38));
+        barEntries.add(new BarEntry(8, 20));
+        barEntries.add(new BarEntry(9, 30));
+        barEntries.add(new BarEntry(10, 40));
+        barEntries.add(new BarEntry(11, 25));
+        barEntries.add(new BarEntry(12, 35));
+        barEntries.add(new BarEntry(13, 20));
+
+        BarDataSet set = new BarDataSet(barEntries, "");
+        set.setColors(ColorTemplate.MATERIAL_COLORS);
+        //set.setColors(colors);
+        set.setDrawValues(true);
+        BarData barData = new BarData(set);
+        barData.setBarWidth(.8f);
+        barChartMonthlyIncome.setData(barData);
+        barChartMonthlyExpense.setPadding(0,0,0,0);
+        barChartMonthlyIncome.setExtraOffsets(0, 0, 0, 0);
+
+
+        barChartMonthlyIncome.getContentRect().set(0, 0, barChartMonthlyIncome.getWidth(), barChartMonthlyIncome.getHeight());
+        barChartMonthlyIncome.animateY(500);
+        barChartMonthlyIncome.setScaleEnabled(false);
+        barChartMonthlyIncome.setDrawValueAboveBar(true);
+        barChartMonthlyIncome.setDrawBorders(false);
+        barChartMonthlyIncome.setExtraOffsets(0,0,0,0);
+        barChartMonthlyIncome.getLegend().setEnabled(false);
+        barChartMonthlyIncome.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
+        barChartMonthlyIncome.moveViewToX(-1);
+        XAxis xAxis = barChartMonthlyIncome.getXAxis();
+        YAxis left = barChartMonthlyIncome.getAxisLeft();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
+        left.setAxisMaximum(30);
+        left.setDrawLabels(true); // no axis labels
+        left.setDrawAxisLine(true); // no axis line
+        left.setDrawGridLines(false); // no grid lines
+        left.setDrawZeroLine(false); // draw a zero line
+        left.setInverted(false);
+
+        barChartMonthlyIncome.getAxisRight().setEnabled(false); // no right axis
+        xAxis.setDrawGridLines(false);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
+        xAxis.setDrawLabels(true);
+        xAxis.setDrawAxisLine(true);
+        xAxis.setAxisLineColor(Color.BLACK);
+        //xAxis.setCenterAxisLabels(true);
+        barChartMonthlyIncome.setDrawGridBackground(false);
+        barChartMonthlyIncome.setFitBars(false);
+        barChartMonthlyIncome.invalidate();
+    }
+
+    private void BindDataToMonthlyExpenseBarChart() {
+        barChartMonthlyExpense.getDescription().setEnabled(false);
+        final BarEntryDataController beDataController = new BarEntryDataController();
+//        List<BarEntry> data = beDataController.GetBarEntries(getApplicationContext());
+//        //generating colors
+//        List<Integer> colors = new ArrayList<>();
+//        for (BarEntry be:
+//                data) {
+//            if(be.getY()>dailyLimit){
+//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
+//            }
+//            else {
+//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
+//            }
+//        }
+        List<BarEntry> barEntries = new ArrayList<>();
+        barEntries.add(new BarEntry(0, 20));
+        barEntries.add(new BarEntry(1, 30));
+        barEntries.add(new BarEntry(2, 40));
+        barEntries.add(new BarEntry(3, 38));
+        barEntries.add(new BarEntry(4, 25));
+        barEntries.add(new BarEntry(5, 35));
+        barEntries.add(new BarEntry(6, 20));
+        barEntries.add(new BarEntry(7, 38));
+        barEntries.add(new BarEntry(8, 20));
+        barEntries.add(new BarEntry(9, 30));
+        barEntries.add(new BarEntry(10, 40));
+        barEntries.add(new BarEntry(11, 25));
+        barEntries.add(new BarEntry(12, 35));
+        barEntries.add(new BarEntry(13, 20));
+
+        BarDataSet set = new BarDataSet(barEntries, "");
+        set.setColors(ColorTemplate.MATERIAL_COLORS);
+        //set.setColors(colors);
+        set.setDrawValues(true);
+        BarData barData = new BarData(set);
+        barData.setBarWidth(.8f);
+        barChartMonthlyExpense.setData(barData);
+        barChartMonthlyExpense.setViewPortOffsets(0,0,0,0);
+        barChartMonthlyExpense.setExtraOffsets(0, 0, 0, 0);
+
+
+        barChartMonthlyExpense.getContentRect().set(0, 0, barChartMonthlyExpense.getWidth(), barChartMonthlyExpense.getHeight());
+        barChartMonthlyExpense.animateY(500);
+        barChartMonthlyExpense.setScaleEnabled(false);
+        barChartMonthlyExpense.setDrawValueAboveBar(true);
+        barChartMonthlyExpense.setDrawBorders(false);
+        barChartMonthlyExpense.setExtraOffsets(0,0,0,0);
+        barChartMonthlyExpense.getLegend().setEnabled(false);
+        barChartMonthlyExpense.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
+        barChartMonthlyExpense.moveViewToX(-1);
+        //barChartMonthlyExpense.
+        XAxis xAxis = barChartMonthlyExpense.getXAxis();
+        YAxis left = barChartMonthlyExpense.getAxisLeft();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
+        left.setAxisMaximum(30);
+        left.setDrawLabels(true); // no axis labels
+        left.setDrawAxisLine(false); // no axis line
+        left.setDrawGridLines(false); // no grid lines
+        left.setDrawZeroLine(false); // draw a zero line
+        left.setInverted(true);
+
+        barChartMonthlyExpense.getAxisRight().setEnabled(false); // no right axis
+        xAxis.setDrawGridLines(false);
+        xAxis.setPosition(XAxis.XAxisPosition.TOP_INSIDE);
+        xAxis.setDrawLabels(true);
+        xAxis.setDrawAxisLine(true);
+        xAxis.setAxisLineColor(Color.BLACK);
+        //xAxis.setCenterAxisLabels(true);
+        barChartMonthlyExpense.setDrawGridBackground(false);
+        barChartMonthlyExpense.setFitBars(false);
+        barChartMonthlyExpense.invalidate();
     }
 
     private void onFirstRun() {
@@ -328,12 +486,14 @@ public class StartActivity extends AppCompatActivity {
 
         pieChart.setData(data);
     }
+
+
+
     public static MMDatabase getDBInstance(final Context context) {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context, MMDatabase.class, "MMdb").allowMainThreadQueries().build();
             }
             return INSTANCE;
-
     }
 
     // close database
