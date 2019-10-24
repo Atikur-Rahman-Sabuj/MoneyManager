@@ -18,10 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tiringbring.moneymanager.Activity.StartActivity;
 import com.tiringbring.moneymanager.DataController.CategoryDataController;
 import com.tiringbring.moneymanager.DataController.TransactionDataController;
+import com.tiringbring.moneymanager.Entity.DayTransactions;
 import com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.ITabbedFragments;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
 import com.tiringbring.moneymanager.Dialog.SelectCategoryListDialog;
-import com.tiringbring.moneymanager.Entity.DayExpenses;
 import com.tiringbring.moneymanager.ListAdaptor.ExpenseExpandableListAdaptor;
 import com.tiringbring.moneymanager.ListAdaptor.SelectedCategoryListAdaptor;
 import com.tiringbring.moneymanager.R;
@@ -41,7 +41,7 @@ public class DailyFragment extends Fragment implements ITabbedFragments {
     ExpenseExpandableListAdaptor expandableListAdapter;
     List<Transaction> transactions;
     List<Transaction> filteredTransactions;
-    List<DayExpenses> dayExpensesList;
+    List<DayTransactions> dayTransactionsList;
     Button btnSelectFilterCategory;
     List<Category> allCategories;
     List<Category> selectedCategories;
@@ -74,8 +74,8 @@ public class DailyFragment extends Fragment implements ITabbedFragments {
         StartActivity.destroyDBInstance();
         filteredTransactions = transactions;
 
-        dayExpensesList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
-        expandableListAdapter = new ExpenseExpandableListAdaptor(getContext(), dayExpensesList);
+        dayTransactionsList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
+        expandableListAdapter = new ExpenseExpandableListAdaptor(getContext(), dayTransactionsList);
         expandableListView.setAdapter(expandableListAdapter);
         showHideMessage();
         return view;
@@ -86,13 +86,13 @@ public class DailyFragment extends Fragment implements ITabbedFragments {
     public void NotifySelectedCategoryChange() {
         selectedCategoryListAdaptor.notifyDataSetChanged();
         filteredTransactions = TransactionDataController.FilterTransactionsByCatgory(transactions, selectedCategories);
-        dayExpensesList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
-        expandableListAdapter = new ExpenseExpandableListAdaptor(getContext(), dayExpensesList);
+        dayTransactionsList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
+        expandableListAdapter = new ExpenseExpandableListAdaptor(getContext(), dayTransactionsList);
         expandableListView.setAdapter(expandableListAdapter);
         showHideMessage();
     }
     void showHideMessage(){
-        if(dayExpensesList.size()>0){
+        if(dayTransactionsList.size()>0){
             tvMessage.setVisibility(View.GONE);
             flListFragment.setVisibility(View.VISIBLE);
         }else{

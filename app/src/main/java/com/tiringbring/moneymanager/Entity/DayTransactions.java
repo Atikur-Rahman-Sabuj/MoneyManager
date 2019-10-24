@@ -6,17 +6,17 @@ import java.util.List;
 
 import RoomDb.Transaction;
 
-public class DayExpenses {
+public class DayTransactions {
     public Date date;
     public Double incomeTotal;
     public Double expenseTotal;
     public Double total;
     public List<Transaction> dayTransactionList = new ArrayList<>();
-    public DayExpenses(){
+    public DayTransactions(){
 
     }
 
-    public DayExpenses(List<Transaction> dayTransactionList) {
+    public DayTransactions(List<Transaction> dayTransactionList) {
         this.dayTransactionList.addAll(dayTransactionList);
         this.date = dayTransactionList.get(0).getDate();
         SetTotals(dayTransactionList);

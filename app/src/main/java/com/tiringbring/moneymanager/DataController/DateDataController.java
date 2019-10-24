@@ -66,6 +66,10 @@ public class DateDataController {
         SimpleDateFormat newFormatter = new SimpleDateFormat("MMMM yyyy");
         return newFormatter.format(date);
     }
+    public String DateToShortMonthYear(Date date){
+        SimpleDateFormat newFormatter = new SimpleDateFormat("MMM yy");
+        return newFormatter.format(date);
+    }
     public String DateToYear(Date date){
         SimpleDateFormat newFormatter = new SimpleDateFormat("yyyy");
         return newFormatter.format(date);

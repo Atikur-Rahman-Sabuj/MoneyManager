@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.tiringbring.moneymanager.DataController.DateDataController;
 import com.tiringbring.moneymanager.DataController.MySharedPreferences;
-import com.tiringbring.moneymanager.Entity.MonthExpenses;
+import com.tiringbring.moneymanager.Entity.MonthTransactions;
 import com.tiringbring.moneymanager.R;
 
 import java.text.SimpleDateFormat;
@@ -19,10 +19,10 @@ public class MonthlyExpenseExpandableListAdaptor extends BaseExpandableListAdapt
     Context context;
     Long monthlyLimit;
     float scale;
-    List<MonthExpenses> MonthlyExpenseList;
+    List<MonthTransactions> MonthlyExpenseList;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
-    public  MonthlyExpenseExpandableListAdaptor(Context context, List<MonthExpenses> MonthlyExpenseList){
+    public  MonthlyExpenseExpandableListAdaptor(Context context, List<MonthTransactions> MonthlyExpenseList){
         this.context = context;
         this.MonthlyExpenseList = MonthlyExpenseList;
         monthlyLimit = new MySharedPreferences(context).getMonthlyLimit();
@@ -47,7 +47,7 @@ public class MonthlyExpenseExpandableListAdaptor extends BaseExpandableListAdapt
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return MonthlyExpenseList.get(groupPosition).dayExpenses.get(childPosition);
+        return MonthlyExpenseList.get(groupPosition).dayTransactions.get(childPosition);
     }
 
     @Override
@@ -98,8 +98,8 @@ public class MonthlyExpenseExpandableListAdaptor extends BaseExpandableListAdapt
         }
         TextView mIdView = (TextView) convertView.findViewById(R.id.tvName);
         TextView mContentView = (TextView) convertView.findViewById(R.id.tvAmount);
-        mIdView.setText(new DateDataController().DateToDate(MonthlyExpenseList.get(groupPosition).dayExpenses.get(childPosition).date));
-        mContentView.setText("Total "+String.format("%.2f", MonthlyExpenseList.get(groupPosition).dayExpenses.get(childPosition).total));
+        mIdView.setText(new DateDataController().DateToDate(MonthlyExpenseList.get(groupPosition).dayTransactions.get(childPosition).date));
+        mContentView.setText("Total "+String.format("%.2f", MonthlyExpenseList.get(groupPosition).dayTransactions.get(childPosition).total));
         return  convertView;
     }
 

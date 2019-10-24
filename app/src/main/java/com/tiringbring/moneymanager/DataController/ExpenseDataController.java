@@ -1,8 +1,8 @@
 package com.tiringbring.moneymanager.DataController;
 
-import com.tiringbring.moneymanager.Entity.DayExpenses;
-import com.tiringbring.moneymanager.Entity.MonthExpenses;
-import com.tiringbring.moneymanager.Entity.YearlyExpenses;
+import com.tiringbring.moneymanager.Entity.DayTransactions;
+import com.tiringbring.moneymanager.Entity.MonthTransactions;
+import com.tiringbring.moneymanager.Entity.YearlyTransactions;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
 import RoomDb.Transaction;
 
 public class ExpenseDataController {
-    public List<DayExpenses> DailyExpenses = new ArrayList<>();
+    public List<DayTransactions> DailyExpenses = new ArrayList<>();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
     public ExpenseDataController(List<Transaction> expens) {
@@ -21,53 +21,53 @@ public class ExpenseDataController {
             MakeList(expens);
         }
     }
-    public List<MonthExpenses> GetMonthlyExpenses(List<DayExpenses> dailyExpenses){
-        List<MonthExpenses> monthlyExpenses = new ArrayList<>();
+    public List<MonthTransactions> GetMonthlyExpenses(List<DayTransactions> dailyExpenses){
+        List<MonthTransactions> monthlyExpenses = new ArrayList<>();
         if(dailyExpenses.size()>0){
             DateDataController ddc = new DateDataController();
             String month = ddc.DateToMonthYear( dailyExpenses.get(0).date);
-            List<DayExpenses> tempDailyExpenses = new ArrayList<>();
-            for (DayExpenses dEx:dailyExpenses) {
+            List<DayTransactions> tempDailyExpenses = new ArrayList<>();
+            for (DayTransactions dEx:dailyExpenses) {
                 if(month.equals(ddc.DateToMonthYear(dEx.date))){
                     tempDailyExpenses.add(dEx);
                 }else {
-                    MonthExpenses monthExpenses = new MonthExpenses(tempDailyExpenses);
-                    monthlyExpenses.add(monthExpenses);
+                    MonthTransactions monthTransactions = new MonthTransactions(tempDailyExpenses);
+                    monthlyExpenses.add(monthTransactions);
                     tempDailyExpenses.clear();
                     tempDailyExpenses.add(dEx);
                     month = ddc.DateToMonthYear(dEx.date);
                 }
             }
-            MonthExpenses monthExpenses = new MonthExpenses(tempDailyExpenses);
-            monthlyExpenses.add(monthExpenses);
+            MonthTransactions monthTransactions = new MonthTransactions(tempDailyExpenses);
+            monthlyExpenses.add(monthTransactions);
         }
         return monthlyExpenses;
     }
 
-    public List<YearlyExpenses> GetYearlyExpenses(List<MonthExpenses> monthlyExpenseList){
-        List<YearlyExpenses> yearlyExpenseList = new ArrayList<>();
+    public List<YearlyTransactions> GetYearlyExpenses(List<MonthTransactions> monthlyExpenseList){
+        List<YearlyTransactions> yearlyExpenseList = new ArrayList<>();
         if(monthlyExpenseList.size()>0){
             DateDataController ddc = new DateDataController();
             String year = ddc.DateToYear( monthlyExpenseList.get(0).date);
-            List<MonthExpenses> tempMonthlyExpenses = new ArrayList<>();
-            for (MonthExpenses mEx:monthlyExpenseList) {
+            List<MonthTransactions> tempMonthlyExpenses = new ArrayList<>();
+            for (MonthTransactions mEx:monthlyExpenseList) {
                 if(year.equals(ddc.DateToYear(mEx.date))){
                     tempMonthlyExpenses.add(mEx);
                 }else {
-                    YearlyExpenses yearlyExpenses = new YearlyExpenses(tempMonthlyExpenses);
-                    yearlyExpenseList.add(yearlyExpenses);
+                    YearlyTransactions yearlyTransactions = new YearlyTransactions(tempMonthlyExpenses);
+                    yearlyExpenseList.add(yearlyTransactions);
                     tempMonthlyExpenses.clear();
                     tempMonthlyExpenses.add(mEx);
                     year = ddc.DateToMonthYear(mEx.date);
                 }
             }
-            YearlyExpenses yearlyExpenses = new YearlyExpenses(tempMonthlyExpenses);
-            yearlyExpenseList.add(yearlyExpenses);
+            YearlyTransactions yearlyTransactions = new YearlyTransactions(tempMonthlyExpenses);
+            yearlyExpenseList.add(yearlyTransactions);
         }
         return yearlyExpenseList;
     }
-    public  List<DayExpenses> MakeCustomList(Date StartDate, Date EndDate){
-        List<DayExpenses> CustomDailyExpenses = new ArrayList<>();
+    public  List<DayTransactions> MakeCustomList(Date StartDate, Date EndDate){
+        List<DayTransactions> CustomDailyExpenses = new ArrayList<>();
         int i = 0;
         while (i<DailyExpenses.size()){
             boolean first = (DailyExpenses.get(i).date).after(StartDate);
@@ -90,7 +90,7 @@ public class ExpenseDataController {
         Date prevDate = fex.getDate();
         Date newDate;
         List<Transaction> tempExpens = new ArrayList<>();
-        DayExpenses tempDayExpenses = new DayExpenses();
+        DayTransactions tempDayTransactions = new DayTransactions();
         for(Transaction ex: expens)
         {
             newDate = ex.getDate();
@@ -98,26 +98,26 @@ public class ExpenseDataController {
                 tempExpens.add(ex);
             }
             else {
-                tempDayExpenses = new DayExpenses(tempExpens);
-                DailyExpenses.add(tempDayExpenses);
+                tempDayTransactions = new DayTransactions(tempExpens);
+                DailyExpenses.add(tempDayTransactions);
                 tempExpens.clear();
                 tempExpens.add(ex);
                 prevDate = ex.getDate();
             }
         }
-        tempDayExpenses = new DayExpenses(tempExpens);
-        DailyExpenses.add(tempDayExpenses);
+        tempDayTransactions = new DayTransactions(tempExpens);
+        DailyExpenses.add(tempDayTransactions);
 
     }
 
 
 
-    public List<DayExpenses> getDailyExpenses() {
+    public List<DayTransactions> getDailyExpenses() {
         return DailyExpenses;
     }
 
 
-    public void setDailyExpenses(List<DayExpenses> dailyExpenses) {
+    public void setDailyExpenses(List<DayTransactions> dailyExpenses) {
         DailyExpenses = dailyExpenses;
     }
 }

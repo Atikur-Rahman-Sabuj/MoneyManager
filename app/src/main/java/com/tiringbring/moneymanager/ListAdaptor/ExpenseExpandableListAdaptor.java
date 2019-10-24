@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tiringbring.moneymanager.Activity.StartActivity;
 import com.tiringbring.moneymanager.DataController.DateDataController;
 import com.tiringbring.moneymanager.DataController.MySharedPreferences;
-import com.tiringbring.moneymanager.Entity.DayExpenses;
+import com.tiringbring.moneymanager.Entity.DayTransactions;
 import com.tiringbring.moneymanager.R;
 
 import java.text.SimpleDateFormat;
@@ -27,12 +27,12 @@ public class ExpenseExpandableListAdaptor extends BaseExpandableListAdapter {
     Context context;
     Long dailyLimit;
     float scale;
-    List<DayExpenses> DayExpenseList;
+    List<DayTransactions> DayExpenseList;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
     List<Category> categories = new ArrayList<>();
 
 
-    public  ExpenseExpandableListAdaptor(Context context, List<DayExpenses> DayExpenseList){
+    public  ExpenseExpandableListAdaptor(Context context, List<DayTransactions> DayExpenseList){
         this.context = context;
         this.DayExpenseList = DayExpenseList;
         dailyLimit = new MySharedPreferences(context).getDayilyLimit();

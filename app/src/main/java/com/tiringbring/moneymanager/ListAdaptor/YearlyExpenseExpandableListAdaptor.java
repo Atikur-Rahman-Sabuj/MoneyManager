@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.tiringbring.moneymanager.DataController.DateDataController;
 import com.tiringbring.moneymanager.DataController.MySharedPreferences;
-import com.tiringbring.moneymanager.Entity.YearlyExpenses;
+import com.tiringbring.moneymanager.Entity.YearlyTransactions;
 import com.tiringbring.moneymanager.R;
 
 import java.text.SimpleDateFormat;
@@ -19,10 +19,10 @@ public class YearlyExpenseExpandableListAdaptor extends BaseExpandableListAdapte
     Context context;
     Long yearlyLimit;
     float scale;
-    List<YearlyExpenses> YearlyExpenseList;
+    List<YearlyTransactions> YearlyExpenseList;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
-    public  YearlyExpenseExpandableListAdaptor(Context context, List<YearlyExpenses> YearlyExpenseList){
+    public  YearlyExpenseExpandableListAdaptor(Context context, List<YearlyTransactions> YearlyExpenseList){
         this.context = context;
         this.YearlyExpenseList = YearlyExpenseList;
         yearlyLimit = new MySharedPreferences(context).getYearlyLimit();

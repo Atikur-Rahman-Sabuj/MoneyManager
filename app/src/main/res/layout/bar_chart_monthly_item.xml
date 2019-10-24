@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/allContainer"
     android:layout_width="wrap_content"
-    android:layout_height="240dp"
+    android:layout_height="241dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -12,6 +12,7 @@
         android:layout_weight="1"
         android:gravity="bottom"
         android:orientation="vertical">
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -25,12 +26,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tvIncomeAmount"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="10dp"
                     android:text="30"
                     android:textAlignment="center"
                     android:textSize="8sp" />
+
 
                 <LinearLayout
                     android:id="@+id/income"
@@ -43,7 +45,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/tvDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -51,10 +53,9 @@
                 android:text="Jan 19"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="8sp" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 
     </LinearLayout>
@@ -83,7 +84,7 @@
             android:orientation="horizontal"></LinearLayout>
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/tvExpenseAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="20"

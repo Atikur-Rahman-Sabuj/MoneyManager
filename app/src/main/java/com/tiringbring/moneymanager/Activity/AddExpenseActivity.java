@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tiringbring.moneymanager.Entity.DayExpenses;
+import com.tiringbring.moneymanager.Entity.DayTransactions;
 import com.tiringbring.moneymanager.Fragment.ExpenseFragment;
 import com.tiringbring.moneymanager.R;
 
@@ -220,7 +220,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         Date date = new GregorianCalendar(Year, Month-1, Day).getTime();
         List<Transaction> expens = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTransactionsOfaDate(date);
         StartActivity.destroyDBInstance();
-        Double totoal = new DayExpenses().AddTotal(expens);
+        Double totoal = new DayTransactions().AddTotal(expens);
         tvTotal.setText(String.format("%.2f", totoal));
         //mContentView.setText(String.format("%.2f",mValues.get(position).getAmount()));
 

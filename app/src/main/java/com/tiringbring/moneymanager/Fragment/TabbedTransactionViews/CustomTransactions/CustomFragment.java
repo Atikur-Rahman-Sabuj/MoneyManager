@@ -27,7 +27,7 @@ import com.tiringbring.moneymanager.DataController.DateDataController;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
 import com.tiringbring.moneymanager.DataController.TransactionDataController;
 import com.tiringbring.moneymanager.Dialog.SelectCategoryListDialog;
-import com.tiringbring.moneymanager.Entity.DayExpenses;
+import com.tiringbring.moneymanager.Entity.DayTransactions;
 import com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.ITabbedFragments;
 import com.tiringbring.moneymanager.ListAdaptor.ExpenseExpandableListAdaptor;
 import com.tiringbring.moneymanager.ListAdaptor.SelectedCategoryListAdaptor;
@@ -47,10 +47,10 @@ public class CustomFragment extends Fragment implements ITabbedFragments {
 
     ExpandableListView expandableListView;
     ExpenseExpandableListAdaptor expandableListAdapter;
-    List<DayExpenses> dayExpensesList;
+    List<DayTransactions> dayTransactionsList;
     List<Transaction> transactions;
     List<Transaction> filteredTransactions;
-    List<DayExpenses> customDayExpenseList;
+    List<DayTransactions> customDayExpenseList;
 
     private Date startDate = new Date();
     private Date endDate = new Date();
@@ -176,7 +176,7 @@ public class CustomFragment extends Fragment implements ITabbedFragments {
 
     private void GenerateCustomList() {
 
-        //dayExpensesList = new ExpenseDataController(transactions).getDailyExpenses();
+        //dayTransactionsList = new ExpenseDataController(transactions).getDailyExpenses();
         customDayExpenseList = new ExpenseDataController(filteredTransactions).MakeCustomList(startDate, endDate);
         calculateTotals(customDayExpenseList);
         tvIncomeTotal.setText(String.format("%.2f",incomeTotal));
@@ -187,10 +187,10 @@ public class CustomFragment extends Fragment implements ITabbedFragments {
     }
 
 
-    private void calculateTotals(List<DayExpenses> dayExpensesList){
+    private void calculateTotals(List<DayTransactions> dayTransactionsList){
         double incomeSum = 0;
         double expenseSum = 0;
-        for (DayExpenses dex: dayExpensesList
+        for (DayTransactions dex: dayTransactionsList
         ) {
             incomeSum += dex.incomeTotal;
             expenseSum += dex.expenseTotal;
@@ -203,7 +203,7 @@ public class CustomFragment extends Fragment implements ITabbedFragments {
     public void NotifySelectedCategoryChange() {
         selectedCategoryListAdaptor.notifyDataSetChanged();
         filteredTransactions = TransactionDataController.FilterTransactionsByCatgory(transactions, selectedCategories);
-        //dayExpensesList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
+        //dayTransactionsList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
         customDayExpenseList = new ExpenseDataController(filteredTransactions).MakeCustomList(startDate, endDate);
         calculateTotals(customDayExpenseList);
         tvIncomeTotal.setText(String.format("%.2f",incomeTotal));

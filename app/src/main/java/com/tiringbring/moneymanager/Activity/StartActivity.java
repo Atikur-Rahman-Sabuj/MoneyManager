@@ -38,10 +38,12 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.tiringbring.moneymanager.DataController.BarEntryDataController;
 import com.tiringbring.moneymanager.DataController.MySharedPreferences;
 import com.tiringbring.moneymanager.DataController.PieEntryDataController;
-import com.tiringbring.moneymanager.ListAdaptor.TestChartAdaptor;
+import com.tiringbring.moneymanager.Entity.MonthTransactions;
+import com.tiringbring.moneymanager.ListAdaptor.ChartMonthlyAdaptor;
 import com.tiringbring.moneymanager.Notification.Notification;
 import com.tiringbring.moneymanager.R;
 import com.tiringbring.moneymanager.Utility.ResourceManager;
+import com.tiringbring.moneymanager.chart.MonthlyChartData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -80,8 +82,10 @@ public class StartActivity extends AppCompatActivity {
         barChartMonthlyExpense = (BarChart) findViewById(R.id.monthlyExpenseBarChart);
         rvTestList = (RecyclerView) findViewById(R.id.rvTestList);
         rvTestList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        TestChartAdaptor testChartAdaptor = new TestChartAdaptor();
-        rvTestList.setAdapter(testChartAdaptor);
+        MonthlyChartData cmd = new MonthlyChartData();
+        List<MonthTransactions> monthTransactionsList = cmd.GetMonthlyExpenseList(getApplicationContext());
+        ChartMonthlyAdaptor chartMonthlyAdaptor = new ChartMonthlyAdaptor(getApplicationContext(), monthTransactionsList, cmd.GetMaximumMonthlyIncome(monthTransactionsList), cmd.GetMaximumMonthlyExpense(monthTransactionsList));
+        rvTestList.setAdapter(chartMonthlyAdaptor);
 
 
 
@@ -119,97 +123,6 @@ public class StartActivity extends AppCompatActivity {
 
             }
         });
-        //SetPieChartDate();
-        //BindDataToPieChart();
-        //BindDataToMonthlyIncomeBarChart();
-        //BindDataToMonthlyExpenseBarChart();
-
-
-//        barChartMonthlyIncome.getDescription().setEnabled(false);
-//        final BarEntryDataController beDataController = new BarEntryDataController();
-//        List<BarEntry> data = beDataController.GetBarEntries(getApplicationContext());
-//        //generating colors
-//        List<Integer> colors = new ArrayList<>();
-//        for (BarEntry be:
-//                data) {
-//            if(be.getY()>dailyLimit){
-//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
-//            }
-//            else {
-//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
-//            }
-//        }
-//        BarDataSet set = new BarDataSet(data, "");
-//        //set.setColors(ColorTemplate.MATERIAL_COLORS);
-//        set.setColors(colors);
-//        set.setDrawValues(true);
-//        BarData barData = new BarData(set);
-//        barData.setBarWidth(.8f);
-//        barChartMonthlyIncome.setData(barData);
-//        barChartMonthlyIncome.setExtraOffsets(0, 0, 0, 0);
-//
-//
-//        barChartMonthlyIncome.getContentRect().set(0, 0, barChartMonthlyIncome.getWidth(), barChartMonthlyIncome.getHeight());
-//        barChartMonthlyIncome.animateY(500);
-//        barChartMonthlyIncome.setScaleEnabled(false);
-//        barChartMonthlyIncome.setDrawValueAboveBar(true);
-//        barChartMonthlyIncome.setDrawBorders(false);
-//        //barChartMonthlyIncome.setExtraOffsets(0,0,0,0);
-//        barChartMonthlyIncome.getLegend().setEnabled(false);
-//        barChartMonthlyIncome.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
-//        barChartMonthlyIncome.moveViewToX(-1);
-//        XAxis xAxis = barChartMonthlyIncome.getXAxis();
-//        YAxis left = barChartMonthlyIncome.getAxisLeft();
-//        xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
-//        left.setDrawLabels(false); // no axis labels
-//        left.setDrawAxisLine(false); // no axis line
-//        left.setDrawGridLines(false); // no grid lines
-//        left.setDrawZeroLine(false); // draw a zero line
-//
-//        barChartMonthlyIncome.getAxisRight().setEnabled(false); // no right axis
-//        xAxis.setDrawGridLines(false);
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
-//        xAxis.setDrawLabels(true);
-//        xAxis.setDrawAxisLine(true);
-//        xAxis.setAxisLineColor(Color.BLACK);
-//        //xAxis.setCenterAxisLabels(true);
-//        barChartMonthlyIncome.setDrawGridBackground(false);
-//        barChartMonthlyIncome.setFitBars(false);
-//        barChartMonthlyIncome.invalidate();
-//        barChartMonthlyIncome.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-//            @Override
-//            public void onValueSelected(Entry e, Highlight h) {
-//                pieDate = beDataController.dates.get(((int) e.getX()));
-//                BindDataToPieChart();
-//            }
-//
-//            @Override
-//            public void onNothingSelected() {
-//
-//            }
-//        });
-
-//        pieChart.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()){
-//            public void onSwipeTop() {
-//                //Toast.makeText(StartActivity.this, "top", Toast.LENGTH_SHORT).show();
-//            }
-//            public void onSwipeRight() {
-//                //Toast.makeText(StartActivity.this, "right", Toast.LENGTH_SHORT).show();
-//                ChangePieDate(1);
-//                pieChart.clear();
-//                BindDataToPieChart();
-//            }
-//            public void onSwipeLeft() {
-//                //Toast.makeText(StartActivity.this, "left", Toast.LENGTH_SHORT).show();
-//                ChangePieDate(-1);
-//                pieChart.clear();
-//                BindDataToPieChart();
-//            }
-//            public void onSwipeBottom() {
-//                //Toast.makeText(StartActivity.this, "bottom", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
     }
 
     private void BindDataToMonthlyIncomeBarChart() {

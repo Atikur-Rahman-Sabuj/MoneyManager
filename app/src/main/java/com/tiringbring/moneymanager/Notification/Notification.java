@@ -12,19 +12,17 @@ import com.tiringbring.moneymanager.Activity.AddExpenseActivity;
 import com.tiringbring.moneymanager.DataController.DateDataController;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
 import com.tiringbring.moneymanager.DataController.MySharedPreferences;
-import com.tiringbring.moneymanager.Entity.DayExpenses;
-import com.tiringbring.moneymanager.Entity.MonthExpenses;
+import com.tiringbring.moneymanager.Entity.DayTransactions;
+import com.tiringbring.moneymanager.Entity.MonthTransactions;
 import com.tiringbring.moneymanager.Activity.ExpenseListActivity;
 import com.tiringbring.moneymanager.R;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import RoomDb.Transaction;
 import RoomDb.MMDatabase;
 import androidx.core.app.NotificationCompat;
-import androidx.room.Room;
 
 public class Notification extends BroadcastReceiver {
     MMDatabase myAppRoomDatabase = null;
@@ -60,13 +58,13 @@ public class Notification extends BroadcastReceiver {
             builder = new NotificationCompat.Builder(context);
         }
         List<Transaction> expens = myAppRoomDatabase.mmDao().GetTransaction();
-        List<DayExpenses> dayExpensesList = new ExpenseDataController(expens).getDailyExpenses();
-        List<MonthExpenses> monthlyExpenseList = new ExpenseDataController(expens).GetMonthlyExpenses(dayExpensesList);
+        List<DayTransactions> dayTransactionsList = new ExpenseDataController(expens).getDailyExpenses();
+        List<MonthTransactions> monthlyExpenseList = new ExpenseDataController(expens).GetMonthlyExpenses(dayTransactionsList);
         Calendar calendar = Calendar.getInstance();
         Double total = 0.0;
         String monthName = "";
         DateDataController ddc= new DateDataController();
-        for (MonthExpenses mex:monthlyExpenseList) {
+        for (MonthTransactions mex:monthlyExpenseList) {
             if(String.valueOf(calendar.get(Calendar.YEAR)).equals( ddc.DateToYear(mex.date))&&(calendar.get(Calendar.MONTH)-1)==ddc.DateToMonthNo(mex.date))  {
                 total = mex.expenseTotal;
                 monthName = mex.month;

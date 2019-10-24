@@ -20,10 +20,9 @@ import com.tiringbring.moneymanager.DataController.CategoryDataController;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
 import com.tiringbring.moneymanager.DataController.TransactionDataController;
 import com.tiringbring.moneymanager.Dialog.SelectCategoryListDialog;
-import com.tiringbring.moneymanager.Entity.DayExpenses;
-import com.tiringbring.moneymanager.Entity.MonthExpenses;
+import com.tiringbring.moneymanager.Entity.DayTransactions;
+import com.tiringbring.moneymanager.Entity.MonthTransactions;
 import com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.ITabbedFragments;
-import com.tiringbring.moneymanager.ListAdaptor.ExpenseExpandableListAdaptor;
 import com.tiringbring.moneymanager.ListAdaptor.MonthlyExpenseExpandableListAdaptor;
 import com.tiringbring.moneymanager.ListAdaptor.SelectedCategoryListAdaptor;
 import com.tiringbring.moneymanager.R;
@@ -42,8 +41,8 @@ public class MonthlyFragment extends Fragment implements ITabbedFragments {
     MonthlyExpenseExpandableListAdaptor monthlyExpenseExpandableListAdaptor;
     List<Transaction> transactions;
     List<Transaction> filteredTransactions;
-    List<DayExpenses> dayExpensesList;
-    List<MonthExpenses> monthlyExpenseList;
+    List<DayTransactions> dayTransactionsList;
+    List<MonthTransactions> monthlyExpenseList;
     Button btnSelectFilterCategory;
     List<Category> allCategories;
     List<Category> selectedCategories;
@@ -80,9 +79,9 @@ public class MonthlyFragment extends Fragment implements ITabbedFragments {
         transactions = StartActivity.getDBInstance(getContext()).mmDao().GetTransaction();
         StartActivity.destroyDBInstance();
 
-        dayExpensesList = new ExpenseDataController(transactions).getDailyExpenses();
+        dayTransactionsList = new ExpenseDataController(transactions).getDailyExpenses();
         filteredTransactions = transactions;
-        monthlyExpenseList = new ExpenseDataController(filteredTransactions).GetMonthlyExpenses(dayExpensesList);
+        monthlyExpenseList = new ExpenseDataController(filteredTransactions).GetMonthlyExpenses(dayTransactionsList);
         monthlyExpenseExpandableListAdaptor = new MonthlyExpenseExpandableListAdaptor(getContext(), monthlyExpenseList);
         expandableListView.setAdapter(monthlyExpenseExpandableListAdaptor);
         showHideMessage();
@@ -92,8 +91,8 @@ public class MonthlyFragment extends Fragment implements ITabbedFragments {
     public void NotifySelectedCategoryChange() {
         selectedCategoryListAdaptor.notifyDataSetChanged();
         filteredTransactions = TransactionDataController.FilterTransactionsByCatgory(transactions, selectedCategories);
-        dayExpensesList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
-        monthlyExpenseList = new ExpenseDataController(transactions).GetMonthlyExpenses(dayExpensesList);
+        dayTransactionsList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
+        monthlyExpenseList = new ExpenseDataController(transactions).GetMonthlyExpenses(dayTransactionsList);
         monthlyExpenseExpandableListAdaptor = new MonthlyExpenseExpandableListAdaptor(getContext(), monthlyExpenseList);
         expandableListView.setAdapter(monthlyExpenseExpandableListAdaptor);
         showHideMessage();

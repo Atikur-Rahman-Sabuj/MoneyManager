@@ -19,12 +19,10 @@ import com.tiringbring.moneymanager.DataController.CategoryDataController;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
 import com.tiringbring.moneymanager.DataController.TransactionDataController;
 import com.tiringbring.moneymanager.Dialog.SelectCategoryListDialog;
-import com.tiringbring.moneymanager.Entity.DayExpenses;
-import com.tiringbring.moneymanager.Entity.MonthExpenses;
-import com.tiringbring.moneymanager.Entity.YearlyExpenses;
+import com.tiringbring.moneymanager.Entity.DayTransactions;
+import com.tiringbring.moneymanager.Entity.MonthTransactions;
+import com.tiringbring.moneymanager.Entity.YearlyTransactions;
 import com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.ITabbedFragments;
-import com.tiringbring.moneymanager.ListAdaptor.ExpenseExpandableListAdaptor;
-import com.tiringbring.moneymanager.ListAdaptor.MonthlyExpenseExpandableListAdaptor;
 import com.tiringbring.moneymanager.ListAdaptor.SelectedCategoryListAdaptor;
 import com.tiringbring.moneymanager.ListAdaptor.YearlyExpenseExpandableListAdaptor;
 import com.tiringbring.moneymanager.R;
@@ -43,9 +41,9 @@ public class YearlyFragment extends Fragment implements ITabbedFragments {
     YearlyExpenseExpandableListAdaptor yearlyExpenseExpandableListAdaptor;
     List<Transaction> transactions;
     List<Transaction> filteredTransactions;
-    List<DayExpenses> dayExpensesList;
-    List<MonthExpenses> monthlyExpenseList;
-    List<YearlyExpenses> yearlyExpensesList;
+    List<DayTransactions> dayTransactionsList;
+    List<MonthTransactions> monthlyExpenseList;
+    List<YearlyTransactions> yearlyTransactionsList;
     Button btnSelectFilterCategory;
     List<Category> allCategories;
     List<Category> selectedCategories;
@@ -81,10 +79,10 @@ public class YearlyFragment extends Fragment implements ITabbedFragments {
         transactions = StartActivity.getDBInstance(getContext()).mmDao().GetTransaction();
         StartActivity.destroyDBInstance();
         filteredTransactions = transactions;
-        dayExpensesList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
-        monthlyExpenseList = new ExpenseDataController(transactions).GetMonthlyExpenses(dayExpensesList);
-        yearlyExpensesList = new ExpenseDataController(transactions).GetYearlyExpenses(monthlyExpenseList);
-        yearlyExpenseExpandableListAdaptor = new YearlyExpenseExpandableListAdaptor(getContext(), yearlyExpensesList);
+        dayTransactionsList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
+        monthlyExpenseList = new ExpenseDataController(transactions).GetMonthlyExpenses(dayTransactionsList);
+        yearlyTransactionsList = new ExpenseDataController(transactions).GetYearlyExpenses(monthlyExpenseList);
+        yearlyExpenseExpandableListAdaptor = new YearlyExpenseExpandableListAdaptor(getContext(), yearlyTransactionsList);
         expandableListView.setAdapter(yearlyExpenseExpandableListAdaptor);
         showHideMessage();
         return view;
@@ -93,15 +91,15 @@ public class YearlyFragment extends Fragment implements ITabbedFragments {
     public void NotifySelectedCategoryChange() {
         selectedCategoryListAdaptor.notifyDataSetChanged();
         filteredTransactions = TransactionDataController.FilterTransactionsByCatgory(transactions, selectedCategories);
-        dayExpensesList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
-        monthlyExpenseList = new ExpenseDataController(transactions).GetMonthlyExpenses(dayExpensesList);
-        yearlyExpensesList = new ExpenseDataController(transactions).GetYearlyExpenses(monthlyExpenseList);
-        yearlyExpenseExpandableListAdaptor = new YearlyExpenseExpandableListAdaptor(getContext(), yearlyExpensesList);
+        dayTransactionsList = new ExpenseDataController(filteredTransactions).getDailyExpenses();
+        monthlyExpenseList = new ExpenseDataController(transactions).GetMonthlyExpenses(dayTransactionsList);
+        yearlyTransactionsList = new ExpenseDataController(transactions).GetYearlyExpenses(monthlyExpenseList);
+        yearlyExpenseExpandableListAdaptor = new YearlyExpenseExpandableListAdaptor(getContext(), yearlyTransactionsList);
         expandableListView.setAdapter(yearlyExpenseExpandableListAdaptor);
         showHideMessage();
     }
     void showHideMessage(){
-        if(yearlyExpensesList.size()>0){
+        if(yearlyTransactionsList.size()>0){
             tvMessage.setVisibility(View.GONE);
             flListFragment.setVisibility(View.VISIBLE);
         }else{
