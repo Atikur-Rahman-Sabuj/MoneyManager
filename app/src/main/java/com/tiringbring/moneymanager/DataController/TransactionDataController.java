@@ -38,6 +38,8 @@ public class TransactionDataController {
         Date date = new DateDataController().CropTimeFromDate(Calendar.getInstance());
         List<Transaction>  todayTransactions = StartActivity.getDBInstance(context).mmDao().GetTransactionsOfaDate(date);
         List<DayTransactions> dayTransactions = new ExpenseDataController(todayTransactions).getDailyExpenses();
-        return dayTransactions.get(0);
+        if(dayTransactions.size()>0)
+            return dayTransactions.get(0);
+        return null;
     }
 }

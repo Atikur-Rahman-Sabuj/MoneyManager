@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/card_background_verylight"
     android:orientation="vertical">
 
     <LinearLayout
@@ -32,7 +33,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -171,45 +173,51 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutLower"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:layout_margin="5dp">
 
-            <TextView
-                android:id="@+id/tvMessage"
+            <LinearLayout
+                android:id="@+id/layoutLower"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="No transactions"
-                android:visibility="visible" />
+                android:orientation="vertical"
+                android:visibility="visible">
 
-            <FrameLayout
-                android:id="@+id/flListFrrame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:transitionName="showList"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
-
-                <ExpandableListView
-                    android:id="@+id/expandableExpenseList"
+                <TextView
+                    android:id="@+id/tvMessage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:divider="@android:color/background_light"
-                    android:dividerHeight="5dp"
-                    android:elevation="5dp"
-                    android:groupIndicator="@color/transparent"></ExpandableListView>
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="No transactions"
+                    android:visibility="visible" />
 
-            </FrameLayout>
-        </LinearLayout>
+                <FrameLayout
+                    android:id="@+id/flListFrrame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:transitionName="showList"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <ExpandableListView
+                        android:id="@+id/expandableExpenseList"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:divider="@android:color/background_light"
+                        android:dividerHeight="5dp"
+                        android:elevation="5dp"
+                        android:groupIndicator="@color/transparent"></ExpandableListView>
+
+                </FrameLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
@@ -331,6 +339,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <FrameLayout
@@ -355,8 +364,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/light_gray"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:text="Change"
                 android:textColor="@color/dark_gray"
                 android:textSize="14sp" />

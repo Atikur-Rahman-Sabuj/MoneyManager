@@ -13,13 +13,15 @@
         android:roundIcon="@drawable/logoround"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity.DailyTransactionsActivity"></activity>
         <activity
             android:name=".Activity.BottomNavigationActivity"
-            android:label="@string/title_activity_bottom_navigation"></activity>
-        <activity android:name=".Activity.AddTransactionActivity"
+            android:label="@string/title_activity_bottom_navigation" />
+        <activity
+            android:name=".Activity.AddTransactionActivity"
             android:exported="true"
             android:label="Add transaction"
-            android:parentActivityName=".Activity.StartActivity"/>
+            android:parentActivityName=".Activity.StartActivity" />
         <activity android:name=".Activity.FileExplorerActivity" />
         <activity android:name=".Activity.ImportExportActivity" />
         <activity android:name=".Activity.StartActivity">

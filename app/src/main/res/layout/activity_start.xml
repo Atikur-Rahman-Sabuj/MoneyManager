@@ -89,62 +89,47 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Income"
-                                    android:textAlignment="center"
-                                    android:textSize="10sp" />
-
-                                <TextView
-                                    android:id="@+id/tvFirstTransaction"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@color/white"
-                                    android:text="sample"
-                                    android:textAlignment="center"
-                                    android:textColor="@color/black"
-                                    android:textSize="18sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width=".5dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:background="@color/black"
-                                android:orientation="horizontal"></LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/tvFirstTransactionType"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Expense"
+                                    android:text="Type"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
                                 <TextView
-                                    android:id="@+id/tvSecondTransaction"
+                                    android:id="@+id/tvFirstTransactionValue"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:background="@color/white"
-                                    android:text="sample"
+                                    android:text="0"
                                     android:textAlignment="center"
                                     android:textColor="@color/black"
                                     android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/tvFirstTransactionName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Name"
+                                    android:textAlignment="center"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:id="@+id/tvFirstTransactionCategory"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Category"
+                                    android:textAlignment="center"
+                                    android:textSize="10sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -164,23 +149,95 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/tvSecondTransactionType"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Balance"
+                                    android:text="Type"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
                                 <TextView
-                                    android:id="@+id/tvThirdTransaction"
+                                    android:id="@+id/tvSecondTransactionValue"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:background="@color/white"
-                                    android:text="sample"
+                                    android:text="0"
                                     android:textAlignment="center"
                                     android:textColor="@color/black"
                                     android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/tvSecondTransactionName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Name"
+                                    android:textAlignment="center"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:id="@+id/tvSecondTransactionCategory"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Category"
+                                    android:textAlignment="center"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width=".5dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@color/black"
+                                android:orientation="horizontal"></LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tvThirdTransactionType"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Type"
+                                    android:textAlignment="center"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:id="@+id/tvThirdTransactionValue"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@color/white"
+                                    android:text="0"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/tvThirdTransactionName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Name"
+                                    android:textAlignment="center"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:id="@+id/tvThirdTransactionCategory"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Category"
+                                    android:textAlignment="center"
+                                    android:textSize="10sp" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -287,7 +344,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:background="@color/white"
-                                    android:text="sample"
+                                    android:text="0"
                                     android:textAlignment="center"
                                     android:textColor="@color/black"
                                     android:textSize="18sp" />
@@ -322,7 +379,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:background="@color/white"
-                                    android:text="sample"
+                                    android:text="0"
                                     android:textAlignment="center"
                                     android:textColor="@color/black"
                                     android:textSize="18sp" />
@@ -359,7 +416,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:background="@color/white"
-                                    android:text="sample"
+                                    android:text="0"
                                     android:textAlignment="center"
                                     android:textColor="@color/black"
                                     android:textSize="18sp" />
@@ -471,7 +528,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:background="@color/white"
-                                    android:text="sample"
+                                    android:text="0"
                                     android:textAlignment="center"
                                     android:textColor="@color/black"
                                     android:textSize="18sp" />
@@ -506,7 +563,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:background="@color/white"
-                                    android:text="sample"
+                                    android:text="0"
                                     android:textAlignment="center"
                                     android:textColor="@color/black"
                                     android:textSize="18sp" />
@@ -543,7 +600,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:background="@color/white"
-                                    android:text="sample"
+                                    android:text="0"
                                     android:textAlignment="center"
                                     android:textColor="@color/black"
                                     android:textSize="18sp" />

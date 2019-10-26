@@ -7,15 +7,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 
+import RoomDb.Category;
 import RoomDb.MMDatabase;
+import RoomDb.Transaction;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.os.Bundle;
+import android.os.TestLooperManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,6 +52,8 @@ import com.tiringbring.moneymanager.R;
 import com.tiringbring.moneymanager.Utility.ResourceManager;
 import com.tiringbring.moneymanager.chart.MonthlyChartData;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -59,12 +65,16 @@ public class StartActivity extends AppCompatActivity {
     private BarChart barChartMonthlyExpense;
     private PieChart pcTodaysTransactions;
     private TextView tvMonthlyIncomeTotal, tvMonthlyExpenseTotal, tvMonthlyBalanceTotal,
-            tvDailyIncomeTotal, tvDailyExpenseTotal, tvDailyBalanceTotal;
+            tvDailyIncomeTotal, tvDailyExpenseTotal, tvDailyBalanceTotal,
+            tvFirstTransactionType, tvFirstTransactionValue, tvFirstTransactionName, tvFirstTransactionCategory,
+            tvSecondTransactionType, tvSecondTransactionValue, tvSecondTransactionName, tvSecondTransactionCategory,
+            tvThirdTransactionType, tvThirdTransactionValue, tvThirdTransactionName, tvThirdTransactionCategory;
     Long dailyLimit;
     private Date pieDate;
     private Button btnAddNew;
     private Button btnShowList, btnBottomNavigation;
     private RecyclerView rvTestList;
+    private CardView cvTodayInfo;
     @SuppressLint("ClickableViewAccessibility")
 
     @Override
@@ -88,7 +98,24 @@ public class StartActivity extends AppCompatActivity {
         tvDailyExpenseTotal = (TextView) findViewById(R.id.tvDailyExpenseTotal);
         tvDailyBalanceTotal = (TextView) findViewById(R.id.tvDailyBalanceTotal);
 
+        tvFirstTransactionType = (TextView) findViewById(R.id.tvFirstTransactionType);
+        tvFirstTransactionValue = (TextView) findViewById(R.id.tvFirstTransactionValue);
+        tvFirstTransactionName = (TextView) findViewById(R.id.tvFirstTransactionName);
+        tvFirstTransactionCategory = (TextView) findViewById(R.id.tvFirstTransactionCategory);
+
+        tvSecondTransactionType = (TextView) findViewById(R.id.tvSecondTransactionType);
+        tvSecondTransactionValue = (TextView) findViewById(R.id.tvSecondTransactionValue);
+        tvSecondTransactionName = (TextView) findViewById(R.id.tvSecondTransactionName);
+        tvSecondTransactionCategory = (TextView) findViewById(R.id.tvSecondTransactionCategory);
+
+        tvThirdTransactionType = (TextView) findViewById(R.id.tvThirdTransactionType);
+        tvThirdTransactionValue = (TextView) findViewById(R.id.tvThirdTransactionValue);
+        tvThirdTransactionName = (TextView) findViewById(R.id.tvThirdTransactionName);
+        tvThirdTransactionCategory = (TextView) findViewById(R.id.tvThirdTransactionCategory);
+        cvTodayInfo = (CardView) findViewById(R.id.cvTodayInfo);
+
         BindDataTodaySection();
+        BindDataToRecentTransactions();
 
         btnAddNew = (Button) findViewById(R.id.btnAddNew);
         btnShowList = (Button) findViewById(R.id.btnShowList);
@@ -131,102 +158,61 @@ public class StartActivity extends AppCompatActivity {
 //        nCalendar.set(Calendar.SECOND, 0);
 //        setAlart(nCalendar.getTimeInMillis());
 
-
+        cvTodayInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DailyTransactionsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnAddNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
-
-
                 startActivity(intent);
-
-
             }
         });
+
         btnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
-
                 startActivity(intent);
-
             }
         });
     }
 
-//    private void BindDataToMonthlyIncomeBarChart() {
-//        barChartMonthlyIncome.getDescription().setEnabled(false);
-//        final BarEntryDataController beDataController = new BarEntryDataController();
-////        List<BarEntry> data = beDataController.GetBarEntries(getApplicationContext());
-////        //generating colors
-////        List<Integer> colors = new ArrayList<>();
-////        for (BarEntry be:
-////                data) {
-////            if(be.getY()>dailyLimit){
-////                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
-////            }
-////            else {
-////                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
-////            }
-////        }
-//        List<BarEntry> barEntries = new ArrayList<>();
-//        barEntries.add(new BarEntry(0, 20));
-//        barEntries.add(new BarEntry(1, 30));
-//        barEntries.add(new BarEntry(2, 40));
-//        barEntries.add(new BarEntry(3, 38));
-//        barEntries.add(new BarEntry(4, 25));
-//        barEntries.add(new BarEntry(5, 35));
-//        barEntries.add(new BarEntry(6, 20));
-//        barEntries.add(new BarEntry(7, 38));
-//        barEntries.add(new BarEntry(8, 20));
-//        barEntries.add(new BarEntry(9, 30));
-//        barEntries.add(new BarEntry(10, 40));
-//        barEntries.add(new BarEntry(11, 25));
-//        barEntries.add(new BarEntry(12, 35));
-//        barEntries.add(new BarEntry(13, 20));
-//
-//        BarDataSet set = new BarDataSet(barEntries, "");
-//        set.setColors(ColorTemplate.MATERIAL_COLORS);
-//        //set.setColors(colors);
-//        set.setDrawValues(true);
-//        BarData barData = new BarData(set);
-//        barData.setBarWidth(.8f);
-//        barChartMonthlyIncome.setData(barData);
-//        barChartMonthlyExpense.setPadding(0,0,0,0);
-//        barChartMonthlyIncome.setExtraOffsets(0, 0, 0, 0);
-//
-//
-//        barChartMonthlyIncome.getContentRect().set(0, 0, barChartMonthlyIncome.getWidth(), barChartMonthlyIncome.getHeight());
-//        barChartMonthlyIncome.animateY(500);
-//        barChartMonthlyIncome.setScaleEnabled(false);
-//        barChartMonthlyIncome.setDrawValueAboveBar(true);
-//        barChartMonthlyIncome.setDrawBorders(false);
-//        barChartMonthlyIncome.setExtraOffsets(0,0,0,0);
-//        barChartMonthlyIncome.getLegend().setEnabled(false);
-//        barChartMonthlyIncome.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
-//        barChartMonthlyIncome.moveViewToX(-1);
-//        XAxis xAxis = barChartMonthlyIncome.getXAxis();
-//        YAxis left = barChartMonthlyIncome.getAxisLeft();
-//        xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
-//        left.setAxisMaximum(30);
-//        left.setDrawLabels(true); // no axis labels
-//        left.setDrawAxisLine(true); // no axis line
-//        left.setDrawGridLines(false); // no grid lines
-//        left.setDrawZeroLine(false); // draw a zero line
-//        left.setInverted(false);
-//
-//        barChartMonthlyIncome.getAxisRight().setEnabled(false); // no right axis
-//        xAxis.setDrawGridLines(false);
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
-//        xAxis.setDrawLabels(true);
-//        xAxis.setDrawAxisLine(true);
-//        xAxis.setAxisLineColor(Color.BLACK);
-//        //xAxis.setCenterAxisLabels(true);
-//        barChartMonthlyIncome.setDrawGridBackground(false);
-//        barChartMonthlyIncome.setFitBars(false);
-//        barChartMonthlyIncome.invalidate();
-//    }
+    private void BindDataToRecentTransactions() {
+        List<Transaction> transactions = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTransaction();
+        StartActivity.destroyDBInstance();
+        transactions = transactions.subList(0,3);
+        if(transactions.get(0)!=null){
+            BindDatasUsedByBindDataToRecentTransactions(transactions.get(0), tvFirstTransactionType, tvFirstTransactionValue, tvFirstTransactionName, tvFirstTransactionCategory);
+        }
+        if(transactions.get(1)!=null){
+            BindDatasUsedByBindDataToRecentTransactions(transactions.get(1), tvSecondTransactionType, tvSecondTransactionValue, tvSecondTransactionName, tvSecondTransactionCategory);
+        }
+        if(transactions.get(2)!=null){
+            BindDatasUsedByBindDataToRecentTransactions(transactions.get(2), tvThirdTransactionType, tvThirdTransactionValue, tvThirdTransactionName, tvThirdTransactionCategory);
+        }
+    }
+    private void BindDatasUsedByBindDataToRecentTransactions(Transaction transaction, TextView type, TextView value, TextView name, TextView category){
+        Category _category = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetCategoryById(transaction.getCategoryId());
+        if(transaction.getIsIncome()){
+            type.setText("Income");
+        }else {
+            type.setText("Expense");
+        }
+        value.setText(String.format("%.2f", transaction.getAmount()));
+        if(transaction.getName().equals(null) || transaction.getName().equals("")){
+            name.setText(_category.getName());
+        }else{
+            name.setText(transaction.getName());
+        }
+        category.setText(_category.getName());
+
+    }
 
     private void BindDataToDailyExpenseBarChart() {
         barChartMonthlyExpense.getDescription().setEnabled(false);
@@ -288,9 +274,11 @@ public class StartActivity extends AppCompatActivity {
 
     private void BindDataTodaySection(){
         DayTransactions dayTransactions = TransactionDataController.GetTodaysTransactions(getApplicationContext());
-        tvDailyIncomeTotal.setText(String.format("%.2f", dayTransactions.incomeTotal));
-        tvDailyExpenseTotal.setText(String.format("%.2f", dayTransactions.expenseTotal));
-        tvDailyBalanceTotal.setText(String.format("%.2f", dayTransactions.incomeTotal - dayTransactions.expenseTotal));
+        if(dayTransactions!=null) {
+            tvDailyIncomeTotal.setText(String.format("%.2f", dayTransactions.incomeTotal));
+            tvDailyExpenseTotal.setText(String.format("%.2f", dayTransactions.expenseTotal));
+            tvDailyBalanceTotal.setText(String.format("%.2f", dayTransactions.incomeTotal - dayTransactions.expenseTotal));
+        }
     }
 
     private void onFirstRun() {
