@@ -3,9 +3,11 @@ package com.tiringbring.moneymanager.chart;
 import android.content.Context;
 
 import com.tiringbring.moneymanager.Activity.StartActivity;
+import com.tiringbring.moneymanager.DataController.DateDataController;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
 import com.tiringbring.moneymanager.Entity.MonthTransactions;
 
+import java.util.Date;
 import java.util.List;
 
 import RoomDb.Transaction;
@@ -36,5 +38,15 @@ public class MonthlyChartData {
             }
         }
         return  maximum;
+    }
+    public MonthTransactions GetThisMonthTransactions(List<MonthTransactions> monthTransactionsList){
+        Date date = new Date();
+        String thisMonth = new DateDataController().DateToMonthYear(date);
+        for(MonthTransactions monthTransactions : monthTransactionsList){
+            if(monthTransactions.month.equals(thisMonth)){
+                return  monthTransactions;
+            }
+        }
+        return null;
     }
 }

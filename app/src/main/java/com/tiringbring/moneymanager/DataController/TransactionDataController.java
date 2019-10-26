@@ -1,6 +1,13 @@
 package com.tiringbring.moneymanager.DataController;
 
+import android.content.Context;
+
+import com.tiringbring.moneymanager.Activity.StartActivity;
+import com.tiringbring.moneymanager.Entity.DayTransactions;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import RoomDb.Category;
@@ -26,5 +33,11 @@ public class TransactionDataController {
             }
         }
         return false;
+    }
+    public static DayTransactions GetTodaysTransactions(Context context){
+        Date date = new DateDataController().CropTimeFromDate(Calendar.getInstance());
+        List<Transaction>  todayTransactions = StartActivity.getDBInstance(context).mmDao().GetTransactionsOfaDate(date);
+        List<DayTransactions> dayTransactions = new ExpenseDataController(todayTransactions).getDailyExpenses();
+        return dayTransactions.get(0);
     }
 }

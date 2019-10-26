@@ -17,7 +17,7 @@ public class BarEntryDataController {
     public ArrayList<String> labels = new ArrayList<String> ();
     public ArrayList<Date> dates = new ArrayList<>();
     public List<BarEntry> GetBarEntries(Context context){
-        List<Transaction> transactions = StartActivity.getDBInstance(context).mmDao().GetTransaction();
+        List<Transaction> transactions = StartActivity.getDBInstance(context).mmDao().GetTransactionofType(false);
         StartActivity.destroyDBInstance();
         List<DayTransactions> dayTransactionsList = new ArrayList<>();
 
@@ -49,18 +49,18 @@ public class BarEntryDataController {
             DayTransactions tempdayTransactions = new DayTransactions();
             tempdayTransactions.setDate(date);
             if(date.equals(itDayExpense.date)){
-                tempdayTransactions.setTotal(itDayExpense.getTotal());
+                tempdayTransactions.setExpenseTotal(itDayExpense.getExpenseTotal());
                 itDayExpense = dayTransactionsList.get(++i);
             }
             else {
-                tempdayTransactions.setTotal(0.0);
+                tempdayTransactions.setExpenseTotal(0.0);
             }
             dayExpens.add(tempdayTransactions);
         }
         if(transactions.size()>0){
             DayTransactions tempdayTransactions = new DayTransactions();
             tempdayTransactions.setDate(endDate);
-            tempdayTransactions.setTotal(dayTransactionsList.get(dayTransactionsList.size()-1).getTotal());
+            tempdayTransactions.setExpenseTotal(dayTransactionsList.get(dayTransactionsList.size()-1).getExpenseTotal());
             dayExpens.add(tempdayTransactions);
         }else {
             calendar.add(Calendar.DATE, 1);
@@ -71,7 +71,7 @@ public class BarEntryDataController {
             dt = new DateDataController().CropTimeFromDate(calendar);
             DayTransactions tempodayTransactions = new DayTransactions();
             tempodayTransactions.setDate(dt);
-            tempodayTransactions.setTotal(0.0);
+            tempodayTransactions.setExpenseTotal(0.0);
             dayExpens.add(tempodayTransactions);
 
         }
@@ -80,7 +80,7 @@ public class BarEntryDataController {
                 dayExpens) {
             labels.add(new DateDataController().DatetoString(expense.date));
             dates.add(expense.date);
-            barEntries.add(new BarEntry(j++, expense.getTotal().intValue()));
+            barEntries.add(new BarEntry(j++, expense.getExpenseTotal().intValue()));
         }
 
         return  barEntries;
@@ -88,22 +88,22 @@ public class BarEntryDataController {
     }
     public List<String> getXAxisValues()
     {
-        List<String> mlabels = new ArrayList<>();
-        mlabels.add("first");
-        mlabels.add("second");
-        mlabels.add("third");
-        mlabels.add("fourth");
-        mlabels.add("fifth");
-        mlabels.add("sixth");
-        mlabels.add("seventh");
-        mlabels.add("first");
-        mlabels.add("second");
-        mlabels.add("third");
-        mlabels.add("fourth");
-        mlabels.add("fifth");
-        mlabels.add("sixth");
-        mlabels.add("seventh");
-        return mlabels;
-        //return labels;
+//        List<String> mlabels = new ArrayList<>();
+//        mlabels.add("first");
+//        mlabels.add("second");
+//        mlabels.add("third");
+//        mlabels.add("fourth");
+//        mlabels.add("fifth");
+//        mlabels.add("sixth");
+//        mlabels.add("seventh");
+//        mlabels.add("first");
+//        mlabels.add("second");
+//        mlabels.add("third");
+//        mlabels.add("fourth");
+//        mlabels.add("fifth");
+//        mlabels.add("sixth");
+//        mlabels.add("seventh");
+//        return mlabels;
+          return labels;
     }
 }

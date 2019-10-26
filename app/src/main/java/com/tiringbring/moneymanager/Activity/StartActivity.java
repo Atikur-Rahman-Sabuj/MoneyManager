@@ -10,6 +10,7 @@ import android.graphics.Color;
 import RoomDb.MMDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -38,6 +39,8 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.tiringbring.moneymanager.DataController.BarEntryDataController;
 import com.tiringbring.moneymanager.DataController.MySharedPreferences;
 import com.tiringbring.moneymanager.DataController.PieEntryDataController;
+import com.tiringbring.moneymanager.DataController.TransactionDataController;
+import com.tiringbring.moneymanager.Entity.DayTransactions;
 import com.tiringbring.moneymanager.Entity.MonthTransactions;
 import com.tiringbring.moneymanager.ListAdaptor.ChartMonthlyAdaptor;
 import com.tiringbring.moneymanager.Notification.Notification;
@@ -53,9 +56,10 @@ import java.util.List;
 
 public class StartActivity extends AppCompatActivity {
     private static MMDatabase INSTANCE;
-    private BarChart barChartMonthlyIncome, barChartMonthlyExpense;
-    private PieChart pieChart;
-    private TextView textView;
+    private BarChart barChartMonthlyExpense;
+    private PieChart pcTodaysTransactions;
+    private TextView tvMonthlyIncomeTotal, tvMonthlyExpenseTotal, tvMonthlyBalanceTotal,
+            tvDailyIncomeTotal, tvDailyExpenseTotal, tvDailyBalanceTotal;
     Long dailyLimit;
     private Date pieDate;
     private Button btnAddNew;
@@ -76,16 +80,42 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         //myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(),MMDatabase.class, "Expensedb").allowMainThreadQueries().build();
         onFirstRun();
+        tvMonthlyIncomeTotal = (TextView) findViewById(R.id.tvMonthlyIncomeTotal);
+        tvMonthlyExpenseTotal = (TextView) findViewById(R.id.tvMonthlyExpenseTotal);
+        tvMonthlyBalanceTotal = (TextView) findViewById(R.id.tvMonthlyBalanceTotal);
+
+        tvDailyIncomeTotal = (TextView) findViewById(R.id.tvDailyIncomeTotal);
+        tvDailyExpenseTotal = (TextView) findViewById(R.id.tvDailyExpenseTotal);
+        tvDailyBalanceTotal = (TextView) findViewById(R.id.tvDailyBalanceTotal);
+
+        BindDataTodaySection();
+
         btnAddNew = (Button) findViewById(R.id.btnAddNew);
         btnShowList = (Button) findViewById(R.id.btnShowList);
-        barChartMonthlyIncome = (BarChart) findViewById(R.id.monthlyIncomeBarChart);
-        barChartMonthlyExpense = (BarChart) findViewById(R.id.monthlyExpenseBarChart);
+        pcTodaysTransactions = (PieChart) findViewById(R.id.pcTodaysTransactions);
+        barChartMonthlyExpense = (BarChart) findViewById(R.id.dailyExpenseBarChart);
         rvTestList = (RecyclerView) findViewById(R.id.rvTestList);
         rvTestList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         MonthlyChartData cmd = new MonthlyChartData();
         List<MonthTransactions> monthTransactionsList = cmd.GetMonthlyExpenseList(getApplicationContext());
+        MonthTransactions thisMonth = null;
+        if(monthTransactionsList.size()>0){
+            thisMonth = cmd.GetThisMonthTransactions(monthTransactionsList);
+        }
+        if(thisMonth == null){
+            tvMonthlyIncomeTotal.setText("0");
+            tvMonthlyExpenseTotal.setText("0");
+            tvMonthlyBalanceTotal.setText("0");
+        }else{
+            tvMonthlyIncomeTotal.setText(String.format("%.2f", thisMonth.incomeTotal));
+            tvMonthlyExpenseTotal.setText(String.format("%.2f", thisMonth.expenseTotal));
+            tvMonthlyBalanceTotal.setText(String.format("%.2f", thisMonth.incomeTotal - thisMonth.expenseTotal));
+        }
         ChartMonthlyAdaptor chartMonthlyAdaptor = new ChartMonthlyAdaptor(getApplicationContext(), monthTransactionsList, cmd.GetMaximumMonthlyIncome(monthTransactionsList), cmd.GetMaximumMonthlyExpense(monthTransactionsList));
         rvTestList.setAdapter(chartMonthlyAdaptor);
+        SetPieChartDate();
+        BindDataToPieChart();
+        BindDataToDailyExpenseBarChart();
 
 
 
@@ -125,118 +155,102 @@ public class StartActivity extends AppCompatActivity {
         });
     }
 
-    private void BindDataToMonthlyIncomeBarChart() {
-        barChartMonthlyIncome.getDescription().setEnabled(false);
-        final BarEntryDataController beDataController = new BarEntryDataController();
-//        List<BarEntry> data = beDataController.GetBarEntries(getApplicationContext());
-//        //generating colors
-//        List<Integer> colors = new ArrayList<>();
-//        for (BarEntry be:
-//                data) {
-//            if(be.getY()>dailyLimit){
-//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
-//            }
-//            else {
-//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
-//            }
-//        }
-        List<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(0, 20));
-        barEntries.add(new BarEntry(1, 30));
-        barEntries.add(new BarEntry(2, 40));
-        barEntries.add(new BarEntry(3, 38));
-        barEntries.add(new BarEntry(4, 25));
-        barEntries.add(new BarEntry(5, 35));
-        barEntries.add(new BarEntry(6, 20));
-        barEntries.add(new BarEntry(7, 38));
-        barEntries.add(new BarEntry(8, 20));
-        barEntries.add(new BarEntry(9, 30));
-        barEntries.add(new BarEntry(10, 40));
-        barEntries.add(new BarEntry(11, 25));
-        barEntries.add(new BarEntry(12, 35));
-        barEntries.add(new BarEntry(13, 20));
+//    private void BindDataToMonthlyIncomeBarChart() {
+//        barChartMonthlyIncome.getDescription().setEnabled(false);
+//        final BarEntryDataController beDataController = new BarEntryDataController();
+////        List<BarEntry> data = beDataController.GetBarEntries(getApplicationContext());
+////        //generating colors
+////        List<Integer> colors = new ArrayList<>();
+////        for (BarEntry be:
+////                data) {
+////            if(be.getY()>dailyLimit){
+////                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
+////            }
+////            else {
+////                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
+////            }
+////        }
+//        List<BarEntry> barEntries = new ArrayList<>();
+//        barEntries.add(new BarEntry(0, 20));
+//        barEntries.add(new BarEntry(1, 30));
+//        barEntries.add(new BarEntry(2, 40));
+//        barEntries.add(new BarEntry(3, 38));
+//        barEntries.add(new BarEntry(4, 25));
+//        barEntries.add(new BarEntry(5, 35));
+//        barEntries.add(new BarEntry(6, 20));
+//        barEntries.add(new BarEntry(7, 38));
+//        barEntries.add(new BarEntry(8, 20));
+//        barEntries.add(new BarEntry(9, 30));
+//        barEntries.add(new BarEntry(10, 40));
+//        barEntries.add(new BarEntry(11, 25));
+//        barEntries.add(new BarEntry(12, 35));
+//        barEntries.add(new BarEntry(13, 20));
+//
+//        BarDataSet set = new BarDataSet(barEntries, "");
+//        set.setColors(ColorTemplate.MATERIAL_COLORS);
+//        //set.setColors(colors);
+//        set.setDrawValues(true);
+//        BarData barData = new BarData(set);
+//        barData.setBarWidth(.8f);
+//        barChartMonthlyIncome.setData(barData);
+//        barChartMonthlyExpense.setPadding(0,0,0,0);
+//        barChartMonthlyIncome.setExtraOffsets(0, 0, 0, 0);
+//
+//
+//        barChartMonthlyIncome.getContentRect().set(0, 0, barChartMonthlyIncome.getWidth(), barChartMonthlyIncome.getHeight());
+//        barChartMonthlyIncome.animateY(500);
+//        barChartMonthlyIncome.setScaleEnabled(false);
+//        barChartMonthlyIncome.setDrawValueAboveBar(true);
+//        barChartMonthlyIncome.setDrawBorders(false);
+//        barChartMonthlyIncome.setExtraOffsets(0,0,0,0);
+//        barChartMonthlyIncome.getLegend().setEnabled(false);
+//        barChartMonthlyIncome.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
+//        barChartMonthlyIncome.moveViewToX(-1);
+//        XAxis xAxis = barChartMonthlyIncome.getXAxis();
+//        YAxis left = barChartMonthlyIncome.getAxisLeft();
+//        xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
+//        left.setAxisMaximum(30);
+//        left.setDrawLabels(true); // no axis labels
+//        left.setDrawAxisLine(true); // no axis line
+//        left.setDrawGridLines(false); // no grid lines
+//        left.setDrawZeroLine(false); // draw a zero line
+//        left.setInverted(false);
+//
+//        barChartMonthlyIncome.getAxisRight().setEnabled(false); // no right axis
+//        xAxis.setDrawGridLines(false);
+//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
+//        xAxis.setDrawLabels(true);
+//        xAxis.setDrawAxisLine(true);
+//        xAxis.setAxisLineColor(Color.BLACK);
+//        //xAxis.setCenterAxisLabels(true);
+//        barChartMonthlyIncome.setDrawGridBackground(false);
+//        barChartMonthlyIncome.setFitBars(false);
+//        barChartMonthlyIncome.invalidate();
+//    }
 
-        BarDataSet set = new BarDataSet(barEntries, "");
-        set.setColors(ColorTemplate.MATERIAL_COLORS);
-        //set.setColors(colors);
-        set.setDrawValues(true);
-        BarData barData = new BarData(set);
-        barData.setBarWidth(.8f);
-        barChartMonthlyIncome.setData(barData);
-        barChartMonthlyExpense.setPadding(0,0,0,0);
-        barChartMonthlyIncome.setExtraOffsets(0, 0, 0, 0);
-
-
-        barChartMonthlyIncome.getContentRect().set(0, 0, barChartMonthlyIncome.getWidth(), barChartMonthlyIncome.getHeight());
-        barChartMonthlyIncome.animateY(500);
-        barChartMonthlyIncome.setScaleEnabled(false);
-        barChartMonthlyIncome.setDrawValueAboveBar(true);
-        barChartMonthlyIncome.setDrawBorders(false);
-        barChartMonthlyIncome.setExtraOffsets(0,0,0,0);
-        barChartMonthlyIncome.getLegend().setEnabled(false);
-        barChartMonthlyIncome.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
-        barChartMonthlyIncome.moveViewToX(-1);
-        XAxis xAxis = barChartMonthlyIncome.getXAxis();
-        YAxis left = barChartMonthlyIncome.getAxisLeft();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
-        left.setAxisMaximum(30);
-        left.setDrawLabels(true); // no axis labels
-        left.setDrawAxisLine(true); // no axis line
-        left.setDrawGridLines(false); // no grid lines
-        left.setDrawZeroLine(false); // draw a zero line
-        left.setInverted(false);
-
-        barChartMonthlyIncome.getAxisRight().setEnabled(false); // no right axis
-        xAxis.setDrawGridLines(false);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
-        xAxis.setDrawLabels(true);
-        xAxis.setDrawAxisLine(true);
-        xAxis.setAxisLineColor(Color.BLACK);
-        //xAxis.setCenterAxisLabels(true);
-        barChartMonthlyIncome.setDrawGridBackground(false);
-        barChartMonthlyIncome.setFitBars(false);
-        barChartMonthlyIncome.invalidate();
-    }
-
-    private void BindDataToMonthlyExpenseBarChart() {
+    private void BindDataToDailyExpenseBarChart() {
         barChartMonthlyExpense.getDescription().setEnabled(false);
         final BarEntryDataController beDataController = new BarEntryDataController();
-//        List<BarEntry> data = beDataController.GetBarEntries(getApplicationContext());
-//        //generating colors
-//        List<Integer> colors = new ArrayList<>();
-//        for (BarEntry be:
-//                data) {
-//            if(be.getY()>dailyLimit){
-//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
-//            }
-//            else {
-//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
-//            }
-//        }
-        List<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(0, 20));
-        barEntries.add(new BarEntry(1, 30));
-        barEntries.add(new BarEntry(2, 40));
-        barEntries.add(new BarEntry(3, 38));
-        barEntries.add(new BarEntry(4, 25));
-        barEntries.add(new BarEntry(5, 35));
-        barEntries.add(new BarEntry(6, 20));
-        barEntries.add(new BarEntry(7, 38));
-        barEntries.add(new BarEntry(8, 20));
-        barEntries.add(new BarEntry(9, 30));
-        barEntries.add(new BarEntry(10, 40));
-        barEntries.add(new BarEntry(11, 25));
-        barEntries.add(new BarEntry(12, 35));
-        barEntries.add(new BarEntry(13, 20));
+        List<BarEntry> barEntries = beDataController.GetBarEntries(getApplicationContext());
+        //generating colors
+        List<Integer> colors = new ArrayList<>();
+        for (BarEntry be: barEntries) {
+            if(be.getY()>500){
+                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
+            }
+            else {
+                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
+            }
+        }
 
         BarDataSet set = new BarDataSet(barEntries, "");
-        set.setColors(ColorTemplate.MATERIAL_COLORS);
+        set.setColors(colors);
         //set.setColors(colors);
         set.setDrawValues(true);
         BarData barData = new BarData(set);
         barData.setBarWidth(.8f);
         barChartMonthlyExpense.setData(barData);
-        barChartMonthlyExpense.setViewPortOffsets(0,0,0,0);
+        //barChartMonthlyExpense.setViewPortOffsets(0,0,0,0);
         barChartMonthlyExpense.setExtraOffsets(0, 0, 0, 0);
 
 
@@ -253,16 +267,16 @@ public class StartActivity extends AppCompatActivity {
         XAxis xAxis = barChartMonthlyExpense.getXAxis();
         YAxis left = barChartMonthlyExpense.getAxisLeft();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
-        left.setAxisMaximum(30);
+        //left.setAxisMaximum(1000);
         left.setDrawLabels(true); // no axis labels
         left.setDrawAxisLine(false); // no axis line
         left.setDrawGridLines(false); // no grid lines
         left.setDrawZeroLine(false); // draw a zero line
-        left.setInverted(true);
+        left.setInverted(false);
 
         barChartMonthlyExpense.getAxisRight().setEnabled(false); // no right axis
         xAxis.setDrawGridLines(false);
-        xAxis.setPosition(XAxis.XAxisPosition.TOP_INSIDE);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawLabels(true);
         xAxis.setDrawAxisLine(true);
         xAxis.setAxisLineColor(Color.BLACK);
@@ -270,6 +284,13 @@ public class StartActivity extends AppCompatActivity {
         barChartMonthlyExpense.setDrawGridBackground(false);
         barChartMonthlyExpense.setFitBars(false);
         barChartMonthlyExpense.invalidate();
+    }
+
+    private void BindDataTodaySection(){
+        DayTransactions dayTransactions = TransactionDataController.GetTodaysTransactions(getApplicationContext());
+        tvDailyIncomeTotal.setText(String.format("%.2f", dayTransactions.incomeTotal));
+        tvDailyExpenseTotal.setText(String.format("%.2f", dayTransactions.expenseTotal));
+        tvDailyBalanceTotal.setText(String.format("%.2f", dayTransactions.incomeTotal - dayTransactions.expenseTotal));
     }
 
     private void onFirstRun() {
@@ -366,38 +387,39 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void BindDataToPieChart() {
-        pieChart.setUsePercentValues(false);
+        pcTodaysTransactions.setUsePercentValues(false);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
-        pieChart.getDescription().setText("");
+        pcTodaysTransactions.getDescription().setText("");
 
-        pieChart.setCenterText(dateFormat.format(pieDate));
-        pieChart.setExtraOffsets(5,10,5,5);
-        pieChart.setDragDecelerationFrictionCoef(0.95f);
-        pieChart.setDrawHoleEnabled(true);
+        pcTodaysTransactions.setCenterText(dateFormat.format(pieDate));
+        pcTodaysTransactions.setExtraOffsets(0,0,0,0);
+        pcTodaysTransactions.setDragDecelerationFrictionCoef(0.95f);
+        pcTodaysTransactions.setDrawHoleEnabled(true);
 
-        pieChart.getLegend().setEnabled(false);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setHoleRadius(35f);
-        pieChart.setTransparentCircleRadius(50f);
-        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
+        pcTodaysTransactions.getLegend().setEnabled(false);
+        pcTodaysTransactions.setHoleColor(Color.WHITE);
+        pcTodaysTransactions.setHoleRadius(40f);
+        pcTodaysTransactions.setTransparentCircleRadius(50f);
+        pcTodaysTransactions.animateY(1000, Easing.EasingOption.EaseInOutCubic);
         PieEntryDataController pedc = new PieEntryDataController();
         ArrayList<PieEntry> yValues = pedc.GetList(getApplicationContext(), pieDate);
         if(yValues.size()<1){
-            pieChart.setHoleRadius(50f);
-            pieChart.setCenterText(dateFormat.format(pieDate)+" No expense on this date");
+            pcTodaysTransactions.setHoleRadius(50f);
+            pcTodaysTransactions.setCenterText(dateFormat.format(pieDate)+" No expense on this date");
         }
         Double Total = pedc.getTotal();
-        textView.setText(getResources().getString(R.string.total)+" : "+Total.toString()+"   "+getResources().getString(R.string.chart_slide));
+        //textView.setText(getResources().getString(R.string.total)+" : "+Total.toString()+"   "+getResources().getString(R.string.chart_slide));
         PieDataSet dataSet = new PieDataSet(yValues, "");
         dataSet.setSliceSpace(1f);
         dataSet.setSelectionShift(5f);
         dataSet.setColors(ColorTemplate.PASTEL_COLORS);
 
         PieData data = new PieData(dataSet);
-        data.setValueTextSize(10f);
+        data.setValueTextSize(8f);
+
         data.setValueTextColor(Color.WHITE);
 
-        pieChart.setData(data);
+        pcTodaysTransactions.setData(data);
     }
 
 

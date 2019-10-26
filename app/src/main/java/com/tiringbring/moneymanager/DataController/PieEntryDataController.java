@@ -15,12 +15,15 @@ public class PieEntryDataController {
     private  double Total=0;
     public ArrayList<PieEntry> GetList(Context context, Date date){
          ArrayList<PieEntry> pieEntries = new ArrayList<>();
-         List<Transaction> expens = StartActivity.getDBInstance(context).mmDao().GetTransactionsOfaDate(date);
+         List<Transaction> transactions = StartActivity.getDBInstance(context).mmDao().GetTransactionsOfaDate(date);
          StartActivity.destroyDBInstance();
-        for (Transaction transaction : expens
+        for (Transaction transaction : transactions
              ) {
-            Total += transaction.getAmount();
-            pieEntries.add(new PieEntry(((int) transaction.getAmount()), transaction.getName()));
+            if(!transaction.getIsIncome()){
+                Total += transaction.getAmount();
+                pieEntries.add(new PieEntry(((int) transaction.getAmount()), transaction.getName()));
+            }
+
         }
 
 //         if(pieEntries.size()==0){

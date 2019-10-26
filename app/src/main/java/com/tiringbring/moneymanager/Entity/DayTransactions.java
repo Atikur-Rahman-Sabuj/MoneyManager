@@ -11,6 +11,7 @@ public class DayTransactions {
     public Double incomeTotal;
     public Double expenseTotal;
     public Double total;
+
     public List<Transaction> dayTransactionList = new ArrayList<>();
     public DayTransactions(){
 
@@ -22,13 +23,9 @@ public class DayTransactions {
         SetTotals(dayTransactionList);
     }
 
-    public Double getTotal() {
-        return total;
-    }
 
-    public void setTotal(Double total) {
-        this.total = total;
-    }
+
+
 
     public Double getIncomeTotal() {
         return incomeTotal;
