@@ -48,7 +48,8 @@ public class AddTransactionActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener tvDateSetListner;
     private Boolean isIncome = false;
     private EditText etMemo, etAmount;
-    private Button btnSave,btnLeft, btnRight;
+    private Button btnSave;
+    private LinearLayout btnLeft, btnRight;
     private TextView tvDatePicker, tvIncomeSelect, tvExpenseSelect;
     private long transactionId = 0;
     private long selectedId;
@@ -64,8 +65,8 @@ public class AddTransactionActivity extends AppCompatActivity {
         etMemo = (EditText) findViewById(R.id.etMemo);
         etAmount = (EditText) findViewById(R.id.etAmount);
         btnSave = (Button) findViewById(R.id.btnSave);
-        btnLeft = (Button) findViewById(R.id.btnDPleft);
-        btnRight = (Button) findViewById(R.id.btnDPRight);
+        btnLeft = (LinearLayout) findViewById(R.id.btnDPleft);
+        btnRight = (LinearLayout) findViewById(R.id.btnDPRight);
         tvIncomeSelect = (TextView) findViewById(R.id.tvSelectIncome);
         tvExpenseSelect = (TextView) findViewById(R.id.tvSelectExpense);
         tvExpenseSelect.setBackground(getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));

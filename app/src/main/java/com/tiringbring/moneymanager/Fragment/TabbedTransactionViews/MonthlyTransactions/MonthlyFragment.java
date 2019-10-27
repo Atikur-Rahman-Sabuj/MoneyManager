@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,7 +50,7 @@ public class MonthlyFragment extends Fragment implements ITabbedFragments {
     SelectedCategoryListAdaptor selectedCategoryListAdaptor;
     private TextView tvMessage;
     private FrameLayout flListFragment;
-
+    private CardView cvList;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -58,6 +59,7 @@ public class MonthlyFragment extends Fragment implements ITabbedFragments {
         View view = inflater.inflate(R.layout.fragment_monthly, container, false);
         tvMessage = (TextView) view.findViewById(R.id.tvMessage);
         flListFragment = (FrameLayout) view.findViewById(R.id.flListFrrame);
+        cvList = (CardView) view.findViewById(R.id.cvList);
 
         btnSelectFilterCategory = (Button) view.findViewById(R.id.btnSelectFilterCategory);
         btnSelectFilterCategory.setOnClickListener(new View.OnClickListener() {
@@ -100,9 +102,9 @@ public class MonthlyFragment extends Fragment implements ITabbedFragments {
     void showHideMessage(){
         if(monthlyExpenseList.size()>0){
             tvMessage.setVisibility(View.GONE);
-            flListFragment.setVisibility(View.VISIBLE);
+            cvList.setVisibility(View.VISIBLE);
         }else{
-            flListFragment.setVisibility(View.GONE);
+            cvList.setVisibility(View.GONE);
             tvMessage.setVisibility(View.VISIBLE);
         }
     }

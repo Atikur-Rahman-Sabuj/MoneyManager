@@ -22,8 +22,8 @@ public class ImportExport {
             File data  = Environment.getDataDirectory();
 
             if (sd.canWrite()) {
-                String  currentDBPath= "//data//" + "com.tiringbring.dailyexpenses"
-                        + "//databases//" + "Expensedb";
+                String  currentDBPath= "//data//" + "com.tiringbring.moneymanager"
+                        + "//databases//" + "MMdb";
                 String backupDBPath  =  backupPath;//"/RoomDB/Expensedb";
                 File  backupDB= new File(data, currentDBPath);
                 File currentDB  = new File(sd, backupDBPath);
@@ -55,14 +55,14 @@ public class ImportExport {
             File data = Environment.getDataDirectory();
 
             if (sd.canWrite()) {
-                String  currentDBPath= "//data//" + "com.tiringbring.dailyexpenses"
-                        + "//databases//" + "Expensedb";
-                String backupDBPath  = "/Transaction/Expensedb";
+                String  currentDBPath= "//data//" + "com.tiringbring.moneymanager"
+                        + "//databases//" + "MMdb";
+                String backupDBPath  = "/MoneyManager/MMdb";
                 File currentDB = new File(data, currentDBPath);
                 File backupDB = new File(sd, backupDBPath);
 
                 FileChannel src = new FileInputStream(currentDB).getChannel();
-                File yourAppDir = new File(Environment.getExternalStorageDirectory()+File.separator+"Transaction");
+                File yourAppDir = new File(Environment.getExternalStorageDirectory()+File.separator+"MoneyManager");
 
                 if(!yourAppDir.exists() && !yourAppDir.isDirectory())
                 {

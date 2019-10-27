@@ -109,14 +109,34 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:background="@drawable/set_date_background">
+
+            <LinearLayout
+                android:id="@+id/btnDPleft"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
+                android:translationZ="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/left_button_background"
+                    android:orientation="horizontal"></LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvDatePicker"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_weight="1"
                 android:background="@drawable/set_date_background"
                 android:elevation="2dp"
                 android:paddingTop="12dp"
@@ -125,8 +145,26 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
+            <LinearLayout
+                android:id="@+id/btnDPRight"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
+                android:translationZ="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/right_button_background"
+                    android:orientation="horizontal"></LinearLayout>
+            </LinearLayout>
+
             <Button
-                android:id="@+id/btnDPleft"
+                android:id="@+id/btnDPleft2"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
                 android:layout_alignParentLeft="true"
@@ -134,10 +172,11 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/left_button_background"
-                android:translationZ="1dp" />
+                android:translationZ="1dp"
+                android:visibility="gone" />
 
             <Button
-                android:id="@+id/btnDPRight"
+                android:id="@+id/btnDPRight2"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
@@ -145,8 +184,9 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/right_button_background"
-                android:translationZ="1dp" />
-        </RelativeLayout>
+                android:translationZ="1dp"
+                android:visibility="gone" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

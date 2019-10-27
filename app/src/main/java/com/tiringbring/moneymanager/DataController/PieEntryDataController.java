@@ -17,8 +17,7 @@ public class PieEntryDataController {
          ArrayList<PieEntry> pieEntries = new ArrayList<>();
          List<Transaction> transactions = StartActivity.getDBInstance(context).mmDao().GetTransactionsOfaDate(date);
          StartActivity.destroyDBInstance();
-        for (Transaction transaction : transactions
-             ) {
+        for (Transaction transaction : transactions) {
             if(!transaction.getIsIncome()){
                 Total += transaction.getAmount();
                 pieEntries.add(new PieEntry(((int) transaction.getAmount()), transaction.getName()));

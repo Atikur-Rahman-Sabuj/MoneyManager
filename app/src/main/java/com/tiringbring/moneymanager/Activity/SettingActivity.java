@@ -53,10 +53,10 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.activity_setting);
         isSpinnerInitialized = false;
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
-        TextView tvDayLimitPanel = (TextView)findViewById(R.id.tvDayLimitPanel);
-        final TextView tvDayLimitValue = (TextView)findViewById(R.id.tvDayLimitValue);
-        final TextView tvMonthlyLimitValue = (TextView) findViewById(R.id.tvMonthlyLimitValue);
-        final TextView tvYearlyLimitValue = (TextView)findViewById(R.id.tvYearlyLimitValue);
+        //TextView tvDayLimitPanel = (TextView)findViewById(R.id.tvDayLimitPanel);
+       // final TextView tvDayLimitValue = (TextView)findViewById(R.id.tvDayLimitValue);
+       // final TextView tvMonthlyLimitValue = (TextView) findViewById(R.id.tvMonthlyLimitValue);
+      //  final TextView tvYearlyLimitValue = (TextView)findViewById(R.id.tvYearlyLimitValue);
         btnImportExport = (Button) findViewById(R.id.btnImportExport);
         btnImportExport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,121 +116,121 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         final long dailyLimit = new MySharedPreferences(getApplicationContext()).getDayilyLimit();
         final long monthlyLimit = new MySharedPreferences(getApplicationContext()).getMonthlyLimit();
         final long yearlyLimit = new MySharedPreferences(getApplicationContext()).getYearlyLimit();
-        tvDayLimitValue.setText(String.valueOf(dailyLimit));
-        tvMonthlyLimitValue.setText(String.valueOf(monthlyLimit));
-        tvYearlyLimitValue.setText(String.valueOf(yearlyLimit));
+        //tvDayLimitValue.setText(String.valueOf(dailyLimit));
+        //tvMonthlyLimitValue.setText(String.valueOf(monthlyLimit));
+       // tvYearlyLimitValue.setText(String.valueOf(yearlyLimit));
 
-        tvDayLimitValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View dialogView = getLayoutInflater().inflate(R.layout.setting_limit_dialouge, null);
-                final AlertDialog alertDialog = new AlertDialog.Builder(SettingActivity.this).create();
-                alertDialog.setTitle("Set Daily Limit");
-                //alertDialog.setIcon("Icon id here");
-                alertDialog.setCancelable(true);
-                //alertDialog.getWindow().setGravity(Gravity.BOTTOM);
-                //Constant.alertDialog.setMessage("Your Message Here");
-
-
-                final EditText etLimit = (EditText) dialogView.findViewById(R.id.etLimit);
-                etLimit.setText(String.valueOf(dailyLimit));
-
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        long value = Long.parseLong(etLimit.getText().toString());
-                        new MySharedPreferences(getApplicationContext()).setDayilyLimit(value);
-                        tvDayLimitValue.setText(String.valueOf(value));
-                    }
-                });
-
-                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        alertDialog.dismiss();
-                    }
-                });
-
-
-                alertDialog.setView(dialogView);
-                alertDialog.show();
-            }
-        });
-        tvMonthlyLimitValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View dialogView = getLayoutInflater().inflate(R.layout.setting_limit_dialouge, null);
-                final AlertDialog alertDialog = new AlertDialog.Builder(SettingActivity.this).create();
-                alertDialog.setTitle("Set Monthly Limit");
-                //alertDialog.setIcon("Icon id here");
-                alertDialog.setCancelable(true);
-                //alertDialog.getWindow().setGravity(Gravity.BOTTOM);
-                //Constant.alertDialog.setMessage("Your Message Here");
-
-
-                final EditText etLimit = (EditText) dialogView.findViewById(R.id.etLimit);
-                etLimit.setText(String.valueOf(monthlyLimit));
-
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        long value = Long.parseLong(etLimit.getText().toString());
-                        new MySharedPreferences(getApplicationContext()).setMonthlyLimit(value);
-                        tvMonthlyLimitValue.setText(String.valueOf(value));
-                    }
-                });
-
-                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        alertDialog.dismiss();
-                    }
-                });
-
-
-                alertDialog.setView(dialogView);
-                alertDialog.show();
-            }
-        });
-        tvYearlyLimitValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View dialogView = getLayoutInflater().inflate(R.layout.setting_limit_dialouge, null);
-                final AlertDialog alertDialog = new AlertDialog.Builder(SettingActivity.this).create();
-                alertDialog.setTitle("Set Yearly Limit");
-                //alertDialog.setIcon("Icon id here");
-                alertDialog.setCancelable(true);
-                //alertDialog.getWindow().setGravity(Gravity.BOTTOM);
-                //Constant.alertDialog.setMessage("Your Message Here");
-
-
-                final EditText etLimit = (EditText) dialogView.findViewById(R.id.etLimit);
-                etLimit.setText(String.valueOf(yearlyLimit));
-
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        long value = Long.parseLong(etLimit.getText().toString());
-                        new MySharedPreferences(getApplicationContext()).setYearlyLimit(value);
-                        tvYearlyLimitValue.setText(String.valueOf(value));
-                    }
-                });
-
-                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        alertDialog.dismiss();
-                    }
-                });
-
-
-                alertDialog.setView(dialogView);
-                alertDialog.show();
-            }
-        });
+//        tvDayLimitValue.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                View dialogView = getLayoutInflater().inflate(R.layout.setting_limit_dialouge, null);
+//                final AlertDialog alertDialog = new AlertDialog.Builder(SettingActivity.this).create();
+//                alertDialog.setTitle("Set Daily Limit");
+//                //alertDialog.setIcon("Icon id here");
+//                alertDialog.setCancelable(true);
+//                //alertDialog.getWindow().setGravity(Gravity.BOTTOM);
+//                //Constant.alertDialog.setMessage("Your Message Here");
+//
+//
+//                final EditText etLimit = (EditText) dialogView.findViewById(R.id.etLimit);
+//                etLimit.setText(String.valueOf(dailyLimit));
+//
+//                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        long value = Long.parseLong(etLimit.getText().toString());
+//                        new MySharedPreferences(getApplicationContext()).setDayilyLimit(value);
+//                        tvDayLimitValue.setText(String.valueOf(value));
+//                    }
+//                });
+//
+//                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        alertDialog.dismiss();
+//                    }
+//                });
+//
+//
+//                alertDialog.setView(dialogView);
+//                alertDialog.show();
+//            }
+//        });
+//        tvMonthlyLimitValue.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                View dialogView = getLayoutInflater().inflate(R.layout.setting_limit_dialouge, null);
+//                final AlertDialog alertDialog = new AlertDialog.Builder(SettingActivity.this).create();
+//                alertDialog.setTitle("Set Monthly Limit");
+//                //alertDialog.setIcon("Icon id here");
+//                alertDialog.setCancelable(true);
+//                //alertDialog.getWindow().setGravity(Gravity.BOTTOM);
+//                //Constant.alertDialog.setMessage("Your Message Here");
+//
+//
+//                final EditText etLimit = (EditText) dialogView.findViewById(R.id.etLimit);
+//                etLimit.setText(String.valueOf(monthlyLimit));
+//
+//                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        long value = Long.parseLong(etLimit.getText().toString());
+//                        new MySharedPreferences(getApplicationContext()).setMonthlyLimit(value);
+//                        tvMonthlyLimitValue.setText(String.valueOf(value));
+//                    }
+//                });
+//
+//                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        alertDialog.dismiss();
+//                    }
+//                });
+//
+//
+//                alertDialog.setView(dialogView);
+//                alertDialog.show();
+//            }
+//        });
+//        tvYearlyLimitValue.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                View dialogView = getLayoutInflater().inflate(R.layout.setting_limit_dialouge, null);
+//                final AlertDialog alertDialog = new AlertDialog.Builder(SettingActivity.this).create();
+//                alertDialog.setTitle("Set Yearly Limit");
+//                //alertDialog.setIcon("Icon id here");
+//                alertDialog.setCancelable(true);
+//                //alertDialog.getWindow().setGravity(Gravity.BOTTOM);
+//                //Constant.alertDialog.setMessage("Your Message Here");
+//
+//
+//                final EditText etLimit = (EditText) dialogView.findViewById(R.id.etLimit);
+//                etLimit.setText(String.valueOf(yearlyLimit));
+//
+//                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        long value = Long.parseLong(etLimit.getText().toString());
+//                        new MySharedPreferences(getApplicationContext()).setYearlyLimit(value);
+//                        tvYearlyLimitValue.setText(String.valueOf(value));
+//                    }
+//                });
+//
+//                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        alertDialog.dismiss();
+//                    }
+//                });
+//
+//
+//                alertDialog.setView(dialogView);
+//                alertDialog.show();
+//            }
+//        });
 
 
 

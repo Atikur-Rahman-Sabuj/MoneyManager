@@ -41,6 +41,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.tiringbring.moneymanager.DataController.BarEntryDataController;
+import com.tiringbring.moneymanager.DataController.InitialData;
 import com.tiringbring.moneymanager.DataController.MySharedPreferences;
 import com.tiringbring.moneymanager.DataController.PieEntryDataController;
 import com.tiringbring.moneymanager.DataController.TransactionDataController;
@@ -88,7 +89,6 @@ public class StartActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_start);
-        //myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(),MMDatabase.class, "Expensedb").allowMainThreadQueries().build();
         onFirstRun();
         tvMonthlyIncomeTotal = (TextView) findViewById(R.id.tvMonthlyIncomeTotal);
         tvMonthlyExpenseTotal = (TextView) findViewById(R.id.tvMonthlyExpenseTotal);
@@ -183,17 +183,21 @@ public class StartActivity extends AppCompatActivity {
         });
     }
 
+
+
+
     private void BindDataToRecentTransactions() {
         List<Transaction> transactions = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTransaction();
         StartActivity.destroyDBInstance();
-        transactions = transactions.subList(0,3);
-        if(transactions.get(0)!=null){
+        if(transactions.size()>=3)
+            transactions = transactions.subList(0,3);
+        if(transactions.size()>=1){
             BindDatasUsedByBindDataToRecentTransactions(transactions.get(0), tvFirstTransactionType, tvFirstTransactionValue, tvFirstTransactionName, tvFirstTransactionCategory);
         }
-        if(transactions.get(1)!=null){
+        if(transactions.size()>=2){
             BindDatasUsedByBindDataToRecentTransactions(transactions.get(1), tvSecondTransactionType, tvSecondTransactionValue, tvSecondTransactionName, tvSecondTransactionCategory);
         }
-        if(transactions.get(2)!=null){
+        if(transactions.size()>=3){
             BindDatasUsedByBindDataToRecentTransactions(transactions.get(2), tvThirdTransactionType, tvThirdTransactionValue, tvThirdTransactionName, tvThirdTransactionCategory);
         }
     }
@@ -282,10 +286,11 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void onFirstRun() {
-        //MySharedPreferences msp = new MySharedPreferences(getApplicationContext());
-            setNotification();
-            //msp.setIsFirstRun(false);
-
+        MySharedPreferences msp = new MySharedPreferences(getApplicationContext());
+        if(msp.getIsFirstRun()){
+            InitialData.CreateCategories(getApplicationContext());
+            msp.setIsFirstRun(false);
+        }
     }
 
     private void setNotification() {
@@ -393,7 +398,8 @@ public class StartActivity extends AppCompatActivity {
         ArrayList<PieEntry> yValues = pedc.GetList(getApplicationContext(), pieDate);
         if(yValues.size()<1){
             pcTodaysTransactions.setHoleRadius(50f);
-            pcTodaysTransactions.setCenterText(dateFormat.format(pieDate)+" No expense on this date");
+            pcTodaysTransactions.setCenterText("No expense");
+            //pcTodaysTransactions.setCenterText(dateFormat.format(pieDate)+" No expense on this date");
         }
         Double Total = pedc.getTotal();
         //textView.setText(getResources().getString(R.string.total)+" : "+Total.toString()+"   "+getResources().getString(R.string.chart_slide));
