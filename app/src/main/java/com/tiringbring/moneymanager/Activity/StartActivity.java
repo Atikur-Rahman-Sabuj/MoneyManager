@@ -183,8 +183,33 @@ public class StartActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-
+        BindDataTodaySection();
+        BindDataToRecentTransactions();
+        MonthlyChartData cmd = new MonthlyChartData();
+        List<MonthTransactions> monthTransactionsList = cmd.GetMonthlyExpenseList(getApplicationContext());
+        MonthTransactions thisMonth = null;
+        if(monthTransactionsList.size()>0){
+            thisMonth = cmd.GetThisMonthTransactions(monthTransactionsList);
+        }
+        if(thisMonth == null){
+            tvMonthlyIncomeTotal.setText("0");
+            tvMonthlyExpenseTotal.setText("0");
+            tvMonthlyBalanceTotal.setText("0");
+        }else{
+            tvMonthlyIncomeTotal.setText(String.format("%.2f", thisMonth.incomeTotal));
+            tvMonthlyExpenseTotal.setText(String.format("%.2f", thisMonth.expenseTotal));
+            tvMonthlyBalanceTotal.setText(String.format("%.2f", thisMonth.incomeTotal - thisMonth.expenseTotal));
+        }
+        ChartMonthlyAdaptor chartMonthlyAdaptor = new ChartMonthlyAdaptor(getApplicationContext(), monthTransactionsList, cmd.GetMaximumMonthlyIncome(monthTransactionsList), cmd.GetMaximumMonthlyExpense(monthTransactionsList));
+        rvTestList.setAdapter(chartMonthlyAdaptor);
+        SetPieChartDate();
+        BindDataToPieChart();
+        BindDataToDailyExpenseBarChart();
+    }
 
     private void BindDataToRecentTransactions() {
         List<Transaction> transactions = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTransaction();

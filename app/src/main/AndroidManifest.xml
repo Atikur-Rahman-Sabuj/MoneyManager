@@ -13,17 +13,25 @@
         android:roundIcon="@drawable/logoround"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.DailyTransactionsActivity"></activity>
+        <activity android:name=".Activity.DailyTransactionsActivity"
+            android:exported="true"
+            android:parentActivityName=".Activity.StartActivity"></activity>
         <activity
             android:name=".Activity.BottomNavigationActivity"
+            android:exported="true"
+            android:parentActivityName=".Activity.StartActivity"
             android:label="@string/title_activity_bottom_navigation" />
         <activity
             android:name=".Activity.AddTransactionActivity"
             android:exported="true"
             android:label="Add transaction"
             android:parentActivityName=".Activity.StartActivity" />
-        <activity android:name=".Activity.FileExplorerActivity" />
-        <activity android:name=".Activity.ImportExportActivity" />
+        <activity android:name=".Activity.FileExplorerActivity"
+            android:exported="true"
+            android:parentActivityName=".Activity.ImportExportActivity"/>
+        <activity android:name=".Activity.ImportExportActivity"
+            android:exported="true"
+            android:parentActivityName=".Activity.SettingActivity"/>
         <activity android:name=".Activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
