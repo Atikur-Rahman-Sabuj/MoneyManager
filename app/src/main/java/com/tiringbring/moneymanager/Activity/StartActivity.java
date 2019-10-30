@@ -11,6 +11,7 @@ import RoomDb.Category;
 import RoomDb.MMDatabase;
 import RoomDb.Transaction;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
@@ -89,6 +90,16 @@ public class StartActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_start);
+
+
+        this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.action_bar_custom);
+        getSupportActionBar().getCustomView().setLayoutParams(new androidx.appcompat.widget.Toolbar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.WRAP_CONTENT, 3));
+        //getSupportActionBar().setElevation(0);
+        View view = getSupportActionBar().getCustomView();
+
+
         onFirstRun();
         tvMonthlyIncomeTotal = (TextView) findViewById(R.id.tvMonthlyIncomeTotal);
         tvMonthlyExpenseTotal = (TextView) findViewById(R.id.tvMonthlyExpenseTotal);

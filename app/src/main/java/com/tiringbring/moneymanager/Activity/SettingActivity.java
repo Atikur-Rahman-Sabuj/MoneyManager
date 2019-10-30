@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
     private boolean isNotificationEnabled;
     private Spinner spLanguage;
     boolean isSpinnerInitialized = false;
-    private Button btnImportExport;
+    private ImageView btnImportExport;
 
     @Override
     public void onBackPressed() {
@@ -57,7 +58,7 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
        // final TextView tvDayLimitValue = (TextView)findViewById(R.id.tvDayLimitValue);
        // final TextView tvMonthlyLimitValue = (TextView) findViewById(R.id.tvMonthlyLimitValue);
       //  final TextView tvYearlyLimitValue = (TextView)findViewById(R.id.tvYearlyLimitValue);
-        btnImportExport = (Button) findViewById(R.id.btnImportExport);
+        btnImportExport = (ImageView) findViewById(R.id.btnImportExport);
         btnImportExport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
