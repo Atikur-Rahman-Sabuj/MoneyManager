@@ -176,7 +176,27 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp">
+            android:layout_margin="10dp"
+            app:cardCornerRadius="5dp">
+
+            <FrameLayout
+                android:id="@+id/flListFrrame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:transitionName="showList"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="8dp">
+
+                <ExpandableListView
+                    android:id="@+id/expandableExpenseList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@android:color/background_light"
+                    android:dividerHeight="5dp"
+                    android:elevation="5dp"
+                    android:groupIndicator="@color/transparent"></ExpandableListView>
+
+            </FrameLayout>
 
             <LinearLayout
                 android:id="@+id/layoutLower"
@@ -194,28 +214,6 @@
                     android:text="No transactions"
                     android:visibility="visible" />
 
-                <FrameLayout
-                    android:id="@+id/flListFrrame"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:transitionName="showList"
-                    tools:layout_editor_absoluteX="8dp"
-                    tools:layout_editor_absoluteY="8dp">
-
-                    <ExpandableListView
-                        android:id="@+id/expandableExpenseList"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:divider="@android:color/background_light"
-                        android:dividerHeight="5dp"
-                        android:elevation="5dp"
-                        android:groupIndicator="@color/transparent"></ExpandableListView>
-
-                </FrameLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

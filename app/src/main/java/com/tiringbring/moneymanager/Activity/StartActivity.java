@@ -21,6 +21,7 @@ import androidx.room.Room;
 
 import android.os.Bundle;
 import android.os.TestLooperManager;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -91,15 +92,25 @@ public class StartActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_start);
 
+//
+//        this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        getSupportActionBar().setDisplayShowHomeEnabled(false);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowCustomEnabled(true);
+//        getSupportActionBar().setCustomView(R.layout.action_bar_custom);
+//       // getSupportActionBar().getCustomView().setLayoutParams(new androidx.appcompat.widget.Toolbar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, Gravity.TOP));
+//        getSupportActionBar().getCustomView().setPadding(0,0,0,0);
+//
+//        getSupportActionBar().setElevation(0);
+//        View view = getSupportActionBar().getCustomView();
 
-        this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setCustomView(R.layout.action_bar_custom);
-        getSupportActionBar().getCustomView().setLayoutParams(new androidx.appcompat.widget.Toolbar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.WRAP_CONTENT, 3));
-        //getSupportActionBar().setElevation(0);
-        View view = getSupportActionBar().getCustomView();
-
-
+        final TextView tvAppName = (TextView) findViewById(R.id.tvAppName);
+        tvAppName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvAppName.setText("SABUJ");
+            }
+        });
         onFirstRun();
         tvMonthlyIncomeTotal = (TextView) findViewById(R.id.tvMonthlyIncomeTotal);
         tvMonthlyExpenseTotal = (TextView) findViewById(R.id.tvMonthlyExpenseTotal);
@@ -350,23 +361,23 @@ public class StartActivity extends AppCompatActivity {
 //    }
 
     // create an action bar button
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.actionbar_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    // handle button activities
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.settingMenuButton) {
-            Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.actionbar_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    // handle button activities
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if (id == R.id.settingMenuButton) {
+//            Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+//            startActivity(intent);
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
     private void SetPieChartDate() {

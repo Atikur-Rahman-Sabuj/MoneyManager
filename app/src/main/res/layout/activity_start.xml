@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/card_background_verylight"
     android:orientation="vertical">
-
+    <include layout="@layout/action_bar_custom"/>
 
     <Button
         android:id="@+id/btnAddNew"
@@ -35,6 +35,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
         android:fillViewport="true">
 
         <LinearLayout
@@ -47,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="2dp"
                 app:cardElevation="2dp">
 
@@ -251,6 +253,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="2dp">
 
@@ -283,6 +286,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="2dp"
                 app:cardElevation="2dp">
 
@@ -433,6 +437,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="2dp">
 
@@ -468,6 +473,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="2dp"
                 app:cardElevation="2dp">
 
@@ -618,6 +624,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="2dp">
 
@@ -662,6 +669,7 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="10dp"
                                 android:text="Income"
+                                android:textColor="@color/black"
                                 android:textSize="10sp" />
 
                             <LinearLayout
@@ -677,6 +685,7 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="10dp"
                                 android:text="Expense"
+                                android:textColor="@color/black"
                                 android:textSize="10sp" />
 
                         </LinearLayout>
