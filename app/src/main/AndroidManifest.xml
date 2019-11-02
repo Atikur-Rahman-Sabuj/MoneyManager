@@ -41,16 +41,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.AddExpenseActivity"
-            android:exported="true"
-            android:label="Add Expense"
-            android:parentActivityName=".Activity.StartActivity" />
-        <activity
-            android:name=".Activity.ExpenseListActivity"
-            android:exported="true"
-            android:label="expens"
-            android:parentActivityName=".Activity.StartActivity" />
-        <activity
             android:name=".Activity.SettingActivity"
             android:label="Settings"
             android:parentActivityName=".Activity.StartActivity" />

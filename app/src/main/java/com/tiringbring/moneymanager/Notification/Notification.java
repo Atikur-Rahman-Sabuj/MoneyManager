@@ -8,13 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import com.tiringbring.moneymanager.Activity.AddExpenseActivity;
+import com.tiringbring.moneymanager.Activity.AddTransactionActivity;
+import com.tiringbring.moneymanager.Activity.BottomNavigationActivity;
 import com.tiringbring.moneymanager.DataController.DateDataController;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
 import com.tiringbring.moneymanager.DataController.MySharedPreferences;
 import com.tiringbring.moneymanager.Entity.DayTransactions;
 import com.tiringbring.moneymanager.Entity.MonthTransactions;
-import com.tiringbring.moneymanager.Activity.ExpenseListActivity;
 import com.tiringbring.moneymanager.R;
 
 import java.util.Calendar;
@@ -46,7 +46,7 @@ public class Notification extends BroadcastReceiver {
     }
 
     private void CreateMonthlyNotification(Context context) {
-        PendingIntent notificationIntent = PendingIntent.getActivity(context, 0, new Intent(context, ExpenseListActivity.class),0);
+        PendingIntent notificationIntent = PendingIntent.getActivity(context, 0, new Intent(context, BottomNavigationActivity.class),0);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -89,7 +89,7 @@ public class Notification extends BroadcastReceiver {
     }
 
     private void CreateDailyNotification(Context context, String header, String message, String alert) {
-        PendingIntent notificationIntent = PendingIntent.getActivity(context, 0, new Intent(context, AddExpenseActivity.class),0);
+        PendingIntent notificationIntent = PendingIntent.getActivity(context, 0, new Intent(context, AddTransactionActivity.class),0);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

@@ -14,13 +14,13 @@
         <item name="android:windowActivityTransitions">true</item>
     </style>
     <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/myColorPrimary</item>
+        <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryDark">@color/card_background_verylight</item>
         <item name="colorAccent">@color/myColorAccent</item>
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:windowBackground">@color/card_background_verylight</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:navigationBarColor">@color/card_background_verylight</item>
+        <item name="android:navigationBarColor">@color/black</item>
         <item name="android:windowActivityTransitions">true</item>
     </style>
 
@@ -32,5 +32,8 @@
 
     <style name="MyTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="BottomNavigationStyle">
+        <item name="android:textSize">10sp</item><!-- text size in menu-->
     </style>
 </resources>

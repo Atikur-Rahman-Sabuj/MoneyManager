@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -56,10 +57,29 @@ public class AddTransactionActivity extends AppCompatActivity {
     private int  Year;
     private int Month;
     private int Day;
+    private ImageView ivBarLeft,ivBarRight;
+    private TextView tvBarText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
+
+        tvBarText = (TextView) findViewById(R.id.tvBarText);
+        ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
+        ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
+        tvBarText.setText("Add Transaction");
+        ivBarLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), StartActivity.class));
+            }
+        });
+        ivBarRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+            }
+        });
         rvCategoryList = (RecyclerView) findViewById(R.id.rvCategoryList);
         layoutAddTransaction = (LinearLayout) findViewById(R.id.layoutAddTrsaction);
         etMemo = (EditText) findViewById(R.id.etMemo);

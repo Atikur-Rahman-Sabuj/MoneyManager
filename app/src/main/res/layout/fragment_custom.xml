@@ -345,7 +345,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp">
+                android:paddingRight="0dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCategoryFilterList"
@@ -358,13 +358,15 @@
 
             <Button
                 android:id="@+id/btnSelectFilterCategory"
-                style="@android:style/Widget.Toolbar.Button.Navigation"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/light_gray"
+                android:background="@color/white"
+                android:fontFamily="sans-serif"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="Change"
+                android:textAllCaps="false"
                 android:textColor="@color/dark_gray"
                 android:textSize="14sp" />
 

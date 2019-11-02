@@ -11,7 +11,6 @@ import RoomDb.Category;
 import RoomDb.MMDatabase;
 import RoomDb.Transaction;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
@@ -20,12 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.os.Bundle;
-import android.os.TestLooperManager;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,8 +51,6 @@ import com.tiringbring.moneymanager.R;
 import com.tiringbring.moneymanager.Utility.ResourceManager;
 import com.tiringbring.moneymanager.chart.MonthlyChartData;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -78,6 +72,8 @@ public class StartActivity extends AppCompatActivity {
     private Button btnShowList, btnBottomNavigation;
     private RecyclerView rvTestList;
     private CardView cvTodayInfo;
+    private ImageView ivBarLeft,ivBarRight;
+    private TextView tvBarText;
     @SuppressLint("ClickableViewAccessibility")
 
     @Override
@@ -104,11 +100,15 @@ public class StartActivity extends AppCompatActivity {
 //        getSupportActionBar().setElevation(0);
 //        View view = getSupportActionBar().getCustomView();
 
-        final TextView tvAppName = (TextView) findViewById(R.id.tvAppName);
-        tvAppName.setOnClickListener(new View.OnClickListener() {
+        tvBarText = (TextView) findViewById(R.id.tvBarText);
+        ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
+        ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
+        tvBarText.setText("Money Manager");
+        ivBarLeft.setVisibility(View.GONE);
+        ivBarRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tvAppName.setText("SABUJ");
+                startActivity(new Intent(getApplicationContext(), SettingActivity.class));
             }
         });
         onFirstRun();

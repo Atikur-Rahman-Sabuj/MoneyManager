@@ -31,8 +31,10 @@
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
             android:isScrollContainer="false"
+            android:theme="@style/BottomNavigationStyle"
+            app:elevation="4dp"
             app:itemHorizontalTranslationEnabled="false"
-            app:itemIconSize="24dp"
+            app:itemIconSize="20dp"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
 

@@ -41,6 +41,9 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
     boolean isSpinnerInitialized = false;
     private ImageView btnImportExport;
 
+    private ImageView ivBarLeft,ivBarRight;
+    private TextView tvBarText;
+
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
@@ -52,6 +55,20 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        tvBarText = (TextView) findViewById(R.id.tvBarText);
+        ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
+        ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
+        ivBarRight.setVisibility(View.GONE);
+        tvBarText.setText("Setting");
+        ivBarLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), StartActivity.class));
+            }
+        });
+
+
         isSpinnerInitialized = false;
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
         //TextView tvDayLimitPanel = (TextView)findViewById(R.id.tvDayLimitPanel);
@@ -111,7 +128,6 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         });
 
         assert getSupportActionBar() != null;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         final long dailyLimit = new MySharedPreferences(getApplicationContext()).getDayilyLimit();
