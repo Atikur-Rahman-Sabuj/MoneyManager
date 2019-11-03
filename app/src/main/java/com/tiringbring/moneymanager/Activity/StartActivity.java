@@ -72,9 +72,10 @@ public class StartActivity extends AppCompatActivity {
     private LinearLayout cvAddIncome, cvAddExpense;
     private Button  btnBottomNavigation;
     private RecyclerView rvTestList;
-    private CardView cvTodayInfo;
+    private CardView cvTodayInfo, cvRecentInfo, cvMonthInfo, cvSeeMoreTransaction, cvSeeMoreDay, cvSeeMoreMonth;
     private ImageView ivBarLeft,ivBarRight;
     private TextView tvBarText;
+    private View.OnClickListener goToDailyTrasnsaction, gotoDayListTransaction, gotoMonthListTransaction;
     @SuppressLint("ClickableViewAccessibility")
 
     @Override
@@ -135,7 +136,44 @@ public class StartActivity extends AppCompatActivity {
         tvThirdTransactionValue = (TextView) findViewById(R.id.tvThirdTransactionValue);
         tvThirdTransactionName = (TextView) findViewById(R.id.tvThirdTransactionName);
         tvThirdTransactionCategory = (TextView) findViewById(R.id.tvThirdTransactionCategory);
+
+        goToDailyTrasnsaction = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), DailyTransactionsActivity.class));
+            }
+        };
+
+        gotoDayListTransaction = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), BottomNavigationActivity.class));
+            }
+        };
+
+        gotoMonthListTransaction = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
+                intent.putExtra("isMonth", true);
+                startActivity(intent);
+            }
+        };
+
+        cvRecentInfo = (CardView) findViewById(R.id.cvRecentInfo);
+        cvRecentInfo.setOnClickListener(goToDailyTrasnsaction);
+        cvSeeMoreTransaction = (CardView) findViewById(R.id.cvSeeMoreTransaction);
+        cvSeeMoreTransaction.setOnClickListener(goToDailyTrasnsaction);
         cvTodayInfo = (CardView) findViewById(R.id.cvTodayInfo);
+        cvTodayInfo.setOnClickListener(gotoDayListTransaction);
+        cvSeeMoreDay = (CardView) findViewById(R.id.cvSeeMoreDay);
+        cvSeeMoreDay.setOnClickListener(gotoDayListTransaction);
+        cvMonthInfo = (CardView) findViewById(R.id.cvMonthInfo);
+        cvMonthInfo.setOnClickListener(gotoMonthListTransaction);
+        cvSeeMoreMonth = (CardView) findViewById(R.id.cvSeeMoreMonth);
+        cvSeeMoreMonth.setOnClickListener(gotoMonthListTransaction);
+
+
 
         BindDataTodaySection();
         BindDataToRecentTransactions();
@@ -181,18 +219,12 @@ public class StartActivity extends AppCompatActivity {
 //        nCalendar.set(Calendar.SECOND, 0);
 //        setAlart(nCalendar.getTimeInMillis());
 
-        cvTodayInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DailyTransactionsActivity.class);
-                startActivity(intent);
-            }
-        });
 
         cvAddIncome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
+                intent.putExtra("isIncome", true);
                 startActivity(intent);
             }
         });
@@ -307,6 +339,7 @@ public class StartActivity extends AppCompatActivity {
         YAxis left = barChartMonthlyExpense.getAxisLeft();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
         //left.setAxisMaximum(1000);
+        left.setAxisMinimum(1);
         left.setDrawLabels(true); // no axis labels
         left.setDrawAxisLine(false); // no axis line
         left.setDrawGridLines(false); // no grid lines

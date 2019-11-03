@@ -51,6 +51,9 @@ public class ChartMonthlyAdaptor extends RecyclerView.Adapter<ChartMonthlyAdapto
         LinearLayout.LayoutParams expenseLP = new LinearLayout.LayoutParams(getPXFromDP(40), getPXFromDP(expenseHeight));
         expenseLP.setMargins(getPXFromDP(10),0, getPXFromDP(10),0);
         holder.expense.setLayoutParams(expenseLP);
+        if(((110*monthTransactionsList.get(position).incomeTotal)/incomeMaximum)<10.0){
+            holder.tvDate.setText("");
+        }
 
     }
     private int getPXFromDP(float dp){

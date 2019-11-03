@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.tiringbring.moneymanager.Activity.BottomNavigationActivity;
 import com.tiringbring.moneymanager.Activity.StartActivity;
 import com.tiringbring.moneymanager.DataController.CategoryDataController;
 import com.tiringbring.moneymanager.DataController.TransactionDataController;
@@ -54,6 +55,7 @@ public class DailyFragment extends Fragment implements ITabbedFragments {
                              final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_daily, container, false);
+        ((BottomNavigationActivity)getActivity()).setHeaderText("Daily");
         tvMessage = (TextView) view.findViewById(R.id.tvMessage);
         flListFragment = (FrameLayout) view.findViewById(R.id.flListFrrame);
         cvList = (CardView) view.findViewById(R.id.cvList);

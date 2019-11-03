@@ -245,7 +245,8 @@ public class AddTransactionActivity extends AppCompatActivity {
             etAmount.setText(String.valueOf(transaction.getAmount()));
             SetType(transaction.getIsIncome());
             LoadCategory(transaction.getCategoryId());
-
+        }else {
+            SetType(intent.getBooleanExtra("isIncome", false));
         }
 
         //endregion
@@ -268,6 +269,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             tvIncomeSelect.setBackground(null);
             tvIncomeSelect.setTextColor(getResources().getColor(R.color.black));
         }
+        LoadCategory(0);
     }
 
 

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tiringbring.moneymanager.Activity.BottomNavigationActivity;
 import com.tiringbring.moneymanager.Activity.StartActivity;
 import com.tiringbring.moneymanager.DataController.CategoryDataController;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
@@ -57,6 +58,7 @@ public class YearlyFragment extends Fragment implements ITabbedFragments {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_yearly, container, false);
+        ((BottomNavigationActivity)getActivity()).setHeaderText("Yearly");
         tvMessage = (TextView) view.findViewById(R.id.tvMessage);
         flListFragment = (FrameLayout) view.findViewById(R.id.flListFrrame);
         cvList = (CardView) view.findViewById(R.id.cvList);

@@ -21,6 +21,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tiringbring.moneymanager.Activity.BottomNavigationActivity;
 import com.tiringbring.moneymanager.Activity.StartActivity;
 import com.tiringbring.moneymanager.DataController.CategoryDataController;
 import com.tiringbring.moneymanager.DataController.DateDataController;
@@ -76,6 +77,7 @@ public class CustomFragment extends Fragment implements ITabbedFragments {
 
 
         View view  =  inflater.inflate(R.layout.fragment_custom, container, false);
+        ((BottomNavigationActivity)getActivity()).setHeaderText("Custom");
         tvMessage = (TextView) view.findViewById(R.id.tvMessage);
         flListFragment = (FrameLayout) view.findViewById(R.id.flListFrrame);
 

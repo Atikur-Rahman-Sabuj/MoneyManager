@@ -47,10 +47,12 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
         }
         holder.tvValue.setText(String.valueOf(String.format("%.2f", transactions.get(position).getAmount())));
         if(transactions.get(position).getIsIncome()){
-            holder.llBorderColer.setBackground(ContextCompat.getDrawable(context, R.drawable.card_back_with_border_green));
+            //holder.llBorderColer.setBackground(ContextCompat.getDrawable(context, R.drawable.card_back_with_border_green));
+            holder.tvType.setText("Income");
 
         }else{
-            holder.llBorderColer.setBackground(ContextCompat.getDrawable(context, R.drawable.card_back_with_border_red));
+            //holder.llBorderColer.setBackground(ContextCompat.getDrawable(context, R.drawable.card_back_with_border_red));
+            holder.tvType.setText("Expense");
         }
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -73,6 +75,7 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
         public final TextView tvCategoryName;
         public final TextView tvName;
         public final TextView tvValue;
+        public final TextView tvType;
         public final LinearLayout llBorderColer;
 
 
@@ -82,6 +85,7 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
             tvCategoryName = (TextView) view.findViewById(R.id.tvCategoyName);
             tvName = (TextView) view.findViewById(R.id.tvName);
             tvValue = (TextView) view.findViewById(R.id.tvValue);
+            tvType = (TextView) view.findViewById(R.id.tvType);
             llBorderColer = (LinearLayout) view.findViewById(R.id.llBorderColor);
 
         }

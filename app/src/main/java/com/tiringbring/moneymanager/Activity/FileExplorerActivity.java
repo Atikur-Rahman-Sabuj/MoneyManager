@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tiringbring.moneymanager.DataController.ImportExport;
@@ -28,6 +30,8 @@ public class FileExplorerActivity extends AppCompatActivity {
     private RecyclerView rcFiles;
     private RecyclerView.Adapter adapter;
 
+    private ImageView ivBarLeft,ivBarRight;
+    private TextView tvBarText;
 
     /**
      * Called when the activity is first created.
@@ -40,6 +44,22 @@ public class FileExplorerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_file_explorer);
+        tvBarText = (TextView) findViewById(R.id.tvBarText);
+        ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
+        ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
+        tvBarText.setText("Import");
+        ivBarLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ImportExportActivity.class));
+            }
+        });
+        ivBarRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+            }
+        });
 
         //myPath = (TextView) findViewById(R.id.path);
 

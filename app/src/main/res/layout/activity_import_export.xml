@@ -6,9 +6,12 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <include layout="@layout/action_bar_custom" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
         android:gravity="bottom"
         android:orientation="vertical"
         android:paddingLeft="20dp"
@@ -21,12 +24,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:id="@+id/btnImport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textbox_background_white"
                 android:gravity="center_horizontal|center_vertical"
                 android:orientation="horizontal"
                 android:paddingTop="15dp"
@@ -38,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Import"
-                    android:textColor="@color/black"
+                    android:textColor="@color/myColorPrimaryDark"
                     android:textSize="18sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -47,12 +51,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:id="@+id/btnExport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textbox_background_white"
                 android:gravity="center_horizontal|center_vertical"
                 android:orientation="horizontal"
                 android:paddingTop="15dp"
@@ -65,7 +70,7 @@
                     android:layout_gravity="center"
                     android:gravity="right"
                     android:text="Export"
-                    android:textColor="@color/black"
+                    android:textColor="@color/myColorPrimaryDark"
                     android:textSize="18sp" />
 
             </LinearLayout>
