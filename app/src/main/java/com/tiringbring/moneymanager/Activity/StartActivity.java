@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,8 +69,8 @@ public class StartActivity extends AppCompatActivity {
             tvThirdTransactionType, tvThirdTransactionValue, tvThirdTransactionName, tvThirdTransactionCategory;
     Long dailyLimit;
     private Date pieDate;
-    private Button btnAddNew;
-    private Button btnShowList, btnBottomNavigation;
+    private LinearLayout cvAddIncome, cvAddExpense;
+    private Button  btnBottomNavigation;
     private RecyclerView rvTestList;
     private CardView cvTodayInfo;
     private ImageView ivBarLeft,ivBarRight;
@@ -139,8 +140,8 @@ public class StartActivity extends AppCompatActivity {
         BindDataTodaySection();
         BindDataToRecentTransactions();
 
-        btnAddNew = (Button) findViewById(R.id.btnAddNew);
-        btnShowList = (Button) findViewById(R.id.btnShowList);
+        cvAddIncome = (LinearLayout) findViewById(R.id.llAddIncome);
+        cvAddExpense = (LinearLayout) findViewById(R.id.llAddExpense);
         pcTodaysTransactions = (PieChart) findViewById(R.id.pcTodaysTransactions);
         barChartMonthlyExpense = (BarChart) findViewById(R.id.dailyExpenseBarChart);
         rvTestList = (RecyclerView) findViewById(R.id.rvTestList);
@@ -188,7 +189,14 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        btnAddNew.setOnClickListener(new View.OnClickListener() {
+        cvAddIncome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
+                startActivity(intent);
+            }
+        });
+        cvAddExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
@@ -196,13 +204,7 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        btnShowList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
     @Override

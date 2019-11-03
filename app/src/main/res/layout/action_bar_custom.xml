@@ -17,12 +17,15 @@
             android:layout_height="match_parent"
             android:gravity="center|left"
             android:orientation="horizontal"
-            android:paddingLeft="10dp">
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
 
             <ImageView
                 android:id="@+id/ivBarLeft"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
                 app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
         </LinearLayout>
 
@@ -51,12 +54,15 @@
             android:layout_height="match_parent"
             android:gravity="center|right"
             android:orientation="horizontal"
-            android:paddingRight="10dp">
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
 
             <ImageView
                 android:id="@+id/ivBarRight"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
                 app:srcCompat="@drawable/ic_settings_black_24dp" />
         </LinearLayout>
     </LinearLayout>

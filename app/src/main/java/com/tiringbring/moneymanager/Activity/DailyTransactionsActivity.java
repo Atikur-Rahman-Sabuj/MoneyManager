@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -56,11 +58,28 @@ public class DailyTransactionsActivity extends AppCompatActivity {
     private RecyclerView rvTransactionList;
     private TextView tvTypeTop,tvTypeBottom, tvValueTop, tvValueBottom;
     private CardView cvTodayPieChart;
+    private ImageView ivBarLeft,ivBarRight;
+    private TextView tvBarText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_transactions);
-        setTitle("Expense");
+        tvBarText = (TextView) findViewById(R.id.tvBarText);
+        ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
+        ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
+        tvBarText.setText("Expense");
+        ivBarLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), StartActivity.class));
+            }
+        });
+        ivBarRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+            }
+        });
         allCategories = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetCategories();
         StartActivity.destroyDBInstance();
         pcTodaysTransactions = (PieChart) findViewById(R.id.pcTodaysTransactions);
@@ -88,9 +107,9 @@ public class DailyTransactionsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 isIncome = !isIncome;
                 if(isIncome){
-                    setTitle("Income");
+                    tvBarText.setText("Income");
                 }else{
-                    setTitle("Expense");
+                    tvBarText.setText("Expense");
                 }
                 listTransactions.clear();
                 for(Transaction _transaction: dayTransactions){
