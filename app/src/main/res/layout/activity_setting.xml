@@ -39,22 +39,25 @@
                 android:paddingBottom="5dp">
 
                 <TextView
+                    android:id="@+id/tvNotificationSetting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_weight="1"
                     android:gravity="left"
                     android:padding="10dp"
-                    android:text="Import or export database"
+                    android:text="@string/show_notification"
                     android:textColor="@android:color/background_dark"
                     android:textSize="16sp" />
 
-                <ImageView
-                    android:id="@+id/btnImportExport"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
+                <Switch
+                    android:id="@+id/switchNotification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
+                    android:padding="10dp"
+                    android:text="" />
+
 
             </RelativeLayout>
 
@@ -112,25 +115,22 @@
                 android:paddingBottom="5dp">
 
                 <TextView
-                    android:id="@+id/tvNotificationSetting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_weight="1"
                     android:gravity="left"
                     android:padding="10dp"
-                    android:text="@string/show_notification"
+                    android:text="Import or export database"
                     android:textColor="@android:color/background_dark"
                     android:textSize="16sp" />
 
-                <Switch
-                    android:id="@+id/switchNotification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/btnImportExport"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentRight="true"
-                    android:padding="10dp"
-                    android:text="" />
-
+                    app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
 
             </RelativeLayout>
 

@@ -80,7 +80,7 @@ public class ImportExport {
                 dst.transferFrom(src, 0, src.size());
                 src.close();
                 dst.close();
-                Snackbar.make(((ImportExportActivity)context).findViewById(R.id.clRootExportImport), "Exported to folder: Transaction", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(((ImportExportActivity)context).findViewById(R.id.clRootExportImport), "Exported to folder: MoneyManager", Snackbar.LENGTH_LONG).show();
                 //Toast.makeText(context, backupDB.toString(),
              //           Toast.LENGTH_LONG).show();
                 return  true;

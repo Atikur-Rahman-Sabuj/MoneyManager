@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tiringbring.moneymanager.Activity.AddTransactionActivity;
 import com.tiringbring.moneymanager.R;
 
@@ -53,6 +54,14 @@ public class DayTransactionsRecycleViewAdaptor extends RecyclerView.Adapter<DayT
                 return false;
             }
         });
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, AddTransactionActivity.class);
+                intent.putExtra("transactionId", transactions.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -65,6 +74,7 @@ public class DayTransactionsRecycleViewAdaptor extends RecyclerView.Adapter<DayT
         public final TextView tvCategoryName;
         public final TextView tvName;
         public final TextView tvValue;
+        public final FloatingActionButton btnEdit;
 
 
         public ViewHolder(View view) {
@@ -73,6 +83,7 @@ public class DayTransactionsRecycleViewAdaptor extends RecyclerView.Adapter<DayT
             tvCategoryName = (TextView) view.findViewById(R.id.tvCategoyName);
             tvName = (TextView) view.findViewById(R.id.tvName);
             tvValue = (TextView) view.findViewById(R.id.tvValue);
+            btnEdit = (FloatingActionButton) view.findViewById(R.id.btnEdit);
 
         }
 

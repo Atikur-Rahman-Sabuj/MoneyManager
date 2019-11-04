@@ -285,20 +285,25 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
+                app:cardCornerRadius="2dp"
                 app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/myColorPrimary"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
 
                     <TextView
                         android:id="@+id/textView17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="See more transactions"
-                        android:textColor="@color/myColorPrimary"
+                        android:text="See more transactions > >"
+                        android:textColor="@color/white"
                         android:textSize="10sp" />
                 </LinearLayout>
 
@@ -499,14 +504,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/myColorPrimary"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="See more by date"
-                        android:textColor="@color/myColorPrimary"
+                        android:text="See more by date >>"
+                        android:textColor="@color/white"
                         android:textSize="10sp" />
                 </LinearLayout>
 
@@ -710,14 +719,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/myColorPrimary"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="See more by month"
-                        android:textColor="@color/myColorPrimary"
+                        android:text="See more by month >>"
+                        android:textColor="@color/white"
                         android:textSize="10sp" />
                 </LinearLayout>
 
