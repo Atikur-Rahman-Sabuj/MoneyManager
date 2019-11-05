@@ -22,7 +22,7 @@ import RoomDb.Transaction;
 public class CategoryDialog {
     public void showDialog(final Context context, final String msg, final Boolean isIncome, final List<List<Category>> categoryList, final String catName) {
 
-        final Dialog dialog = new Dialog(context);
+        final Dialog dialog = new Dialog(context, R.style.PauseDialog);
         //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.dialog_category_edit_update);

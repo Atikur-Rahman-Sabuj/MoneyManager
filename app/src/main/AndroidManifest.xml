@@ -2,44 +2,50 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tiringbring.moneymanager">
 
+    <!-- To access Google+ APIs: -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
         android:configChanges="locale"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/icon_money_manager"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logoround"
+        android:roundIcon="@drawable/icon_money_manager"
         android:supportsRtl="true"
         android:theme="@style/NoActionBar">
-        <activity android:name=".Activity.DailyTransactionsActivity"
+        <activity android:name=".Activity.FirstStartActivity" />
+        <activity android:name=".Activity.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.DailyTransactionsActivity"
             android:exported="true"
-            android:parentActivityName=".Activity.StartActivity"></activity>
+            android:parentActivityName=".Activity.StartActivity" />
         <activity
             android:name=".Activity.BottomNavigationActivity"
             android:exported="true"
-            android:parentActivityName=".Activity.StartActivity"
-            android:label="@string/title_activity_bottom_navigation" />
+            android:label="@string/title_activity_bottom_navigation"
+            android:parentActivityName=".Activity.StartActivity" />
         <activity
             android:name=".Activity.AddTransactionActivity"
             android:exported="true"
             android:label="Add transaction"
             android:parentActivityName=".Activity.StartActivity" />
-        <activity android:name=".Activity.FileExplorerActivity"
+        <activity
+            android:name=".Activity.FileExplorerActivity"
             android:exported="true"
-            android:parentActivityName=".Activity.ImportExportActivity"/>
-        <activity android:name=".Activity.ImportExportActivity"
+            android:parentActivityName=".Activity.ImportExportActivity" />
+        <activity
+            android:name=".Activity.ImportExportActivity"
             android:exported="true"
-            android:parentActivityName=".Activity.SettingActivity"/>
-        <activity android:name=".Activity.StartActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:parentActivityName=".Activity.SettingActivity" />
+        <activity android:name=".Activity.StartActivity" />
         <activity
             android:name=".Activity.SettingActivity"
             android:label="Settings"

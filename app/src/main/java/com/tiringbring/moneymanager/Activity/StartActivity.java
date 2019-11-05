@@ -20,6 +20,8 @@ import androidx.room.Room;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -113,7 +115,7 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SettingActivity.class));
             }
         });
-        onFirstRun();
+        //onFirstRun();
         tvMonthlyIncomeTotal = (TextView) findViewById(R.id.tvMonthlyIncomeTotal);
         tvMonthlyExpenseTotal = (TextView) findViewById(R.id.tvMonthlyExpenseTotal);
         tvMonthlyBalanceTotal = (TextView) findViewById(R.id.tvMonthlyBalanceTotal);
@@ -172,7 +174,12 @@ public class StartActivity extends AppCompatActivity {
         cvMonthInfo.setOnClickListener(gotoMonthListTransaction);
         cvSeeMoreMonth = (CardView) findViewById(R.id.cvSeeMoreMonth);
         cvSeeMoreMonth.setOnClickListener(gotoMonthListTransaction);
-
+        Animation zoomOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomout);
+        cvRecentInfo.startAnimation(zoomOut);
+        cvRecentInfo.startAnimation(zoomOut);
+        cvSeeMoreTransaction.startAnimation(zoomOut);
+        cvTodayInfo.startAnimation(zoomOut);
+        cvSeeMoreDay.startAnimation(zoomOut);
 
 
         BindDataTodaySection();
@@ -367,13 +374,13 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
-    private void onFirstRun() {
-        MySharedPreferences msp = new MySharedPreferences(getApplicationContext());
-        if(msp.getIsFirstRun()){
-            InitialData.CreateCategories(getApplicationContext());
-            msp.setIsFirstRun(false);
-        }
-    }
+//    private void onFirstRun() {
+//        MySharedPreferences msp = new MySharedPreferences(getApplicationContext());
+//        if(msp.getIsFirstRun()){
+//            InitialData.CreateCategories(getApplicationContext());
+//            msp.setIsFirstRun(false);
+//        }
+//    }
 
     private void setNotification() {
         //Long alertTime = new GregorianCalendar().getTimeInMillis()+10*1000;

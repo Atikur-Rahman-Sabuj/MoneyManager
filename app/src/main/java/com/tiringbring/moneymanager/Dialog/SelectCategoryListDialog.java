@@ -35,8 +35,9 @@ public class SelectCategoryListDialog {
         this.allCategories = allCategories;
         this.selectedCategories = selectedCategories;
         this.context = context;
-        final Dialog dialog = new Dialog(context, android.R.style.Theme_DeviceDefault_NoActionBar_Fullscreen);
-
+        final Dialog dialog = new Dialog(context, R.style.PauseDialogCategoryList);
+        //R.style.PauseDialogCategoryList
+        //android.R.style.Theme_DeviceDefault_NoActionBar_Fullscreen
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
         //dialog.getWindow().get
