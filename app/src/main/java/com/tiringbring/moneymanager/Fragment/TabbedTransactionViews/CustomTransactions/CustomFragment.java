@@ -77,7 +77,7 @@ public class CustomFragment extends Fragment implements ITabbedFragments {
 
 
         View view  =  inflater.inflate(R.layout.fragment_custom, container, false);
-        ((BottomNavigationActivity)getActivity()).setHeaderText("Custom");
+        ((BottomNavigationActivity)getActivity()).setHeaderText(getResources().getString(R.string.custom));
         tvMessage = (TextView) view.findViewById(R.id.tvMessage);
         flListFragment = (FrameLayout) view.findViewById(R.id.flListFrrame);
 

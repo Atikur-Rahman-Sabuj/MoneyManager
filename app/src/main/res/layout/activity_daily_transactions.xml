@@ -104,9 +104,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="5dp"
-                    android:text="tap to change type"
+                    android:text="@string/tap_to_chane_type"
                     android:textAlignment="viewEnd"
-                    android:textSize="6sp" />
+                    android:textSize="8sp" />
 
             </LinearLayout>
 

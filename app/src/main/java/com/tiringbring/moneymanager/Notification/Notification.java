@@ -10,6 +10,7 @@ import android.os.Build;
 
 import com.tiringbring.moneymanager.Activity.AddTransactionActivity;
 import com.tiringbring.moneymanager.Activity.BottomNavigationActivity;
+import com.tiringbring.moneymanager.Activity.SplashScreenActivity;
 import com.tiringbring.moneymanager.DataController.DateDataController;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
 import com.tiringbring.moneymanager.DataController.MySharedPreferences;
@@ -18,30 +19,35 @@ import com.tiringbring.moneymanager.Entity.MonthTransactions;
 import com.tiringbring.moneymanager.R;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import RoomDb.Transaction;
 import RoomDb.MMDatabase;
 import androidx.core.app.NotificationCompat;
+import androidx.room.Room;
 
 public class Notification extends BroadcastReceiver {
     MMDatabase myAppRoomDatabase = null;
     @Override
     public void onReceive(Context context, Intent intent) {
-//        if(new MySharedPreferences(context).getIsNotificationEnabled()){
-//            Calendar calendar = Calendar.getInstance();
-//            Date date = new DateDataController().CropTimeFromDate(calendar);
-//
-//            myAppRoomDatabase = Room.databaseBuilder(context, MMDatabase.class, "mmdb").allowMainThreadQueries().build();
-//            boolean isExpenseExist = (myAppRoomDatabase.mmDao().GetTransactionsOfaDate(date)).size()>0;
-//            if(!isExpenseExist){
-//                CreateDailyNotification(context, "Alert!!!", "You might have forgot to add todays expense!", "Reminder from Expenses");
-//            }
-//            if(calendar.get(Calendar.DAY_OF_MONTH ) == 1){
+        if(new MySharedPreferences(context).getIsNotificationEnabled()){
+            Calendar calendar = Calendar.getInstance();
+            Date date = new DateDataController().CropTimeFromDate(calendar);
+
+            myAppRoomDatabase = Room.databaseBuilder(context, MMDatabase.class, "MMdb").allowMainThreadQueries().build();
+
+            boolean isExpenseExist = (myAppRoomDatabase.mmDao().GetTransactionsOfaDate(date)).size()>0;
+            myAppRoomDatabase = null;
+            if(!isExpenseExist){
+                CreateDailyNotification(context, "Alert!!!", "You might have forgot to add todays expense!", "Reminder from Money Manager");
+            }
+//              if(calendar.get(Calendar.DAY_OF_MONTH ) == 1){
 //                CreateMonthlyNotification(context);
 //            }
-//
-//        }
+
+
+        }
 
     }
 

@@ -53,12 +53,16 @@ public class CategoryDialog {
                 StartActivity.destroyDBInstance();
                 for(int i = 0 ; i<categories.size(); i++){
                     if(categories.get(i).getName().equals(etCategoryName.getText().toString())){
-                        tvErrorMessage.setText("Category already exists!");
+                        tvErrorMessage.setText(context.getResources().getString(R.string.category_already_exists));
                         return;
                     }
                 }
+                if(etCategoryName.getText().toString().equals("+")){
+                    tvErrorMessage.setText(context.getResources().getString(R.string.category_already_exists));
+                    return;
+                }
 
-                if(msg.equals("Add Category")){
+                if(msg.equals(context.getResources().getString(R.string.add_category))){
                     if(etCategoryName.getText().toString().length()>0){
                         Category category = new Category();
                         category.setName(etCategoryName.getText().toString());

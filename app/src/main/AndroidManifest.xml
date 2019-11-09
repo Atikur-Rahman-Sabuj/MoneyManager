@@ -30,7 +30,6 @@
         <activity
             android:name=".Activity.BottomNavigationActivity"
             android:exported="true"
-            android:label="@string/title_activity_bottom_navigation"
             android:parentActivityName=".Activity.StartActivity" />
         <activity
             android:name=".Activity.AddTransactionActivity"

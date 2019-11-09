@@ -33,7 +33,7 @@
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+ Income"
+                android:text="@string/plus_income"
                 android:textColor="@color/myColorPrimaryDark"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -52,7 +52,7 @@
                 android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-  Expense"
+                android:text="@string/minus_expense"
                 android:textColor="@color/myColorPrimaryDark"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -109,7 +109,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/white"
-                            android:text="Recent Transactions"
+                            android:text="@string/recent_transactions"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
                             android:textSize="10sp"
@@ -302,7 +302,7 @@
                         android:id="@+id/textView17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="See more transactions > >"
+                        android:text="@string/see_more_transactions"
                         android:textColor="@color/white"
                         android:textSize="10sp" />
                 </LinearLayout>
@@ -329,7 +329,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingTop="5dp"
-                        android:text="Todays expenses"
+                        android:text="@string/todays_expenses"
                         android:textColor="@color/black"
                         android:textSize="10sp"
                         android:textStyle="bold" />
@@ -377,7 +377,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/white"
-                            android:text="Today"
+                            android:text="@string/today"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
                             android:textSize="10sp"
@@ -399,7 +399,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Income"
+                                    android:text="@string/income"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -434,7 +434,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Expense"
+                                    android:text="@string/expense"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -471,7 +471,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Balance"
+                                    android:text="@string/balance"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -514,7 +514,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="See more by date >>"
+                        android:text="@string/see_other_days"
                         android:textColor="@color/white"
                         android:textSize="10sp" />
                 </LinearLayout>
@@ -542,7 +542,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingTop="5dp"
-                        android:text="Daily expenses"
+                        android:text="@string/daily_expenses"
                         android:textColor="@color/black"
                         android:textSize="10sp"
                         android:textStyle="bold" />
@@ -592,7 +592,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/white"
-                            android:text="This Month"
+                            android:text="@string/this_month"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
                             android:textSize="10sp"
@@ -614,7 +614,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Income"
+                                    android:text="@string/income"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -649,7 +649,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Expense"
+                                    android:text="@string/expense"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -686,7 +686,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Balance"
+                                    android:text="@string/balance"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -729,7 +729,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="See more by month >>"
+                        android:text="@string/see_other_months"
                         android:textColor="@color/white"
                         android:textSize="10sp" />
                 </LinearLayout>
@@ -761,7 +761,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="10dp"
                             android:paddingTop="5dp"
-                            android:text="Monthly income and expenses"
+                            android:text="@string/monthly_income_and_expense"
                             android:textColor="@color/black"
                             android:textSize="10sp"
                             android:textStyle="bold" />
@@ -776,7 +776,7 @@
                             <LinearLayout
                                 android:layout_width="10dp"
                                 android:layout_height="10dp"
-                                android:background="@color/myColorPrimaryDark"
+                                android:background="@color/myColorPrimary"
                                 android:orientation="vertical"></LinearLayout>
 
                             <TextView
@@ -785,14 +785,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="10dp"
-                                android:text="Income"
+                                android:text="@string/income"
                                 android:textColor="@color/black"
                                 android:textSize="10sp" />
 
                             <LinearLayout
                                 android:layout_width="10dp"
                                 android:layout_height="10dp"
-                                android:background="@color/medium_gray"
+                                android:background="@color/bar_bottom"
                                 android:orientation="vertical"></LinearLayout>
 
                             <TextView
@@ -801,7 +801,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="10dp"
-                                android:text="Expense"
+                                android:text="@string/expense"
                                 android:textColor="@color/black"
                                 android:textSize="10sp" />
 

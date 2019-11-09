@@ -48,11 +48,11 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
         holder.tvValue.setText(String.valueOf(String.format("%.2f", transactions.get(position).getAmount())));
         if(transactions.get(position).getIsIncome()){
             //holder.llBorderColer.setBackground(ContextCompat.getDrawable(context, R.drawable.card_back_with_border_green));
-            holder.tvType.setText("Income");
+            holder.tvType.setText(context.getResources().getString(R.string.income));
 
         }else{
             //holder.llBorderColer.setBackground(ContextCompat.getDrawable(context, R.drawable.card_back_with_border_red));
-            holder.tvType.setText("Expense");
+            holder.tvType.setText(context.getResources().getString(R.string.expense));
         }
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

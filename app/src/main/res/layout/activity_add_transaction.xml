@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/myColorPrimaryDark"
                 android:padding="5dp"
-                android:text="Select a type"
+                android:text="@string/select_a_type"
                 android:textColor="@color/white" />
 
             <LinearLayout
@@ -55,7 +55,7 @@
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:padding="6dp"
-                    android:text="Income"
+                    android:text="@string/income"
                     android:textAlignment="center"
                     android:textColor="@color/black" />
 
@@ -70,7 +70,7 @@
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:padding="6dp"
-                    android:text="Expense"
+                    android:text="@string/expense"
                     android:textAlignment="center"
                     android:textColor="@color/black" />
             </LinearLayout>
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/myColorPrimaryDark"
                 android:padding="5dp"
-                android:text="Select a Category"
+                android:text="@string/select_a_category"
                 android:textColor="@color/white" />
 
             <LinearLayout
@@ -221,8 +221,7 @@
                 android:ems="10"
                 android:hint="@string/hint_amount"
                 android:inputType="number"
-                android:paddingLeft="15dp"
-                android:text="0" />
+                android:paddingLeft="15dp" />
 
             <Button
                 android:id="@+id/btnSave"
@@ -230,7 +229,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/myColorPrimaryDark"
-                android:text="Save"
+                android:text="@string/save"
                 android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>

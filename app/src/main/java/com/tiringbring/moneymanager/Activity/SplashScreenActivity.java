@@ -15,19 +15,20 @@ import com.tiringbring.moneymanager.DataController.MySharedPreferences;
 import com.tiringbring.moneymanager.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
-    private final int SPLASH_DISPLAY_LENGTH = 2000;
+    private final int SPLASH_DISPLAY_LENGTH = 1000;
     private LinearLayout mainLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         mainLayout = (LinearLayout) findViewById(R.id.mainLayout);
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein);
-        mainLayout.startAnimation(animation);
+        playAnimation();
+
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
+
                 MySharedPreferences msp = new MySharedPreferences(getApplicationContext());
                 if(msp.getIsFirstRun()){
                     Intent mainIntent = new Intent(getApplicationContext(), FirstStartActivity.class);
@@ -39,5 +40,9 @@ public class SplashScreenActivity extends AppCompatActivity {
                 SplashScreenActivity.this.finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
+    }
+    private void playAnimation(){
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein);
+        mainLayout.startAnimation(animation);
     }
 }

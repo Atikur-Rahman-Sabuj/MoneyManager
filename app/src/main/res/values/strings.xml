@@ -32,12 +32,42 @@
     <string name="hint_spend_reason">write what you spent on</string>
     <string name="hint_amount">amount</string>
     <string name="update">Update</string>
-    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="plus_income">+ Income</string>
+    <string name="minus_expense">- Expense</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="monthly_income_and_expense">Monthly income and expense</string>
+    <string name="this_month">This month</string>
+    <string name="daily_expenses">Daily expenses</string>
+    <string name="today">Today</string>
+    <string name="todays_expenses">Todays expenses</string>
+    <string name="todays_income">Todays income</string>
+    <string name="recent_transactions">Recent transactions</string>
+    <string name="balance">Balance</string>
+    <string name="select_a_type">Select a type</string>
+    <string name="select_a_category">Select a category</string>
+    <string name="tap_to_chane_type">tap to change type</string>
+    <string name="no_income">No income</string>
+    <string name="no_expense">No expense</string>
+    <string name="daily">Daily</string>
+    <string name="monthly">Monthly</string>
+    <string name="yearly">Yearly</string>
+    <string name="custom">Custom</string>
+    <string name="change">Change</string>
+    <string name="imprt_export_database" translatable="false">Import export database</string>
+    <string name="see_more_transactions">See more transactions >></string>
+    <string name="see_other_days">See other days >></string>
+    <string name="see_other_months">See other months >></string>
+    <string name="memo_left">"memo: "</string>
+    <string name="category_left">"category: "</string>
+    <string name="type_left">"type: "</string>
+    <string name="no_transactions">No transactions</string>
+    <string name="category_name">Category name</string>
+    <string name="done">Done</string>
+    <string name="select_category">Select category</string>
+    <string name="category_already_exists">Category already exists</string>
+    <string name="update_category">Update category</string>
+    <string name="add_category">Add category</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

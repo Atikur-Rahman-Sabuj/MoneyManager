@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="No transactions"
+        android:text="@string/no_transactions"
         android:visibility="gone" />
 
     <androidx.cardview.widget.CardView
@@ -92,7 +92,7 @@
                 android:fontFamily="sans-serif"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:text="Change"
+                android:text="@string/change"
                 android:textAllCaps="false"
                 android:textColor="@color/dark_gray"
                 android:textSize="14sp" />

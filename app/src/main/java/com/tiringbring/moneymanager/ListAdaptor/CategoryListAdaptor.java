@@ -50,7 +50,7 @@ public class CategoryListAdaptor extends RecyclerView.Adapter<CategoryListAdapto
                 editText.setLayoutParams(lp);
 
                 //editText.setPadding(200, 0,200,0);
-                if(textView.getText().equals("Add")){
+                if(textView.getText().equals("+")){
 //                    new AlertDialog.Builder(context)
 //                            .setTitle("Add category")
 //                            .setView(editText)
@@ -69,7 +69,7 @@ public class CategoryListAdaptor extends RecyclerView.Adapter<CategoryListAdapto
 //                                }
 //                            }).setNegativeButton("Cancel", null).show();
                     CategoryDialog categoryDialog = new CategoryDialog();
-                    categoryDialog.showDialog(context, "Add Category", isIncome, categoryList, "");
+                    categoryDialog.showDialog(context, context.getResources().getString(R.string.add_category), isIncome, categoryList, "");
                 }else{
                     for(int j=0; j<categoryList.size(); j++){
                         for(int k=0; k<categoryList.get(j).size(); k++){
@@ -90,6 +90,9 @@ public class CategoryListAdaptor extends RecyclerView.Adapter<CategoryListAdapto
                 TextView textView = (TextView) view;
 //                final EditText editText = new EditText(context);
                 final String catName = textView.getText().toString();
+                if(catName.equals("+")){
+                    return false;
+                }
 //                editText.setText(textView.getText());
 //                if(!textView.getText().equals("Add")){
 //                    new AlertDialog.Builder(context)
@@ -121,7 +124,7 @@ public class CategoryListAdaptor extends RecyclerView.Adapter<CategoryListAdapto
 //                }
 //
                 CategoryDialog categoryDialog = new CategoryDialog();
-                categoryDialog.showDialog(context, "Update Category", isIncome, categoryList, catName);
+                categoryDialog.showDialog(context, context.getResources().getString(R.string.update_category), isIncome, categoryList, catName);
                 return false;
             }
         };

@@ -44,11 +44,14 @@ public class ImportExportActivity extends AppCompatActivity {
         btnImport = (LinearLayout) findViewById(R.id.btnImport);
         btnExport = (LinearLayout) findViewById(R.id.btnExport);
         Intent intent = getIntent();
-        if(intent.getExtras().getString("isImport").equals("success")){
-            Snackbar.make(findViewById(R.id.clRootExportImport),"Imported successfully",Snackbar.LENGTH_LONG).show();
-        }else if(intent.getExtras().getString("isImport").equals("failed")){
-            Snackbar.make(findViewById(R.id.clRootExportImport),"Import failed, try again.",Snackbar.LENGTH_LONG).show();
+        if(intent.hasExtra("isImport")){
+            if(intent.getExtras().getString("isImport","novalue").equals("success")){
+                Snackbar.make(findViewById(R.id.clRootExportImport),"Imported successfully",Snackbar.LENGTH_LONG).show();
+            }else if(intent.getExtras().getString("isImport", "novalue").equals("failed")){
+                Snackbar.make(findViewById(R.id.clRootExportImport),"Import failed, try again.",Snackbar.LENGTH_LONG).show();
+            }
         }
+
         btnImport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

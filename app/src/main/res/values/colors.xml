@@ -19,5 +19,6 @@
     <color name="light_gray">#F5F2F2</color>
     <color name="transparent">#00F5F2F2</color>
     <color name="dark_gray">#3D3D3D</color>
+    <color name="bar_bottom">#ED8161</color>
 
 </resources>

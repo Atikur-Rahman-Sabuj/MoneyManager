@@ -28,7 +28,8 @@
             android:background="@color/white"
             android:orientation="vertical"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingRight="10dp"
+            android:paddingBottom="100dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -107,6 +108,7 @@
                 android:orientation="vertical"></LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/btnImportExport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
@@ -126,7 +128,6 @@
                     android:textSize="16sp" />
 
                 <ImageView
-                    android:id="@+id/btnImportExport"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"

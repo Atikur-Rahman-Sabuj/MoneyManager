@@ -56,7 +56,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Income"
+                                android:text="@string/income"
                                 android:textAlignment="center"
                                 android:textSize="10sp" />
 
@@ -91,7 +91,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Expense"
+                                android:text="@string/expense"
                                 android:textAlignment="center"
                                 android:textSize="10sp" />
 
@@ -128,7 +128,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Balance"
+                                android:text="@string/balance"
                                 android:textAlignment="center"
                                 android:textSize="10sp" />
 

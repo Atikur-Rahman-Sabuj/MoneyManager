@@ -48,7 +48,7 @@ public class SelectCategoryListDialog {
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
         TextView title = (TextView) dialog.findViewById(R.id.tvDialogTitle);
-        title.setText("Select Category");
+        title.setText(context.getResources().getString(R.string.select_category));
 
 
         rvSelectCategoryList = (RecyclerView) dialog.findViewById(R.id.rvSelectCategoryList);

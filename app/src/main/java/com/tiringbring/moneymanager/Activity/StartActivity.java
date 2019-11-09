@@ -243,6 +243,8 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
+       // setNotification();
+
 
     }
 
@@ -292,9 +294,9 @@ public class StartActivity extends AppCompatActivity {
     private void BindDatasUsedByBindDataToRecentTransactions(Transaction transaction, TextView type, TextView value, TextView name, TextView category){
         Category _category = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetCategoryById(transaction.getCategoryId());
         if(transaction.getIsIncome()){
-            type.setText("Income");
+            type.setText(getResources().getString(R.string.income));
         }else {
-            type.setText("Expense");
+            type.setText(getResources().getString(R.string.expense));
         }
         value.setText(String.format("%.2f", transaction.getAmount()));
         if(transaction.getName().equals(null) || transaction.getName().equals("")){
@@ -345,7 +347,7 @@ public class StartActivity extends AppCompatActivity {
         XAxis xAxis = barChartMonthlyExpense.getXAxis();
         YAxis left = barChartMonthlyExpense.getAxisLeft();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
-        //left.setAxisMaximum(1000);
+        left.setAxisMaximum(10000);
         left.setAxisMinimum(1);
         left.setDrawLabels(true); // no axis labels
         left.setDrawAxisLine(false); // no axis line
@@ -382,16 +384,16 @@ public class StartActivity extends AppCompatActivity {
 //        }
 //    }
 
-    private void setNotification() {
-        //Long alertTime = new GregorianCalendar().getTimeInMillis()+10*1000;
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        Intent alertIntent = new Intent(this, Notification.class);
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT));
-    }
+//    private void setNotification() {
+//        //Long alertTime = new GregorianCalendar().getTimeInMillis()+10*1000;
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR_OF_DAY, 22);
+//        calendar.set(Calendar.MINUTE, 21);
+//        calendar.set(Calendar.SECOND, 0);
+//        Intent alertIntent = new Intent(getApplicationContext(), Notification.class);
+//        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(getApplicationContext(), 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT));
+//    }
 
 //    private void setAlart(long timeInMillis) {
 //        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -487,7 +489,7 @@ public class StartActivity extends AppCompatActivity {
         ArrayList<PieEntry> yValues = pedc.GetList(getApplicationContext(), pieDate);
         if(yValues.size()<1){
             pcTodaysTransactions.setHoleRadius(50f);
-            pcTodaysTransactions.setCenterText("No expense");
+            pcTodaysTransactions.setCenterText(getResources().getString(R.string.no_expense));
             //pcTodaysTransactions.setCenterText(dateFormat.format(pieDate)+" No expense on this date");
         }
         Double Total = pedc.getTotal();

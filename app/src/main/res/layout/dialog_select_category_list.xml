@@ -42,7 +42,7 @@
         style="@android:style/Widget.Toolbar.Button.Navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Done" />
+        android:text="@string/done" />
 
 
 </LinearLayout>

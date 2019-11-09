@@ -55,7 +55,7 @@ public class DailyFragment extends Fragment implements ITabbedFragments {
                              final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_daily, container, false);
-        ((BottomNavigationActivity)getActivity()).setHeaderText("Daily");
+        ((BottomNavigationActivity)getActivity()).setHeaderText(getResources().getString(R.string.daily));
         tvMessage = (TextView) view.findViewById(R.id.tvMessage);
         flListFragment = (FrameLayout) view.findViewById(R.id.flListFrrame);
         cvList = (CardView) view.findViewById(R.id.cvList);

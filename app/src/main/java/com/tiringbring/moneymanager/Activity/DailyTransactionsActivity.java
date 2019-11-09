@@ -67,7 +67,7 @@ public class DailyTransactionsActivity extends AppCompatActivity {
         tvBarText = (TextView) findViewById(R.id.tvBarText);
         ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
         ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
-        tvBarText.setText("Expense");
+        tvBarText.setText(getResources().getString(R.string.expense));
         ivBarLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,9 +107,9 @@ public class DailyTransactionsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 isIncome = !isIncome;
                 if(isIncome){
-                    tvBarText.setText("Income");
+                    tvBarText.setText(getResources().getString(R.string.income));
                 }else{
-                    tvBarText.setText("Expense");
+                    tvBarText.setText(getResources().getString(R.string.expense));
                 }
                 listTransactions.clear();
                 for(Transaction _transaction: dayTransactions){
@@ -227,13 +227,13 @@ public class DailyTransactionsActivity extends AppCompatActivity {
 
     private void SetTotalTextviews(){
         if(isIncome){
-            tvTypeTop.setText("Income");
-            tvTypeBottom.setText("Expense");
+            tvTypeTop.setText(getResources().getString(R.string.income));
+            tvTypeBottom.setText(getResources().getString(R.string.expense));
             tvValueTop.setText(String.valueOf(String.format("%.2f", incomeTotal)));
             tvValueBottom.setText(String.valueOf(String.format("%.2f", expenseTotal)));
         }else {
-            tvTypeBottom.setText("Income");
-            tvTypeTop.setText("Expense");
+            tvTypeBottom.setText(getResources().getString(R.string.income));
+            tvTypeTop.setText(getResources().getString(R.string.expense));
             tvValueBottom.setText(String.valueOf(String.format("%.2f", incomeTotal)));
             tvValueTop.setText(String.valueOf(String.format("%.2f", expenseTotal)));
         }
@@ -272,9 +272,9 @@ public class DailyTransactionsActivity extends AppCompatActivity {
         if(yValues.size()<1){
             pcTodaysTransactions.setHoleRadius(50f);
             if(isIncome){
-                pcTodaysTransactions.setCenterText("No Income");
+                pcTodaysTransactions.setCenterText(getResources().getString(R.string.no_income));
             }else{
-                pcTodaysTransactions.setCenterText("No Expense");
+                pcTodaysTransactions.setCenterText(getResources().getString(R.string.no_expense));
             }
            // pcTodaysTransactions.setCenterText(dateFormat.format(date)+" No expense on this date");
         }

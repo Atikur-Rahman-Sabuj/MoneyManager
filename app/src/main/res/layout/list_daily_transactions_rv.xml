@@ -52,7 +52,7 @@
                             android:id="@+id/tvNameLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="memo: "
+                            android:text="@string/memo_left"
                             android:textSize="10sp" />
 
                         <TextView
@@ -73,7 +73,7 @@
                             android:id="@+id/tvCategoryLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="category: "
+                            android:text="@string/category_left"
                             android:textSize="10sp" />
 
                         <TextView

@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -290,7 +291,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             tempCategories = new ArrayList<>();
         }
         Category category = new Category();
-        category.setName("Add");
+        category.setName("+");
         category.setId(-1);
         tempCategories.add(category);
         categoryList.add(tempCategories);
@@ -302,12 +303,23 @@ public class AddTransactionActivity extends AppCompatActivity {
             this.selectedId = selectedId;
         }else {
             layoutAddTransaction.setVisibility(View.VISIBLE);
+            if(etAmount.requestFocus()){
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.showSoftInput(etAmount, InputMethodManager.SHOW_IMPLICIT);
+            }
+
             this.selectedId = selectedId;
         }
 
     }
 
-//    @Override
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+        startActivity(intent);
+    }
+    //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.options, menu);
 //        MenuItem item = menu.findItem(R.id.spinner);
