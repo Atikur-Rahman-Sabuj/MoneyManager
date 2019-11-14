@@ -74,7 +74,7 @@ public class StartActivity extends AppCompatActivity {
     private LinearLayout cvAddIncome, cvAddExpense;
     private Button  btnBottomNavigation;
     private RecyclerView rvTestList;
-    private CardView cvTodayInfo, cvRecentInfo, cvMonthInfo, cvSeeMoreTransaction, cvSeeMoreDay, cvSeeMoreMonth;
+    private CardView cvTodayInfo, cvRecentInfo, cvMonthInfo, cvSeeMoreTransaction, cvSeeMoreDay, cvSeeMoreMonth, cvMonthlyChart;
     private ImageView ivBarLeft,ivBarRight;
     private TextView tvBarText;
     private View.OnClickListener goToDailyTrasnsaction, gotoDayListTransaction, gotoMonthListTransaction;
@@ -162,6 +162,7 @@ public class StartActivity extends AppCompatActivity {
             }
         };
 
+        cvMonthlyChart = (CardView) findViewById(R.id.cvMonthlyChart);
         cvRecentInfo = (CardView) findViewById(R.id.cvRecentInfo);
         cvRecentInfo.setOnClickListener(goToDailyTrasnsaction);
         cvSeeMoreTransaction = (CardView) findViewById(R.id.cvSeeMoreTransaction);
@@ -206,8 +207,14 @@ public class StartActivity extends AppCompatActivity {
             tvMonthlyExpenseTotal.setText(String.format("%.2f", thisMonth.expenseTotal));
             tvMonthlyBalanceTotal.setText(String.format("%.2f", thisMonth.incomeTotal - thisMonth.expenseTotal));
         }
-        ChartMonthlyAdaptor chartMonthlyAdaptor = new ChartMonthlyAdaptor(getApplicationContext(), monthTransactionsList, cmd.GetMaximumMonthlyIncome(monthTransactionsList), cmd.GetMaximumMonthlyExpense(monthTransactionsList));
-        rvTestList.setAdapter(chartMonthlyAdaptor);
+        if(monthTransactionsList.size()>0){
+            cvMonthlyChart.setVisibility(View.VISIBLE);
+            ChartMonthlyAdaptor chartMonthlyAdaptor = new ChartMonthlyAdaptor(getApplicationContext(), monthTransactionsList, cmd.GetMaximumMonthlyIncome(monthTransactionsList), cmd.GetMaximumMonthlyExpense(monthTransactionsList));
+            rvTestList.setAdapter(chartMonthlyAdaptor);
+        }else{
+            cvMonthlyChart.setVisibility(View.GONE);
+        }
+
         SetPieChartDate();
         BindDataToPieChart();
         BindDataToDailyExpenseBarChart();
@@ -221,8 +228,8 @@ public class StartActivity extends AppCompatActivity {
         //new PlayAnimation().PlayFadeIn(getApplicationContext(), btnAddNew);
         //Notification set
 //        Calendar nCalendar = Calendar.getInstance();
-//        nCalendar.set(Calendar.HOUR, 21);
-//        nCalendar.set(Calendar.MINUTE, 45);
+//        nCalendar.set(Calendar.HOUR, 0);
+//        nCalendar.set(Calendar.MINUTE, 1);
 //        nCalendar.set(Calendar.SECOND, 0);
 //        setAlart(nCalendar.getTimeInMillis());
 
@@ -269,8 +276,14 @@ public class StartActivity extends AppCompatActivity {
             tvMonthlyExpenseTotal.setText(String.format("%.2f", thisMonth.expenseTotal));
             tvMonthlyBalanceTotal.setText(String.format("%.2f", thisMonth.incomeTotal - thisMonth.expenseTotal));
         }
-        ChartMonthlyAdaptor chartMonthlyAdaptor = new ChartMonthlyAdaptor(getApplicationContext(), monthTransactionsList, cmd.GetMaximumMonthlyIncome(monthTransactionsList), cmd.GetMaximumMonthlyExpense(monthTransactionsList));
-        rvTestList.setAdapter(chartMonthlyAdaptor);
+        if(monthTransactionsList.size()>0){
+            cvMonthlyChart.setVisibility(View.VISIBLE);
+            ChartMonthlyAdaptor chartMonthlyAdaptor = new ChartMonthlyAdaptor(getApplicationContext(), monthTransactionsList, cmd.GetMaximumMonthlyIncome(monthTransactionsList), cmd.GetMaximumMonthlyExpense(monthTransactionsList));
+            rvTestList.setAdapter(chartMonthlyAdaptor);
+        }else {
+            cvMonthlyChart.setVisibility(View.GONE);
+        }
+
         SetPieChartDate();
         BindDataToPieChart();
         BindDataToDailyExpenseBarChart();
@@ -315,12 +328,11 @@ public class StartActivity extends AppCompatActivity {
         //generating colors
         List<Integer> colors = new ArrayList<>();
         for (BarEntry be: barEntries) {
-            if(be.getY()>500){
-                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
-            }
-            else {
+           // if(be.getY()>500){
+           //     colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
+          //  }
                 colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
-            }
+          //  }
         }
 
         BarDataSet set = new BarDataSet(barEntries, "");
@@ -395,14 +407,14 @@ public class StartActivity extends AppCompatActivity {
 //        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(getApplicationContext(), 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT));
 //    }
 
-//    private void setAlart(long timeInMillis) {
-//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(this, Notification.class);
-//        intent.setAction("MY_NOTIFICATION_MESSAGE");
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
-//        Toast.makeText(this, "Alarm is set", Toast.LENGTH_SHORT).show();
-//    }
+    private void setAlart(long timeInMillis) {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getApplicationContext(), Notification.class);
+        intent.setAction("MY_NOTIFICATION_MESSAGE");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
+        Toast.makeText(this, "Alarm is set", Toast.LENGTH_SHORT).show();
+    }
 
     // create an action bar button
 //    @Override

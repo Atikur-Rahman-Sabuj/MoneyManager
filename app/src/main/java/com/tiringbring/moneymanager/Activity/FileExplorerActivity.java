@@ -82,9 +82,9 @@ public class FileExplorerActivity extends AppCompatActivity {
         File f = new File(dirPath);
 
         File[] files = f.listFiles();
+        String test = Environment.getExternalStorageDirectory().toString()+root;
 
-
-        if (!dirPath.equals(Environment.getExternalStorageDirectory().toString()+root)) {
+        if (!dirPath.equals(Environment.getExternalStorageDirectory().toString()+root) && !dirPath.equals(Environment.getExternalStorageDirectory().toString())) {
 
 
             //item.add(root);
@@ -147,17 +147,6 @@ public class FileExplorerActivity extends AppCompatActivity {
                                 }).show();
             }
         } else {
-//            new AlertDialog.Builder(this)
-//                    .setIcon(R.drawable.icon)
-//                    .setTitle("[" + file.getName() + "]")
-//                    .setPositiveButton("OK",
-//                            new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    // TODO Auto-generated method stub
-//                                }
-//                            }).show();
-
 
             if(ImportExport.importDB(path.get(position).substring(Environment.getExternalStorageDirectory().toString().length()), getApplicationContext())){
                 startActivity(new Intent(getApplicationContext(), ImportExportActivity.class).putExtra("isImport","success"));
@@ -165,7 +154,6 @@ public class FileExplorerActivity extends AppCompatActivity {
             }else {
                 startActivity(new Intent(getApplicationContext(), ImportExportActivity.class).putExtra("isImport","failed"));
             }
-            //StartActivity.myAppRoomDatabase = Room.databaseBuilder(getApplicationContext(), MMDatabase.class, "Expensedb").allowMainThreadQueries().build();
 
 
         }

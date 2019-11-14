@@ -68,6 +68,13 @@
     <string name="category_already_exists">Category already exists</string>
     <string name="update_category">Update category</string>
     <string name="add_category">Add category</string>
+    <string name="type">type</string>
+    <string name="memo">memo</string>
+    <string name="category">category</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="add_income">Add Income</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="setting">Setting</string>
 
 
 </resources>

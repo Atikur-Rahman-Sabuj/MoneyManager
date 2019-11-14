@@ -61,7 +61,7 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
         ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
         ivBarRight.setVisibility(View.GONE);
-        tvBarText.setText("Setting");
+        tvBarText.setText(getResources().getString(R.string.setting));
         ivBarLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

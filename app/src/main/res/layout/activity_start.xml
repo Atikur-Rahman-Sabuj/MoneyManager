@@ -131,7 +131,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Type"
+                                    android:text="@string/type"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -151,7 +151,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Name"
+                                    android:text="@string/memo"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -160,7 +160,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Category"
+                                    android:text="@string/category"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
                             </LinearLayout>
@@ -186,7 +186,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Type"
+                                    android:text="@string/type"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -206,7 +206,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Name"
+                                    android:text="@string/memo"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -215,7 +215,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Category"
+                                    android:text="@string/category"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
                             </LinearLayout>
@@ -239,7 +239,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Type"
+                                    android:text="@string/type"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -259,7 +259,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Name"
+                                    android:text="@string/memo"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
 
@@ -268,7 +268,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Category"
+                                    android:text="@string/category"
                                     android:textAlignment="center"
                                     android:textSize="10sp" />
                             </LinearLayout>

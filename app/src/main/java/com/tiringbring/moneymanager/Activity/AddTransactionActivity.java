@@ -98,6 +98,11 @@ public class AddTransactionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(isIncome) return;
                 isIncome = true;
+                if(isIncome){
+                    tvBarText.setText(getResources().getString(R.string.add_income));
+                }else{
+                    tvBarText.setText(getResources().getString(R.string.add_expense));
+                }
                 tvIncomeSelect.setBackground(getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
                 tvIncomeSelect.setTextColor(getResources().getColor(R.color.white));
 
@@ -113,6 +118,11 @@ public class AddTransactionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!isIncome) return;
                 isIncome = false;
+                if(isIncome){
+                    tvBarText.setText(getResources().getString(R.string.add_income));
+                }else{
+                    tvBarText.setText(getResources().getString(R.string.add_expense));
+                }
                 tvExpenseSelect.setBackground(getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
                 tvExpenseSelect.setTextColor(getResources().getColor(R.color.white));
 
@@ -252,11 +262,22 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         //endregion
 
+        if(isIncome){
+            tvBarText.setText(getResources().getString(R.string.add_income));
+        }else{
+            tvBarText.setText(getResources().getString(R.string.add_expense));
+        }
+
 
     }
 
     public void SetType(Boolean _isIncome){
         isIncome = _isIncome;
+        if(isIncome){
+            tvBarText.setText(getResources().getString(R.string.add_income));
+        }else{
+            tvBarText.setText(getResources().getString(R.string.add_expense));
+        }
         if(_isIncome){
             tvIncomeSelect.setBackground(getResources().getDrawable(R.drawable.rounded_corner_rectangle_amber));
             tvIncomeSelect.setTextColor(getResources().getColor(R.color.white));

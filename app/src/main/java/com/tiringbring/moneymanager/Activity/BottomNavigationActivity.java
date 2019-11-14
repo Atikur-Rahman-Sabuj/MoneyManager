@@ -67,6 +67,11 @@ public class BottomNavigationActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), StartActivity.class));
+    }
+
     public void setHeaderText(String text){
         tvBarText.setText(text);
     }

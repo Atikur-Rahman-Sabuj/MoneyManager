@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import com.tiringbring.moneymanager.Activity.AddTransactionActivity;
 import com.tiringbring.moneymanager.Activity.BottomNavigationActivity;
@@ -42,9 +43,9 @@ public class Notification extends BroadcastReceiver {
             if(!isExpenseExist){
                 CreateDailyNotification(context, "Alert!!!", "You might have forgot to add todays expense!", "Reminder from Money Manager");
             }
-//              if(calendar.get(Calendar.DAY_OF_MONTH ) == 1){
-//                CreateMonthlyNotification(context);
-//            }
+              if(calendar.get(Calendar.DAY_OF_MONTH ) == 1){
+                CreateMonthlyNotification(context);
+            }
 
 
         }
@@ -83,10 +84,10 @@ public class Notification extends BroadcastReceiver {
                 .setContentText("Total Transaction "+total+", "+percentage+"% than limit.")
                 .setTicker("Monthly expense report");
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder.setSmallIcon(R.drawable.smalliconlowapi);
-            builder.setColor(context.getResources().getColor(R.color.colorPrimary));
+            builder.setSmallIcon(R.drawable.ic_notification_icon);
+            builder.setColor(context.getResources().getColor(R.color.myColorPrimary));
         } else {
-            builder.setSmallIcon(R.drawable.smalliconlowapi);
+            builder.setSmallIcon(R.drawable.ic_notification_icon);
         }
         builder.setContentIntent(notificationIntent);
         builder.setDefaults(NotificationCompat.DEFAULT_SOUND);
@@ -112,10 +113,10 @@ public class Notification extends BroadcastReceiver {
                 .setTicker(alert);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder.setSmallIcon(R.drawable.smalliconlowapi);
-            builder.setColor(context.getResources().getColor(R.color.colorPrimary));
+            builder.setSmallIcon(R.drawable.ic_notification_icon);
+            builder.setColor(context.getResources().getColor(R.color.myColorPrimary));
         } else {
-            builder.setSmallIcon(R.drawable.smalliconlowapi);
+            builder.setSmallIcon(R.drawable.ic_notification_icon);
         }
         builder.setContentIntent(notificationIntent);
         builder.setDefaults(NotificationCompat.DEFAULT_SOUND);

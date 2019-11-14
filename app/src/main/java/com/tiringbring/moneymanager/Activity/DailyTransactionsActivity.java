@@ -265,7 +265,12 @@ public class DailyTransactionsActivity extends AppCompatActivity {
         for (Transaction transaction : listTransactions) {
 
                 Total += transaction.getAmount();
-                yValues.add(new PieEntry(((int) transaction.getAmount()), transaction.getName()));
+                if(transaction.getName().equals("")||transaction.getName().equals(null)){
+                    yValues.add(new PieEntry(((int) transaction.getAmount()), transaction.getCategory().getName()));
+                }else {
+                    yValues.add(new PieEntry(((int) transaction.getAmount()), transaction.getName()));
+                }
+
 
 
         }

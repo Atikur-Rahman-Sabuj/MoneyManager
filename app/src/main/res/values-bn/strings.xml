@@ -63,4 +63,11 @@
     <string name="category_already_exists">" বিভাগ ইতিমধ্যে বিদ্যমান"</string>
     <string name="update_category">আপডেট বিভাগ</string>
     <string name="add_category">" নতুন বিভাগ"</string>
+    <string name="type">প্রকার</string>
+ <string name="memo">মেমো</string>
+ <string name="category">বিভাগ</string>
+    <string name="add_transaction">" নতুন লেনদেন"</string>
+ <string name="add_income">" নতুন আয়"</string>
+ <string name="add_expense">" নতুন ব্যয়"</string>
+ <string name="setting">সেটিং</string>
 </resources>
