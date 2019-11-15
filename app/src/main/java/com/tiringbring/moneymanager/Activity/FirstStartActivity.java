@@ -44,9 +44,10 @@ public class FirstStartActivity extends AppCompatActivity {
     private void setNotification() {
         //Long alertTime = new GregorianCalendar().getTimeInMillis()+10*1000;
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 22);
-        calendar.set(Calendar.MINUTE, 21);
-        calendar.set(Calendar.SECOND, 0);
+        //int minute = calendar.get(Calendar.MINUTE);
+        calendar.set(Calendar.HOUR_OF_DAY, 20);
+        calendar.set(Calendar.MINUTE, 1);
+        calendar.set(Calendar.SECOND, 1);
         Intent alertIntent = new Intent(getApplicationContext(), Notification.class);
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() ,AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(getApplicationContext(), 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT));
