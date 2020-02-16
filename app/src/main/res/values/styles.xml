@@ -35,6 +35,8 @@
     </style>
     <style name="BottomNavigationStyle">
         <item name="android:textSize">10sp</item><!-- text size in menu-->
+        <item name="android:textAppearance"></item><!-- text size in menu-->
+
     </style>
 
     <style name="PauseDialog" parent="Theme.AppCompat.Light.Dialog">

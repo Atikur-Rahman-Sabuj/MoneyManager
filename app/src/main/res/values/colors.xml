@@ -9,7 +9,7 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="common_border_color">#DAF7A6</color>
-    <color name="card_background_verylight">#F4F6F7</color>
+    <color name="card_background_verylight">#FFFFFF</color>
     <color name="button_default">#21618C</color>
     <color name="light_green">#C8FFC8</color>
     <color name="light_red">#FFCACA</color>
@@ -20,5 +20,6 @@
     <color name="transparent">#00F5F2F2</color>
     <color name="dark_gray">#3D3D3D</color>
     <color name="bar_bottom">#ED8161</color>
+    <color name="light_blue">#03A9F4</color>
 
 </resources>

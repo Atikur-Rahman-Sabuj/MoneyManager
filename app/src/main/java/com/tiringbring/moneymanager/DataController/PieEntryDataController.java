@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import RoomDb.Category;
 import RoomDb.Transaction;
 
 public class PieEntryDataController {
@@ -20,7 +21,14 @@ public class PieEntryDataController {
         for (Transaction transaction : transactions) {
             if(!transaction.getIsIncome()){
                 Total += transaction.getAmount();
-                pieEntries.add(new PieEntry(((int) transaction.getAmount()), transaction.getName()));
+                if(transaction.getName().equals("") || transaction.getName().equals(null)){
+                    Category category = StartActivity.getDBInstance(context).mmDao().GetCategoryById(transaction.getCategoryId());
+                    StartActivity.destroyDBInstance();
+                    pieEntries.add(new PieEntry(((int) transaction.getAmount()), category.getName()));
+                }else{
+                    pieEntries.add(new PieEntry(((int) transaction.getAmount()), transaction.getName()));
+                }
+
             }
 
         }

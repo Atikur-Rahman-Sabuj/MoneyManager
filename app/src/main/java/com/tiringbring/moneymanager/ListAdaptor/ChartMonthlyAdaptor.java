@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tiringbring.moneymanager.DataController.DateDataController;
@@ -43,16 +44,16 @@ public class ChartMonthlyAdaptor extends RecyclerView.Adapter<ChartMonthlyAdapto
         holder.tvIncomeAmount.setText(monthTransactionsList.get(position).incomeTotal.toString());
         holder.tvExpenseAmount.setText(monthTransactionsList.get(position).expenseTotal.toString());
         holder.tvDate.setText(new DateDataController().DateToShortMonthYear(monthTransactionsList.get(position).date));
-        float incomeHeight = (float)((110*monthTransactionsList.get(position).incomeTotal)/incomeMaximum);
-        float expenseHeight = (float)((110*monthTransactionsList.get(position).expenseTotal)/expenseMaximum);
-        LinearLayout.LayoutParams incomeLP = new LinearLayout.LayoutParams(getPXFromDP(40), getPXFromDP(incomeHeight));
-        incomeLP.setMargins(getPXFromDP(10),0, getPXFromDP(10),0);
+        float incomeHeight = (float)((90*monthTransactionsList.get(position).incomeTotal)/incomeMaximum);
+        float expenseHeight = (float)((90*monthTransactionsList.get(position).expenseTotal)/expenseMaximum);
+        LinearLayout.LayoutParams incomeLP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, getPXFromDP(incomeHeight));
+        //incomeLP.setMargins(getPXFromDP(10),0, getPXFromDP(10),0);
         holder.income.setLayoutParams(incomeLP);
-        LinearLayout.LayoutParams expenseLP = new LinearLayout.LayoutParams(getPXFromDP(40), getPXFromDP(expenseHeight));
-        expenseLP.setMargins(getPXFromDP(10),0, getPXFromDP(10),0);
+        LinearLayout.LayoutParams expenseLP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, getPXFromDP(expenseHeight));
+        //expenseLP.setMargins(getPXFromDP(10),0, getPXFromDP(10),0);
         holder.expense.setLayoutParams(expenseLP);
         if(((110*monthTransactionsList.get(position).incomeTotal)/incomeMaximum)<10.0){
-            holder.tvDate.setText("");
+           // holder.tvDate.setText("");
         }
 
     }
@@ -66,8 +67,8 @@ public class ChartMonthlyAdaptor extends RecyclerView.Adapter<ChartMonthlyAdapto
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout income;
-        LinearLayout expense;
+        CardView income;
+        CardView expense;
         TextView tvIncomeAmount, tvExpenseAmount, tvDate;
 
         public ViewHolder(@NonNull View itemView) {
