@@ -34,7 +34,7 @@ import com.tiringbring.moneymanager.Utility.ResourceManager;
 
 import java.util.Locale;
 
-public class SettingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class SettingActivity extends ParentActivityWithLeftNavigation implements AdapterView.OnItemSelectedListener {
     MySharedPreferences mySharedPreferences;
     private Switch switchNotification;
     private boolean isNotificationEnabled;
@@ -42,7 +42,7 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
     boolean isSpinnerInitialized = false;
     private RelativeLayout btnImportExport;
 
-    private ImageView ivBarLeft,ivBarRight;
+    private ImageView ivBarRight;
     private TextView tvBarText;
 
     @Override
@@ -55,21 +55,12 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setMyContentView(R.layout.activity_setting);
 
         tvBarText = (TextView) findViewById(R.id.tvBarText);
-        ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
         ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
         ivBarRight.setVisibility(View.GONE);
         tvBarText.setText(getResources().getString(R.string.setting));
-        ivBarLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), StartActivity.class));
-            }
-        });
-
-
         isSpinnerInitialized = false;
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
         //TextView tvDayLimitPanel = (TextView)findViewById(R.id.tvDayLimitPanel);

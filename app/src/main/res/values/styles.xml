@@ -35,8 +35,12 @@
     </style>
     <style name="BottomNavigationStyle">
         <item name="android:textSize">10sp</item><!-- text size in menu-->
-        <item name="android:textAppearance"></item><!-- text size in menu-->
+<!--        <item name="android:textAppearance"></item>&lt;!&ndash; text size in menu&ndash;&gt;-->
 
+    </style>
+    <style name="LeftNavigationTheme">
+        <item name="listPreferredItemHeightSmall">80dp</item><!-- menu item height- vary as u need -->
+        <item name="android:listPreferredItemPaddingStart">80dp</item>
     </style>
 
     <style name="PauseDialog" parent="Theme.AppCompat.Light.Dialog">

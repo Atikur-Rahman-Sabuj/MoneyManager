@@ -14,6 +14,8 @@ import RoomDb.Transaction;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -63,7 +65,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends ParentActivityWithLeftNavigation {
     private static MMDatabase INSTANCE;
     //private BarChart barChartMonthlyExpense;
     private PieChart pcTodaysTransactions;
@@ -78,7 +80,7 @@ public class StartActivity extends AppCompatActivity {
     private Button  btnBottomNavigation;
     private RecyclerView rvTestList, rvDailyBarChartList;
     private CardView cvTodayInfo, cvRecentInfo, cvMonthInfo, cvSeeMoreTransaction, cvSeeMoreDay, cvSeeMoreMonth, cvMonthlyChart;
-    private ImageView ivBarLeft,ivBarRight;
+    private ImageView ivBarRight;
     private TextView tvBarText;
     private View.OnClickListener goToDailyTrasnsaction, gotoDayListTransaction, gotoMonthListTransaction;
     @SuppressLint("ClickableViewAccessibility")
@@ -92,26 +94,12 @@ public class StartActivity extends AppCompatActivity {
         }else{
             ResourceManager.changeLanguage(this, "en");
         }
-
-        setContentView(R.layout.activity_start);
-
-//
-//        this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//        getSupportActionBar().setDisplayShowHomeEnabled(false);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
-//        getSupportActionBar().setDisplayShowCustomEnabled(true);
-//        getSupportActionBar().setCustomView(R.layout.action_bar_custom);
-//       // getSupportActionBar().getCustomView().setLayoutParams(new androidx.appcompat.widget.Toolbar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, Gravity.TOP));
-//        getSupportActionBar().getCustomView().setPadding(0,0,0,0);
-//
-//        getSupportActionBar().setElevation(0);
-//        View view = getSupportActionBar().getCustomView();
-
+        setMyContentView(R.layout.activity_start);
         tvBarText = (TextView) findViewById(R.id.tvBarText);
-        ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
+
         ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
         tvBarText.setText("Money Manager");
-        ivBarLeft.setVisibility(View.GONE);
+
         ivBarRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -333,61 +321,6 @@ public class StartActivity extends AppCompatActivity {
         rvDailyBarChartList.setAdapter(chartDailyAdaptor);
 
 
-//        barChartMonthlyExpense.getDescription().setEnabled(false);
-//        final BarEntryDataController beDataController = new BarEntryDataController();
-//        List<BarEntry> barEntries = beDataController.GetBarEntries(getApplicationContext());
-//        //generating colors
-//        List<Integer> colors = new ArrayList<>();
-//        for (BarEntry be: barEntries) {
-//           // if(be.getY()>500){
-//           //     colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.dark_red, null));
-//          //  }
-//                colors.add(ResourcesCompat.getColor(getApplicationContext().getResources(), R.color.myColorPrimary, null));
-//          //  }
-//        }
-//
-//        BarDataSet set = new BarDataSet(barEntries, "");
-//        set.setColors(colors);
-//        //set.setColors(colors);
-//        set.setDrawValues(true);
-//        BarData barData = new BarData(set);
-//        barData.setBarWidth(.8f);
-//        barChartMonthlyExpense.setData(barData);
-//        //barChartMonthlyExpense.setViewPortOffsets(0,0,0,0);
-//        barChartMonthlyExpense.setExtraOffsets(0, 0, 0, 0);
-//
-//
-//        barChartMonthlyExpense.getContentRect().set(0, 0, barChartMonthlyExpense.getWidth(), barChartMonthlyExpense.getHeight());
-//        barChartMonthlyExpense.animateY(500);
-//        barChartMonthlyExpense.setScaleEnabled(false);
-//        barChartMonthlyExpense.setDrawValueAboveBar(true);
-//        barChartMonthlyExpense.setDrawBorders(false);
-//        barChartMonthlyExpense.setExtraOffsets(0,0,0,0);
-//        barChartMonthlyExpense.getLegend().setEnabled(false);
-//        barChartMonthlyExpense.setVisibleXRangeMaximum(7); // allow 20 values to be displayed at once on the x-axis, not more
-//        barChartMonthlyExpense.moveViewToX(-1);
-//        //barChartMonthlyExpense.
-//        XAxis xAxis = barChartMonthlyExpense.getXAxis();
-//        YAxis left = barChartMonthlyExpense.getAxisLeft();
-//        xAxis.setValueFormatter(new IndexAxisValueFormatter(beDataController.getXAxisValues()));
-//        left.setAxisMaximum(10000);
-//        left.setAxisMinimum(1);
-//        left.setDrawLabels(true); // no axis labels
-//        left.setDrawAxisLine(false); // no axis line
-//        left.setDrawGridLines(false); // no grid lines
-//        left.setDrawZeroLine(false); // draw a zero line
-//        left.setInverted(false);
-//
-//        barChartMonthlyExpense.getAxisRight().setEnabled(false); // no right axis
-//        xAxis.setDrawGridLines(false);
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-//        xAxis.setDrawLabels(true);
-//        xAxis.setDrawAxisLine(true);
-//        xAxis.setAxisLineColor(Color.BLACK);
-//        //xAxis.setCenterAxisLabels(true);
-//        barChartMonthlyExpense.setDrawGridBackground(false);
-//        barChartMonthlyExpense.setFitBars(false);
-//        barChartMonthlyExpense.invalidate();
     }
 
     private void BindDataTodaySection(){

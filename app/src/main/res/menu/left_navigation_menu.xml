@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/l_n_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+        <item
+            android:id="@+id/l_n_income"
+            android:icon="@drawable/ic_add_black_24dp"
+            android:title="@string/add_income" />
+        <item
+            android:id="@+id/l_n_expense"
+            android:icon="@drawable/ic_remove_black_24dp"
+            android:title="@string/add_expense" />
+
+        <item
+            android:id="@+id/l_n_everyday"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Day by Day" />
+        <item
+            android:id="@+id/l_n_show_all"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Show All" />
+    </group>
+    <group>
+        <item
+            android:id="@+id/l_n_setting"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/setting" />
+    </group>
+</menu>

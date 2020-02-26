@@ -6,42 +6,71 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/action_bar_custom" />
-
-    <LinearLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/mainDrawer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <fragment
-            android:id="@+id/nav_host_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:defaultNavHost="true"
+            android:layout_height="match_parent">
 
-            app:navGraph="@navigation/mobile_navigation" />
+            <include layout="@layout/action_bar_custom" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bottomnavigation_background"
-            android:clipToPadding="false"
-            android:isScrollContainer="false"
-            android:theme="@style/BottomNavigationStyle"
-            app:elevation="4dp"
-            app:itemBackground="@drawable/bottom_navigation_item_background"
-            app:itemHorizontalTranslationEnabled="true"
-            app:itemIconSize="20dp"
-            app:itemIconTint="@color/card_background_verylight"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical">
+
+                <fragment
+                    android:id="@+id/nav_host_fragment"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:defaultNavHost="true"
+
+                    app:navGraph="@navigation/mobile_navigation" />
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/nav_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bottomnavigation_background"
+                    android:clipToPadding="false"
+                    android:isScrollContainer="false"
+                    android:theme="@style/BottomNavigationStyle"
+                    app:elevation="4dp"
+                    app:itemBackground="@drawable/bottom_navigation_item_background"
+                    app:itemHorizontalTranslationEnabled="true"
+                    app:itemIconPadding="10dp"
+                    app:itemIconSize="20dp"
+                    app:itemIconTint="@color/card_background_verylight"
+                    app:itemTextColor="#FFFFFF"
+                    app:labelVisibilityMode="labeled"
+                    app:menu="@menu/bottom_nav_menu" />
+
+            </LinearLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/leftNavigationView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|left"
+            android:fitsSystemWindows="true"
+            android:theme="@style/LeftNavigationTheme"
+            app:headerLayout="@layout/left_navigation_header_layout"
+            app:itemBackground="@drawable/left_navigation_item_background"
+            app:itemHorizontalPadding="30dp"
+            app:itemIconTint="@color/colorPrimary"
+            app:itemTextAppearance="@style/TextAppearance.AppCompat.Small"
             app:itemTextColor="#FFFFFF"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_nav_menu" />
+            app:menu="@menu/left_navigation_menu">
 
-    </LinearLayout>
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -43,7 +43,7 @@ import java.util.Locale;
 import RoomDb.Category;
 import RoomDb.Transaction;
 
-public class AddTransactionActivity extends AppCompatActivity {
+public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
 
     private RecyclerView rvCategoryList;
     private LinearLayout layoutAddTransaction;
@@ -58,23 +58,16 @@ public class AddTransactionActivity extends AppCompatActivity {
     private int  Year;
     private int Month;
     private int Day;
-    private ImageView ivBarLeft,ivBarRight;
+    private ImageView ivBarRight;
     private TextView tvBarText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_transaction);
+        setMyContentView(R.layout.activity_add_transaction);
 
         tvBarText = (TextView) findViewById(R.id.tvBarText);
-        ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
         ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
         tvBarText.setText("Add Transaction");
-        ivBarLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), StartActivity.class));
-            }
-        });
         ivBarRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

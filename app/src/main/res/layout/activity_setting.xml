@@ -6,138 +6,166 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activity.SettingActivity">
-
-    <include layout="@layout/action_bar_custom" />
-
-    <LinearLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/mainDrawer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="100dp">
+            android:layout_height="match_parent">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp">
-
-                <TextView
-                    android:id="@+id/tvNotificationSetting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:padding="10dp"
-                    android:text="@string/show_notification"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="16sp" />
-
-                <Switch
-                    android:id="@+id/switchNotification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:padding="10dp"
-                    android:text="" />
-
-
-            </RelativeLayout>
+            <include layout="@layout/action_bar_custom" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height=".5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/medium_gray"
-                android:orientation="vertical"></LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp">
-
-                <TextView
-                    android:id="@+id/tvLanguage"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:padding="10dp"
-                    android:text="@string/language"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="16sp" />
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="100dp">
 
-                <Spinner
-                    android:id="@+id/spiLanguage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:padding="10dp" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp">
 
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvNotificationSetting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:padding="10dp"
+                            android:text="@string/show_notification"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="16sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height=".5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/medium_gray"
-                android:orientation="vertical"></LinearLayout>
+                        <Switch
+                            android:id="@+id/switchNotification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:padding="10dp"
+                            android:text="" />
 
-            <RelativeLayout
-                android:id="@+id/btnImportExport"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:padding="10dp"
-                    android:text="Import or export database"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="16sp" />
+                    </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height=".5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/medium_gray"
+                        android:orientation="vertical"></LinearLayout>
 
-            </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp">
 
-        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvLanguage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:padding="10dp"
+                            android:text="@string/language"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="16sp" />
 
-    </LinearLayout>
+                        <Spinner
+                            android:id="@+id/spiLanguage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:padding="10dp" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height=".5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/medium_gray"
+                        android:orientation="vertical"></LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/btnImportExport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:padding="10dp"
+                            android:text="Import or export database"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/leftNavigationView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|left"
+            android:fitsSystemWindows="true"
+            android:theme="@style/LeftNavigationTheme"
+            app:headerLayout="@layout/left_navigation_header_layout"
+            app:itemBackground="@drawable/left_navigation_item_background"
+            app:itemHorizontalPadding="30dp"
+            app:itemIconTint="@color/colorPrimary"
+            app:itemTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:itemTextColor="#FFFFFF"
+            app:menu="@menu/left_navigation_menu">
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

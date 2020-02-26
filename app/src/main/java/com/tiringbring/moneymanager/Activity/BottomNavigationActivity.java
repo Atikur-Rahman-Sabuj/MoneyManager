@@ -17,10 +17,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class BottomNavigationActivity extends AppCompatActivity {
+public class BottomNavigationActivity extends ParentActivityWithLeftNavigation {
 
-
-    private ImageView ivBarLeft,ivBarRight;
+    private ImageView ivBarRight;
     private TextView tvBarText;
 
     @Override
@@ -28,11 +27,8 @@ public class BottomNavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         assert getSupportActionBar() != null;
       //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setContentView(R.layout.activity_bottom_navigation);
-
-
+        setMyContentView(R.layout.activity_bottom_navigation);
         tvBarText = (TextView) findViewById(R.id.tvBarText);
-        ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
         ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
         ivBarRight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,13 +37,6 @@ public class BottomNavigationActivity extends AppCompatActivity {
             }
         });
         tvBarText.setText("Daily");
-        ivBarLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), StartActivity.class));
-            }
-        });
-
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

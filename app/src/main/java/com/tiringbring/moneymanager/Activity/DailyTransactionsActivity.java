@@ -40,7 +40,7 @@ import java.util.List;
 import RoomDb.Category;
 import RoomDb.Transaction;
 
-public class DailyTransactionsActivity extends AppCompatActivity {
+public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation {
     private PieChart pcTodaysTransactions;
     private Date date;
     private Boolean isIncome = false;
@@ -58,22 +58,15 @@ public class DailyTransactionsActivity extends AppCompatActivity {
     private RecyclerView rvTransactionList;
     private TextView tvTypeTop,tvTypeBottom, tvValueTop, tvValueBottom;
     private CardView cvTodayPieChart;
-    private ImageView ivBarLeft,ivBarRight;
+    private ImageView ivBarRight;
     private TextView tvBarText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_daily_transactions);
+        setMyContentView(R.layout.activity_daily_transactions);
         tvBarText = (TextView) findViewById(R.id.tvBarText);
-        ivBarLeft = (ImageView) findViewById(R.id.ivBarLeft);
         ivBarRight = (ImageView) findViewById(R.id.ivBarRight);
         tvBarText.setText(getResources().getString(R.string.expense));
-        ivBarLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), StartActivity.class));
-            }
-        });
         ivBarRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
