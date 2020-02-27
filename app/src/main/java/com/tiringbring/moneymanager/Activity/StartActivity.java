@@ -64,7 +64,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
+//unlockmoneymanager853
 public class StartActivity extends ParentActivityWithLeftNavigation {
     private static MMDatabase INSTANCE;
     //private BarChart barChartMonthlyExpense;

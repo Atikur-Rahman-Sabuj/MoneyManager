@@ -16,11 +16,11 @@
 
         <item
             android:id="@+id/l_n_everyday"
-            android:icon="@drawable/ic_settings_black_24dp"
+            android:icon="@drawable/ic_update_black_24dp"
             android:title="Day by Day" />
         <item
             android:id="@+id/l_n_show_all"
-            android:icon="@drawable/ic_settings_black_24dp"
+            android:icon="@drawable/ic_select_all_black_24dp"
             android:title="Show All" />
     </group>
     <group>

@@ -186,6 +186,7 @@ public class CustomFragment extends Fragment implements ITabbedFragments {
         tvBalanceTotal.setText(String.format("%.2f",incomeTotal - expenseTotal));
         expandableListAdapter = new ExpenseExpandableListAdaptor(getContext(), customDayExpenseList);
         expandableListView.setAdapter(expandableListAdapter);
+        showHideMessage();
     }
 
 

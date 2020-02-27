@@ -13,7 +13,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="2dp">
+            app:cardBackgroundColor="@color/very_light_gray"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -23,18 +25,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
                     android:orientation="vertical"
-                    android:paddingLeft="5dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="5dp"
-                    android:paddingBottom="5dp">
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp">
 
                     <TextView
                         android:id="@+id/tvDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
                         android:text="sample"
                         android:textAlignment="textStart"
                         android:textColor="@color/black"
@@ -58,14 +58,13 @@
                                 android:layout_weight="1"
                                 android:text="@string/income"
                                 android:textAlignment="center"
-                                android:textSize="10sp" />
+                                android:textSize="12sp" />
 
                             <TextView
                                 android:id="@+id/tvIncomeTotal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/white"
                                 android:text="sample"
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
@@ -93,14 +92,13 @@
                                 android:layout_weight="1"
                                 android:text="@string/expense"
                                 android:textAlignment="center"
-                                android:textSize="10sp" />
+                                android:textSize="12sp" />
 
                             <TextView
                                 android:id="@+id/tvExpenseTotal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/white"
                                 android:text="sample"
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
@@ -130,14 +128,13 @@
                                 android:layout_weight="1"
                                 android:text="@string/balance"
                                 android:textAlignment="center"
-                                android:textSize="10sp" />
+                                android:textSize="12sp" />
 
                             <TextView
                                 android:id="@+id/tvBalanceTotal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/white"
                                 android:text="sample"
                                 android:textAlignment="center"
                                 android:textColor="@color/black"

@@ -21,5 +21,6 @@
     <color name="dark_gray">#3D3D3D</color>
     <color name="bar_bottom">#ED8161</color>
     <color name="light_blue">#03A9F4</color>
+    <color name="very_light_gray">#F8F8F8</color>
 
 </resources>
