@@ -27,4 +27,11 @@ public class CategoryDataController {
         }
         return allCategories;
     }
+    public static Category GetUndefinedCategory(){
+        Category category = new Category();
+        category.setId(0);
+        category.setIsIncome(true);
+        category.setName("Undefined");
+        return category;
+    }
 }

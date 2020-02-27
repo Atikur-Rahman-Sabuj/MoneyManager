@@ -122,7 +122,7 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
                 tvIncomeSelect.setBackground(null);
                 tvIncomeSelect.setTextColor(getResources().getColor(R.color.black));
 
-                layoutAddTransaction.setVisibility(View.GONE);
+                //layoutAddTransaction.setVisibility(View.GONE);
                 LoadCategory(0);
             }
         });
@@ -290,6 +290,18 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
 
     public void LoadCategory(long selectedId){
         List<Category> categories = StartActivity.getDBInstance(this).mmDao().GetCategoriesofType(isIncome);
+        if(selectedId==0){
+            long categoryId = 0;
+            for (Category category :
+                    categories) {
+                if (category.getIsIncome()==isIncome) {
+                    categoryId = category.getId();
+                    break;
+                }
+            }
+            LoadCategory(categoryId);
+            return;
+        }
         StartActivity.destroyDBInstance();
         List<List<Category>> categoryList = new ArrayList<List<Category>>();
         List<Category> tempCategories = new ArrayList<>();
@@ -311,20 +323,11 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
         categoryList.add(tempCategories);
         CategoryListAdaptor adaptor = new CategoryListAdaptor(categoryList, this, selectedId, isIncome);
         rvCategoryList.setAdapter(adaptor);
-
-        if(selectedId==0){
-            layoutAddTransaction.setVisibility(View.GONE);
-            this.selectedId = selectedId;
-        }else {
-            layoutAddTransaction.setVisibility(View.VISIBLE);
-            if(etAmount.requestFocus()){
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.showSoftInput(etAmount, InputMethodManager.SHOW_IMPLICIT);
-            }
-
-            this.selectedId = selectedId;
+        if(etAmount.requestFocus()){
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.showSoftInput(etAmount, InputMethodManager.SHOW_IMPLICIT);
         }
-
+        this.selectedId = selectedId;
     }
 
     @Override
@@ -333,50 +336,4 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
         Intent intent = new Intent(getApplicationContext(), StartActivity.class);
         startActivity(intent);
     }
-    //    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.options, menu);
-//        MenuItem item = menu.findItem(R.id.spinner);
-//        Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
-//
-//        ArrayAdapter<CharSequence> mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.dropdown_income_expense, R.layout.spinner_item);
-//        mSpinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_item);
-//        //spinner.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
-//
-//        spinner.setAdapter(mSpinnerAdapter); // set the adapter to provide layout of rows and content
-//        //spinner.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
-//        spinner.requestLayout();
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                switch (position) {
-//                    case 0: {
-//                        if(!isIncome){
-//                            isIncome = true;
-//                            layoutAddTransaction.setVisibility(View.GONE);
-//                            LoadCategory(0);
-//
-//                        }
-//
-//                        break;
-//                    }
-//                    case 1: {
-//                       if(isIncome){
-//                           isIncome = false;
-//                           layoutAddTransaction.setVisibility(View.GONE);
-//                           LoadCategory(0);
-//                       }
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                // Toast.makeText(getApplicationContext(),"nothing selected", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        }); // set the listener, to perform actions based on item selection
-//        return super.onCreateOptionsMenu(menu);
-//    }
 }

@@ -63,10 +63,11 @@
                                 android:layout_marginBottom="5dp"
                                 android:layout_weight="1"
                                 android:background="@color/white"
-                                android:padding="6dp"
+                                android:padding="16dp"
                                 android:text="@string/income"
                                 android:textAlignment="center"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
 
                             <TextView
                                 android:id="@+id/tvSelectExpense"
@@ -78,10 +79,11 @@
                                 android:layout_marginBottom="5dp"
                                 android:layout_weight="1"
                                 android:background="@color/white"
-                                android:padding="6dp"
+                                android:padding="16dp"
                                 android:text="@string/expense"
                                 android:textAlignment="center"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
                         </LinearLayout>
                     </LinearLayout>
 
