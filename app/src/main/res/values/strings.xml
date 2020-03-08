@@ -75,6 +75,7 @@
     <string name="add_income">Add Income</string>
     <string name="add_expense">Add Expense</string>
     <string name="setting">Setting</string>
+    <string name="recent">Recent</string>
 
 
 </resources>

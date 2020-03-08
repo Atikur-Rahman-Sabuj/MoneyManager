@@ -70,4 +70,5 @@
  <string name="add_income">" নতুন আয়"</string>
  <string name="add_expense">" নতুন ব্যয়"</string>
  <string name="setting">সেটিং</string>
+    <string name="recent">সাম্প্রতিক</string>
 </resources>
