@@ -25,7 +25,8 @@ public class BottomNavigationActivity extends ParentActivityWithLeftNavigation {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        assert getSupportActionBar() != null;
+        //assert getSupportActionBar() != null;
+
       //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setMyContentView(R.layout.activity_bottom_navigation);
         tvBarText = (TextView) findViewById(R.id.tvBarText);

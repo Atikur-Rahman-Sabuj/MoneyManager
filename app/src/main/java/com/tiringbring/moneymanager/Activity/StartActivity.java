@@ -440,7 +440,7 @@ public class StartActivity extends ParentActivityWithLeftNavigation {
         pcTodaysTransactions.setHoleColor(Color.WHITE);
         pcTodaysTransactions.setHoleRadius(40f);
         pcTodaysTransactions.setTransparentCircleRadius(50f);
-        pcTodaysTransactions.animateY(1000, Easing.EasingOption.EaseInOutCubic);
+        pcTodaysTransactions.animateY(1000, Easing.EaseInOutCubic);
         PieEntryDataController pedc = new PieEntryDataController();
         ArrayList<PieEntry> yValues = pedc.GetList(getApplicationContext(), pieDate);
         if(yValues.size()<1){

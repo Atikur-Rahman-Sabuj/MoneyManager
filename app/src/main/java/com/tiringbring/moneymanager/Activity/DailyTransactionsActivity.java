@@ -252,7 +252,7 @@ public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation 
         pcTodaysTransactions.setHoleColor(Color.WHITE);
         pcTodaysTransactions.setHoleRadius(40f);
         pcTodaysTransactions.setTransparentCircleRadius(50f);
-        pcTodaysTransactions.animateY(1000, Easing.EasingOption.EaseInOutCubic);
+        pcTodaysTransactions.animateY(1000, Easing.EaseInOutCubic);
         Double Total = 0.0;
         ArrayList<PieEntry> yValues = new ArrayList<>();
         for (Transaction transaction : listTransactions) {

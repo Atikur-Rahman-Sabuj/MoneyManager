@@ -119,7 +119,7 @@ public class SettingActivity extends ParentActivityWithLeftNavigation implements
             }
         });
 
-        assert getSupportActionBar() != null;
+        //assert getSupportActionBar() != null;
 
 
         final long dailyLimit = new MySharedPreferences(getApplicationContext()).getDayilyLimit();
