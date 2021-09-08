@@ -1,8 +1,10 @@
 package com.tiringbring.moneymanager.Activity;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,8 +12,11 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tiringbring.moneymanager.R;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.NavGraph;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -54,6 +59,12 @@ public class BottomNavigationActivity extends ParentActivityWithLeftNavigation {
         if(intent.getBooleanExtra("isMonth", false)){
             navController.navigate(R.id.navigation_monthly);
         }
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+            }
+        });
 
     }
 
@@ -63,7 +74,8 @@ public class BottomNavigationActivity extends ParentActivityWithLeftNavigation {
     }
 
     public void setHeaderText(String text){
-        tvBarText.setText(text);
+        if (tvBarText!=null)
+            tvBarText.setText(text);
     }
 
 }

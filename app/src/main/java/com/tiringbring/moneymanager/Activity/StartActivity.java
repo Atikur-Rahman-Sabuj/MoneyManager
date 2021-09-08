@@ -283,7 +283,7 @@ public class StartActivity extends ParentActivityWithLeftNavigation {
     }
 
     private void BindDataToRecentTransactions() {
-        List<Transaction> transactions = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTransaction();
+        List<Transaction> transactions = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTransactionByDateSort();
         StartActivity.destroyDBInstance();
         if(transactions.size()>=3)
             transactions = transactions.subList(0,3);

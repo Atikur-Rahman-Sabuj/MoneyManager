@@ -19,8 +19,7 @@
     <fragment
         android:id="@+id/navigation_custom"
         android:name="com.tiringbring.moneymanager.Fragment.TabbedTransactionViews.CustomTransactions.CustomFragment"
-        android:label="Custom"
-        tools:layout="@layout/fragment_custom" />
+        android:label="Custom" />
 
     <fragment
         android:id="@+id/navigation_daily"

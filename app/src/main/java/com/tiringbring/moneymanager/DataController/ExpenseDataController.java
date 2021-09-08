@@ -83,6 +83,7 @@ public class ExpenseDataController {
         return CustomDailyExpenses;
     }
     public  void MakeList(List<Transaction> expens){
+        DateDataController ddc = new DateDataController();
         Collections.sort(expens);
         Collections.reverse(expens);
         //expens.sort(Comparator.comparing(Transaction::getDate).reversed());
@@ -94,7 +95,7 @@ public class ExpenseDataController {
         for(Transaction ex: expens)
         {
             newDate = ex.getDate();
-            if(prevDate.equals(newDate)){
+            if(ddc.DatetoDateMonthYear(prevDate).equals(ddc.DatetoDateMonthYear(newDate))){
                 tempExpens.add(ex);
             }
             else {

@@ -5,6 +5,15 @@
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/action_bar_custom.xml" value="0.22083333333333333" />
+        <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/activity_add_transaction.xml" value="0.36666666666666664" />
+        <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.1609375" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

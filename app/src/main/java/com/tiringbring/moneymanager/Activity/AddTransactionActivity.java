@@ -102,7 +102,6 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
                 tvExpenseSelect.setBackground(null);
                 tvExpenseSelect.setTextColor(getResources().getColor(R.color.black));
 
-                layoutAddTransaction.setVisibility(View.GONE);
                 LoadCategory(0);
             }
         });
@@ -122,7 +121,6 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
                 tvIncomeSelect.setBackground(null);
                 tvIncomeSelect.setTextColor(getResources().getColor(R.color.black));
 
-                //layoutAddTransaction.setVisibility(View.GONE);
                 LoadCategory(0);
             }
         });
@@ -210,7 +208,9 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
                     newTransaction.setIsIncome(isIncome);
                     newTransaction.setCategoryId(selectedId);
                     newTransaction.setAmount(Double.parseDouble(etAmount.getText().toString()));
+                    String date = tvDatePicker.getText().toString();
                     newTransaction.setDate(new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(tvDatePicker.getText().toString()));
+                    newTransaction.getDate().setTime(new Date().getTime());
                     if(transactionId == 0){
                         StartActivity.getDBInstance(getApplicationContext()).mmDao().AddTransaction(newTransaction);
                         StartActivity.destroyDBInstance();

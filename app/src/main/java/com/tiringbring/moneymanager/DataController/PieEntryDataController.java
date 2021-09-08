@@ -16,7 +16,7 @@ public class PieEntryDataController {
     private  double Total=0;
     public ArrayList<PieEntry> GetList(Context context, Date date){
          ArrayList<PieEntry> pieEntries = new ArrayList<>();
-         List<Transaction> transactions = StartActivity.getDBInstance(context).mmDao().GetTransactionsOfaDate(date);
+         List<Transaction> transactions = StartActivity.getDBInstance(context).mmDao().GetTallransactionsAfteraDate(date);
          StartActivity.destroyDBInstance();
         for (Transaction transaction : transactions) {
             if(!transaction.getIsIncome()){

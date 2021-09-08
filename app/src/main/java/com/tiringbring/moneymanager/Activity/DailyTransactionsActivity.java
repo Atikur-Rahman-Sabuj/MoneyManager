@@ -1,6 +1,5 @@
 package com.tiringbring.moneymanager.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,11 +9,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.BoringLayout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,7 +23,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.tiringbring.moneymanager.DataController.PieEntryDataController;
 import com.tiringbring.moneymanager.ListAdaptor.DayTransactionsRecycleViewAdaptor;
 import com.tiringbring.moneymanager.R;
 
@@ -181,7 +177,7 @@ public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation 
     }
     private void LoadTransactions(){
         date = new GregorianCalendar(Year, Month-1, Day).getTime();
-        dayTransactions = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTransactionsOfaDate(date);
+        dayTransactions = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTallransactionsAfteraDate(date);
         StartActivity.destroyDBInstance();
         for(int i=0 ; i<dayTransactions.size(); i++){
             Transaction transaction = dayTransactions.get(i);

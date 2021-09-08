@@ -32,14 +32,17 @@ public interface MMDao {
     @Query("SELECT * FROM `Transactions`")
     public List<Transaction> GetTransaction();
 
+    @Query("SELECT * FROM `Transactions` ORDER BY date DESC")
+    public List<Transaction> GetTransactionByDateSort();
+
     @Query("SELECT * FROM `Transactions` WHERE IsIncome = :isIncome")
     public  List<Transaction> GetTransactionofType (Boolean isIncome);
 
     @Query("SELECT * FROM `Transactions` WHERE Id = :id")
     public Transaction GetTransactionById(Long id);
 
-    @Query("SELECT * FROM `Transactions` WHERE date = :date")
-    public List<Transaction> GetTransactionsOfaDate(Date date);
+    @Query("SELECT * FROM `Transactions` WHERE date >= :date")
+    public List<Transaction> GetTallransactionsAfteraDate(Date date);
 
 
     @Query("SELECT * FROM `Categories`")

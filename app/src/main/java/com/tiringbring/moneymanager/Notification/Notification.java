@@ -7,11 +7,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 
 import com.tiringbring.moneymanager.Activity.AddTransactionActivity;
 import com.tiringbring.moneymanager.Activity.BottomNavigationActivity;
-import com.tiringbring.moneymanager.Activity.SplashScreenActivity;
 import com.tiringbring.moneymanager.DataController.DateDataController;
 import com.tiringbring.moneymanager.DataController.ExpenseDataController;
 import com.tiringbring.moneymanager.DataController.MySharedPreferences;
@@ -38,7 +36,7 @@ public class Notification extends BroadcastReceiver {
 
             myAppRoomDatabase = Room.databaseBuilder(context, MMDatabase.class, "MMdb").allowMainThreadQueries().build();
 
-            boolean isExpenseExist = (myAppRoomDatabase.mmDao().GetTransactionsOfaDate(date)).size()>0;
+            boolean isExpenseExist = (myAppRoomDatabase.mmDao().GetTallransactionsAfteraDate(date)).size()>0;
             myAppRoomDatabase = null;
             if(!isExpenseExist){
                 CreateDailyNotification(context, "Alert!!!", "You might have forgot to add todays expense!", "Reminder from Money Manager");
