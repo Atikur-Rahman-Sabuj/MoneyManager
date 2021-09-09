@@ -76,6 +76,8 @@
     <string name="add_expense">Add Expense</string>
     <string name="setting">Setting</string>
     <string name="recent">Recent</string>
+    <string name="show_income">Show Income</string>
+    <string name="show_expense">Show Expense</string>
 
 
 </resources>

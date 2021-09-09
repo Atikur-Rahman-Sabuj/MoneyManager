@@ -71,4 +71,6 @@
  <string name="add_expense">" নতুন ব্যয়"</string>
  <string name="setting">সেটিং</string>
     <string name="recent">সাম্প্রতিক</string>
+    <string name="show_income">আয়  দেখান</string>
+    <string name="show_expense">" ব্যয় দেখান"</string>
 </resources>

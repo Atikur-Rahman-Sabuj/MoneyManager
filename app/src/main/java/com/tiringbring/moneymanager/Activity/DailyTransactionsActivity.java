@@ -52,7 +52,7 @@ public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation 
     private LinearLayout btnLeft, btnRight;
     private DatePickerDialog.OnDateSetListener tvDateSetListner;
     private RecyclerView rvTransactionList;
-    private TextView tvTypeTop,tvTypeBottom, tvValueTop, tvValueBottom;
+    private TextView tvTypeTop,tvTypeBottom, tvValueTop, tvValueBottom, tvChangeViewBtnTxt;
     private CardView cvTodayPieChart;
     private ImageView ivBarRight;
     private TextView tvBarText;
@@ -82,6 +82,7 @@ public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation 
         btnLeft = (LinearLayout) findViewById(R.id.btnDPleft);
         btnRight = (LinearLayout) findViewById(R.id.btnDPRight);
         tvDatePicker = (TextView) findViewById(R.id.tvDatePicker);
+        tvChangeViewBtnTxt = (TextView) findViewById(R.id.tvChangeViewBtnText);
         rvTransactionList = (RecyclerView) findViewById(R.id.rvTransactionList);
         cvTodayPieChart = (CardView) findViewById(R.id.cvTodayPieChart);
         rvTransactionList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -97,8 +98,10 @@ public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation 
                 isIncome = !isIncome;
                 if(isIncome){
                     tvBarText.setText(getResources().getString(R.string.income));
+                    tvChangeViewBtnTxt.setText(getResources().getString(R.string.show_expense));
                 }else{
                     tvBarText.setText(getResources().getString(R.string.expense));
+                    tvChangeViewBtnTxt.setText(getResources().getString(R.string.show_income));
                 }
                 listTransactions.clear();
                 for(Transaction _transaction: dayTransactions){

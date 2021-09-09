@@ -136,6 +136,7 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
         Month = calendar.get(Calendar.MONTH)+1;
         Day = calendar.get(Calendar.DAY_OF_MONTH);
         tvDatePicker.setText(Day+"/"+Month+"/"+Year);
+
         tvDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +151,7 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
                 dialog.show();
             }
         });
+
         tvDateSetListner = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -162,7 +164,6 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
                 //ChangeTotal();
             }
         };
-
 
         btnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,9 +197,6 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
             }
         });
 
-
-
-
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -222,6 +220,7 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
                         StartActivity.destroyDBInstance();
                         Toast.makeText(getApplicationContext(),"Updated Successfully",Toast.LENGTH_LONG).show();
                         setTitle("Add transaction");
+                        transactionId = 0;
                     }
                     etMemo.setText("");
                     etAmount.setText("");
@@ -231,6 +230,7 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
 
             }
         });
+
         //region for update
         Intent intent = getIntent();
         transactionId = intent.getLongExtra("transactionId", 0);
