@@ -180,7 +180,8 @@ public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation 
     }
     private void LoadTransactions(){
         date = new GregorianCalendar(Year, Month-1, Day).getTime();
-        dayTransactions = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetTallransactionsAfteraDate(date);
+        Date endDate = new GregorianCalendar(Year, Month-1, Day+1).getTime();
+        dayTransactions = StartActivity.getDBInstance(getApplicationContext()).mmDao().GetAllransactionsBetweenTime(date, endDate);
         StartActivity.destroyDBInstance();
         for(int i=0 ; i<dayTransactions.size(); i++){
             Transaction transaction = dayTransactions.get(i);

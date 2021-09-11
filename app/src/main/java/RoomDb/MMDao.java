@@ -41,8 +41,8 @@ public interface MMDao {
     @Query("SELECT * FROM `Transactions` WHERE Id = :id")
     public Transaction GetTransactionById(Long id);
 
-    @Query("SELECT * FROM `Transactions` WHERE date >= :date")
-    public List<Transaction> GetTallransactionsAfteraDate(Date date);
+    @Query("SELECT * FROM `Transactions` WHERE date >= :startDate AND date<:endDate")
+    public List<Transaction> GetAllransactionsBetweenTime(Date startDate, Date endDate);
 
 
     @Query("SELECT * FROM `Categories`")

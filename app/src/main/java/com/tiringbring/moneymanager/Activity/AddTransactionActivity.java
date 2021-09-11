@@ -208,7 +208,8 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
                     newTransaction.setAmount(Double.parseDouble(etAmount.getText().toString()));
                     String date = tvDatePicker.getText().toString();
                     newTransaction.setDate(new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(tvDatePicker.getText().toString()));
-                    newTransaction.getDate().setTime(new Date().getTime());
+                    newTransaction.getDate().setHours(new Date().getHours());
+                    newTransaction.getDate().setMinutes(new Date().getMinutes());
                     if(transactionId == 0){
                         StartActivity.getDBInstance(getApplicationContext()).mmDao().AddTransaction(newTransaction);
                         StartActivity.destroyDBInstance();

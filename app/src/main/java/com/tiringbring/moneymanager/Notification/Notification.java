@@ -33,10 +33,12 @@ public class Notification extends BroadcastReceiver {
         if(new MySharedPreferences(context).getIsNotificationEnabled()){
             Calendar calendar = Calendar.getInstance();
             Date date = new DateDataController().CropTimeFromDate(calendar);
+            calendar.set(Calendar.DATE, calendar.get(Calendar.DATE)+1);
+            Date endDate = new DateDataController().CropTimeFromDate(calendar);
 
             myAppRoomDatabase = Room.databaseBuilder(context, MMDatabase.class, "MMdb").allowMainThreadQueries().build();
 
-            boolean isExpenseExist = (myAppRoomDatabase.mmDao().GetTallransactionsAfteraDate(date)).size()>0;
+            boolean isExpenseExist = (myAppRoomDatabase.mmDao().GetAllransactionsBetweenTime(date, endDate)).size()>0;
             myAppRoomDatabase = null;
             if(!isExpenseExist){
                 CreateDailyNotification(context, "Alert!!!", "You might have forgot to add todays expense!", "Reminder from Money Manager");

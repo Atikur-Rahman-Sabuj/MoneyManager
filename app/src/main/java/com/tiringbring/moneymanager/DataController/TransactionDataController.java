@@ -36,7 +36,10 @@ public class TransactionDataController {
     }
     public static DayTransactions GetTodaysTransactions(Context context){
         Date date = new DateDataController().CropTimeFromDate(Calendar.getInstance());
-        List<Transaction>  todayTransactions = StartActivity.getDBInstance(context).mmDao().GetTallransactionsAfteraDate(date);
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.DATE, c.get(Calendar.DATE)+1);
+        Date endDate = new DateDataController().CropTimeFromDate(c);
+        List<Transaction>  todayTransactions = StartActivity.getDBInstance(context).mmDao().GetAllransactionsBetweenTime(date , endDate);
         List<DayTransactions> dayTransactions = new ExpenseDataController(todayTransactions).getDailyExpenses();
         if(dayTransactions.size()>0)
             return dayTransactions.get(0);
