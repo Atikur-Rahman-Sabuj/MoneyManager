@@ -14,8 +14,8 @@ android {
         applicationId 'com.tiringbring.moneymanager'
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 8
-        versionName '2.2.6'
+        versionCode 9
+        versionName '2.2.7'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

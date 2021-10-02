@@ -11,8 +11,10 @@
         <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/action_bar_custom.xml" value="0.22083333333333333" />
         <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/activity_add_transaction.xml" value="0.36666666666666664" />
         <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.1609375" />
-        <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/activity_daily_transactions.xml" value="0.43797709923664124" />
-        <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/list_daily_transactions_rv.xml" value="0.18659420289855072" />
+        <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/activity_daily_transactions.xml" value="0.33" />
+        <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/activity_first_start.xml" value="0.327445652173913" />
+        <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/activity_start.xml" value="0.327445652173913" />
+        <entry key="..\:/Work/Personal/Projects/MoneyManager/app/src/main/res/layout/list_daily_transactions_rv.xml" value="0.5" />
       </map>
     </option>
   </component>

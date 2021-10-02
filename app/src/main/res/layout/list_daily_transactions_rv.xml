@@ -108,7 +108,7 @@
         android:layout_height="40dp"
         android:layout_gravity="bottom|right"
         android:layout_marginRight="20dp"
-        android:src="@drawable/ic_edit"
+        app:srcCompat="@drawable/ic_edit"
         app:backgroundTint="@color/bar_bottom"
         app:elevation="0dp"
         app:fabSize="mini" />

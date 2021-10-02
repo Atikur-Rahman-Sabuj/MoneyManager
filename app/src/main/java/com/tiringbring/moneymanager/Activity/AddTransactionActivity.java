@@ -131,10 +131,11 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
         //rvCategoryList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         tvDatePicker = (TextView) findViewById(R.id.tvDatePicker);
         LoadCategory(0);
+        int[] dateArray =  getIntent().getIntArrayExtra("date");
         Calendar calendar = Calendar.getInstance();
-        Year = calendar.get(Calendar.YEAR);
-        Month = calendar.get(Calendar.MONTH)+1;
-        Day = calendar.get(Calendar.DAY_OF_MONTH);
+        Year = dateArray!=null?dateArray[0]: calendar.get(Calendar.YEAR);
+        Month =dateArray!=null?dateArray[1]: calendar.get(Calendar.MONTH)+1;
+        Day =dateArray!=null?dateArray[2]: calendar.get(Calendar.DAY_OF_MONTH);
         tvDatePicker.setText(Day+"/"+Month+"/"+Year);
 
         tvDatePicker.setOnClickListener(new View.OnClickListener() {
@@ -333,8 +334,8 @@ public class AddTransactionActivity extends ParentActivityWithLeftNavigation {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
-        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-        startActivity(intent);
+        super.onBackPressed();
+//        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+//        startActivity(intent);
     }
 }

@@ -49,7 +49,7 @@ public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation 
     private int Day;
     private Double incomeTotal, expenseTotal;
     private TextView tvDatePicker;
-    private LinearLayout btnLeft, btnRight;
+    private LinearLayout btnLeft, btnRight, btnIncome, btnExpense;
     private DatePickerDialog.OnDateSetListener tvDateSetListner;
     private RecyclerView rvTransactionList;
     private TextView tvTypeTop,tvTypeBottom, tvValueTop, tvValueBottom, tvChangeViewBtnTxt;
@@ -81,6 +81,8 @@ public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation 
         listTransactions = new ArrayList<>();
         btnLeft = (LinearLayout) findViewById(R.id.btnDPleft);
         btnRight = (LinearLayout) findViewById(R.id.btnDPRight);
+        btnIncome = (LinearLayout) findViewById(R.id.btnIncome);
+        btnExpense = (LinearLayout) findViewById(R.id.btnExpense);
         tvDatePicker = (TextView) findViewById(R.id.tvDatePicker);
         tvChangeViewBtnTxt = (TextView) findViewById(R.id.tvChangeViewBtnText);
         rvTransactionList = (RecyclerView) findViewById(R.id.rvTransactionList);
@@ -130,6 +132,7 @@ public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation 
                 dialog.show();
             }
         });
+
         tvDateSetListner = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -141,6 +144,7 @@ public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation 
                 LoadTransactions();
             }
         };
+
         btnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,10 +178,34 @@ public class DailyTransactionsActivity extends ParentActivityWithLeftNavigation 
 
             }
         });
+
+        btnIncome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int[] dateArray = {Year, Month ,Day};
+                startActivity(new Intent(DailyTransactionsActivity.this, AddTransactionActivity.class).putExtra("isIncome", true).putExtra("date", dateArray));
+            }
+        });
+
+        btnExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int[] dateArray = {Year, Month ,Day};
+                startActivity( new Intent(DailyTransactionsActivity.this, AddTransactionActivity.class).putExtra("date", dateArray));
+            }
+        });
+
         LoadTransactions();
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LoadTransactions();
+    }
+
     private void LoadTransactions(){
         date = new GregorianCalendar(Year, Month-1, Day).getTime();
         Date endDate = new GregorianCalendar(Year, Month-1, Day+1).getTime();
